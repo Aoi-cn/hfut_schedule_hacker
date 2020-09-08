@@ -6,13 +6,14 @@ import { AtMessage } from 'taro-ui'
 
 import IconFont from '../../components/iconfont'
 import * as actions from '../../actions/login'
-import CustomButton from '../../components/custom-button'
+import CustomButton from '../../components/CustomButtom'
+import StandardFloatLayout from '../../components/StandardFloatLayout'
 import './index.less'
 
 function Login(props) {
   const { bizData, uiData } = props
   const { username, password } = bizData
-  const { isLoginDisabled, showPwd } = uiData
+  const { isLoginDisabled, showPwd, showLoginHelp } = uiData
 
   useDidShow(() => {
     Taro.hideHomeButton()
@@ -35,7 +36,7 @@ function Login(props) {
 
       <View className='login-header'>
         <Text className='login-header-title'>登录</Text>
-        <Text className='login-header-secondary'>请绑定信息门户账号</Text>
+        <Text className='login-header-secondary'>请绑定教务系统账号</Text>
       </View>
 
       <View className='login-content'>
@@ -84,16 +85,21 @@ function Login(props) {
 
       </View>
 
-      {/* <View className='login-footer footer'>
-        点击登录即代表你已阅读并同意
-        <View
-          className='login-footer-link'
-          // onClick={this.agreementPage}
-        >
-          《用户协议》
-        </View>
-      </View> */}
+      <View className='login-footer footer' onClick={() => props.updateUiData({ showLoginHelp: true })}>
+        关于这个
+      </View>
       <AtMessage />
+      <StandardFloatLayout
+        isOpened={showLoginHelp}
+        onClose={() => props.updateUiData({ showLoginHelp: false })}
+        title='合工大课程表无敌版'
+        content='在学校封网时也可以看课表，造福工大学子。如遇bug请加qq：254139147反馈，谢谢！'
+        buttons={[{
+          value: '知道了',
+          color: 'blue',
+          onClick: () => props.updateUiData({ showLoginHelp: false })
+        }]}
+      />
     </View>
   )
 }

@@ -1,0 +1,9 @@
+@keyframes menu {
+  from {
+    transform: scaleY(0.1);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}

@@ -12,8 +12,12 @@ import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 export const enter = () => async (dispatch) => {
   Taro.getStorage({ key: 'userInfo' })
     .then(async () => {
+      // 读取本次数据
       const scheduleMatrix = await Taro.getStorage({ key: 'scheduleMatrix' })
-      dispatch(updateScheduleData({ scheduleMatrix: scheduleMatrix.data }))
+      const dayLineMatrix = await Taro.getStorage({ key: 'dayLineMatrix' })
+      dispatch(updateBizData({ scheduleMatrix: scheduleMatrix.data, dayLineMatrix: dayLineMatrix.data }))
+      // 自动更新
+      // dispatch(updateScheduleData({ scheduleMatrix: scheduleMatrix.data, dayLineMatrix: dayLineMatrix.data }))
     })
     .catch(() => {
       // 本地缓存获取失败，重新登录
@@ -48,11 +52,8 @@ export const reLogin = () => async (dispatch) => {
 }
 
 // 登陆成功/自动登录成功执行
-export const updateScheduleData = (payload) => async (dispatch) => {
-  // 先渲染本地的课表数据
-  if (payload) {
-    dispatch(updateBizData({ scheduleMatrix: payload.scheduleMatrix }))
-  }
+export const updateScheduleData = () => async (dispatch) => {
+  Taro.showLoading({ title: '正在加载...' })
   // 进行课表更新逻辑
   const { data: { key } } = await Taro.getStorage({ key: 'userInfo' })
   const res = await GET('/schedule', { key, semesterId: 114 })
@@ -77,6 +78,14 @@ export const updateScheduleData = (payload) => async (dispatch) => {
 
   // 将数据存在本地
   await Taro.setStorage({
+    key: 'scheduleData',
+    data: scheduleData
+  })
+  await Taro.setStorage({
+    key: 'lessonIds',
+    data: lessonIds
+  })
+  await Taro.setStorage({
     key: 'scheduleMatrix',
     data: scheduleMatrix
   })
@@ -85,10 +94,22 @@ export const updateScheduleData = (payload) => async (dispatch) => {
     data: dayLineMatrix
   })
   dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
+  Taro.hideLoading()
   Taro.showToast({
     title: '课表更新成功',
     icon: 'none',
     duration: 2000
+  })
+}
+
+export const refreshColor = () => async (dispatch) => {
+  const scheduleData = await Taro.getStorage({ key: 'scheduleData' })
+  const lessonIds = await Taro.getStorage({ key: 'lessonIds' })
+  const scheduleMatrix = dataToMatrix(scheduleData.data, lessonIds.data)
+  dispatch(updateBizData({ scheduleMatrix }))
+  Taro.setStorage({
+    key: 'scheduleMatrix',
+    data: scheduleMatrix
   })
 }
 

@@ -35,6 +35,7 @@ export const login = ({ username, password }) => async (dispatch) => {
     }
   })
   await Taro.setStorage({ key: 'scheduleMatrix', data: [] })
+  await Taro.setStorage({ key: 'dayLineMatrix', data: [] })
   Taro.redirectTo({ url: '/pages/schedule/index' })
 
   // 更新课表数据
@@ -59,7 +60,9 @@ export const updateUiData = (payload) => {
 
 export const logout = () => {
   // 执行登出逻辑
+  Taro.clearStorage()
+  Taro.redirectTo({ url: '/pages/login/index' })
   return {
-    type: LOGOUT,
+    type: LOGOUT
   }
 }

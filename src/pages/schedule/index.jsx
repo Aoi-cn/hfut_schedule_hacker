@@ -9,19 +9,19 @@ import WhiteTable from './components/WhiteTable'
 import CourseTable from './components/CourseTable'
 import DayLine from './components/DayLine'
 import TimeLine from './components/TimeLine'
-import WeekPicker from './components/WeekPicker'
+import ScheduleTop from './components/ScheduleTop'
 import './index.less'
 
 function Schedule(props) {
   const { bizData } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
-  
 
   useDidShow(() => {
     Taro.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#0089ff',
     })
+    // 自动更新
     props.enter()
   })
 
@@ -47,7 +47,8 @@ function Schedule(props) {
   return (
     <View className='schedule'>
       <View className='schedule-header'>
-        <WeekPicker 
+        
+        <ScheduleTop 
           weekIndex={weekIndex}
           currentWeekIndex={currentWeekIndex}
           changeWeekIndex={changeWeekIndex}

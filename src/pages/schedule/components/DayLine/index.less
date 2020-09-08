@@ -1,8 +1,28 @@
 @import "../../../../style/theme.less";
 
 .dayLine {
-  width: 100%;
+  width: 710px;
   height: 85px;
-  // background-color: @color-brand-background;
   background-color: #eee;
+  padding-left: 40px;
+  display: flex;
+  justify-content: space-around;
+
+  &-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &-day {
+      margin-bottom: 2px;
+      text-align: center;
+      font-size: 21px;
+      color: #999;
+    }
+
+    &-date {
+      font-size: 21px;
+      color: #999;
+    }
+  }
 }
