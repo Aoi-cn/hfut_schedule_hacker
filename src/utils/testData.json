@@ -1,0 +1,5885 @@
+{
+  "status": 200,
+  "body": {
+    "timeTableLayoutId": 2,
+    "weekIndices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "courseId2CourseTextbookStat": {
+      "8920": {
+        "id": 8920,
+        "nameZh": "电子商务概论（双语）",
+        "nameEn": "General Introduction to Electronic Commerce (Bilingual)",
+        "code": "1110022B",
+        "periodInfo": {
+          "total": 32,
+          "weeks": 16,
+          "theory": 32,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 0,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": 0,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": 0,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 4,
+          "extraCourse": null,
+          "extraCourseUnit": null,
+          "requireExtraCourse": null
+        },
+        "stageInfo": {
+          "stage": false,
+          "stageNum": null,
+          "stageGrantNum": null
+        },
+        "credits": 2,
+        "calculateGp": true,
+        "theory": false,
+        "experiment": false,
+        "practice": false,
+        "test": false,
+        "machine": false,
+        "design": false,
+        "enabled": true,
+        "education": {
+          "nameZh": "本科",
+          "nameEn": null,
+          "id": 6,
+          "code": "01",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "本科"
+        },
+        "courseType": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "defaultOpenDepart": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "grantCourseLevel": null,
+        "defaultExamMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "defaultPreCourses": [],
+        "belongBizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "suitableBizTypes": [{
+            "id": 2,
+            "nameZh": "本科",
+            "nameEn": "Undergraduate"
+          },
+          {
+            "id": 23,
+            "nameZh": "本科（宣城）",
+            "nameEn": "bkxc"
+          }
+        ],
+        "mngtDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "teachLang": null,
+        "courseNature": null,
+        "courseCategory": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "extraCredits": null,
+        "remark": null,
+        "extraCourse": false,
+        "chargeTeacher": {
+          "id": 6326,
+          "code": "1997800039",
+          "teaching": true,
+          "zaiZhi": true,
+          "hireType": "FORMAL",
+          "department": {
+            "id": 169,
+            "nameZh": "管理学院",
+            "nameEn": "School of Management",
+            "code": "109",
+            "abbrZh": "管理学院",
+            "abbrEn": null,
+            "college": true,
+            "openCourse": true,
+            "experiment": true
+          },
+          "person": {
+            "id": 5031,
+            "nameZh": "任明仑",
+            "nameEn": "Ren Minglun"
+          },
+          "title": {
+            "nameZh": "教授",
+            "nameEn": "js",
+            "id": 1153,
+            "code": "011",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "教授"
+          },
+          "type": {
+            "nameZh": "全职",
+            "nameEn": "full-time",
+            "id": 1,
+            "code": "01",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "全职"
+          }
+        },
+        "openMajor": null,
+        "workloadType": null,
+        "courseCharacter": null,
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "lessonCount": 1,
+        "textbook": null,
+        "notPublishTextbook": null,
+        "count": null,
+        "assistantDetails": [],
+        "courseTextbookStatAssoc": null
+      },
+      "8923": {
+        "id": 8923,
+        "nameZh": "管理信息学",
+        "nameEn": "Management Informatics",
+        "code": "1110032B",
+        "periodInfo": {
+          "total": 48,
+          "weeks": 16,
+          "theory": 48,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 0,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": 0,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": 0,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 4,
+          "extraCourse": null,
+          "extraCourseUnit": null,
+          "requireExtraCourse": null
+        },
+        "stageInfo": {
+          "stage": false,
+          "stageNum": null,
+          "stageGrantNum": null
+        },
+        "credits": 3,
+        "calculateGp": true,
+        "theory": false,
+        "experiment": false,
+        "practice": false,
+        "test": false,
+        "machine": false,
+        "design": false,
+        "enabled": true,
+        "education": {
+          "nameZh": "本科",
+          "nameEn": null,
+          "id": 6,
+          "code": "01",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "本科"
+        },
+        "courseType": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "defaultOpenDepart": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "grantCourseLevel": null,
+        "defaultExamMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "defaultPreCourses": [],
+        "belongBizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "suitableBizTypes": [{
+            "id": 2,
+            "nameZh": "本科",
+            "nameEn": "Undergraduate"
+          },
+          {
+            "id": 23,
+            "nameZh": "本科（宣城）",
+            "nameEn": "bkxc"
+          }
+        ],
+        "mngtDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "teachLang": null,
+        "courseNature": null,
+        "courseCategory": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "extraCredits": null,
+        "remark": null,
+        "extraCourse": false,
+        "chargeTeacher": {
+          "id": 6460,
+          "code": "1999800062",
+          "teaching": true,
+          "zaiZhi": true,
+          "hireType": "FORMAL",
+          "department": {
+            "id": 169,
+            "nameZh": "管理学院",
+            "nameEn": "School of Management",
+            "code": "109",
+            "abbrZh": "管理学院",
+            "abbrEn": null,
+            "college": true,
+            "openCourse": true,
+            "experiment": true
+          },
+          "person": {
+            "id": 5165,
+            "nameZh": "胡笑旋",
+            "nameEn": "hxx"
+          },
+          "title": {
+            "nameZh": "教授",
+            "nameEn": "js",
+            "id": 1153,
+            "code": "011",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "教授"
+          },
+          "type": {
+            "nameZh": "全职",
+            "nameEn": "full-time",
+            "id": 1,
+            "code": "01",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "全职"
+          }
+        },
+        "openMajor": null,
+        "workloadType": null,
+        "courseCharacter": null,
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "lessonCount": 2,
+        "textbook": null,
+        "notPublishTextbook": null,
+        "count": null,
+        "assistantDetails": [],
+        "courseTextbookStatAssoc": null
+      },
+      "9537": {
+        "id": 9537,
+        "nameZh": "数据库管理与应用",
+        "nameEn": "Principle and Application of Database",
+        "code": "1110072B",
+        "periodInfo": {
+          "total": 56,
+          "weeks": 16,
+          "theory": 44,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 0,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": 12,
+          "experimentUnit": "HOUR",
+          "requireExperiment": null,
+          "machine": 0,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 4,
+          "extraCourse": null,
+          "extraCourseUnit": null,
+          "requireExtraCourse": null
+        },
+        "stageInfo": {
+          "stage": false,
+          "stageNum": null,
+          "stageGrantNum": null
+        },
+        "credits": 3.5,
+        "calculateGp": true,
+        "theory": false,
+        "experiment": true,
+        "practice": false,
+        "test": false,
+        "machine": false,
+        "design": false,
+        "enabled": true,
+        "education": {
+          "nameZh": "本科",
+          "nameEn": null,
+          "id": 6,
+          "code": "01",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "本科"
+        },
+        "courseType": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "defaultOpenDepart": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "grantCourseLevel": null,
+        "defaultExamMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "defaultPreCourses": [],
+        "belongBizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "suitableBizTypes": [{
+            "id": 2,
+            "nameZh": "本科",
+            "nameEn": "Undergraduate"
+          },
+          {
+            "id": 23,
+            "nameZh": "本科（宣城）",
+            "nameEn": "bkxc"
+          }
+        ],
+        "mngtDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "teachLang": null,
+        "courseNature": null,
+        "courseCategory": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "extraCredits": null,
+        "remark": null,
+        "extraCourse": false,
+        "chargeTeacher": {
+          "id": 5206,
+          "code": "1994800060",
+          "teaching": true,
+          "zaiZhi": true,
+          "hireType": "FORMAL",
+          "department": {
+            "id": 169,
+            "nameZh": "管理学院",
+            "nameEn": "School of Management",
+            "code": "109",
+            "abbrZh": "管理学院",
+            "abbrEn": null,
+            "college": true,
+            "openCourse": true,
+            "experiment": true
+          },
+          "person": {
+            "id": 4883,
+            "nameZh": "余本功",
+            "nameEn": "ybg"
+          },
+          "title": {
+            "nameZh": "教授",
+            "nameEn": "js",
+            "id": 1153,
+            "code": "011",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "教授"
+          },
+          "type": {
+            "nameZh": "全职",
+            "nameEn": "full-time",
+            "id": 1,
+            "code": "01",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "全职"
+          }
+        },
+        "openMajor": null,
+        "workloadType": null,
+        "courseCharacter": null,
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "lessonCount": 1,
+        "textbook": null,
+        "notPublishTextbook": null,
+        "count": null,
+        "assistantDetails": [],
+        "courseTextbookStatAssoc": null
+      },
+      "9576": {
+        "id": 9576,
+        "nameZh": "网络营销",
+        "nameEn": "Network Marketing",
+        "code": "1111020X",
+        "periodInfo": {
+          "total": 32,
+          "weeks": 16,
+          "theory": 32,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 0,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": 0,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": 0,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 4,
+          "extraCourse": null,
+          "extraCourseUnit": null,
+          "requireExtraCourse": null
+        },
+        "stageInfo": {
+          "stage": false,
+          "stageNum": null,
+          "stageGrantNum": null
+        },
+        "credits": 2,
+        "calculateGp": true,
+        "theory": false,
+        "experiment": false,
+        "practice": false,
+        "test": false,
+        "machine": false,
+        "design": false,
+        "enabled": true,
+        "education": {
+          "nameZh": "本科",
+          "nameEn": null,
+          "id": 6,
+          "code": "01",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "本科"
+        },
+        "courseType": {
+          "nameZh": "各专业选修课",
+          "nameEn": "gzyxxk",
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "defaultOpenDepart": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "grantCourseLevel": null,
+        "defaultExamMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "defaultPreCourses": [],
+        "belongBizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "suitableBizTypes": [{
+            "id": 2,
+            "nameZh": "本科",
+            "nameEn": "Undergraduate"
+          },
+          {
+            "id": 23,
+            "nameZh": "本科（宣城）",
+            "nameEn": "bkxc"
+          }
+        ],
+        "mngtDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "teachLang": null,
+        "courseNature": null,
+        "courseCategory": {
+          "nameZh": "各专业选修课",
+          "nameEn": null,
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "extraCredits": null,
+        "remark": null,
+        "extraCourse": false,
+        "chargeTeacher": {
+          "id": 6455,
+          "code": "1999800057",
+          "teaching": true,
+          "zaiZhi": true,
+          "hireType": "FORMAL",
+          "department": {
+            "id": 169,
+            "nameZh": "管理学院",
+            "nameEn": "School of Management",
+            "code": "109",
+            "abbrZh": "管理学院",
+            "abbrEn": null,
+            "college": true,
+            "openCourse": true,
+            "experiment": true
+          },
+          "person": {
+            "id": 5160,
+            "nameZh": "何建民",
+            "nameEn": "hjm"
+          },
+          "title": {
+            "nameZh": "教授",
+            "nameEn": "js",
+            "id": 1153,
+            "code": "011",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "教授"
+          },
+          "type": {
+            "nameZh": "全职",
+            "nameEn": "full-time",
+            "id": 1,
+            "code": "01",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "全职"
+          }
+        },
+        "openMajor": null,
+        "workloadType": null,
+        "courseCharacter": null,
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "lessonCount": 1,
+        "textbook": null,
+        "notPublishTextbook": null,
+        "count": null,
+        "assistantDetails": [],
+        "courseTextbookStatAssoc": null
+      },
+      "9578": {
+        "id": 9578,
+        "nameZh": "管理决策分析",
+        "nameEn": "Management Decision Analysis",
+        "code": "1111040X",
+        "periodInfo": {
+          "total": 32,
+          "weeks": 16,
+          "theory": 32,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 0,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": 0,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": 0,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 4,
+          "extraCourse": null,
+          "extraCourseUnit": null,
+          "requireExtraCourse": null
+        },
+        "stageInfo": {
+          "stage": false,
+          "stageNum": null,
+          "stageGrantNum": null
+        },
+        "credits": 2,
+        "calculateGp": true,
+        "theory": false,
+        "experiment": false,
+        "practice": false,
+        "test": false,
+        "machine": false,
+        "design": false,
+        "enabled": true,
+        "education": {
+          "nameZh": "本科",
+          "nameEn": null,
+          "id": 6,
+          "code": "01",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "本科"
+        },
+        "courseType": {
+          "nameZh": "各专业选修课",
+          "nameEn": "gzyxxk",
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "defaultOpenDepart": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "grantCourseLevel": null,
+        "defaultExamMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "defaultPreCourses": [],
+        "belongBizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "suitableBizTypes": [{
+            "id": 2,
+            "nameZh": "本科",
+            "nameEn": "Undergraduate"
+          },
+          {
+            "id": 23,
+            "nameZh": "本科（宣城）",
+            "nameEn": "bkxc"
+          }
+        ],
+        "mngtDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "teachLang": null,
+        "courseNature": null,
+        "courseCategory": {
+          "nameZh": "各专业选修课",
+          "nameEn": null,
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "extraCredits": null,
+        "remark": null,
+        "extraCourse": false,
+        "chargeTeacher": {
+          "id": 4111,
+          "code": "2014800214",
+          "teaching": true,
+          "zaiZhi": true,
+          "hireType": "FORMAL",
+          "department": {
+            "id": 169,
+            "nameZh": "管理学院",
+            "nameEn": "School of Management",
+            "code": "109",
+            "abbrZh": "管理学院",
+            "abbrEn": null,
+            "college": true,
+            "openCourse": true,
+            "experiment": true
+          },
+          "person": {
+            "id": 6217,
+            "nameZh": "裴军",
+            "nameEn": " "
+          },
+          "title": {
+            "nameZh": "副教授",
+            "nameEn": "fjs",
+            "id": 1154,
+            "code": "012",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "副教授"
+          },
+          "type": null
+        },
+        "openMajor": null,
+        "workloadType": null,
+        "courseCharacter": null,
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "lessonCount": 1,
+        "textbook": null,
+        "notPublishTextbook": null,
+        "count": null,
+        "assistantDetails": [],
+        "courseTextbookStatAssoc": null
+      },
+      "12941": {
+        "id": 12941,
+        "nameZh": "公益活动 C（上）",
+        "nameEn": "Volunteer Activity (Anterior  Volume)",
+        "code": "5700063B",
+        "periodInfo": {
+          "total": 24,
+          "weeks": 1,
+          "theory": 0,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 24,
+          "practiceUnit": "HOUR",
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": null,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 24,
+          "extraCourse": null,
+          "extraCourseUnit": null,
+          "requireExtraCourse": null
+        },
+        "stageInfo": {
+          "stage": false,
+          "stageNum": null,
+          "stageGrantNum": null
+        },
+        "credits": 0,
+        "calculateGp": true,
+        "theory": false,
+        "experiment": false,
+        "practice": true,
+        "test": false,
+        "machine": false,
+        "design": false,
+        "enabled": true,
+        "education": {
+          "nameZh": "本科",
+          "nameEn": null,
+          "id": 6,
+          "code": "01",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "本科"
+        },
+        "courseType": {
+          "nameZh": "实践环节",
+          "nameEn": null,
+          "id": 3,
+          "code": "3B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "实践环节"
+        },
+        "defaultOpenDepart": {
+          "id": 188,
+          "nameZh": "学工部",
+          "nameEn": "57",
+          "code": "57",
+          "abbrZh": "学工部",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": false
+        },
+        "grantCourseLevel": null,
+        "defaultExamMode": {
+          "nameZh": "考查",
+          "nameEn": "3",
+          "id": 11,
+          "code": "3",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "考查"
+        },
+        "defaultPreCourses": [],
+        "belongBizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "suitableBizTypes": [{
+            "id": 2,
+            "nameZh": "本科",
+            "nameEn": "Undergraduate"
+          },
+          {
+            "id": 23,
+            "nameZh": "本科（宣城）",
+            "nameEn": "bkxc"
+          }
+        ],
+        "mngtDepartment": {
+          "id": 188,
+          "nameZh": "学工部",
+          "nameEn": "57",
+          "code": "57",
+          "abbrZh": "学工部",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": false
+        },
+        "teachLang": null,
+        "courseNature": {
+          "nameZh": "实践课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2",
+          "remark": null,
+          "enabled": true,
+          "autoCalcPeriod": false,
+          "unitPeriod": null,
+          "transient": false,
+          "name": "实践课"
+        },
+        "courseCategory": {
+          "nameZh": "实践环节",
+          "nameEn": null,
+          "id": 3,
+          "code": "3B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "实践环节"
+        },
+        "extraCredits": null,
+        "remark": null,
+        "extraCourse": false,
+        "chargeTeacher": null,
+        "openMajor": null,
+        "workloadType": null,
+        "courseCharacter": null,
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "lessonCount": 39,
+        "textbook": null,
+        "notPublishTextbook": null,
+        "count": null,
+        "assistantDetails": [],
+        "courseTextbookStatAssoc": null
+      },
+      "15723": {
+        "id": 15723,
+        "nameZh": "UML建模工具",
+        "nameEn": "UML  Modeling Tools",
+        "code": "1115102B",
+        "periodInfo": {
+          "total": 40,
+          "weeks": 10,
+          "theory": 32,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 0,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": 8,
+          "experimentUnit": "HOUR",
+          "requireExperiment": null,
+          "machine": 0,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 4,
+          "extraCourse": null,
+          "extraCourseUnit": null,
+          "requireExtraCourse": null
+        },
+        "stageInfo": {
+          "stage": false,
+          "stageNum": null,
+          "stageGrantNum": null
+        },
+        "credits": 2.5,
+        "calculateGp": true,
+        "theory": false,
+        "experiment": true,
+        "practice": false,
+        "test": false,
+        "machine": false,
+        "design": false,
+        "enabled": true,
+        "education": {
+          "nameZh": "本科",
+          "nameEn": null,
+          "id": 6,
+          "code": "01",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "本科"
+        },
+        "courseType": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "defaultOpenDepart": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "grantCourseLevel": null,
+        "defaultExamMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "defaultPreCourses": [],
+        "belongBizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "suitableBizTypes": [{
+            "id": 2,
+            "nameZh": "本科",
+            "nameEn": "Undergraduate"
+          },
+          {
+            "id": 23,
+            "nameZh": "本科（宣城）",
+            "nameEn": "bkxc"
+          }
+        ],
+        "mngtDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "teachLang": null,
+        "courseNature": null,
+        "courseCategory": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "extraCredits": null,
+        "remark": null,
+        "extraCourse": false,
+        "chargeTeacher": {
+          "id": 6677,
+          "code": "2003800100",
+          "teaching": true,
+          "zaiZhi": true,
+          "hireType": "FORMAL",
+          "department": {
+            "id": 169,
+            "nameZh": "管理学院",
+            "nameEn": "School of Management",
+            "code": "109",
+            "abbrZh": "管理学院",
+            "abbrEn": null,
+            "college": true,
+            "openCourse": true,
+            "experiment": true
+          },
+          "person": {
+            "id": 5382,
+            "nameZh": "付超",
+            "nameEn": " "
+          },
+          "title": {
+            "nameZh": "讲师（高校）",
+            "nameEn": "js",
+            "id": 1155,
+            "code": "013",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "讲师（高校）"
+          },
+          "type": null
+        },
+        "openMajor": null,
+        "workloadType": null,
+        "courseCharacter": null,
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "lessonCount": 1,
+        "textbook": null,
+        "notPublishTextbook": null,
+        "count": null,
+        "assistantDetails": [],
+        "courseTextbookStatAssoc": null
+      },
+      "15725": {
+        "id": 15725,
+        "nameZh": "信息资源管理",
+        "nameEn": "Information System Integrated Training",
+        "code": "1110142B",
+        "periodInfo": {
+          "total": 32,
+          "weeks": 8,
+          "theory": 32,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 0,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": 0,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": 0,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 4,
+          "extraCourse": null,
+          "extraCourseUnit": null,
+          "requireExtraCourse": null
+        },
+        "stageInfo": {
+          "stage": false,
+          "stageNum": null,
+          "stageGrantNum": null
+        },
+        "credits": 2,
+        "calculateGp": true,
+        "theory": false,
+        "experiment": false,
+        "practice": false,
+        "test": false,
+        "machine": false,
+        "design": false,
+        "enabled": true,
+        "education": {
+          "nameZh": "本科",
+          "nameEn": null,
+          "id": 6,
+          "code": "01",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "本科"
+        },
+        "courseType": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "defaultOpenDepart": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "grantCourseLevel": null,
+        "defaultExamMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "defaultPreCourses": [],
+        "belongBizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "suitableBizTypes": [{
+            "id": 2,
+            "nameZh": "本科",
+            "nameEn": "Undergraduate"
+          },
+          {
+            "id": 23,
+            "nameZh": "本科（宣城）",
+            "nameEn": "bkxc"
+          }
+        ],
+        "mngtDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "teachLang": null,
+        "courseNature": null,
+        "courseCategory": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "extraCredits": null,
+        "remark": null,
+        "extraCourse": false,
+        "chargeTeacher": {
+          "id": 6670,
+          "code": "2002800096",
+          "teaching": true,
+          "zaiZhi": true,
+          "hireType": "FORMAL",
+          "department": {
+            "id": 169,
+            "nameZh": "管理学院",
+            "nameEn": "School of Management",
+            "code": "109",
+            "abbrZh": "管理学院",
+            "abbrEn": null,
+            "college": true,
+            "openCourse": true,
+            "experiment": true
+          },
+          "person": {
+            "id": 5375,
+            "nameZh": "顾东晓",
+            "nameEn": "gdx"
+          },
+          "title": {
+            "nameZh": "副教授",
+            "nameEn": "fjs",
+            "id": 1154,
+            "code": "012",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "副教授"
+          },
+          "type": {
+            "nameZh": "全职",
+            "nameEn": "full-time",
+            "id": 1,
+            "code": "01",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "全职"
+          }
+        },
+        "openMajor": null,
+        "workloadType": null,
+        "courseCharacter": null,
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "lessonCount": 1,
+        "textbook": null,
+        "notPublishTextbook": null,
+        "count": null,
+        "assistantDetails": [],
+        "courseTextbookStatAssoc": null
+      },
+      "15727": {
+        "id": 15727,
+        "nameZh": "供应链与物流管理",
+        "nameEn": "Supply Chain & Logistics Management",
+        "code": "1115030X",
+        "periodInfo": {
+          "total": 32,
+          "weeks": 8,
+          "theory": 32,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 0,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": 0,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": 0,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 4,
+          "extraCourse": null,
+          "extraCourseUnit": null,
+          "requireExtraCourse": null
+        },
+        "stageInfo": {
+          "stage": false,
+          "stageNum": null,
+          "stageGrantNum": null
+        },
+        "credits": 2,
+        "calculateGp": true,
+        "theory": false,
+        "experiment": false,
+        "practice": false,
+        "test": false,
+        "machine": false,
+        "design": false,
+        "enabled": true,
+        "education": {
+          "nameZh": "本科",
+          "nameEn": null,
+          "id": 6,
+          "code": "01",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "本科"
+        },
+        "courseType": {
+          "nameZh": "各专业选修课",
+          "nameEn": "gzyxxk",
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "defaultOpenDepart": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "grantCourseLevel": null,
+        "defaultExamMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "defaultPreCourses": [],
+        "belongBizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "suitableBizTypes": [{
+            "id": 2,
+            "nameZh": "本科",
+            "nameEn": "Undergraduate"
+          },
+          {
+            "id": 23,
+            "nameZh": "本科（宣城）",
+            "nameEn": "bkxc"
+          }
+        ],
+        "mngtDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "teachLang": null,
+        "courseNature": null,
+        "courseCategory": {
+          "nameZh": "各专业选修课",
+          "nameEn": null,
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "extraCredits": null,
+        "remark": null,
+        "extraCourse": false,
+        "chargeTeacher": {
+          "id": 4699,
+          "code": "2005800135",
+          "teaching": true,
+          "zaiZhi": true,
+          "hireType": "FORMAL",
+          "department": {
+            "id": 169,
+            "nameZh": "管理学院",
+            "nameEn": "School of Management",
+            "code": "109",
+            "abbrZh": "管理学院",
+            "abbrEn": null,
+            "college": true,
+            "openCourse": true,
+            "experiment": true
+          },
+          "person": {
+            "id": 5599,
+            "nameZh": "赵菊",
+            "nameEn": "ZJ"
+          },
+          "title": {
+            "nameZh": "讲师（高校）",
+            "nameEn": "js",
+            "id": 1155,
+            "code": "013",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "讲师（高校）"
+          },
+          "type": null
+        },
+        "openMajor": null,
+        "workloadType": null,
+        "courseCharacter": null,
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "lessonCount": 1,
+        "textbook": null,
+        "notPublishTextbook": null,
+        "count": null,
+        "assistantDetails": [],
+        "courseTextbookStatAssoc": null
+      },
+      "15736": {
+        "id": 15736,
+        "nameZh": "云计算技术",
+        "nameEn": "Cloud Computing Technology",
+        "code": "1111280X",
+        "periodInfo": {
+          "total": 32,
+          "weeks": 8,
+          "theory": 32,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 0,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": 0,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": 0,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 4,
+          "extraCourse": null,
+          "extraCourseUnit": null,
+          "requireExtraCourse": null
+        },
+        "stageInfo": {
+          "stage": false,
+          "stageNum": null,
+          "stageGrantNum": null
+        },
+        "credits": 2,
+        "calculateGp": true,
+        "theory": false,
+        "experiment": false,
+        "practice": false,
+        "test": false,
+        "machine": false,
+        "design": false,
+        "enabled": true,
+        "education": {
+          "nameZh": "本科",
+          "nameEn": null,
+          "id": 6,
+          "code": "01",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "本科"
+        },
+        "courseType": {
+          "nameZh": "各专业选修课",
+          "nameEn": "gzyxxk",
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "defaultOpenDepart": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "grantCourseLevel": null,
+        "defaultExamMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "defaultPreCourses": [],
+        "belongBizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "suitableBizTypes": [{
+            "id": 2,
+            "nameZh": "本科",
+            "nameEn": "Undergraduate"
+          },
+          {
+            "id": 23,
+            "nameZh": "本科（宣城）",
+            "nameEn": "bkxc"
+          }
+        ],
+        "mngtDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "teachLang": null,
+        "courseNature": null,
+        "courseCategory": {
+          "nameZh": "各专业选修课",
+          "nameEn": null,
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "extraCredits": null,
+        "remark": null,
+        "extraCourse": false,
+        "chargeTeacher": {
+          "id": 4237,
+          "code": "2009800053",
+          "teaching": true,
+          "zaiZhi": true,
+          "hireType": "FORMAL",
+          "department": {
+            "id": 169,
+            "nameZh": "管理学院",
+            "nameEn": "School of Management",
+            "code": "109",
+            "abbrZh": "管理学院",
+            "abbrEn": null,
+            "college": true,
+            "openCourse": true,
+            "experiment": true
+          },
+          "person": {
+            "id": 6343,
+            "nameZh": "罗贺",
+            "nameEn": " "
+          },
+          "title": {
+            "nameZh": "教授",
+            "nameEn": "js",
+            "id": 1153,
+            "code": "011",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "教授"
+          },
+          "type": {
+            "nameZh": "全职",
+            "nameEn": "full-time",
+            "id": 1,
+            "code": "01",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "全职"
+          }
+        },
+        "openMajor": null,
+        "workloadType": null,
+        "courseCharacter": null,
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "lessonCount": 3,
+        "textbook": null,
+        "notPublishTextbook": null,
+        "count": null,
+        "assistantDetails": [],
+        "courseTextbookStatAssoc": null
+      },
+      "16144": {
+        "id": 16144,
+        "nameZh": "形势与政策（5）",
+        "nameEn": "Situation and Policies (5)",
+        "code": "1201151B",
+        "periodInfo": {
+          "total": 16,
+          "weeks": 4,
+          "theory": 8,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 8,
+          "practiceUnit": "HOUR",
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": null,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 4,
+          "extraCourse": null,
+          "extraCourseUnit": null,
+          "requireExtraCourse": null
+        },
+        "stageInfo": {
+          "stage": false,
+          "stageNum": null,
+          "stageGrantNum": null
+        },
+        "credits": 0.25,
+        "calculateGp": true,
+        "theory": false,
+        "experiment": false,
+        "practice": true,
+        "test": false,
+        "machine": false,
+        "design": false,
+        "enabled": true,
+        "education": {
+          "nameZh": "本科",
+          "nameEn": null,
+          "id": 6,
+          "code": "01",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "本科"
+        },
+        "courseType": {
+          "nameZh": "通识必修课",
+          "nameEn": null,
+          "id": 1,
+          "code": "1B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "通识必修课"
+        },
+        "defaultOpenDepart": {
+          "id": 178,
+          "nameZh": "马克思主义学院",
+          "nameEn": "School of Marxism",
+          "code": "118",
+          "abbrZh": "马克思学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": false
+        },
+        "grantCourseLevel": null,
+        "defaultExamMode": {
+          "nameZh": "考查",
+          "nameEn": "3",
+          "id": 11,
+          "code": "3",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "考查"
+        },
+        "defaultPreCourses": [],
+        "belongBizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "suitableBizTypes": [{
+            "id": 2,
+            "nameZh": "本科",
+            "nameEn": "Undergraduate"
+          },
+          {
+            "id": 23,
+            "nameZh": "本科（宣城）",
+            "nameEn": "bkxc"
+          }
+        ],
+        "mngtDepartment": {
+          "id": 178,
+          "nameZh": "马克思主义学院",
+          "nameEn": "School of Marxism",
+          "code": "118",
+          "abbrZh": "马克思学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": false
+        },
+        "teachLang": null,
+        "courseNature": {
+          "nameZh": "理论课",
+          "nameEn": null,
+          "id": 1,
+          "code": "1",
+          "remark": null,
+          "enabled": true,
+          "autoCalcPeriod": true,
+          "unitPeriod": 16,
+          "transient": false,
+          "name": "理论课"
+        },
+        "courseCategory": {
+          "nameZh": "通识必修课",
+          "nameEn": null,
+          "id": 1,
+          "code": "1B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "通识必修课"
+        },
+        "extraCredits": null,
+        "remark": null,
+        "extraCourse": false,
+        "chargeTeacher": {
+          "id": 4127,
+          "code": "2008800063",
+          "teaching": true,
+          "zaiZhi": true,
+          "hireType": "FORMAL",
+          "department": {
+            "id": 178,
+            "nameZh": "马克思主义学院",
+            "nameEn": "School of Marxism",
+            "code": "118",
+            "abbrZh": "马克思学院",
+            "abbrEn": null,
+            "college": true,
+            "openCourse": true,
+            "experiment": false
+          },
+          "person": {
+            "id": 6233,
+            "nameZh": "陈群",
+            "nameEn": " "
+          },
+          "title": {
+            "nameZh": "副教授",
+            "nameEn": "fjs",
+            "id": 1154,
+            "code": "012",
+            "enabled": true,
+            "bizTypeAssocs": [
+              2,
+              3,
+              23
+            ],
+            "bizTypeIds": [
+              2,
+              3,
+              23
+            ],
+            "transient": false,
+            "name": "副教授"
+          },
+          "type": null
+        },
+        "openMajor": null,
+        "workloadType": null,
+        "courseCharacter": null,
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "lessonCount": 29,
+        "textbook": null,
+        "notPublishTextbook": null,
+        "count": null,
+        "assistantDetails": [],
+        "courseTextbookStatAssoc": null
+      }
+    },
+    "lessonId2Flag": {
+      "335113": "publish",
+      "336155": "dontNeedSchedule",
+      "336157": "publish",
+      "336159": "publish",
+      "336161": "publish",
+      "336163": "publish",
+      "336165": "publish",
+      "336167": "publish",
+      "336169": "publish",
+      "336171": "publish",
+      "336175": "dontNeedSchedule"
+    },
+    "currentWeek": 1,
+    "lessonIds": [
+      336165,
+      336167,
+      336161,
+      336163,
+      336157,
+      336175,
+      336159,
+      335113,
+      336169,
+      336155,
+      336171
+    ],
+    "lessons": [{
+        "id": 335113,
+        "nameZh": "工程管理创新实验18-1班,信息管18-2班,信息管18-1班",
+        "nameEn": null,
+        "code": "1111040X--001",
+        "remark": null,
+        "requiredPeriodInfo": {
+          "total": 32,
+          "weeks": 8,
+          "theory": null,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": null,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": null,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 2
+        },
+        "actualPeriods": 32,
+        "scheduleText": {
+          "dateTimeText": {
+            "textZh": "1~8周 周一 第一节~第二节; \n1~8周 周三 第一节~第二节",
+            "textEn": "1~8 Week Mon. 1~2; \n1~8 Week Wed. 1~2",
+            "text": "1~8周 周一 第一节~第二节; \n1~8周 周三 第一节~第二节"
+          },
+          "dateTimePlaceText": {
+            "textZh": "1~8周 周一 第一节~第二节 屯溪路校区 西二407*; \n1~8周 周三 第一节~第二节 屯溪路校区 西二407*",
+            "textEn": "1~8 Week Mon. 1~2 01,00000494; \n1~8 Week Wed. 1~2 01,00000494",
+            "text": "1~8周 周一 第一节~第二节 屯溪路校区 西二407*; \n1~8周 周三 第一节~第二节 屯溪路校区 西二407*"
+          },
+          "dateTimePlacePersonText": {
+            "textZh": "1~6周 周一 第一节~第二节 屯溪路校区 西二407* 裴军; \n7~8周 周一 第一节~第二节 屯溪路校区 西二407* 周谧; \n1~6周 周三 第一节~第二节 屯溪路校区 西二407* 裴军; \n7~8周 周三 第一节~第二节 屯溪路校区 西二407* 周谧",
+            "textEn": "1~6 Week Mon. 1~2 01,00000494 裴军; \n7~8 Week Mon. 1~2 01,00000494  Jimmy; \n1~6 Week Wed. 1~2 01,00000494 裴军; \n7~8 Week Wed. 1~2 01,00000494  Jimmy",
+            "text": "1~6周 周一 第一节~第二节 屯溪路校区 西二407* 裴军; \n7~8周 周一 第一节~第二节 屯溪路校区 西二407* 周谧; \n1~6周 周三 第一节~第二节 屯溪路校区 西二407* 裴军; \n7~8周 周三 第一节~第二节 屯溪路校区 西二407* 周谧"
+          }
+        },
+        "stdCount": 130,
+        "limitCount": 130,
+        "reserveCount": 0,
+        "suggestScheduleWeeks": [],
+        "calcRelatedAdminclasses": true,
+        "allowMakeup": false,
+        "expActualPeriods": 0,
+        "needAssign": false,
+        "auto": false,
+        "scheduleRemark": null,
+        "timeTableLayout": {
+          "id": 2,
+          "nameZh": "屯溪路校区秋季课表布局",
+          "nameEn": "02",
+          "enabled": true
+        },
+        "bizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "course": {
+          "id": 9578,
+          "nameZh": "管理决策分析",
+          "nameEn": "Management Decision Analysis",
+          "code": "1111040X",
+          "periodInfo": {
+            "total": 32,
+            "weeks": 16,
+            "theory": 32,
+            "theoryUnit": null,
+            "requireTheory": null,
+            "practice": 0,
+            "practiceUnit": null,
+            "requirePractice": null,
+            "test": null,
+            "testUnit": null,
+            "requireTest": null,
+            "experiment": 0,
+            "experimentUnit": null,
+            "requireExperiment": null,
+            "machine": 0,
+            "machineUnit": null,
+            "requireMachine": null,
+            "design": null,
+            "designUnit": null,
+            "requireDesign": null,
+            "periodsPerWeek": 4
+          },
+          "stageInfo": {
+            "stage": false,
+            "stageNum": null,
+            "stageGrantNum": null
+          },
+          "credits": 2,
+          "calculateGp": true,
+          "theory": false,
+          "experiment": false,
+          "practice": false,
+          "test": false,
+          "machine": false,
+          "design": false,
+          "enabled": true
+        },
+        "preCourses": [],
+        "courseType": {
+          "nameZh": "各专业选修课",
+          "nameEn": "gzyxxk",
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "openDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "examMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "campus": {
+          "id": 2,
+          "nameZh": "屯溪路校区",
+          "nameEn": "01",
+          "code": "01"
+        },
+        "teachLang": {
+          "nameZh": "中文",
+          "nameEn": "chinese",
+          "id": 1,
+          "code": "20001",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "中文"
+        },
+        "roomType": null,
+        "suggestScheduleWeeksInfo": "",
+        "scheduleWeeksInfo": "1~8周",
+        "teacherAssignmentList": [{
+            "teacher": {
+              "id": 4111,
+              "code": "2014800214",
+              "teaching": true,
+              "zaiZhi": true,
+              "hireType": "FORMAL",
+              "department": {
+                "id": 169,
+                "nameZh": "管理学院",
+                "nameEn": "School of Management",
+                "code": "109",
+                "abbrZh": "管理学院",
+                "abbrEn": null,
+                "college": true,
+                "openCourse": true,
+                "experiment": true
+              },
+              "person": {
+                "id": 6217,
+                "nameZh": "裴军",
+                "nameEn": " "
+              },
+              "title": {
+                "nameZh": "副教授",
+                "nameEn": "fjs",
+                "id": 1154,
+                "code": "012",
+                "enabled": true,
+                "bizTypeAssocs": [
+                  2,
+                  3,
+                  23
+                ],
+                "bizTypeIds": [
+                  2,
+                  3,
+                  23
+                ],
+                "transient": false,
+                "name": "副教授"
+              },
+              "type": null
+            },
+            "person": {
+              "id": 6217,
+              "nameZh": "裴军",
+              "nameEn": " "
+            },
+            "role": "MAJOR",
+            "indexNo": 1,
+            "age": 33
+          },
+          {
+            "teacher": {
+              "id": 4427,
+              "code": "2010800051",
+              "teaching": true,
+              "zaiZhi": true,
+              "hireType": "FORMAL",
+              "department": {
+                "id": 169,
+                "nameZh": "管理学院",
+                "nameEn": "School of Management",
+                "code": "109",
+                "abbrZh": "管理学院",
+                "abbrEn": null,
+                "college": true,
+                "openCourse": true,
+                "experiment": true
+              },
+              "person": {
+                "id": 6533,
+                "nameZh": "周谧",
+                "nameEn": " Jimmy"
+              },
+              "title": {
+                "nameZh": "副教授",
+                "nameEn": "fjs",
+                "id": 1154,
+                "code": "012",
+                "enabled": true,
+                "bizTypeAssocs": [
+                  2,
+                  3,
+                  23
+                ],
+                "bizTypeIds": [
+                  2,
+                  3,
+                  23
+                ],
+                "transient": false,
+                "name": "副教授"
+              },
+              "type": {
+                "nameZh": "全职",
+                "nameEn": "full-time",
+                "id": 1,
+                "code": "01",
+                "enabled": true,
+                "bizTypeAssocs": [
+                  2,
+                  3,
+                  23
+                ],
+                "bizTypeIds": [
+                  2,
+                  3,
+                  23
+                ],
+                "transient": false,
+                "name": "全职"
+              }
+            },
+            "person": {
+              "id": 6533,
+              "nameZh": "周谧",
+              "nameEn": " Jimmy"
+            },
+            "role": "MAJOR",
+            "indexNo": 2,
+            "age": null
+          }
+        ],
+        "scheduleStartWeek": 1,
+        "scheduleEndWeek": 8,
+        "planExamWeek": 9,
+        "adminclassIds": [
+          4520,
+          4521,
+          4762
+        ],
+        "scheduleCurrentWeek": 1,
+        "scheduleChangeWeeks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "id": 336155,
+        "nameZh": "信息管18-1班,工程管理创新实验18-1班,工商管18-1班,市场营销18-1班,信息管18-2班",
+        "nameEn": null,
+        "code": "1201151B--017",
+        "remark": null,
+        "requiredPeriodInfo": {
+          "total": 8,
+          "weeks": 0,
+          "theory": 8,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 8,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": null,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 0
+        },
+        "actualPeriods": 0,
+        "scheduleText": {
+          "dateTimeText": {
+            "textZh": null,
+            "textEn": null,
+            "text": null
+          },
+          "dateTimePlaceText": {
+            "textZh": null,
+            "textEn": null,
+            "text": null
+          },
+          "dateTimePlacePersonText": {
+            "textZh": null,
+            "textEn": null,
+            "text": null
+          }
+        },
+        "stdCount": 201,
+        "limitCount": 210,
+        "reserveCount": 0,
+        "suggestScheduleWeeks": [],
+        "calcRelatedAdminclasses": true,
+        "allowMakeup": false,
+        "expActualPeriods": 0,
+        "needAssign": false,
+        "auto": false,
+        "scheduleRemark": null,
+        "timeTableLayout": {
+          "id": 2,
+          "nameZh": "屯溪路校区秋季课表布局",
+          "nameEn": "02",
+          "enabled": true
+        },
+        "bizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "course": {
+          "id": 16144,
+          "nameZh": "形势与政策（5）",
+          "nameEn": "Situation and Policies (5)",
+          "code": "1201151B",
+          "periodInfo": {
+            "total": 16,
+            "weeks": 4,
+            "theory": 8,
+            "theoryUnit": null,
+            "requireTheory": null,
+            "practice": 8,
+            "practiceUnit": "HOUR",
+            "requirePractice": null,
+            "test": null,
+            "testUnit": null,
+            "requireTest": null,
+            "experiment": null,
+            "experimentUnit": null,
+            "requireExperiment": null,
+            "machine": null,
+            "machineUnit": null,
+            "requireMachine": null,
+            "design": null,
+            "designUnit": null,
+            "requireDesign": null,
+            "periodsPerWeek": 4
+          },
+          "stageInfo": {
+            "stage": false,
+            "stageNum": null,
+            "stageGrantNum": null
+          },
+          "credits": 0.25,
+          "calculateGp": true,
+          "theory": false,
+          "experiment": false,
+          "practice": true,
+          "test": false,
+          "machine": false,
+          "design": false,
+          "enabled": true
+        },
+        "preCourses": [],
+        "courseType": {
+          "nameZh": "通识必修课",
+          "nameEn": null,
+          "id": 1,
+          "code": "1B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "通识必修课"
+        },
+        "openDepartment": {
+          "id": 178,
+          "nameZh": "马克思主义学院",
+          "nameEn": "School of Marxism",
+          "code": "118",
+          "abbrZh": "马克思学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": false
+        },
+        "examMode": {
+          "nameZh": "考查",
+          "nameEn": "3",
+          "id": 11,
+          "code": "3",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "考查"
+        },
+        "campus": {
+          "id": 2,
+          "nameZh": "屯溪路校区",
+          "nameEn": "01",
+          "code": "01"
+        },
+        "teachLang": null,
+        "roomType": null,
+        "suggestScheduleWeeksInfo": "",
+        "scheduleWeeksInfo": null,
+        "teacherAssignmentList": [{
+          "teacher": {
+            "id": 2017844687,
+            "code": "2020800024",
+            "teaching": true,
+            "zaiZhi": true,
+            "hireType": "FORMAL",
+            "department": {
+              "id": 178,
+              "nameZh": "马克思主义学院",
+              "nameEn": "School of Marxism",
+              "code": "118",
+              "abbrZh": "马克思学院",
+              "abbrEn": null,
+              "college": true,
+              "openCourse": true,
+              "experiment": false
+            },
+            "person": {
+              "id": 138949,
+              "nameZh": "郭宇",
+              "nameEn": "Guo Yu"
+            },
+            "title": null,
+            "type": null
+          },
+          "person": {
+            "id": 138949,
+            "nameZh": "郭宇",
+            "nameEn": "Guo Yu"
+          },
+          "role": "MAJOR",
+          "indexNo": 1,
+          "age": null
+        }],
+        "scheduleStartWeek": null,
+        "scheduleEndWeek": null,
+        "planExamWeek": null,
+        "adminclassIds": [
+          4520,
+          4521,
+          4762,
+          4524,
+          4525
+        ],
+        "scheduleCurrentWeek": null,
+        "scheduleChangeWeeks": []
+      },
+      {
+        "id": 336157,
+        "nameZh": "信息管18-1班,信息管18-2班",
+        "nameEn": null,
+        "code": "1110142B--001",
+        "remark": null,
+        "requiredPeriodInfo": {
+          "total": 32,
+          "weeks": 8,
+          "theory": null,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": null,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": null,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 2
+        },
+        "actualPeriods": 32,
+        "scheduleText": {
+          "dateTimeText": {
+            "textZh": "1~8周 周二 第七节~第八节; \n1~8周 周五 第五节~第六节",
+            "textEn": "1~8 Week Tue. 7~8; \n1~8 Week Fri. 5~6",
+            "text": "1~8周 周二 第七节~第八节; \n1~8周 周五 第五节~第六节"
+          },
+          "dateTimePlaceText": {
+            "textZh": "1~8周 周二 第七节~第八节 屯溪路校区 西二407*; \n1~8周 周五 第五节~第六节 屯溪路校区 西二407*",
+            "textEn": "1~8 Week Tue. 7~8 01,00000494; \n1~8 Week Fri. 5~6 01,00000494",
+            "text": "1~8周 周二 第七节~第八节 屯溪路校区 西二407*; \n1~8周 周五 第五节~第六节 屯溪路校区 西二407*"
+          },
+          "dateTimePlacePersonText": {
+            "textZh": "1~8周 周二 第七节~第八节 屯溪路校区 西二407* 钟金宏; \n1~8周 周五 第五节~第六节 屯溪路校区 西二407* 钟金宏",
+            "textEn": "1~8 Week Tue. 7~8 01,00000494 zhong jinhong; \n1~8 Week Fri. 5~6 01,00000494 zhong jinhong",
+            "text": "1~8周 周二 第七节~第八节 屯溪路校区 西二407* 钟金宏; \n1~8周 周五 第五节~第六节 屯溪路校区 西二407* 钟金宏"
+          }
+        },
+        "stdCount": 102,
+        "limitCount": 102,
+        "reserveCount": 0,
+        "suggestScheduleWeeks": [],
+        "calcRelatedAdminclasses": true,
+        "allowMakeup": false,
+        "expActualPeriods": 0,
+        "needAssign": false,
+        "auto": false,
+        "scheduleRemark": null,
+        "timeTableLayout": {
+          "id": 2,
+          "nameZh": "屯溪路校区秋季课表布局",
+          "nameEn": "02",
+          "enabled": true
+        },
+        "bizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "course": {
+          "id": 15725,
+          "nameZh": "信息资源管理",
+          "nameEn": "Information System Integrated Training",
+          "code": "1110142B",
+          "periodInfo": {
+            "total": 32,
+            "weeks": 8,
+            "theory": 32,
+            "theoryUnit": null,
+            "requireTheory": null,
+            "practice": 0,
+            "practiceUnit": null,
+            "requirePractice": null,
+            "test": null,
+            "testUnit": null,
+            "requireTest": null,
+            "experiment": 0,
+            "experimentUnit": null,
+            "requireExperiment": null,
+            "machine": 0,
+            "machineUnit": null,
+            "requireMachine": null,
+            "design": null,
+            "designUnit": null,
+            "requireDesign": null,
+            "periodsPerWeek": 4
+          },
+          "stageInfo": {
+            "stage": false,
+            "stageNum": null,
+            "stageGrantNum": null
+          },
+          "credits": 2,
+          "calculateGp": true,
+          "theory": false,
+          "experiment": false,
+          "practice": false,
+          "test": false,
+          "machine": false,
+          "design": false,
+          "enabled": true
+        },
+        "preCourses": [],
+        "courseType": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "openDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "examMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "campus": {
+          "id": 2,
+          "nameZh": "屯溪路校区",
+          "nameEn": "01",
+          "code": "01"
+        },
+        "teachLang": {
+          "nameZh": "中文",
+          "nameEn": "chinese",
+          "id": 1,
+          "code": "20001",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "中文"
+        },
+        "roomType": null,
+        "suggestScheduleWeeksInfo": "",
+        "scheduleWeeksInfo": "1~8周",
+        "teacherAssignmentList": [{
+          "teacher": {
+            "id": 6959,
+            "code": "2001800049",
+            "teaching": true,
+            "zaiZhi": true,
+            "hireType": "FORMAL",
+            "department": {
+              "id": 169,
+              "nameZh": "管理学院",
+              "nameEn": "School of Management",
+              "code": "109",
+              "abbrZh": "管理学院",
+              "abbrEn": null,
+              "college": true,
+              "openCourse": true,
+              "experiment": true
+            },
+            "person": {
+              "id": 6871,
+              "nameZh": "钟金宏",
+              "nameEn": "zhong jinhong"
+            },
+            "title": {
+              "nameZh": "副教授",
+              "nameEn": "fjs",
+              "id": 1154,
+              "code": "012",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "副教授"
+            },
+            "type": {
+              "nameZh": "全职",
+              "nameEn": "full-time",
+              "id": 1,
+              "code": "01",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "全职"
+            }
+          },
+          "person": {
+            "id": 6871,
+            "nameZh": "钟金宏",
+            "nameEn": "zhong jinhong"
+          },
+          "role": "MAJOR",
+          "indexNo": 1,
+          "age": 49
+        }],
+        "scheduleStartWeek": 1,
+        "scheduleEndWeek": 8,
+        "planExamWeek": 9,
+        "adminclassIds": [
+          4520,
+          4521
+        ],
+        "scheduleCurrentWeek": 1,
+        "scheduleChangeWeeks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "id": 336159,
+        "nameZh": "信息管18-1班,信息管18-2班",
+        "nameEn": null,
+        "code": "1115102B--001",
+        "remark": null,
+        "requiredPeriodInfo": {
+          "total": 32,
+          "weeks": 8,
+          "theory": null,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": null,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": 8,
+          "experimentUnit": "HOUR",
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 2
+        },
+        "actualPeriods": 32,
+        "scheduleText": {
+          "dateTimeText": {
+            "textZh": "1~8周 周二 第五节~第六节; \n1~8周 周五 第一节~第二节",
+            "textEn": "1~8 Week Tue. 5~6; \n1~8 Week Fri. 1~2",
+            "text": "1~8周 周二 第五节~第六节; \n1~8周 周五 第一节~第二节"
+          },
+          "dateTimePlaceText": {
+            "textZh": "1~8周 周二 第五节~第六节 屯溪路校区 西二407*; \n1~8周 周五 第一节~第二节 屯溪路校区 西二407*",
+            "textEn": "1~8 Week Tue. 5~6 01,00000494; \n1~8 Week Fri. 1~2 01,00000494",
+            "text": "1~8周 周二 第五节~第六节 屯溪路校区 西二407*; \n1~8周 周五 第一节~第二节 屯溪路校区 西二407*"
+          },
+          "dateTimePlacePersonText": {
+            "textZh": "1~8周 周二 第五节~第六节 屯溪路校区 西二407* 付超; \n1~8周 周五 第一节~第二节 屯溪路校区 西二407* 付超",
+            "textEn": "1~8 Week Tue. 5~6 01,00000494 付超; \n1~8 Week Fri. 1~2 01,00000494 付超",
+            "text": "1~8周 周二 第五节~第六节 屯溪路校区 西二407* 付超; \n1~8周 周五 第一节~第二节 屯溪路校区 西二407* 付超"
+          }
+        },
+        "stdCount": 99,
+        "limitCount": 101,
+        "reserveCount": 0,
+        "suggestScheduleWeeks": [],
+        "calcRelatedAdminclasses": true,
+        "allowMakeup": false,
+        "expActualPeriods": 0,
+        "needAssign": false,
+        "auto": false,
+        "scheduleRemark": null,
+        "timeTableLayout": {
+          "id": 2,
+          "nameZh": "屯溪路校区秋季课表布局",
+          "nameEn": "02",
+          "enabled": true
+        },
+        "bizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "course": {
+          "id": 15723,
+          "nameZh": "UML建模工具",
+          "nameEn": "UML  Modeling Tools",
+          "code": "1115102B",
+          "periodInfo": {
+            "total": 40,
+            "weeks": 10,
+            "theory": 32,
+            "theoryUnit": null,
+            "requireTheory": null,
+            "practice": 0,
+            "practiceUnit": null,
+            "requirePractice": null,
+            "test": null,
+            "testUnit": null,
+            "requireTest": null,
+            "experiment": 8,
+            "experimentUnit": "HOUR",
+            "requireExperiment": null,
+            "machine": 0,
+            "machineUnit": null,
+            "requireMachine": null,
+            "design": null,
+            "designUnit": null,
+            "requireDesign": null,
+            "periodsPerWeek": 4
+          },
+          "stageInfo": {
+            "stage": false,
+            "stageNum": null,
+            "stageGrantNum": null
+          },
+          "credits": 2.5,
+          "calculateGp": true,
+          "theory": false,
+          "experiment": true,
+          "practice": false,
+          "test": false,
+          "machine": false,
+          "design": false,
+          "enabled": true
+        },
+        "preCourses": [],
+        "courseType": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "openDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "examMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "campus": {
+          "id": 2,
+          "nameZh": "屯溪路校区",
+          "nameEn": "01",
+          "code": "01"
+        },
+        "teachLang": {
+          "nameZh": "中文",
+          "nameEn": "chinese",
+          "id": 1,
+          "code": "20001",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "中文"
+        },
+        "roomType": null,
+        "suggestScheduleWeeksInfo": "",
+        "scheduleWeeksInfo": "1~8周",
+        "teacherAssignmentList": [{
+          "teacher": {
+            "id": 6677,
+            "code": "2003800100",
+            "teaching": true,
+            "zaiZhi": true,
+            "hireType": "FORMAL",
+            "department": {
+              "id": 169,
+              "nameZh": "管理学院",
+              "nameEn": "School of Management",
+              "code": "109",
+              "abbrZh": "管理学院",
+              "abbrEn": null,
+              "college": true,
+              "openCourse": true,
+              "experiment": true
+            },
+            "person": {
+              "id": 5382,
+              "nameZh": "付超",
+              "nameEn": " "
+            },
+            "title": {
+              "nameZh": "讲师（高校）",
+              "nameEn": "js",
+              "id": 1155,
+              "code": "013",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "讲师（高校）"
+            },
+            "type": null
+          },
+          "person": {
+            "id": 5382,
+            "nameZh": "付超",
+            "nameEn": " "
+          },
+          "role": "MAJOR",
+          "indexNo": 1,
+          "age": 42
+        }],
+        "scheduleStartWeek": 1,
+        "scheduleEndWeek": 8,
+        "planExamWeek": 9,
+        "adminclassIds": [
+          4520,
+          4521
+        ],
+        "scheduleCurrentWeek": 1,
+        "scheduleChangeWeeks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "id": 336161,
+        "nameZh": "信息管18-1班,信息管18-2班",
+        "nameEn": null,
+        "code": "1110022B--001",
+        "remark": null,
+        "requiredPeriodInfo": {
+          "total": 32,
+          "weeks": 8,
+          "theory": null,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": null,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": null,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 2
+        },
+        "actualPeriods": 32,
+        "scheduleText": {
+          "dateTimeText": {
+            "textZh": "1~8周 周二 第三节~第四节; \n1~8周 周五 第三节~第四节",
+            "textEn": "1~8 Week Tue. 3~4; \n1~8 Week Fri. 3~4",
+            "text": "1~8周 周二 第三节~第四节; \n1~8周 周五 第三节~第四节"
+          },
+          "dateTimePlaceText": {
+            "textZh": "1~8周 周二 第三节~第四节 屯溪路校区 西二407*; \n1~8周 周五 第三节~第四节 屯溪路校区 西二407*",
+            "textEn": "1~8 Week Tue. 3~4 01,00000494; \n1~8 Week Fri. 3~4 01,00000494",
+            "text": "1~8周 周二 第三节~第四节 屯溪路校区 西二407*; \n1~8周 周五 第三节~第四节 屯溪路校区 西二407*"
+          },
+          "dateTimePlacePersonText": {
+            "textZh": "1~8周 周二 第三节~第四节 屯溪路校区 西二407* 任明仑; \n1~8周 周五 第三节~第四节 屯溪路校区 西二407* 任明仑",
+            "textEn": "1~8 Week Tue. 3~4 01,00000494 Ren Minglun; \n1~8 Week Fri. 3~4 01,00000494 Ren Minglun",
+            "text": "1~8周 周二 第三节~第四节 屯溪路校区 西二407* 任明仑; \n1~8周 周五 第三节~第四节 屯溪路校区 西二407* 任明仑"
+          }
+        },
+        "stdCount": 100,
+        "limitCount": 101,
+        "reserveCount": 0,
+        "suggestScheduleWeeks": [],
+        "calcRelatedAdminclasses": true,
+        "allowMakeup": false,
+        "expActualPeriods": 0,
+        "needAssign": false,
+        "auto": false,
+        "scheduleRemark": null,
+        "timeTableLayout": {
+          "id": 2,
+          "nameZh": "屯溪路校区秋季课表布局",
+          "nameEn": "02",
+          "enabled": true
+        },
+        "bizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "course": {
+          "id": 8920,
+          "nameZh": "电子商务概论（双语）",
+          "nameEn": "General Introduction to Electronic Commerce (Bilingual)",
+          "code": "1110022B",
+          "periodInfo": {
+            "total": 32,
+            "weeks": 16,
+            "theory": 32,
+            "theoryUnit": null,
+            "requireTheory": null,
+            "practice": 0,
+            "practiceUnit": null,
+            "requirePractice": null,
+            "test": null,
+            "testUnit": null,
+            "requireTest": null,
+            "experiment": 0,
+            "experimentUnit": null,
+            "requireExperiment": null,
+            "machine": 0,
+            "machineUnit": null,
+            "requireMachine": null,
+            "design": null,
+            "designUnit": null,
+            "requireDesign": null,
+            "periodsPerWeek": 4
+          },
+          "stageInfo": {
+            "stage": false,
+            "stageNum": null,
+            "stageGrantNum": null
+          },
+          "credits": 2,
+          "calculateGp": true,
+          "theory": false,
+          "experiment": false,
+          "practice": false,
+          "test": false,
+          "machine": false,
+          "design": false,
+          "enabled": true
+        },
+        "preCourses": [],
+        "courseType": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "openDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "examMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "campus": {
+          "id": 2,
+          "nameZh": "屯溪路校区",
+          "nameEn": "01",
+          "code": "01"
+        },
+        "teachLang": {
+          "nameZh": "双语",
+          "nameEn": "bilingual",
+          "id": 2,
+          "code": "20002",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "双语"
+        },
+        "roomType": null,
+        "suggestScheduleWeeksInfo": "",
+        "scheduleWeeksInfo": "1~8周",
+        "teacherAssignmentList": [{
+          "teacher": {
+            "id": 6326,
+            "code": "1997800039",
+            "teaching": true,
+            "zaiZhi": true,
+            "hireType": "FORMAL",
+            "department": {
+              "id": 169,
+              "nameZh": "管理学院",
+              "nameEn": "School of Management",
+              "code": "109",
+              "abbrZh": "管理学院",
+              "abbrEn": null,
+              "college": true,
+              "openCourse": true,
+              "experiment": true
+            },
+            "person": {
+              "id": 5031,
+              "nameZh": "任明仑",
+              "nameEn": "Ren Minglun"
+            },
+            "title": {
+              "nameZh": "教授",
+              "nameEn": "js",
+              "id": 1153,
+              "code": "011",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "教授"
+            },
+            "type": {
+              "nameZh": "全职",
+              "nameEn": "full-time",
+              "id": 1,
+              "code": "01",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "全职"
+            }
+          },
+          "person": {
+            "id": 5031,
+            "nameZh": "任明仑",
+            "nameEn": "Ren Minglun"
+          },
+          "role": "MAJOR",
+          "indexNo": 1,
+          "age": 50
+        }],
+        "scheduleStartWeek": 1,
+        "scheduleEndWeek": 8,
+        "planExamWeek": 9,
+        "adminclassIds": [
+          4520,
+          4521
+        ],
+        "scheduleCurrentWeek": 1,
+        "scheduleChangeWeeks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "id": 336163,
+        "nameZh": "信息管18-1班,信息管18-2班",
+        "nameEn": null,
+        "code": "1110032B--002",
+        "remark": null,
+        "requiredPeriodInfo": {
+          "total": 48,
+          "weeks": 12,
+          "theory": null,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": null,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": null,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 2
+        },
+        "actualPeriods": 48,
+        "scheduleText": {
+          "dateTimeText": {
+            "textZh": "2~10,12~14周 周一 第五节~第六节; \n1~10,12~13周 周三 第三节~第四节",
+            "textEn": "2~10,12~14 Week Mon. 5~6; \n1~10,12~13 Week Wed. 3~4",
+            "text": "2~10,12~14周 周一 第五节~第六节; \n1~10,12~13周 周三 第三节~第四节"
+          },
+          "dateTimePlaceText": {
+            "textZh": "2~10,12~14周 周一 第五节~第六节 屯溪路校区 西二407*(147); \n1~10,12~13周 周三 第三节~第四节 屯溪路校区 西二407*(147)",
+            "textEn": "2~10,12~14 Week Mon. 5~6 01,00000494(147); \n1~10,12~13 Week Wed. 3~4 01,00000494(147)",
+            "text": "2~10,12~14周 周一 第五节~第六节 屯溪路校区 西二407*(147); \n1~10,12~13周 周三 第三节~第四节 屯溪路校区 西二407*(147)"
+          },
+          "dateTimePlacePersonText": {
+            "textZh": "2~10,12~14周 周一 第五节~第六节 屯溪路校区 西二407*(147) 唐奕城; \n1~10,12~13周 周三 第三节~第四节 屯溪路校区 西二407*(147) 唐奕城",
+            "textEn": "2~10,12~14 Week Mon. 5~6 01,00000494(147) Tang Yi Cheng; \n1~10,12~13 Week Wed. 3~4 01,00000494(147) Tang Yi Cheng",
+            "text": "2~10,12~14周 周一 第五节~第六节 屯溪路校区 西二407*(147) 唐奕城; \n1~10,12~13周 周三 第三节~第四节 屯溪路校区 西二407*(147) 唐奕城"
+          }
+        },
+        "stdCount": 100,
+        "limitCount": 101,
+        "reserveCount": 0,
+        "suggestScheduleWeeks": [],
+        "calcRelatedAdminclasses": true,
+        "allowMakeup": false,
+        "expActualPeriods": 0,
+        "needAssign": false,
+        "auto": false,
+        "scheduleRemark": null,
+        "timeTableLayout": {
+          "id": 2,
+          "nameZh": "屯溪路校区秋季课表布局",
+          "nameEn": "02",
+          "enabled": true
+        },
+        "bizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "course": {
+          "id": 8923,
+          "nameZh": "管理信息学",
+          "nameEn": "Management Informatics",
+          "code": "1110032B",
+          "periodInfo": {
+            "total": 48,
+            "weeks": 16,
+            "theory": 48,
+            "theoryUnit": null,
+            "requireTheory": null,
+            "practice": 0,
+            "practiceUnit": null,
+            "requirePractice": null,
+            "test": null,
+            "testUnit": null,
+            "requireTest": null,
+            "experiment": 0,
+            "experimentUnit": null,
+            "requireExperiment": null,
+            "machine": 0,
+            "machineUnit": null,
+            "requireMachine": null,
+            "design": null,
+            "designUnit": null,
+            "requireDesign": null,
+            "periodsPerWeek": 4
+          },
+          "stageInfo": {
+            "stage": false,
+            "stageNum": null,
+            "stageGrantNum": null
+          },
+          "credits": 3,
+          "calculateGp": true,
+          "theory": false,
+          "experiment": false,
+          "practice": false,
+          "test": false,
+          "machine": false,
+          "design": false,
+          "enabled": true
+        },
+        "preCourses": [],
+        "courseType": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "openDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "examMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "campus": {
+          "id": 2,
+          "nameZh": "屯溪路校区",
+          "nameEn": "01",
+          "code": "01"
+        },
+        "teachLang": {
+          "nameZh": "中文",
+          "nameEn": "chinese",
+          "id": 1,
+          "code": "20001",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "中文"
+        },
+        "roomType": null,
+        "suggestScheduleWeeksInfo": "",
+        "scheduleWeeksInfo": "1~10,12~14周",
+        "teacherAssignmentList": [{
+          "teacher": {
+            "id": 2017844701,
+            "code": "2019800136",
+            "teaching": true,
+            "zaiZhi": true,
+            "hireType": "FORMAL",
+            "department": {
+              "id": 169,
+              "nameZh": "管理学院",
+              "nameEn": "School of Management",
+              "code": "109",
+              "abbrZh": "管理学院",
+              "abbrEn": null,
+              "college": true,
+              "openCourse": true,
+              "experiment": true
+            },
+            "person": {
+              "id": 138978,
+              "nameZh": "唐奕城",
+              "nameEn": "Tang Yi Cheng"
+            },
+            "title": {
+              "nameZh": "讲师（高校）",
+              "nameEn": "js",
+              "id": 1155,
+              "code": "013",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "讲师（高校）"
+            },
+            "type": {
+              "nameZh": "全职",
+              "nameEn": "full-time",
+              "id": 1,
+              "code": "01",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "全职"
+            }
+          },
+          "person": {
+            "id": 138978,
+            "nameZh": "唐奕城",
+            "nameEn": "Tang Yi Cheng"
+          },
+          "role": "MAJOR",
+          "indexNo": 1,
+          "age": null
+        }],
+        "scheduleStartWeek": 1,
+        "scheduleEndWeek": 14,
+        "planExamWeek": 15,
+        "adminclassIds": [
+          4520,
+          4521
+        ],
+        "scheduleCurrentWeek": 1,
+        "scheduleChangeWeeks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ]
+      },
+      {
+        "id": 336165,
+        "nameZh": "信息管18-1班,信息管18-2班",
+        "nameEn": null,
+        "code": "1110072B--001",
+        "remark": null,
+        "requiredPeriodInfo": {
+          "total": 44,
+          "weeks": 11,
+          "theory": null,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": null,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": 12,
+          "experimentUnit": "HOUR",
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 2
+        },
+        "actualPeriods": 44,
+        "scheduleText": {
+          "dateTimeText": {
+            "textZh": "1~10,12周 周二 第一节~第二节; \n1~10,12周 周四 第三节~第四节",
+            "textEn": "1~10,12 Week Tue. 1~2; \n1~10,12 Week Thu. 3~4",
+            "text": "1~10,12周 周二 第一节~第二节; \n1~10,12周 周四 第三节~第四节"
+          },
+          "dateTimePlaceText": {
+            "textZh": "1~10,12周 周二 第一节~第二节 屯溪路校区 西二407*; \n1~10,12周 周四 第三节~第四节 屯溪路校区 西二407*",
+            "textEn": "1~10,12 Week Tue. 1~2 01,00000494; \n1~10,12 Week Thu. 3~4 01,00000494",
+            "text": "1~10,12周 周二 第一节~第二节 屯溪路校区 西二407*; \n1~10,12周 周四 第三节~第四节 屯溪路校区 西二407*"
+          },
+          "dateTimePlacePersonText": {
+            "textZh": "1~10,12周 周二 第一节~第二节 屯溪路校区 西二407* 余本功; \n1~10,12周 周四 第三节~第四节 屯溪路校区 西二407* 余本功",
+            "textEn": "1~10,12 Week Tue. 1~2 01,00000494 ybg; \n1~10,12 Week Thu. 3~4 01,00000494 ybg",
+            "text": "1~10,12周 周二 第一节~第二节 屯溪路校区 西二407* 余本功; \n1~10,12周 周四 第三节~第四节 屯溪路校区 西二407* 余本功"
+          }
+        },
+        "stdCount": 100,
+        "limitCount": 101,
+        "reserveCount": 0,
+        "suggestScheduleWeeks": [],
+        "calcRelatedAdminclasses": true,
+        "allowMakeup": false,
+        "expActualPeriods": 0,
+        "needAssign": false,
+        "auto": false,
+        "scheduleRemark": null,
+        "timeTableLayout": {
+          "id": 2,
+          "nameZh": "屯溪路校区秋季课表布局",
+          "nameEn": "02",
+          "enabled": true
+        },
+        "bizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "course": {
+          "id": 9537,
+          "nameZh": "数据库管理与应用",
+          "nameEn": "Principle and Application of Database",
+          "code": "1110072B",
+          "periodInfo": {
+            "total": 56,
+            "weeks": 16,
+            "theory": 44,
+            "theoryUnit": null,
+            "requireTheory": null,
+            "practice": 0,
+            "practiceUnit": null,
+            "requirePractice": null,
+            "test": null,
+            "testUnit": null,
+            "requireTest": null,
+            "experiment": 12,
+            "experimentUnit": "HOUR",
+            "requireExperiment": null,
+            "machine": 0,
+            "machineUnit": null,
+            "requireMachine": null,
+            "design": null,
+            "designUnit": null,
+            "requireDesign": null,
+            "periodsPerWeek": 4
+          },
+          "stageInfo": {
+            "stage": false,
+            "stageNum": null,
+            "stageGrantNum": null
+          },
+          "credits": 3.5,
+          "calculateGp": true,
+          "theory": false,
+          "experiment": true,
+          "practice": false,
+          "test": false,
+          "machine": false,
+          "design": false,
+          "enabled": true
+        },
+        "preCourses": [],
+        "courseType": {
+          "nameZh": "学科基础和专业必修课",
+          "nameEn": null,
+          "id": 2,
+          "code": "2B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "学科基础和专业必修课"
+        },
+        "openDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "examMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "campus": {
+          "id": 2,
+          "nameZh": "屯溪路校区",
+          "nameEn": "01",
+          "code": "01"
+        },
+        "teachLang": {
+          "nameZh": "中文",
+          "nameEn": "chinese",
+          "id": 1,
+          "code": "20001",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "中文"
+        },
+        "roomType": null,
+        "suggestScheduleWeeksInfo": "",
+        "scheduleWeeksInfo": "1~10,12周",
+        "teacherAssignmentList": [{
+          "teacher": {
+            "id": 5206,
+            "code": "1994800060",
+            "teaching": true,
+            "zaiZhi": true,
+            "hireType": "FORMAL",
+            "department": {
+              "id": 169,
+              "nameZh": "管理学院",
+              "nameEn": "School of Management",
+              "code": "109",
+              "abbrZh": "管理学院",
+              "abbrEn": null,
+              "college": true,
+              "openCourse": true,
+              "experiment": true
+            },
+            "person": {
+              "id": 4883,
+              "nameZh": "余本功",
+              "nameEn": "ybg"
+            },
+            "title": {
+              "nameZh": "教授",
+              "nameEn": "js",
+              "id": 1153,
+              "code": "011",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "教授"
+            },
+            "type": {
+              "nameZh": "全职",
+              "nameEn": "full-time",
+              "id": 1,
+              "code": "01",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "全职"
+            }
+          },
+          "person": {
+            "id": 4883,
+            "nameZh": "余本功",
+            "nameEn": "ybg"
+          },
+          "role": "MAJOR",
+          "indexNo": 1,
+          "age": 48
+        }],
+        "scheduleStartWeek": 1,
+        "scheduleEndWeek": 12,
+        "planExamWeek": 13,
+        "adminclassIds": [
+          4520,
+          4521
+        ],
+        "scheduleCurrentWeek": 1,
+        "scheduleChangeWeeks": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      {
+        "id": 336167,
+        "nameZh": "信息管18-1班",
+        "nameEn": null,
+        "code": "1111280X--002",
+        "remark": null,
+        "requiredPeriodInfo": {
+          "total": 32,
+          "weeks": 8,
+          "theory": null,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": null,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": null,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 2
+        },
+        "actualPeriods": 32,
+        "scheduleText": {
+          "dateTimeText": {
+            "textZh": "12~19周 周二 第五节~第六节; \n12~19周 周四 第七节~第八节",
+            "textEn": "12~19 Week Tue. 5~6; \n12~19 Week Thu. 7~8",
+            "text": "12~19周 周二 第五节~第六节; \n12~19周 周四 第七节~第八节"
+          },
+          "dateTimePlaceText": {
+            "textZh": "12~19周 周二 第五节~第六节 屯溪路校区 西二407*; \n12~19周 周四 第七节~第八节 屯溪路校区 西二407*",
+            "textEn": "12~19 Week Tue. 5~6 01,00000494; \n12~19 Week Thu. 7~8 01,00000494",
+            "text": "12~19周 周二 第五节~第六节 屯溪路校区 西二407*; \n12~19周 周四 第七节~第八节 屯溪路校区 西二407*"
+          },
+          "dateTimePlacePersonText": {
+            "textZh": "12~19周 周二 第五节~第六节 屯溪路校区 西二407* 范雯娟; \n12~19周 周四 第七节~第八节 屯溪路校区 西二407* 范雯娟",
+            "textEn": "12~19 Week Tue. 5~6 01,00000494 范雯娟; \n12~19 Week Thu. 7~8 01,00000494 范雯娟",
+            "text": "12~19周 周二 第五节~第六节 屯溪路校区 西二407* 范雯娟; \n12~19周 周四 第七节~第八节 屯溪路校区 西二407* 范雯娟"
+          }
+        },
+        "stdCount": 52,
+        "limitCount": 52,
+        "reserveCount": 0,
+        "suggestScheduleWeeks": [],
+        "calcRelatedAdminclasses": true,
+        "allowMakeup": false,
+        "expActualPeriods": 0,
+        "needAssign": false,
+        "auto": false,
+        "scheduleRemark": null,
+        "timeTableLayout": {
+          "id": 2,
+          "nameZh": "屯溪路校区秋季课表布局",
+          "nameEn": "02",
+          "enabled": true
+        },
+        "bizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "course": {
+          "id": 15736,
+          "nameZh": "云计算技术",
+          "nameEn": "Cloud Computing Technology",
+          "code": "1111280X",
+          "periodInfo": {
+            "total": 32,
+            "weeks": 8,
+            "theory": 32,
+            "theoryUnit": null,
+            "requireTheory": null,
+            "practice": 0,
+            "practiceUnit": null,
+            "requirePractice": null,
+            "test": null,
+            "testUnit": null,
+            "requireTest": null,
+            "experiment": 0,
+            "experimentUnit": null,
+            "requireExperiment": null,
+            "machine": 0,
+            "machineUnit": null,
+            "requireMachine": null,
+            "design": null,
+            "designUnit": null,
+            "requireDesign": null,
+            "periodsPerWeek": 4
+          },
+          "stageInfo": {
+            "stage": false,
+            "stageNum": null,
+            "stageGrantNum": null
+          },
+          "credits": 2,
+          "calculateGp": true,
+          "theory": false,
+          "experiment": false,
+          "practice": false,
+          "test": false,
+          "machine": false,
+          "design": false,
+          "enabled": true
+        },
+        "preCourses": [],
+        "courseType": {
+          "nameZh": "各专业选修课",
+          "nameEn": "gzyxxk",
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "openDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "examMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "campus": {
+          "id": 2,
+          "nameZh": "屯溪路校区",
+          "nameEn": "01",
+          "code": "01"
+        },
+        "teachLang": {
+          "nameZh": "中文",
+          "nameEn": "chinese",
+          "id": 1,
+          "code": "20001",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "中文"
+        },
+        "roomType": null,
+        "suggestScheduleWeeksInfo": "",
+        "scheduleWeeksInfo": "12~19周",
+        "teacherAssignmentList": [{
+          "teacher": {
+            "id": 4294,
+            "code": "2015800018",
+            "teaching": true,
+            "zaiZhi": true,
+            "hireType": "FORMAL",
+            "department": {
+              "id": 169,
+              "nameZh": "管理学院",
+              "nameEn": "School of Management",
+              "code": "109",
+              "abbrZh": "管理学院",
+              "abbrEn": null,
+              "college": true,
+              "openCourse": true,
+              "experiment": true
+            },
+            "person": {
+              "id": 6400,
+              "nameZh": "范雯娟",
+              "nameEn": " "
+            },
+            "title": {
+              "nameZh": "讲师（高校）",
+              "nameEn": "js",
+              "id": 1155,
+              "code": "013",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "讲师（高校）"
+            },
+            "type": null
+          },
+          "person": {
+            "id": 6400,
+            "nameZh": "范雯娟",
+            "nameEn": " "
+          },
+          "role": "MAJOR",
+          "indexNo": 1,
+          "age": 32
+        }],
+        "scheduleStartWeek": 12,
+        "scheduleEndWeek": 19,
+        "planExamWeek": 20,
+        "adminclassIds": [
+          4520
+        ],
+        "scheduleCurrentWeek": 12,
+        "scheduleChangeWeeks": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ]
+      },
+      {
+        "id": 336169,
+        "nameZh": "信息管18-1班,信息管18-2班",
+        "nameEn": null,
+        "code": "1115030X--001",
+        "remark": null,
+        "requiredPeriodInfo": {
+          "total": 32,
+          "weeks": 8,
+          "theory": null,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": null,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": null,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 2
+        },
+        "actualPeriods": 32,
+        "scheduleText": {
+          "dateTimeText": {
+            "textZh": "12~19周 周二 第三节~第四节; \n12~19周 周五 第三节~第四节",
+            "textEn": "12~19 Week Tue. 3~4; \n12~19 Week Fri. 3~4",
+            "text": "12~19周 周二 第三节~第四节; \n12~19周 周五 第三节~第四节"
+          },
+          "dateTimePlaceText": {
+            "textZh": "12~19周 周二 第三节~第四节 屯溪路校区 西二407*; \n12~19周 周五 第三节~第四节 屯溪路校区 西二407*",
+            "textEn": "12~19 Week Tue. 3~4 01,00000494; \n12~19 Week Fri. 3~4 01,00000494",
+            "text": "12~19周 周二 第三节~第四节 屯溪路校区 西二407*; \n12~19周 周五 第三节~第四节 屯溪路校区 西二407*"
+          },
+          "dateTimePlacePersonText": {
+            "textZh": "12~19周 周二 第三节~第四节 屯溪路校区 西二407* 胡小建(管理); \n12~19周 周五 第三节~第四节 屯溪路校区 西二407* 胡小建(管理)",
+            "textEn": "12~19 Week Tue. 3~4 01,00000494 胡小建(管理); \n12~19 Week Fri. 3~4 01,00000494 胡小建(管理)",
+            "text": "12~19周 周二 第三节~第四节 屯溪路校区 西二407* 胡小建(管理); \n12~19周 周五 第三节~第四节 屯溪路校区 西二407* 胡小建(管理)"
+          }
+        },
+        "stdCount": 105,
+        "limitCount": 105,
+        "reserveCount": 0,
+        "suggestScheduleWeeks": [],
+        "calcRelatedAdminclasses": true,
+        "allowMakeup": false,
+        "expActualPeriods": 0,
+        "needAssign": false,
+        "auto": false,
+        "scheduleRemark": null,
+        "timeTableLayout": {
+          "id": 2,
+          "nameZh": "屯溪路校区秋季课表布局",
+          "nameEn": "02",
+          "enabled": true
+        },
+        "bizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "course": {
+          "id": 15727,
+          "nameZh": "供应链与物流管理",
+          "nameEn": "Supply Chain & Logistics Management",
+          "code": "1115030X",
+          "periodInfo": {
+            "total": 32,
+            "weeks": 8,
+            "theory": 32,
+            "theoryUnit": null,
+            "requireTheory": null,
+            "practice": 0,
+            "practiceUnit": null,
+            "requirePractice": null,
+            "test": null,
+            "testUnit": null,
+            "requireTest": null,
+            "experiment": 0,
+            "experimentUnit": null,
+            "requireExperiment": null,
+            "machine": 0,
+            "machineUnit": null,
+            "requireMachine": null,
+            "design": null,
+            "designUnit": null,
+            "requireDesign": null,
+            "periodsPerWeek": 4
+          },
+          "stageInfo": {
+            "stage": false,
+            "stageNum": null,
+            "stageGrantNum": null
+          },
+          "credits": 2,
+          "calculateGp": true,
+          "theory": false,
+          "experiment": false,
+          "practice": false,
+          "test": false,
+          "machine": false,
+          "design": false,
+          "enabled": true
+        },
+        "preCourses": [],
+        "courseType": {
+          "nameZh": "各专业选修课",
+          "nameEn": "gzyxxk",
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "openDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "examMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "campus": {
+          "id": 2,
+          "nameZh": "屯溪路校区",
+          "nameEn": "01",
+          "code": "01"
+        },
+        "teachLang": {
+          "nameZh": "中文",
+          "nameEn": "chinese",
+          "id": 1,
+          "code": "20001",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "中文"
+        },
+        "roomType": null,
+        "suggestScheduleWeeksInfo": "",
+        "scheduleWeeksInfo": "12~19周",
+        "teacherAssignmentList": [{
+          "teacher": {
+            "id": 4997,
+            "code": "1991800086",
+            "teaching": true,
+            "zaiZhi": true,
+            "hireType": "FORMAL",
+            "department": {
+              "id": 169,
+              "nameZh": "管理学院",
+              "nameEn": "School of Management",
+              "code": "109",
+              "abbrZh": "管理学院",
+              "abbrEn": null,
+              "college": true,
+              "openCourse": true,
+              "experiment": true
+            },
+            "person": {
+              "id": 4674,
+              "nameZh": "胡小建(管理)",
+              "nameEn": " "
+            },
+            "title": {
+              "nameZh": "教授",
+              "nameEn": "js",
+              "id": 1153,
+              "code": "011",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "教授"
+            },
+            "type": null
+          },
+          "person": {
+            "id": 4674,
+            "nameZh": "胡小建(管理)",
+            "nameEn": " "
+          },
+          "role": "MAJOR",
+          "indexNo": 1,
+          "age": null
+        }],
+        "scheduleStartWeek": 12,
+        "scheduleEndWeek": 19,
+        "planExamWeek": 20,
+        "adminclassIds": [
+          4520,
+          4521
+        ],
+        "scheduleCurrentWeek": 12,
+        "scheduleChangeWeeks": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ]
+      },
+      {
+        "id": 336171,
+        "nameZh": "信息管18-1班,信息管18-2班",
+        "nameEn": null,
+        "code": "1111020X--001",
+        "remark": null,
+        "requiredPeriodInfo": {
+          "total": 32,
+          "weeks": 8,
+          "theory": null,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": null,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": null,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 2
+        },
+        "actualPeriods": 32,
+        "scheduleText": {
+          "dateTimeText": {
+            "textZh": "12~19周 周一 第七节~第八节; \n12~19周 周四 第一节~第二节",
+            "textEn": "12~19 Week Mon. 7~8; \n12~19 Week Thu. 1~2",
+            "text": "12~19周 周一 第七节~第八节; \n12~19周 周四 第一节~第二节"
+          },
+          "dateTimePlaceText": {
+            "textZh": "12~19周 周一 第七节~第八节 屯溪路校区 西二407*; \n12~19周 周四 第一节~第二节 屯溪路校区 西二407*",
+            "textEn": "12~19 Week Mon. 7~8 01,00000494; \n12~19 Week Thu. 1~2 01,00000494",
+            "text": "12~19周 周一 第七节~第八节 屯溪路校区 西二407*; \n12~19周 周四 第一节~第二节 屯溪路校区 西二407*"
+          },
+          "dateTimePlacePersonText": {
+            "textZh": "12~19周 周一 第七节~第八节 屯溪路校区 西二407* 李应; \n12~19周 周四 第一节~第二节 屯溪路校区 西二407* 李应",
+            "textEn": "12~19 Week Mon. 7~8 01,00000494 ly; \n12~19 Week Thu. 1~2 01,00000494 ly",
+            "text": "12~19周 周一 第七节~第八节 屯溪路校区 西二407* 李应; \n12~19周 周四 第一节~第二节 屯溪路校区 西二407* 李应"
+          }
+        },
+        "stdCount": 107,
+        "limitCount": 107,
+        "reserveCount": 0,
+        "suggestScheduleWeeks": [],
+        "calcRelatedAdminclasses": true,
+        "allowMakeup": false,
+        "expActualPeriods": 0,
+        "needAssign": false,
+        "auto": false,
+        "scheduleRemark": null,
+        "timeTableLayout": {
+          "id": 2,
+          "nameZh": "屯溪路校区秋季课表布局",
+          "nameEn": "02",
+          "enabled": true
+        },
+        "bizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "course": {
+          "id": 9576,
+          "nameZh": "网络营销",
+          "nameEn": "Network Marketing",
+          "code": "1111020X",
+          "periodInfo": {
+            "total": 32,
+            "weeks": 16,
+            "theory": 32,
+            "theoryUnit": null,
+            "requireTheory": null,
+            "practice": 0,
+            "practiceUnit": null,
+            "requirePractice": null,
+            "test": null,
+            "testUnit": null,
+            "requireTest": null,
+            "experiment": 0,
+            "experimentUnit": null,
+            "requireExperiment": null,
+            "machine": 0,
+            "machineUnit": null,
+            "requireMachine": null,
+            "design": null,
+            "designUnit": null,
+            "requireDesign": null,
+            "periodsPerWeek": 4
+          },
+          "stageInfo": {
+            "stage": false,
+            "stageNum": null,
+            "stageGrantNum": null
+          },
+          "credits": 2,
+          "calculateGp": true,
+          "theory": false,
+          "experiment": false,
+          "practice": false,
+          "test": false,
+          "machine": false,
+          "design": false,
+          "enabled": true
+        },
+        "preCourses": [],
+        "courseType": {
+          "nameZh": "各专业选修课",
+          "nameEn": "gzyxxk",
+          "id": 5,
+          "code": "0X",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "各专业选修课"
+        },
+        "openDepartment": {
+          "id": 169,
+          "nameZh": "管理学院",
+          "nameEn": "School of Management",
+          "code": "109",
+          "abbrZh": "管理学院",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": true
+        },
+        "examMode": {
+          "nameZh": "笔试",
+          "nameEn": null,
+          "id": 9,
+          "code": "1",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "笔试"
+        },
+        "campus": {
+          "id": 2,
+          "nameZh": "屯溪路校区",
+          "nameEn": "01",
+          "code": "01"
+        },
+        "teachLang": {
+          "nameZh": "中文",
+          "nameEn": "chinese",
+          "id": 1,
+          "code": "20001",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "中文"
+        },
+        "roomType": null,
+        "suggestScheduleWeeksInfo": "",
+        "scheduleWeeksInfo": "12~19周",
+        "teacherAssignmentList": [{
+          "teacher": {
+            "id": 6411,
+            "code": "2000800054",
+            "teaching": true,
+            "zaiZhi": true,
+            "hireType": "FORMAL",
+            "department": {
+              "id": 169,
+              "nameZh": "管理学院",
+              "nameEn": "School of Management",
+              "code": "109",
+              "abbrZh": "管理学院",
+              "abbrEn": null,
+              "college": true,
+              "openCourse": true,
+              "experiment": true
+            },
+            "person": {
+              "id": 5116,
+              "nameZh": "李应",
+              "nameEn": "ly"
+            },
+            "title": {
+              "nameZh": "讲师（高校）",
+              "nameEn": "js",
+              "id": 1155,
+              "code": "013",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "讲师（高校）"
+            },
+            "type": null
+          },
+          "person": {
+            "id": 5116,
+            "nameZh": "李应",
+            "nameEn": "ly"
+          },
+          "role": "MAJOR",
+          "indexNo": 1,
+          "age": 48
+        }],
+        "scheduleStartWeek": 12,
+        "scheduleEndWeek": 19,
+        "planExamWeek": 20,
+        "adminclassIds": [
+          4520,
+          4521
+        ],
+        "scheduleCurrentWeek": 12,
+        "scheduleChangeWeeks": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ]
+      },
+      {
+        "id": 336175,
+        "nameZh": "信息管18-1班,会计学18-1班,信息管18-2班,会计学18-2班",
+        "nameEn": null,
+        "code": "5700063B--005",
+        "remark": null,
+        "requiredPeriodInfo": {
+          "total": 0,
+          "weeks": 16,
+          "theory": 0,
+          "theoryUnit": null,
+          "requireTheory": null,
+          "practice": 24,
+          "practiceUnit": null,
+          "requirePractice": null,
+          "test": null,
+          "testUnit": null,
+          "requireTest": null,
+          "experiment": null,
+          "experimentUnit": null,
+          "requireExperiment": null,
+          "machine": null,
+          "machineUnit": null,
+          "requireMachine": null,
+          "design": null,
+          "designUnit": null,
+          "requireDesign": null,
+          "periodsPerWeek": 0
+        },
+        "actualPeriods": 0,
+        "scheduleText": {
+          "dateTimeText": {
+            "textZh": null,
+            "textEn": null,
+            "text": null
+          },
+          "dateTimePlaceText": {
+            "textZh": null,
+            "textEn": null,
+            "text": null
+          },
+          "dateTimePlacePersonText": {
+            "textZh": null,
+            "textEn": null,
+            "text": null
+          }
+        },
+        "stdCount": 208,
+        "limitCount": 230,
+        "reserveCount": 0,
+        "suggestScheduleWeeks": [],
+        "calcRelatedAdminclasses": true,
+        "allowMakeup": false,
+        "expActualPeriods": 0,
+        "needAssign": false,
+        "auto": false,
+        "scheduleRemark": null,
+        "timeTableLayout": {
+          "id": 2,
+          "nameZh": "屯溪路校区秋季课表布局",
+          "nameEn": "02",
+          "enabled": true
+        },
+        "bizType": {
+          "id": 2,
+          "nameZh": "本科",
+          "nameEn": "Undergraduate"
+        },
+        "semester": {
+          "id": 114,
+          "nameZh": "2020-2021学年第一学期",
+          "nameEn": "2020-2021-1",
+          "code": "037",
+          "calendar": {
+            "id": 1,
+            "nameZh": "默认校历",
+            "nameEn": "1"
+          },
+          "schoolYear": "2020-2021",
+          "startDate": "2020-09-07",
+          "endDate": "2021-01-24",
+          "weekStartOnSunday": false,
+          "countInTerm": true,
+          "season": "AUTUMN",
+          "enabled": true,
+          "fileInfo": null
+        },
+        "course": {
+          "id": 12941,
+          "nameZh": "公益活动 C（上）",
+          "nameEn": "Volunteer Activity (Anterior  Volume)",
+          "code": "5700063B",
+          "periodInfo": {
+            "total": 24,
+            "weeks": 1,
+            "theory": 0,
+            "theoryUnit": null,
+            "requireTheory": null,
+            "practice": 24,
+            "practiceUnit": "HOUR",
+            "requirePractice": null,
+            "test": null,
+            "testUnit": null,
+            "requireTest": null,
+            "experiment": null,
+            "experimentUnit": null,
+            "requireExperiment": null,
+            "machine": null,
+            "machineUnit": null,
+            "requireMachine": null,
+            "design": null,
+            "designUnit": null,
+            "requireDesign": null,
+            "periodsPerWeek": 24
+          },
+          "stageInfo": {
+            "stage": false,
+            "stageNum": null,
+            "stageGrantNum": null
+          },
+          "credits": 0,
+          "calculateGp": true,
+          "theory": false,
+          "experiment": false,
+          "practice": true,
+          "test": false,
+          "machine": false,
+          "design": false,
+          "enabled": true
+        },
+        "preCourses": [],
+        "courseType": {
+          "nameZh": "实践环节",
+          "nameEn": null,
+          "id": 3,
+          "code": "3B",
+          "enabled": true,
+          "bizTypeAssocs": [
+            1,
+            2,
+            23
+          ],
+          "bizTypeIds": [
+            1,
+            2,
+            23
+          ],
+          "transient": false,
+          "name": "实践环节"
+        },
+        "openDepartment": {
+          "id": 188,
+          "nameZh": "学工部",
+          "nameEn": "57",
+          "code": "57",
+          "abbrZh": "学工部",
+          "abbrEn": null,
+          "college": true,
+          "openCourse": true,
+          "experiment": false
+        },
+        "examMode": {
+          "nameZh": "考查",
+          "nameEn": "3",
+          "id": 11,
+          "code": "3",
+          "enabled": true,
+          "bizTypeAssocs": [
+            2,
+            3,
+            23
+          ],
+          "bizTypeIds": [
+            2,
+            3,
+            23
+          ],
+          "transient": false,
+          "name": "考查"
+        },
+        "campus": {
+          "id": 2,
+          "nameZh": "屯溪路校区",
+          "nameEn": "01",
+          "code": "01"
+        },
+        "teachLang": null,
+        "roomType": null,
+        "suggestScheduleWeeksInfo": "",
+        "scheduleWeeksInfo": null,
+        "teacherAssignmentList": [{
+          "teacher": {
+            "id": 4361,
+            "code": "2018800034",
+            "teaching": true,
+            "zaiZhi": true,
+            "hireType": "FORMAL",
+            "department": {
+              "id": 169,
+              "nameZh": "管理学院",
+              "nameEn": "School of Management",
+              "code": "109",
+              "abbrZh": "管理学院",
+              "abbrEn": null,
+              "college": true,
+              "openCourse": true,
+              "experiment": true
+            },
+            "person": {
+              "id": 6467,
+              "nameZh": "黄倩",
+              "nameEn": "Huang Qian"
+            },
+            "title": {
+              "nameZh": "讲师（高校）",
+              "nameEn": "js",
+              "id": 1155,
+              "code": "013",
+              "enabled": true,
+              "bizTypeAssocs": [
+                2,
+                3,
+                23
+              ],
+              "bizTypeIds": [
+                2,
+                3,
+                23
+              ],
+              "transient": false,
+              "name": "讲师（高校）"
+            },
+            "type": null
+          },
+          "person": {
+            "id": 6467,
+            "nameZh": "黄倩",
+            "nameEn": "Huang Qian"
+          },
+          "role": "MAJOR",
+          "indexNo": 1,
+          "age": null
+        }],
+        "scheduleStartWeek": null,
+        "scheduleEndWeek": null,
+        "planExamWeek": null,
+        "adminclassIds": [
+          4520,
+          4521,
+          4526,
+          4527
+        ],
+        "scheduleCurrentWeek": null,
+        "scheduleChangeWeeks": []
+      }
+    ]
+  },
+  "headers": {
+    "server": "none",
+    "date": "Mon, 07 Sep 2020 11:50:51 GMT",
+    "content-type": "application/json;charset=UTF-8",
+    "transfer-encoding": "chunked",
+    "connection": "close",
+    "cache-control": "no-store",
+    "vary": "accept-encoding",
+    "x-application-context": "application",
+    "x-ua-compatible": "IE=edge,chrome=1"
+  },
+  "key": "1"
+}

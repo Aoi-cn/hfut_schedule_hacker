@@ -1,0 +1,63 @@
+Component({
+  properties: {
+    // icon-test | icon_selected_fill | tongzhi-shixiang | tongzhi-kebiao | tongzhi-chengji | tongzhi-xitong | 2 | 3 | 1 | jishu | sheji | shipin | yunying | bangongshi | tuiguang | chankai | chanpin | wode_bangzhu | arrow-lift | seleted | wode_shezhi | wode_guanyu | wode_xiaoxi | cloud | cooperate | task | bug1 | addteam | solution | file-text | taolunqu | weixin | like | unlike | info-circle-fill | arrow-right | mine-fill | home | mine | score | schedule | score-fill | home-fill | schedule-fill | login | eye-close | share | sync | eye | calculator | download | swap | plus
+    name: {
+      type: String,
+    },
+    // string | string[]
+    color: {
+      type: null,
+      observer: function(color) {
+        this.setData({
+          colors: this.fixColor(),
+          isStr: typeof color === 'string',
+        });
+      }
+    },
+    size: {
+      type: Number,
+      value: 18,
+      observer: function(size) {
+        this.setData({
+          svgSize: size / 750 * wx.getSystemInfoSync().windowWidth,
+        });
+      },
+    },
+  },
+  data: {
+    colors: '',
+    svgSize: 18 / 750 * wx.getSystemInfoSync().windowWidth,
+    quot: '"',
+    isStr: true,
+  },
+  methods: {
+    fixColor: function() {
+      var color = this.data.color;
+      var hex2rgb = this.hex2rgb;
+
+      if (typeof color === 'string') {
+        return color.indexOf('#') === 0 ? hex2rgb(color) : color;
+      }
+
+      return color.map(function (item) {
+        return item.indexOf('#') === 0 ? hex2rgb(item) : item;
+      });
+    },
+    hex2rgb: function(hex) {
+      var rgb = [];
+
+      hex = hex.substr(1);
+
+      if (hex.length === 3) {
+        hex = hex.replace(/(.)/g, '$1$1');
+      }
+
+      hex.replace(/../g, function(color) {
+        rgb.push(parseInt(color, 0x10));
+        return color;
+      });
+
+      return 'rgb(' + rgb.join(',') + ')';
+    }
+  }
+});
