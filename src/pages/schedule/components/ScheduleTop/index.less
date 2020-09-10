@@ -2,7 +2,7 @@
 
 .scheduleTop {
   background-color: @color-brand;
-  height: 75px;
+  height: 70px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -24,10 +24,13 @@
 
   &-operation {
     position: absolute;
-    right: 26px;
-    top: 2px;
-    padding: 8px;
-    // background-color: red;
+    right: 10px;
+    padding: 10px 20px;
+
+    &:active {
+      transform: rotate(45deg);
+      transition: transform .1s;
+    }
   }
 
   &-mask {

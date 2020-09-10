@@ -15,7 +15,15 @@ const baseOptions = ({ url, data, method }) => Taro.request({
 .then(res => {
   return res.data
 })
-.catch(err => console.error(err))
+.catch(err => {
+  console.log(err)
+  Taro.hideLoading()
+  Taro.showToast({
+    title: '网络连接出错！',
+    icon: 'fail',
+    duration: 3000
+  })
+})
 
 export const GET = (url, data = '') => baseOptions({
   url,

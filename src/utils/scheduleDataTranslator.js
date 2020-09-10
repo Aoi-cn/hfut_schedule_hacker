@@ -13,7 +13,7 @@ export default (scheduleData, lessonIds) => {
     // course：(Object)课程数据
     // text：(String)该门课具体在星期几、教室信息、授课老师
     // lessonId:：课程id
-    const { course, scheduleText: { dateTimePlacePersonText: { text } }, id: lessonId } = lessonInfo
+    const { course, scheduleText: { dateTimePlacePersonText: { text } }, id: lessonId, nameZh: studentClazzes, code: lessonCode, stdCount: studentNumber } = lessonInfo
     if (!text) { return } // 没有课程安排，跳过
 
     // 解析
@@ -66,6 +66,10 @@ export default (scheduleData, lessonIds) => {
         weekIndexes,
         dayIndex,
         timeIndexes,
+        studentClazzes,
+        lessonCode,
+        studentNumber,
+        timeRange: timeIndexToTime(startTime) + '~' + timeIndexToTime(endTime),
         color: lessonIdsColor[lessonId],
       }
 
@@ -86,6 +90,47 @@ const initLessonIdsColor = (lessonIds) => {
     lessonIdsColor[lessonId] = colors[Math.floor((Math.random()*colors.length))]
   })
   return lessonIdsColor
+}
+
+const timeIndexToTime = (timeIndex) => {
+  let time = ''
+  switch (timeIndex) {
+    case 1:
+      time = '8:00'
+      break;
+    case 2:
+      time = '9:50'
+      break;
+    case 3:
+      time = '10:10'
+      break;
+    case 4:
+      time = '12:00'
+      break;
+    case 5:
+      time = '14:00'
+      break;
+    case 6:
+      time = '15:50'
+      break;
+    case 7:
+      time = '16:00'
+      break;
+    case 8:
+      time = '17:50'
+      break;
+    case 9:
+      time = '19:00'
+      break;
+    case 10:
+      time = '20:50'
+      break;
+  
+    default:
+      break;
+  }
+  return time
+
 }
 
 // 将中文的周目转化为index

@@ -10,11 +10,13 @@ import CourseTable from './components/CourseTable'
 import DayLine from './components/DayLine'
 import TimeLine from './components/TimeLine'
 import ScheduleTop from './components/ScheduleTop'
+import CourseDetailFloatLayout from './components/CourseDetailFloatLayout'
 import './index.less'
 
 function Schedule(props) {
-  const { bizData } = props
+  const { bizData, uiData } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
+  const { courseDetailFLData } = uiData
 
   useDidShow(() => {
     Taro.setNavigationBarColor({
@@ -76,6 +78,20 @@ function Schedule(props) {
           <IconFont name='arrow-right' size={52} color='#202124' />
         </View>
       </View>
+
+      <CourseDetailFloatLayout 
+        isOpened={courseDetailFLData.isOpened}
+        onClose={() => props.updateUiData({ courseDetailFLData: { isOpened: false } })}
+        name={courseDetailFLData.name}
+        clazzRoom={courseDetailFLData.clazzRoom}
+        teacher={courseDetailFLData.teacher}
+        timeRange={courseDetailFLData.timeRange}
+        lessonCode={courseDetailFLData.lessonCode}
+        studentClazzes={courseDetailFLData.studentClazzes}
+        studentNumber={courseDetailFLData.studentNumber}
+        color={courseDetailFLData.color}
+        lessonId={courseDetailFLData.lessonId}
+      />
     </View>
   )
 }

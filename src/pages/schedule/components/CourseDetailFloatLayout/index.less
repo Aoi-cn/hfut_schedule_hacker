@@ -1,10 +1,11 @@
-@import "../../style/theme.less";
+@import "../../../../style/theme.less";
 
-.standardFloatLayout {
+.courseDetailFloatLayout {
+  color: @color-semi;
 
   &-header {
     margin: 56px 0;
-    // margin-bottom: 48px;
+    margin-bottom: 40px;
     font-size: 36px;
     font-weight: bold;
     color: @color-semi;
@@ -14,25 +15,20 @@
   &-content {
     padding: 0 48px 0 48px;
     margin-bottom: 56px;
-    // text-align: center;
-
-    &-content {
-      font-size: 32px;
-      color: @color-grey;
+    
+    &-item {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      font-size: 34px;
+      margin-bottom: 16px;
     }
 
   }
 
   &-footer {
-    // background-color: blue;
     padding: 0 48px;
     padding-bottom: 36px;
-
-    &-twoButtonBox {
-      display: flex;
-      justify-content: space-between;
-
-    }
 
     &-btn {
       border: none;
@@ -42,17 +38,7 @@
       height: 100px;
       min-width: 296px;
       background-color: @color-background;
-      color: @color-grey;
-
-      &__red {
-        color: @color-error;
-      }
-      &__blue {
-        color: @color-brand;
-      }
-      &__grey {
-        color: @color-grey;
-      }
+      color: @color-brand;
 
       &-icon {
         position: relative;
@@ -60,5 +46,9 @@
         top: 2px
       }
     }
+  }
+
+  &-itemTitle {
+    color: @color-light;
   }
 }

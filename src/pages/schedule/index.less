@@ -28,11 +28,17 @@
       height: 108px;
       background-color: #eee;
       margin: 40px;
+      border: 2px solid #e8e8e8;
 
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      &:active {
+        background-color: @color-background;
+        filter: opacity(80%);
+      }
     }
   }
 }

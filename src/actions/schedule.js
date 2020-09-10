@@ -6,7 +6,6 @@ import {
 } from '../constants/schedule'
 import { GET } from '../utils/request'
 import dataToMatrix from '../utils/scheduleDataTranslator'
-import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 
 // 刚进入小程序时，判断是否有本地缓存，有的话就不用登录
 export const enter = () => async (dispatch) => {
@@ -54,6 +53,10 @@ export const reLogin = () => async (dispatch) => {
 // 登陆成功/自动登录成功执行
 export const updateScheduleData = () => async (dispatch) => {
   Taro.showLoading({ title: '正在加载...' })
+  // 生成一个时间线数据矩阵，先渲染时间线
+  const dayLineMatrix = await Taro.getStorage({ key: 'dayLineMatrix' })
+  dispatch(updateBizData({ dayLineMatrix: dayLineMatrix.data }))
+
   // 进行课表更新逻辑
   const { data: { key } } = await Taro.getStorage({ key: 'userInfo' })
   const res = await GET('/schedule', { key, semesterId: 114 })
@@ -73,8 +76,7 @@ export const updateScheduleData = () => async (dispatch) => {
   // 转化为UI可识别的matrix
   const scheduleMatrix = dataToMatrix(scheduleData, lessonIds)
 
-  // 生成一个时间线数据矩阵
-  const dayLineMatrix = makeDayLineMatrix()
+  
 
   // 将数据存在本地
   await Taro.setStorage({
@@ -89,11 +91,7 @@ export const updateScheduleData = () => async (dispatch) => {
     key: 'scheduleMatrix',
     data: scheduleMatrix
   })
-  await Taro.setStorage({
-    key: 'dayLineMatrix',
-    data: dayLineMatrix
-  })
-  dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
+  dispatch(updateBizData({ scheduleMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
   Taro.hideLoading()
   Taro.showToast({
     title: '课表更新成功',
@@ -110,6 +108,38 @@ export const refreshColor = () => async (dispatch) => {
   Taro.setStorage({
     key: 'scheduleMatrix',
     data: scheduleMatrix
+  })
+}
+
+export const updateSingleCourseColor = (props) => async (dispatch) => {
+  const { newColor, courseDetailFLData } = props
+  const { lessonId } = courseDetailFLData
+  let scheduleMatrix = await Taro.getStorage({ key: 'scheduleMatrix' })
+  scheduleMatrix = scheduleMatrix.data
+  scheduleMatrix.map((weekData, weekIndex) => {
+    weekData.map((dayData, dayIndex) => {
+      dayData.map((courseBoxData, courseIndex) => {
+        console.log(courseBoxData)
+        if (courseBoxData.lessonId === lessonId) {
+          scheduleMatrix[weekIndex][dayIndex][courseIndex].color = newColor
+        }
+      })
+      
+    })
+  })
+  // 存新的课表数据矩阵
+  Taro.setStorage({
+    key: 'scheduleMatrix',
+    data: scheduleMatrix
+  })
+  dispatch(updateBizData({ scheduleMatrix }))
+  // 更新底部弹出框
+  courseDetailFLData.color = newColor
+  dispatch(updateUiData({ courseDetailFLData }))
+  Taro.showToast({
+    title: '颜色更新成功',
+    icon: 'none',
+    duration: 1000
   })
 }
 

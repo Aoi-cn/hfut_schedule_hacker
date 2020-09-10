@@ -14,11 +14,11 @@ export default (props) => {
     <View className='dayLine'>
       {
         dayLineData.map((dayData) => {
-          const { dayZh, dateZh } = dayData
+          const { dayZh, dateZh, today } = dayData
           return (
-            <View className='dayLine-box' key={dateZh}>
-              <View className='dayLine-box-day'>{dayZh}</View>
-              <View className='dayLine-box-date'>{dateZh}</View>
+            <View className={'dayLine-box ' + (today && 'dayLine-box-today')} key={dateZh}>
+              <View className={'dayLine-box-day ' + (today && 'dayLine-box-day-today')}>{dayZh}</View>
+              <View className={'dayLine-box-date ' + (today && 'dayLine-box-date-today')}>{dateZh}</View>
             </View>
           )
         })
