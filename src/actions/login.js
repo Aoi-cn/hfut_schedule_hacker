@@ -5,12 +5,13 @@ import {
   LOGOUT,
 } from '../constants/login'
 import { GET } from '../utils/request'
-import { updateScheduleData } from './schedule'
+import { updateScheduleData, enter } from './schedule'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 
-export const login = ({ username, password }) => async (dispatch) => {
+export const login = ({ username, password, userType }) => async (dispatch) => {
   Taro.showLoading({
     title: '正在加载...',
+    mask: true,
   })
   const res = await GET('/login', { username, password })
   Taro.hideLoading()
@@ -28,21 +29,47 @@ export const login = ({ username, password }) => async (dispatch) => {
 
   // 验证成功
   await Taro.setStorage({
-    key: 'userInfo',
+    key: userType,
     data: {
-      username,
-      password,
-      key
+      userInfo: {
+        username,
+        password,
+        key
+      },
+      scheduleMatrix: [],
+      scheduleData: [],
+      lessonIds: [],
     }
   })
-  await Taro.setStorage({ key: 'scheduleMatrix', data: [] })
+  await Taro.setStorage({
+    key: 'userType',
+    data: userType
+  })
   await Taro.setStorage({ key: 'dayLineMatrix', data: makeDayLineMatrix() })
   Taro.redirectTo({ url: '/pages/schedule/index' })
 
   // 更新课表数据
-  dispatch(updateScheduleData())
-
+  dispatch(updateScheduleData({ userType }))
   return null
+}
+
+
+// 在情侣课表绑定页面 点击了返回
+export const back = () => async () => {
+  await Taro.setStorage({ 
+    key: 'userType',
+    data: 'me'
+   })
+   Taro.redirectTo({ url: '/pages/schedule/index' })
+}
+
+export const unBindHer = () => async (dispatch) => {
+  await Taro.setStorage({
+    key: 'userType',
+    data: 'me'
+  })
+  await Taro.removeStorage({ key: 'her' })
+  dispatch(enter())
 }
 
 export const updateBizData = (payload) => {

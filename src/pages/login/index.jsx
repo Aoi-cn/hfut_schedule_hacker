@@ -12,7 +12,7 @@ import './index.less'
 
 function Login(props) {
   const { bizData, uiData } = props
-  const { username, password } = bizData
+  const { username, password, userType } = bizData
   const { isLoginDisabled, showPwd, showLoginHelp } = uiData
 
   useDidShow(() => {
@@ -28,15 +28,30 @@ function Login(props) {
       })
       return null
     }
-    props.login({ username, password })
+    props.login({ username, password, userType })
+  }
+
+  const handleBackClick = () => {
+    props.back()
   }
 
   return (
     <View className='login'>
+      {
+        userType === 'her' &&
+        <View className='login-back' onClick={handleBackClick}>
+          <IconFont name='arrow-lift' size={52} color='#202124' />
+        </View>
+      }
 
       <View className='login-header'>
-        <Text className='login-header-title'>登录</Text>
-        <Text className='login-header-secondary'>请绑定教务系统账号</Text>
+        <View className='login-header-title'>
+          登录
+          {
+            userType === 'her' && <IconFont name='aixin-filled' size={60} color='#fcacc7' />
+          }
+        </View>
+        <Text className='login-header-secondary'>请绑定{userType === 'her' && 'ta的'}教务系统账号</Text>
       </View>
 
       <View className='login-content'>
@@ -57,7 +72,7 @@ function Login(props) {
             className='login-content-item-input'
             password={!showPwd}
             border={false}
-            placeholder='请使用教务系统账号登录'
+            placeholder='请输入教务系统密码'
             placeholder-style='color:#ccc;'
             value={password}
             onInput={(e) => props.updateBizData({ password: e.detail.value })}
@@ -85,15 +100,18 @@ function Login(props) {
 
       </View>
 
-      <View className='login-footer footer' onClick={() => props.updateUiData({ showLoginHelp: true })}>
-        关于这个
-      </View>
+      {
+        userType === 'me' &&
+        <View className='login-footer footer' onClick={() => props.updateUiData({ showLoginHelp: true })}>
+          关于这个
+        </View>
+      }
       <AtMessage />
       <StandardFloatLayout
         isOpened={showLoginHelp}
         onClose={() => props.updateUiData({ showLoginHelp: false })}
         title='合工大课程表无敌版'
-        content='在学校封网时也可以看课表，造福工大学子。'
+        content={`在学校封网时也可以看课表，造福工大学子。\n 另有情侣课表、自定义课程颜色等特色功能~`}
         buttons={[{
           value: '知道了',
           color: 'blue',

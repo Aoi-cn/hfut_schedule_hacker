@@ -7,7 +7,7 @@ import './index.less'
 export default class StandardFloatLayout extends Component {
 
   render() {
-    const { isOpened, onClose, title, content, buttons } = this.props
+    const { isOpened, onClose, title, content, contentAlign, buttons } = this.props
     let BottomButtons
     if (buttons.length === 1) {
       BottomButtons = (<AtButton className={'standardFloatLayout-footer-btn standardFloatLayout-footer-btn__' + buttons[0].color} onClick={() => buttons[0].onClick()}>
@@ -32,7 +32,7 @@ export default class StandardFloatLayout extends Component {
       >
         <View className='standardFloatLayout-header'>{title}</View>
 
-        <View className='standardFloatLayout-content'>
+        <View className={`standardFloatLayout-content standardFloatLayout-content-${contentAlign}`}>
           <Text className='standardFloatLayout-content-content'>{content}</Text>
         </View>
 

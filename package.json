@@ -1,8 +1,8 @@
 {
-  "name": "online_schedule",
-  "version": "1.0.0",
+  "name": "hfut_schedule_hacker",
+  "version": "1.8.0",
   "private": true,
-  "description": "hfut课表",
+  "description": "学校封网时也可以用的课程表",
   "templateInfo": {
     "name": "redux",
     "typescript": false,

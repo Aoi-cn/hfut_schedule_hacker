@@ -32,14 +32,14 @@ function Schedule(props) {
       Taro.showToast({
         title: '当前已经是第一周',
         icon: 'none',
-        duration: 1000
+        duration: 500
       })
       return null
     } else if (weekIndex_ > 19) {
       Taro.showToast({
         title: '当前已经是最后一周',
         icon: 'none',
-        duration: 1000
+        duration: 500
       })
       return null
     }

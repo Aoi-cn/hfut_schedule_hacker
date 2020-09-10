@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
+import Taro from '@tarojs/taro'
 import { useDispatch } from 'react-redux'
 import { View, Picker } from '@tarojs/components'
 import moment from 'moment'
 
 import StandardFloatLayout from '../../../../components/StandardFloatLayout'
-import { updateScheduleData, refreshColor } from '../../../../actions/schedule'
-import { logout } from '../../../../actions/login'
+import { updateScheduleData, refreshColor, changeUserType } from '../../../../actions/schedule'
+import { logout, unBindHer } from '../../../../actions/login'
 import IconFont from '../../../../components/iconfont'
 import LittleMenu from '../../../../components/LittleMenu'
 import './index.less'
@@ -14,8 +15,11 @@ export default (props) => {
   const { weekIndex, currentWeekIndex, changeWeekIndex } = props
   const [showMenu, setShowMenu] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
+  const [showLoverBox, setShowLoverBox] = useState(false)
+  const [showConfirmBox, setShowConfirmBox] = useState(false)
   const dispatch = useDispatch()
 
+  const userType = Taro.getStorageSync('userType')
   const daysZh = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 
   const weekIndexes = [
@@ -40,29 +44,17 @@ export default (props) => {
     { name: '第19周', index: 19 },
     { name: '第20周', index: 20 },
   ]
-  
-  const refreshColor_ = () => {
-    dispatch(refreshColor())
-  }
-
-  const refreshData = () => {
-    dispatch(updateScheduleData())
-  }
-
-  const logout_ = () => {
-    dispatch(logout())
-  }
 
   const menuList = [
     {
       value: '刷新颜色',
       icon: 'swap',
-      onClick: refreshColor_,
+      onClick: () => dispatch(refreshColor()),
     },
     {
       value: '更新数据',
       icon: 'sync',
-      onClick: refreshData,
+      onClick: () => dispatch(updateScheduleData()),
     },
     {
       value: '用前必读',
@@ -70,9 +62,9 @@ export default (props) => {
       onClick: () => setShowAbout(true),
     },
     {
-      value: '退出登录',
+      value: userType === 'me' ? '退出登录' : '情侣解绑',
       icon: 'login',
-      onClick: logout_,
+      onClick: () => setShowConfirmBox(true),
     },
   ]
 
@@ -81,8 +73,45 @@ export default (props) => {
     changeWeekIndex(weekIndex_)
   }
 
+  const handleAiXinClick = () => {
+    Taro.getStorage({ key: 'her' })
+      .then(() => {
+        dispatch(changeUserType())
+      })
+      .catch(() => {
+        setShowLoverBox(true)
+      })
+  }
+
+  const handleLoverScheduleClick = async () => {
+    dispatch(changeUserType())
+    setShowLoverBox(false)
+  }
+
+
+  const handleUnbindHerClick = async () => {
+    dispatch(unBindHer())
+    setShowConfirmBox(false)
+    setShowMenu(false)
+  }
+
+  const handleLogoutClick = async () => {
+    console.log('登出')
+    dispatch(logout())
+    setShowConfirmBox(false)
+  }
   return (
     <View className='scheduleTop'>
+
+      <View className='scheduleTop-aixin' onClick={handleAiXinClick}>
+        {
+          userType === 'me' ?
+            <IconFont name='aixin' size={42} color='#ffffff' />
+            :
+            <IconFont name='aixin-filled' size={42} color='#fcacc7' />
+        }
+      </View>
+
       <Picker mode='selector'
         range={weekIndexes}
         rangeKey='name'
@@ -112,7 +141,8 @@ export default (props) => {
         title='用前必读'
         content={`本小程序不代表任何组织或机构的利益，完全出于交流学习和方便工大学子的目的而开发。\n
         由于测试样本较少，部分课程可能会显示不正确（比如1小时和3小时的课）。如在使用中发现bug可以联系开发者（qq：254139147）进行修复。\n
-        本项目已在GitHub开源，仓库名称为：hfut_schedule_hacker。欢迎对前端感兴趣的同学与我一起交流和开发！
+        本项目已在GitHub开源，仓库名称为：hfut_schedule_hacker。欢迎对前端感兴趣的同学与我一起交流和开发！\n
+        情侣课表功能专为我的挚爱：唐小姐开发。祝天下有情人终成眷属
         `}
         buttons={[{
           value: '知道了',
@@ -120,7 +150,40 @@ export default (props) => {
           onClick: () => setShowAbout(false)
         }]}
       />
-      
+
+      <StandardFloatLayout
+        isOpened={showLoverBox}
+        onClose={() => setShowLoverBox(false)}
+        title='情侣课表'
+        content='再绑定一个学生的课表数据，一键切换查看！'
+        buttons={[{
+          value: '取消',
+          color: 'gray',
+          onClick: () => setShowLoverBox(false)
+        }, {
+          value: '开始',
+          color: 'blue',
+          onClick: handleLoverScheduleClick
+        }]}
+      />
+
+      <StandardFloatLayout
+        isOpened={showConfirmBox}
+        onClose={() => setShowConfirmBox(false)}
+        title={userType === 'me' ? '退出登录' : '情侣解绑'}
+        content='确定进行该操作吗？'
+        contentAlign='center'
+        buttons={[{
+          value: '取消',
+          color: 'gray',
+          onClick: () => setShowConfirmBox(false)
+        }, {
+          value: '确定',
+          color: 'red',
+          onClick: userType === 'me' ? handleLogoutClick : handleUnbindHerClick
+        }]}
+      />
+
     </View>
 
   )

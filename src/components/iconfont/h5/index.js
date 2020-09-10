@@ -1,6 +1,8 @@
 /* eslint-disable */
 
 import React from 'react';
+import IconAixinFilled from './IconAixinFilled';
+import IconAixin from './IconAixin';
 import IconIconTest from './IconIconTest';
 import IconIconSelectedFill from './IconIconSelectedFill';
 import IconTongzhiShixiang from './IconTongzhiShixiang';
@@ -57,6 +59,10 @@ import IconPlus from './IconPlus';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
+    case 'aixin-filled':
+      return <IconAixinFilled {...rest} />;
+    case 'aixin':
+      return <IconAixin {...rest} />;
     case 'icon-test':
       return <IconIconTest {...rest} />;
     case 'icon_selected_fill':

@@ -1,9 +1,17 @@
+import Taro from '@tarojs/taro'
 import { UPDATE_BIZDATA, UPDATE_UIDATA, LOGOUT } from '../constants/login'
+
+let userType = ''
+try {
+  userType = Taro.getStorageSync('userType')
+} catch (e) {  }
+
 
 const INITIAL_STATE = {
   bizData: {
     username: '',
     password: '',
+    userType: userType || 'me',
   },
   uiData: {
     isLoginDisabled: false,
