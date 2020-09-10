@@ -179,7 +179,7 @@ export const updateSingleCourseColor = (props) => async (dispatch) => {
   Taro.showToast({
     title: '颜色更新成功',
     icon: 'none',
-    duration: 1000
+    duration: 500
   })
 }
 
@@ -200,7 +200,7 @@ export const changeUserType = () => async (dispatch) => {
   Taro.showToast({
     title: '切换成功',
     icon: 'none',
-    duration: 1000
+    duration: 800
   })
 }
 
