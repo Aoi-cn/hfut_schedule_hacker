@@ -3,12 +3,12 @@ import Taro, { useDidShow } from '@tarojs/taro'
 import { connect } from 'react-redux'
 import { View } from '@tarojs/components'
 
-import IconFont from '../../components/iconfont'
 import * as actions from '../../actions/schedule'
-import WhiteTable from './components/WhiteTable'
+import IconFont from '../../components/iconfont'
+import WhiteTable from '../../components/schedule-component/WhiteTable'
+import DayLine from '../../components/schedule-component/DayLine'
+import TimeLine from '../../components/schedule-component/TimeLine'
 import CourseTable from './components/CourseTable'
-import DayLine from './components/DayLine'
-import TimeLine from './components/TimeLine'
 import ScheduleTop from './components/ScheduleTop'
 import CourseDetailFloatLayout from './components/CourseDetailFloatLayout'
 import './index.less'
@@ -19,10 +19,6 @@ function Schedule(props) {
   const { courseDetailFLData } = uiData
 
   useDidShow(() => {
-    Taro.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: '#0089ff',
-    })
     // 自动更新
     props.enter()
   })
@@ -87,6 +83,8 @@ function Schedule(props) {
         teacher={courseDetailFLData.teacher}
         timeRange={courseDetailFLData.timeRange}
         lessonCode={courseDetailFLData.lessonCode}
+        lessonType={courseDetailFLData.lessonType}
+        weekIndexes={courseDetailFLData.weekIndexes}
         studentClazzes={courseDetailFLData.studentClazzes}
         studentNumber={courseDetailFLData.studentNumber}
         color={courseDetailFLData.color}

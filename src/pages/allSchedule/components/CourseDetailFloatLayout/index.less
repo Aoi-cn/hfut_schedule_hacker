@@ -1,0 +1,54 @@
+@import "../../../../style/theme.less";
+
+.courseDetailFloatLayout {
+  color: @color-semi;
+
+  &-header {
+    margin: 56px 0;
+    margin-bottom: 40px;
+    font-size: 36px;
+    font-weight: bold;
+    color: @color-semi;
+    text-align: center;
+  }
+
+  &-content {
+    padding: 0 48px 0 48px;
+    margin-bottom: 56px;
+    
+    &-item {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      font-size: 34px;
+      margin-bottom: 16px;
+    }
+
+  }
+
+  &-footer {
+    padding: 0 48px;
+    padding-bottom: 12px;
+
+    &-btn {
+      border: none;
+      border-radius: 48px;
+      font-size: 34px;
+      line-height: 100px;
+      height: 100px;
+      min-width: 296px;
+      background-color: @color-background;
+      color: @color-brand;
+
+      &-icon {
+        position: relative;
+        margin-right: 16px;
+        top: 2px
+      }
+    }
+  }
+
+  &-itemTitle {
+    color: @color-light;
+  }
+}

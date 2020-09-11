@@ -5,8 +5,8 @@ import { View } from '@tarojs/components'
 import { updateUiData } from '../../../../actions/schedule'
 import './index.less'
 
-export default ({ courseBoxData }) => {
-  const { name = "", clazzRoom, teacher, timeRange, lessonCode, studentClazzes, studentNumber, lessonId, color } = courseBoxData
+export default ({ courseBoxData, number }) => {
+  const { name = "", clazzRoom, teacher, timeRange, lessonCode, lessonType, weekIndexes, studentClazzes, studentNumber, lessonId, color } = courseBoxData
   const dispatch = useDispatch()
 
   const handleClick = () => {
@@ -20,6 +20,8 @@ export default ({ courseBoxData }) => {
         teacher,
         timeRange,
         lessonCode,
+        lessonType,
+        weekIndexes,
         studentClazzes,
         studentNumber,
         color,
@@ -29,7 +31,7 @@ export default ({ courseBoxData }) => {
   }
 
   return (
-    <View className='courseBox' onClick={handleClick}>
+    <View className={`courseBox courseBox-${number}`} onClick={handleClick}>
       <View className={`courseBox-course ` + `courseBox-course-${color}`}>
         <View className='courseBox-course-name'>{name.length <= 8 ? name : (name.slice(0, 7) + "...")}</View>
         <View className='courseBox-course-clazzRoom'>{clazzRoom}</View>

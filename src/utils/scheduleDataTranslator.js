@@ -13,7 +13,15 @@ export default (scheduleData, lessonIds) => {
     // course：(Object)课程数据
     // text：(String)该门课具体在星期几、教室信息、授课老师
     // lessonId:：课程id
-    const { course, scheduleText: { dateTimePlacePersonText: { text } }, id: lessonId, nameZh: studentClazzes, code: lessonCode, stdCount: studentNumber } = lessonInfo
+    const {
+      course,
+      scheduleText: { dateTimePlacePersonText: { text } },
+      id: lessonId,
+      nameZh: studentClazzes,
+      code: lessonCode,
+      stdCount: studentNumber,
+      courseType: { nameZh: lessonType },
+    } = lessonInfo
     if (!text) { return } // 没有课程安排，跳过
 
     // 解析
@@ -66,8 +74,9 @@ export default (scheduleData, lessonIds) => {
         weekIndexes,
         dayIndex,
         timeIndexes,
-        studentClazzes,
+        studentClazzes: studentClazzes.split(','),
         lessonCode,
+        lessonType,
         studentNumber,
         timeRange: timeIndexToTime(startTime) + '~' + timeIndexToTime(endTime),
         color: lessonIdsColor[lessonId],
@@ -87,7 +96,7 @@ const initLessonIdsColor = (lessonIds) => {
   const colors = ['blue', 'darkBlue', 'red', 'yellow', 'green', 'gray', 'darkGray', 'brown', 'orange', 'purple']
   const lessonIdsColor = {}
   lessonIds.map((lessonId) => {
-    lessonIdsColor[lessonId] = colors[Math.floor((Math.random()*colors.length))]
+    lessonIdsColor[lessonId] = colors[Math.floor((Math.random() * colors.length))]
   })
   return lessonIdsColor
 }
@@ -125,7 +134,7 @@ const timeIndexToTime = (timeIndex) => {
     case 10:
       time = '20:50'
       break;
-  
+
     default:
       break;
   }

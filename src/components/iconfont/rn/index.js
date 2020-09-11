@@ -2,6 +2,7 @@
 
 import React from 'react';
 
+import IconSearch from './IconSearch';
 import IconAixinFilled from './IconAixinFilled';
 import IconAixin from './IconAixin';
 import IconIconTest from './IconIconTest';
@@ -60,6 +61,8 @@ import IconPlus from './IconPlus';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
+    case 'search':
+      return <IconSearch {...rest} />;
     case 'aixin-filled':
       return <IconAixinFilled {...rest} />;
     case 'aixin':

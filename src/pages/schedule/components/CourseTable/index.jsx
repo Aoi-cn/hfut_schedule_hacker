@@ -17,7 +17,7 @@ export default ({ weekScheduleData }) => {
               {
                 totleTimeIndexes.map((totleTimeIndex, i2) => {
                   const courseBoxData = dayScheduleData.filter((courseBoxData_) => (totleTimeIndex[0] === courseBoxData_.timeIndexes[0]))[0]
-                  return <CourseBox courseBoxData={courseBoxData ? courseBoxData : []} key={i2} />
+                  return <CourseBox courseBoxData={courseBoxData ? courseBoxData : []} key={i2} number={i2} />
                 })
               }
             </View>

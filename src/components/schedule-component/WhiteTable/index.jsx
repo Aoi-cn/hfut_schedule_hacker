@@ -14,7 +14,7 @@ export default () => {
             <View className='whiteTable-column' key={i1}>
               {
                 [0, 0, 0, 0, 0].map((_2, i2) => {
-                  return <WhiteBox key={i2} />
+                  return <WhiteBox key={i2} number={i2} />
                 })
               }
             </View>

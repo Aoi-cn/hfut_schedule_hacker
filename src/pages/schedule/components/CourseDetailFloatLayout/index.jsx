@@ -8,8 +8,24 @@ import IconFont from '../../../../components/iconfont'
 import './index.less'
 
 export default (props) => {
-  const { isOpened, onClose, name, clazzRoom, teacher, timeRange, lessonCode, studentClazzes, studentNumber, color } = props
+  const { isOpened, onClose, name, clazzRoom, teacher, timeRange, lessonType, weekIndexes, studentClazzes, studentNumber, color } = props
   const dispatch = useDispatch()
+
+  let clazzString = ''
+  if (studentClazzes) {
+    studentClazzes.map((clazz) => {
+      clazzString += clazz
+      clazzString += (clazz === studentClazzes[studentClazzes.length - 1] ? '' : '、')
+    })
+  }
+
+  let weekString = ''
+  if (weekIndexes) {
+    weekIndexes.map((weekIndex) => {
+      weekString += weekIndex
+      weekString += (weekIndex === weekIndexes[weekIndexes.length - 1] ? '' : ',')
+    })
+  }
 
   // icon先不要了啊
   const items = [
@@ -30,11 +46,15 @@ export default (props) => {
       icon: '',
     },
     {
-      value: <><Text className='courseDetailFloatLayout-itemTitle'>课程ID：</Text><Text>{lessonCode}</Text></>,
+      value: <><Text className='courseDetailFloatLayout-itemTitle'>开设周目：</Text><Text>{weekString}</Text></>,
       icon: '',
     },
     {
-      value: <><Text className='courseDetailFloatLayout-itemTitle'>上课班级：</Text><Text>{studentClazzes}</Text></>,
+      value: <><Text className='courseDetailFloatLayout-itemTitle'>课程类别：</Text><Text>{lessonType}</Text></>,
+      icon: '',
+    },
+    {
+      value: <><Text className='courseDetailFloatLayout-itemTitle'>上课班级：</Text><Text>{clazzString}</Text></>,
       icon: '',
     },
   ]

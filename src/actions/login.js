@@ -46,10 +46,10 @@ export const login = ({ username, password, userType }) => async (dispatch) => {
     data: userType
   })
   await Taro.setStorage({ key: 'dayLineMatrix', data: makeDayLineMatrix() })
-  Taro.redirectTo({ url: '/pages/schedule/index' })
+  await Taro.switchTab({ url: '/pages/schedule/index' })
 
   // 更新课表数据
-  dispatch(updateScheduleData({ userType }))
+  dispatch(updateScheduleData())
   return null
 }
 
@@ -60,7 +60,7 @@ export const back = () => async () => {
     key: 'userType',
     data: 'me'
    })
-   Taro.redirectTo({ url: '/pages/schedule/index' })
+   Taro.switchTab({ url: '/pages/schedule/index' })
 }
 
 export const unBindHer = () => async (dispatch) => {

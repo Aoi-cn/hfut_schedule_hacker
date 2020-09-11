@@ -3,10 +3,12 @@ import { View } from '@tarojs/components'
 
 import './index.less'
 
-export default () => {
+export default (props) => {
+
+  const { number } = props
 
   return (
-    <View className='whiteBox'>
+    <View className={`whiteBox whiteBox-${number}`}>
 
     </View>
   )
