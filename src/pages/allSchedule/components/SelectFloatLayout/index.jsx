@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { View, Picker } from '@tarojs/components'
 import { AtFloatLayout, AtButton, AtList, AtListItem } from 'taro-ui'
 
-import { updateScheduleData } from '../../../../actions/allSchedule'
+import { updateScheduleData, updateBizData } from '../../../../actions/allSchedule'
 // import IconFont from '../../../../components/iconfont'
 import './index.less'
 
@@ -62,11 +62,39 @@ export default (props) => {
     setSelectedClazz(clazz)
   }
 
-  const handleQuery = () => {
+  const handleQuery = async () => {
     if (!selectedClazz) { return }
+    await dispatch(updateBizData({ level: selectedLevel }))
     dispatch(updateScheduleData({ clazz: selectedClazz }))
     onClose()
   }
+
+  const selectsData = [
+    {
+      title: '选择学院',
+      extraText: selectedAcademy,
+      range: Object.keys(selectInfo),
+      onChange: handleAcademyChange,
+    },
+    {
+      title: '选择专业',
+      extraText: selectedMajor,
+      range: majorList,
+      onChange: handleMajorChange,
+    },
+    {
+      title: '选择年级',
+      extraText: selectedLevel,
+      range: levelList,
+      onChange: handleLevelChange,
+    },
+    {
+      title: '选择班级',
+      extraText: selectedClazz,
+      range: clazzList,
+      onChange: handleClazzChange,
+    },
+  ]
 
   return (
     <AtFloatLayout
@@ -78,53 +106,24 @@ export default (props) => {
 
       <View className='selectFloatLayout-content'>
 
-        <View className='selectFloatLayout-content-item'>
-          <Picker mode='selector' range={Object.keys(selectInfo)} onChange={handleAcademyChange}>
-            <AtList className='selectFloatLayout-content-item' hasBorder={false}>
-              <AtListItem
-                title='选择学院'
-                extraText={selectedAcademy}
-                hasBorder={false}
-              />
-            </AtList>
-          </Picker>
-        </View>
-
-        <View className='selectFloatLayout-content-item'>
-          <Picker mode='selector' range={majorList} onChange={handleMajorChange}>
-            <AtList className='selectFloatLayout-content-item' hasBorder={false}>
-              <AtListItem
-                title='选择专业'
-                extraText={selectedMajor}
-                hasBorder={false}
-              />
-            </AtList>
-          </Picker>
-        </View>
-
-        <View className='selectFloatLayout-content-item'>
-          <Picker mode='selector' range={levelList} onChange={handleLevelChange}>
-            <AtList className='selectFloatLayout-content-item' hasBorder={false}>
-              <AtListItem
-                title='选择年级'
-                extraText={selectedLevel}
-                hasBorder={false}
-              />
-            </AtList>
-          </Picker>
-        </View>
-
-        <View className='selectFloatLayout-content-item'>
-          <Picker mode='selector' range={clazzList} onChange={handleClazzChange}>
-            <AtList className='selectFloatLayout-content-item' hasBorder={false}>
-              <AtListItem
-                title='选择班级'
-                extraText={selectedClazz}
-                hasBorder={false}
-              />
-            </AtList>
-          </Picker>
-        </View>
+        {
+          selectsData.map((selectData) => {
+            const { title, extraText, range, onChange } = selectData
+            return (
+              <View className='selectFloatLayout-content-item' key={title} >
+              <Picker mode='selector' range={range} onChange={onChange}>
+                <AtList className='selectFloatLayout-content-item' hasBorder={false}>
+                  <AtListItem
+                    title={title}
+                    extraText={extraText}
+                    hasBorder={false}
+                  />
+                </AtList>
+              </Picker>
+            </View>
+            )
+          })
+        }
 
       </View>
 

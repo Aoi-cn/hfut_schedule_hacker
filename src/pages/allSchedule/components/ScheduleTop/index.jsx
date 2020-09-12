@@ -65,7 +65,7 @@ export default (props) => {
       </Picker>
 
       <View className='scheduleTop-operation' onClick={() => setShowSelect(true)}>
-        <IconFont name='search' size={42} color='#ffffff' />
+        <IconFont name='search' size={46} color='#ffffff' />
       </View>
 
       <StandardFloatLayout

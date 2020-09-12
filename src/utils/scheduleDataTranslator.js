@@ -14,13 +14,19 @@ export default (scheduleData, lessonIds) => {
     // text：(String)该门课具体在星期几、教室信息、授课老师
     // lessonId:：课程id
     const {
-      course,
+      course: {
+        nameZh: name,
+        credits: credits,
+      },
       scheduleText: { dateTimePlacePersonText: { text } },
       id: lessonId,
       nameZh: studentClazzes,
       code: lessonCode,
       stdCount: studentNumber,
       courseType: { nameZh: lessonType },
+      scheduleWeeksInfo: weekIndexesZh,
+      campus: { nameZh: campus },
+
     } = lessonInfo
     if (!text) { return } // 没有课程安排，跳过
 
@@ -67,7 +73,8 @@ export default (scheduleData, lessonIds) => {
 
       // 填充scheduleMatrix
       const courseBoxData = {
-        name: course.nameZh,
+        name,
+        credits,
         lessonId,
         clazzRoom,
         teacher,
@@ -79,6 +86,8 @@ export default (scheduleData, lessonIds) => {
         lessonType,
         studentNumber,
         timeRange: timeIndexToTime(startTime) + '~' + timeIndexToTime(endTime),
+        weekIndexesZh,
+        campus,
         color: lessonIdsColor[lessonId],
       }
 

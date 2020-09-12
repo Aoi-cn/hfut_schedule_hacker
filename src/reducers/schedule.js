@@ -22,6 +22,9 @@ const INITIAL_STATE = {
       studentNumber: '',
       color: '',
       lessonId: '',
+      campus: '',
+      weekIndexesZh: '',
+      credits: '',
     }
   }
 }

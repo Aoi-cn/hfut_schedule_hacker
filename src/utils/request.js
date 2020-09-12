@@ -29,7 +29,7 @@ export const GET = (url, data = '') => baseOptions({
   url,
   data: {
     ...data,
-    target: 'webvpn',
+    target: 'web',
   },
   method: 'GET'
 })

@@ -1,13 +1,24 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { View } from '@tarojs/components'
 
 import { updateUiData } from '../../../../actions/allSchedule'
 import './index.less'
 
 export default ({ courseBoxData, number }) => {
-  const { name = "", clazzRoom, teacher, timeRange, lessonCode, lessonType, weekIndexes, studentClazzes, studentNumber, lessonId, color } = courseBoxData
+  const { name = "", clazzRoom, teacher, timeRange, lessonCode, lessonType, weekIndexes, studentClazzes, studentNumber, lessonId, credits, campus, weekIndexesZh, color } = courseBoxData
+  const { level } = useSelector(state => state.allSchedule.bizData)
   const dispatch = useDispatch()
+
+  // 过滤掉重修的课（非本年级的）
+  if (studentClazzes) {
+    if (studentClazzes[0].indexOf(level) === -1) {
+      return (
+        <View className={`courseBox courseBox-${number}`}>
+        </View>
+      )
+    }
+  }
 
   const handleClick = () => {
     if (!name) { return }
@@ -26,6 +37,9 @@ export default ({ courseBoxData, number }) => {
         studentNumber,
         color,
         lessonId,
+        credits,
+        campus,
+        weekIndexesZh,
       }
     }))
   }

@@ -8,7 +8,8 @@ import IconFont from '../../../../components/iconfont'
 import './index.less'
 
 export default (props) => {
-  const { isOpened, onClose, name, clazzRoom, teacher, timeRange, lessonType, weekIndexes, studentClazzes, studentNumber, color } = props
+  const { courseDetailFLData, onClose } = props
+  const { isOpened, name, credits, clazzRoom, teacher, timeRange, lessonType, studentClazzes, studentNumber, weekIndexesZh, campus, color } = courseDetailFLData
   const dispatch = useDispatch()
 
   let clazzString = ''
@@ -16,14 +17,6 @@ export default (props) => {
     studentClazzes.map((clazz) => {
       clazzString += clazz
       clazzString += (clazz === studentClazzes[studentClazzes.length - 1] ? '' : '、')
-    })
-  }
-
-  let weekString = ''
-  if (weekIndexes) {
-    weekIndexes.map((weekIndex) => {
-      weekString += weekIndex
-      weekString += (weekIndex === weekIndexes[weekIndexes.length - 1] ? '' : ',')
     })
   }
 
@@ -38,7 +31,15 @@ export default (props) => {
       icon: '',
     },
     {
+      value: <><Text className='courseDetailFloatLayout-itemTitle'>学分：</Text><Text>{credits}</Text></>,
+      icon: '',
+    },
+    {
       value: <><Text className='courseDetailFloatLayout-itemTitle'>时间：</Text><Text>{timeRange}</Text></>,
+      icon: '',
+    },
+    {
+      value: <><Text className='courseDetailFloatLayout-itemTitle'>校区：</Text><Text>{campus}</Text></>,
       icon: '',
     },
     {
@@ -46,7 +47,7 @@ export default (props) => {
       icon: '',
     },
     {
-      value: <><Text className='courseDetailFloatLayout-itemTitle'>开设周目：</Text><Text>{weekString}</Text></>,
+      value: <><Text className='courseDetailFloatLayout-itemTitle'>开设周目：</Text><Text>{weekIndexesZh}</Text></>,
       icon: '',
     },
     {

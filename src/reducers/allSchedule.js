@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     scheduleMatrix: [],
     dayLineMatrix: [],
     selectInfo: {},
+    level: 18, // 当前选择班级的年级（为了过滤掉该班级的非正常课程，如重修的）
   },
   uiData: {
     courseDetailFLData: {
@@ -23,6 +24,9 @@ const INITIAL_STATE = {
       studentNumber: '',
       color: '',
       lessonId: '',
+      campus: '',
+      weekIndexesZh: '',
+      credits: '',
     }
   }
 }

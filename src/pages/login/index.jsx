@@ -111,7 +111,7 @@ function Login(props) {
         isOpened={showLoginHelp}
         onClose={() => props.updateUiData({ showLoginHelp: false })}
         title='合工大课程表无敌版'
-        content={`在学校封网时也可以看课表，造福工大学子。\n 另有情侣课表、自定义课程颜色等特色功能~`}
+        content={`在学校封网时也可以看课表，造福工大学子。\n 另有查看全校课表、自定义课程颜色、情侣课表等特色功能~`}
         buttons={[{
           value: '知道了',
           color: 'blue',

@@ -76,19 +76,8 @@ function Schedule(props) {
       </View>
 
       <CourseDetailFloatLayout 
-        isOpened={courseDetailFLData.isOpened}
+        courseDetailFLData={courseDetailFLData}
         onClose={() => props.updateUiData({ courseDetailFLData: { isOpened: false } })}
-        name={courseDetailFLData.name}
-        clazzRoom={courseDetailFLData.clazzRoom}
-        teacher={courseDetailFLData.teacher}
-        timeRange={courseDetailFLData.timeRange}
-        lessonCode={courseDetailFLData.lessonCode}
-        lessonType={courseDetailFLData.lessonType}
-        weekIndexes={courseDetailFLData.weekIndexes}
-        studentClazzes={courseDetailFLData.studentClazzes}
-        studentNumber={courseDetailFLData.studentNumber}
-        color={courseDetailFLData.color}
-        lessonId={courseDetailFLData.lessonId}
       />
     </View>
   )

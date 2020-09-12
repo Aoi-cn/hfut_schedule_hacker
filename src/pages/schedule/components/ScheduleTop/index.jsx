@@ -6,7 +6,7 @@ import moment from 'moment'
 
 import StandardFloatLayout from '../../../../components/StandardFloatLayout'
 import { updateScheduleData, refreshColor, changeUserType } from '../../../../actions/schedule'
-import { logout, unBindHer } from '../../../../actions/login'
+import * as loginActions from '../../../../actions/login'
 import IconFont from '../../../../components/iconfont'
 import LittleMenu from '../../../../components/LittleMenu'
 import './index.less'
@@ -90,14 +90,14 @@ export default (props) => {
 
 
   const handleUnbindHerClick = async () => {
-    dispatch(unBindHer())
+    dispatch(loginActions.unBindHer())
     setShowConfirmBox(false)
     setShowMenu(false)
   }
 
   const handleLogoutClick = async () => {
     console.log('登出')
-    dispatch(logout())
+    dispatch(loginActions.logout())
     setShowConfirmBox(false)
   }
   return (

@@ -55,7 +55,8 @@ export const login = ({ username, password, userType }) => async (dispatch) => {
 
 
 // 在情侣课表绑定页面 点击了返回
-export const back = () => async () => {
+export const back = () => async (dispatch) => {
+  dispatch(updateBizData({ userType: 'me' }))
   await Taro.setStorage({ 
     key: 'userType',
     data: 'me'

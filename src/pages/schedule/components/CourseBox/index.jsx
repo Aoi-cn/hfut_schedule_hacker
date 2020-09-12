@@ -6,7 +6,7 @@ import { updateUiData } from '../../../../actions/schedule'
 import './index.less'
 
 export default ({ courseBoxData, number }) => {
-  const { name = "", clazzRoom, teacher, timeRange, lessonCode, lessonType, weekIndexes, studentClazzes, studentNumber, lessonId, color } = courseBoxData
+  const { name = "", clazzRoom, teacher, timeRange, lessonCode, lessonType, weekIndexes, studentClazzes, studentNumber, lessonId, credits, campus, weekIndexesZh, color } = courseBoxData
   const dispatch = useDispatch()
 
   const handleClick = () => {
@@ -26,6 +26,9 @@ export default ({ courseBoxData, number }) => {
         studentNumber,
         color,
         lessonId,
+        credits,
+        campus,
+        weekIndexesZh,
       }
     }))
   }

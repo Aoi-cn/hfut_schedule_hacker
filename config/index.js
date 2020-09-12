@@ -42,21 +42,21 @@ const config = {
         }
       }
     },
-    // webpackChain(chain) {
-    //   chain.mode("production");
-    //   chain.optimization.minimize(true);
-    //   chain.plugin("terser").use(TerserPlugin, [
-    //     {
-    //       cache: true,
-    //       extractComments: false,
-    //       terserOptions: {
-    //         output: {
-    //           comments: false
-    //         }
-    //       }
-    //     }
-    //   ]);
-    // }
+    webpackChain(chain) {
+      chain.mode("production");
+      chain.optimization.minimize(true);
+      chain.plugin("terser").use(TerserPlugin, [
+        {
+          cache: true,
+          extractComments: false,
+          terserOptions: {
+            output: {
+              comments: false
+            }
+          }
+        }
+      ]);
+    }
   },
   h5: {
     publicPath: '/',
