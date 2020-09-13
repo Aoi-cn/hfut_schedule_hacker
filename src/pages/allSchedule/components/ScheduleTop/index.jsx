@@ -13,7 +13,7 @@ export default (props) => {
   const [showAbout, setShowAbout] = useState(false)
   const [showSelect, setShowSelect] = useState(false)
 
-  const daysZh = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+  const daysZh = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
 
   const weekIndexes = [
     { name: '第1周', index: 1 },
@@ -57,7 +57,7 @@ export default (props) => {
         onChange={e => handlePickerChange(e)}
       >
         <View className='scheduleTop-title'>
-          {`第${weekIndex + 1}周 ` + (currentWeekIndex === weekIndex ? `（当前${daysZh[moment().day() - 1]}）` : `（当前第${currentWeekIndex + 1}周）`)}
+          {`第${weekIndex + 1}周 ` + (currentWeekIndex === weekIndex ? `（当前${daysZh[moment().day()]}）` : `（当前第${currentWeekIndex + 1}周）`)}
           <View className='scheduleTop-title-icon'>
             <IconFont name='icon-test' size={46} color='#ffffff' />
           </View>

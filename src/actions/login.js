@@ -6,7 +6,6 @@ import {
 } from '../constants/login'
 import { GET } from '../utils/request'
 import { updateScheduleData, enter } from './schedule'
-import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 
 export const login = ({ username, password, userType }) => async (dispatch) => {
   Taro.showLoading({
@@ -45,7 +44,7 @@ export const login = ({ username, password, userType }) => async (dispatch) => {
     key: 'userType',
     data: userType
   })
-  await Taro.setStorage({ key: 'dayLineMatrix', data: makeDayLineMatrix() })
+
   await Taro.switchTab({ url: '/pages/schedule/index' })
 
   // 更新课表数据

@@ -23,7 +23,7 @@ function Schedule(props) {
     props.enter()
   })
 
-  const changeWeekIndex = (weekIndex_) => {
+  const changeWeekIndex = async(weekIndex_) => {
     if (weekIndex_ < 0) {
       Taro.showToast({
         title: '当前已经是第一周',
@@ -39,7 +39,7 @@ function Schedule(props) {
       })
       return null
     }
-    props.updateBizData({ weekIndex: weekIndex_ })
+    await props.updateBizData({ weekIndex: weekIndex_ })
   }
 
   return (

@@ -7,7 +7,7 @@ import {
 import { GET } from '../utils/request'
 import dataToMatrix from '../utils/scheduleDataTranslator'
 import * as loginActions from './login'
-
+import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 
 // 登录成功、手动更新数据
 export const updateScheduleData = () => async (dispatch) => {
@@ -21,8 +21,8 @@ export const updateScheduleData = () => async (dispatch) => {
   userType = userType.data
 
   // 生成一个时间线数据矩阵，先渲染时间线
-  const dayLineMatrix = await Taro.getStorage({ key: 'dayLineMatrix' })
-  dispatch(updateBizData({ dayLineMatrix: dayLineMatrix.data }))
+  const { dayLineMatrix } = makeDayLineMatrix()
+  dispatch(updateBizData({ dayLineMatrix: dayLineMatrix }))
 
   // 进行课表更新逻辑
   const userData = await Taro.getStorage({ key: userType })
@@ -79,10 +79,9 @@ export const enter = () => async (dispatch) => {
 
   Taro.getStorage({ key: userType })
     .then(async (userData) => {
-      // 读取本次数据
-      const { scheduleMatrix } = userData.data
-      const dayLineMatrix = await Taro.getStorage({ key: 'dayLineMatrix' })
-      dispatch(updateBizData({ scheduleMatrix, dayLineMatrix: dayLineMatrix.data }))
+      const { scheduleMatrix } = userData.data  // 读取本地的课表数据
+      const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
+      dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex }))
       // 自动更新
       // dispatch(updateScheduleData({ scheduleMatrix: scheduleMatrix.data, dayLineMatrix: dayLineMatrix.data }))
     })
@@ -144,8 +143,8 @@ export const refreshColor = () => async (dispatch) => {
   })
 }
 
-export const updateSingleCourseColor = (props) => async (dispatch) => {
-  const { newColor, courseDetailFLData } = props
+export const updateSingleCourseColor = (payload) => async (dispatch) => {
+  const { newColor, courseDetailFLData: { courseDetailFLData } } = payload
   const { lessonId } = courseDetailFLData
 
   let userType = await Taro.getStorage({ key: 'userType' })
@@ -175,6 +174,7 @@ export const updateSingleCourseColor = (props) => async (dispatch) => {
   dispatch(updateBizData({ scheduleMatrix }))
   // 更新底部弹出框
   courseDetailFLData.color = newColor
+  courseDetailFLData.isOpened = false
   dispatch(updateUiData({ courseDetailFLData }))
   Taro.showToast({
     title: '颜色更新成功',

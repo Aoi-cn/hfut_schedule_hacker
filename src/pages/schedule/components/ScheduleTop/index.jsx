@@ -20,7 +20,7 @@ export default (props) => {
   const dispatch = useDispatch()
 
   const userType = Taro.getStorageSync('userType')
-  const daysZh = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+  const daysZh = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
 
   const weekIndexes = [
     { name: '第1周', index: 1 },
@@ -100,6 +100,7 @@ export default (props) => {
     dispatch(loginActions.logout())
     setShowConfirmBox(false)
   }
+
   return (
     <View className='scheduleTop'>
 
@@ -119,7 +120,7 @@ export default (props) => {
         onChange={e => handlePickerChange(e)}
       >
         <View className='scheduleTop-title'>
-          {`第${weekIndex + 1}周 ` + (currentWeekIndex === weekIndex ? `（当前${daysZh[moment().day() - 1]}）` : `（当前第${currentWeekIndex + 1}周）`)}
+          {`第${weekIndex + 1}周 ` + (currentWeekIndex === weekIndex ? `（当前${daysZh[moment().day()]}）` : `（当前第${currentWeekIndex + 1}周）`)}
           <View className='scheduleTop-title-icon'>
             <IconFont name='icon-test' size={46} color='#ffffff' />
           </View>
@@ -140,7 +141,7 @@ export default (props) => {
         onClose={() => setShowAbout(false)}
         title='用前必读'
         content={`本小程序不代表任何组织或机构的利益，完全出于交流学习和方便工大学子的目的而开发。\n
-        由于测试样本较少，部分课程可能会显示不正确（比如1小时和3小时的课）。如在使用中发现bug可以联系开发者（qq：254139147）进行修复。\n
+        由于测试样本较少，部分课程可能会显示不正确。如在使用中发现bug可以联系开发者（qq：254139147）进行修复。\n
         本项目已在GitHub开源，仓库名称为：hfut_schedule_hacker。欢迎对前端感兴趣的同学与我一起交流和开发！\n
         情侣课表功能专为我的挚爱：唐小姐开发。祝天下有情人终成眷属~
         `}

@@ -12,17 +12,26 @@ export default () => {
   const travelMoment = moment('2020/09/06')
   const currentMoment = moment()
 
-  const dayLineMatrix = weekIndexes.map(() => {
+  let currentWeekIndex = 0
+
+  const dayLineMatrix = weekIndexes.map((weekIndex) => {
     return daysZh.map((dayZh) => {
       travelMoment.add(1, 'd')
+      const today = currentMoment.format('MM/DD') == travelMoment.format('MM/DD')
+      if (today) {
+        currentWeekIndex = weekIndex
+      }
       return {
         dayZh,
         dateZh: travelMoment.format('MM/DD'),
-        today: currentMoment.format('MM/DD') == travelMoment.format('MM/DD')
+        today,
       }
     })
   })
 
-  return dayLineMatrix
+  return {
+    dayLineMatrix,
+    currentWeekIndex,
+  }
 
 }

@@ -53,12 +53,29 @@ export default (scheduleData, lessonIds) => {
       const weekIndexes = []
       splitdSpace[0].split(',').map((splitdComma) => {
         if (splitdComma.split('~').length === 1) {
+          // 对应情境：1~14周,15周
           weekIndexes.push(parseInt(splitdComma.split('~')[0].split('周')[0]))
         } else {
           let startWeek = splitdComma.split('~')[0]
-          let endWeek = splitdComma.split('~')[1].split('周')[0]
-          for (let weekIndex = parseInt(startWeek); weekIndex <= parseInt(endWeek); weekIndex++) {
-            weekIndexes.push(weekIndex)
+          let endWeekString = splitdComma.split('~')[1].split('周')[0]
+          // 判断有没有分单双周
+          if (endWeekString.indexOf('单') !== -1) {
+            for (let weekIndex = parseInt(startWeek); weekIndex <= parseInt(endWeekString); weekIndex++) {
+              if (weekIndex % 2 === 0) {
+                weekIndexes.push(weekIndex)
+              }
+            }
+          } else if (endWeekString.indexOf('双') !== -1) {
+            for (let weekIndex = parseInt(startWeek); weekIndex <= parseInt(endWeekString); weekIndex++) {
+              if (weekIndex % 2 !== 0) {
+                weekIndexes.push(weekIndex)
+              }
+            }
+          } else {
+            // 没有单双周
+            for (let weekIndex = parseInt(startWeek); weekIndex <= parseInt(endWeekString); weekIndex++) {
+              weekIndexes.push(weekIndex)
+            }
           }
         }
       })
@@ -142,6 +159,9 @@ const timeIndexToTime = (timeIndex) => {
       break;
     case 10:
       time = '20:50'
+      break;
+    case 11:
+      time = '21:50'
       break;
 
     default:

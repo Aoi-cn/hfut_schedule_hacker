@@ -6,6 +6,7 @@ import {
 } from '../constants/allSchedule'
 import { GET } from '../utils/request'
 import dataToMatrix from '../utils/scheduleDataTranslator'
+import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 
 export const updateScheduleData = (payload) => async (dispatch) => {
   const { clazz } = payload
@@ -24,8 +25,8 @@ export const updateScheduleData = (payload) => async (dispatch) => {
 // 首次进入，检查本地存储有没有selectInfo和scheduleData。
 // 有的话就dispaatch，没有就请求selectInfo并存在本地
 export const enter = () => async (dispatch) => {
-  const dayLineMatrix = await Taro.getStorage({ key: 'dayLineMatrix' })
-  dispatch(updateBizData({ dayLineMatrix: dayLineMatrix.data }))
+  const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()
+  dispatch(updateBizData({ dayLineMatrix: dayLineMatrix, currentWeekIndex }))
   Taro.getStorage({ key: 'selectInfo' })
     .then(async ({ data: selectInfo }) => {
       dispatch(updateBizData({ selectInfo }))
