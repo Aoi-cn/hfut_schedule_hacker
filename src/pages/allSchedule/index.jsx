@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 import { View } from '@tarojs/components'
 
 import * as actions from '../../actions/allSchedule'
-import IconFont from '../../components/iconfont'
 import WhiteTable from '../../components/schedule-component/WhiteTable'
 import DayLine from '../../components/schedule-component/DayLine'
 import TimeLine from '../../components/schedule-component/TimeLine'
 import CourseTable from './components/CourseTable'
 import ScheduleTop from './components/ScheduleTop'
 import CourseDetailFloatLayout from './components/CourseDetailFloatLayout'
+import ScheduleFooter from './components/ScheduleFooter'
 import './index.less'
 
 function AllSchedule(props) {
@@ -63,17 +63,9 @@ function AllSchedule(props) {
               <CourseTable weekScheduleData={scheduleMatrix[weekIndex]} />
           }
         </View>
-
       </View>
 
-      <View className='allSchedule-footer'>
-        <View className='allSchedule-footer-pop' onClick={() => changeWeekIndex(weekIndex - 1)} >
-          <IconFont name='arrow-lift' size={52} color='#202124' />
-        </View>
-        <View className='allSchedule-footer-pop' onClick={() => changeWeekIndex(weekIndex + 1)}>
-          <IconFont name='arrow-right' size={52} color='#202124' />
-        </View>
-      </View>
+      <ScheduleFooter changeWeekIndex={changeWeekIndex} />
 
       <CourseDetailFloatLayout
         courseDetailFLData={courseDetailFLData}

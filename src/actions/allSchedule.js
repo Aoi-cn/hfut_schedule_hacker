@@ -1,4 +1,5 @@
 import Taro from '@tarojs/taro'
+import _ from 'lodash'
 import {
   UPDATE_BIZDATA,
   UPDATE_UIDATA,
@@ -7,6 +8,7 @@ import {
 import { GET } from '../utils/request'
 import dataToMatrix from '../utils/scheduleDataTranslator'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
+import scheduleDiffTool from '../utils/scheduleDiffTool'
 
 export const updateScheduleData = (payload) => async (dispatch) => {
   const { clazz } = payload
@@ -15,10 +17,13 @@ export const updateScheduleData = (payload) => async (dispatch) => {
     title: '正在查询...',
     mask: true,
   })
+  // 确保diff按钮是关闭的
+  await dispatch(updateUiData({ diff: false }))
+
   const res = await GET('/schedule/schedule', { clazz })
   const { scheduleData, lessonIds } = res
   const scheduleMatrix = dataToMatrix(scheduleData, lessonIds)
-  dispatch(updateBizData({ scheduleMatrix }))
+  await dispatch(updateBizData({ scheduleMatrix, backupScheduleM: _.cloneDeep(scheduleMatrix) }))
   Taro.hideLoading()
 }
 
@@ -39,6 +44,28 @@ export const enter = () => async (dispatch) => {
       })
       dispatch(updateBizData({ selectInfo: res }))
     })
+}
+
+export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
+  Taro.showLoading({ 
+    title: '正在对比...',
+    mask: true,
+   })
+  await dispatch(updateUiData({ diff: true }))
+  const { scheduleMatrix: mineScheduleM } = Taro.getStorageSync('me')
+  const diffScheduleM = scheduleDiffTool(targetScheduleM, mineScheduleM)
+  await dispatch(updateBizData({ scheduleMatrix: diffScheduleM }))
+  Taro.hideLoading()
+}
+
+export const cancelDiff = ({ backupScheduleM }) => async (dispatch) => {
+  Taro.showLoading({ 
+    title: '正在关闭...',
+    mask: true,
+   })
+  await dispatch(updateUiData({ diff: false }))
+  await dispatch(updateBizData({ scheduleMatrix: _.cloneDeep(backupScheduleM) }))
+  Taro.hideLoading()
 }
 
 export const updateBizData = (payload) => {

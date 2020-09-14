@@ -75,11 +75,11 @@ export default (props) => {
         content={`这里可以查看全校几乎所有班级的课表（目前仅支持19、18、17及少数16级）\n
         数据可靠性不做保证，仅供参考！点击右上角的搜索按钮开始。
         `}
-        buttons={[{
-          value: '知道了',
-          color: 'blue',
-          onClick: () => setShowAbout(false)
-        }]}
+        // buttons={[{
+        //   value: '知道了',
+        //   color: 'blue',
+        //   onClick: () => setShowAbout(false)
+        // }]}
       />
 
       <SelectFloatLayout

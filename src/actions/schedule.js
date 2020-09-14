@@ -8,13 +8,17 @@ import { GET } from '../utils/request'
 import dataToMatrix from '../utils/scheduleDataTranslator'
 import * as loginActions from './login'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
+import scheduleDiffTool from '../utils/scheduleDiffTool'
 
 // 登录成功、手动更新数据
 export const updateScheduleData = () => async (dispatch) => {
-  Taro.showLoading({ 
+  Taro.showLoading({
     title: '正在加载...',
     mask: true,
-   })
+  })
+
+  // 确保diff按钮是关闭的
+  dispatch(updateUiData({ diff: false }))
 
   // 先获取当前用户
   let userType = await Taro.getStorage({ key: 'userType' })
@@ -66,6 +70,9 @@ export const updateScheduleData = () => async (dispatch) => {
 
 // 刚进入小程序时，判断是否有本地缓存，有的话就不用登录
 export const enter = () => async (dispatch) => {
+  // 确保diff按钮是关闭的
+  dispatch(updateUiData({ diff: false }))
+
   let userType = ''
   try {
     userType = await Taro.getStorage({ key: 'userType' })
@@ -81,7 +88,7 @@ export const enter = () => async (dispatch) => {
     .then(async (userData) => {
       const { scheduleMatrix } = userData.data  // 读取本地的课表数据
       const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
-      dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex }))
+      dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
       // 自动更新
       // dispatch(updateScheduleData({ scheduleMatrix: scheduleMatrix.data, dayLineMatrix: dayLineMatrix.data }))
     })
@@ -125,14 +132,21 @@ export const reLogin = ({ userType }) => async (dispatch) => {
 }
 
 export const refreshColor = () => async (dispatch) => {
+  Taro.showLoading({
+    title: '正在刷新...',
+    mask: true,
+  })
+  // 确保diff按钮是关闭的
+  await dispatch(updateUiData({ diff: false }))
+
   let userType = await Taro.getStorage({ key: 'userType' })
   userType = userType.data
   const userData = await Taro.getStorage({ key: userType })
   const { userInfo, scheduleData, lessonIds } = userData.data
 
   const scheduleMatrix = dataToMatrix(scheduleData, lessonIds)
-  dispatch(updateBizData({ scheduleMatrix }))
-  Taro.setStorage({
+  await dispatch(updateBizData({ scheduleMatrix }))
+  await Taro.setStorage({
     key: userType,
     data: {
       userInfo,
@@ -141,6 +155,7 @@ export const refreshColor = () => async (dispatch) => {
       lessonIds
     }
   })
+  Taro.hideLoading()
 }
 
 export const updateSingleCourseColor = (payload) => async (dispatch) => {
@@ -202,6 +217,30 @@ export const changeUserType = () => async (dispatch) => {
     icon: 'none',
     duration: 800
   })
+}
+
+export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
+  Taro.showLoading({
+    title: '正在对比...',
+    mask: true,
+  })
+  await dispatch(updateUiData({ diff: true }))
+  const { scheduleMatrix: mineScheduleM } = Taro.getStorageSync('me')
+  const diffScheduleM = scheduleDiffTool(targetScheduleM, mineScheduleM)
+  await dispatch(updateBizData({ scheduleMatrix: diffScheduleM }))
+  Taro.hideLoading()
+}
+
+
+export const cancelDiff = () => async (dispatch) => {
+  Taro.showLoading({
+    title: '正在关闭...',
+    mask: true,
+  })
+  await dispatch(updateUiData({ diff: false }))
+  const { scheduleMatrix } = Taro.getStorageSync('her')
+  await dispatch(updateBizData({ scheduleMatrix }))
+  Taro.hideLoading()
 }
 
 export const updateBizData = (payload) => {

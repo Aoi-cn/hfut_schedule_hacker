@@ -13,7 +13,7 @@ export default class StandardFloatLayout extends Component {
       BottomButtons = (<AtButton className={'standardFloatLayout-footer-btn standardFloatLayout-footer-btn__' + buttons[0].color} onClick={() => buttons[0].onClick()}>
           {buttons[0].value}
         </AtButton>)
-    } else {
+    } else if (buttons.length === 2) {
       BottomButtons = (<View className='standardFloatLayout-footer-twoButtonBox'>
         <AtButton className={'standardFloatLayout-footer-btn standardFloatLayout-footer-btn__' + buttons[0].color} onClick={() => buttons[0].onClick()}>
           {buttons[0].value}
@@ -22,6 +22,8 @@ export default class StandardFloatLayout extends Component {
           {buttons[1].value}
         </AtButton>
       </View>)
+    } else {
+      BottomButtons = null
     }
 
     return (
@@ -36,7 +38,7 @@ export default class StandardFloatLayout extends Component {
           <Text className='standardFloatLayout-content-content'>{content}</Text>
         </View>
 
-        <View className='standardFloatLayout-footer'>
+        <View className={`standardFloatLayout-footer standardFloatLayout-footer-${buttons.length === 0 ? 'noBtn' : ''}`}>
           {BottomButtons}
         </View>
       </AtFloatLayout>
@@ -49,9 +51,5 @@ StandardFloatLayout.defaultProps = {
   onClose: null,
   title: '',
   content: '',
-  buttons: [{
-    value: '',
-    color: '',
-    onClick: null,
-  }]
+  buttons: []
 }

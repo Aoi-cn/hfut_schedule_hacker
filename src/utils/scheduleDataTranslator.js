@@ -5,7 +5,15 @@ export default (scheduleData, lessonIds) => {
   // 初始化scheduleMatrix
   let scheduleMatrix = []
   for (let i = 0; i < 20; i++) {
-    scheduleMatrix.push([[], [], [], [], [], [], [],])
+    scheduleMatrix.push([
+      [{}, {}, {}, {}, {}],
+      [{}, {}, {}, {}, {}],
+      [{}, {}, {}, {}, {}],
+      [{}, {}, {}, {}, {}],
+      [{}, {}, {}, {}, {}],
+      [{}, {}, {}, {}, {}],
+      [{}, {}, {}, {}, {}],
+    ])
   }
 
   // 遍历scheduleData，填充scheduleMatrix
@@ -109,13 +117,16 @@ export default (scheduleData, lessonIds) => {
       }
 
       weekIndexes.map((weekIndex_) => {
-        scheduleMatrix[weekIndex_ - 1][dayIndex - 1].push(courseBoxData)
+        scheduleMatrix[weekIndex_ - 1][dayIndex - 1][parseInt(parseInt(startTime/2))] = courseBoxData
       })
     })
   })
 
+  // console.log(scheduleMatrix)
+
   return scheduleMatrix
 }
+
 
 const initLessonIdsColor = (lessonIds) => {
   // 十个颜色随机

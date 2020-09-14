@@ -6,11 +6,13 @@ const INITIAL_STATE = {
     currentWeekIndex: 0, // 现实中的周数
     currentDayIndex: 0,
     scheduleMatrix: [],
+    backupScheduleM: [],
     dayLineMatrix: [],
     selectInfo: {},
     level: 18, // 当前选择班级的年级（为了过滤掉该班级的非正常课程，如重修的）
   },
   uiData: {
+    diff: false,
     courseDetailFLData: {
       isOpened: false,
       name: '',

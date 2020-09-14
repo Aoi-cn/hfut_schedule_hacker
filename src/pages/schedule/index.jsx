@@ -1,29 +1,28 @@
-import React from 'react'
-import Taro, { useDidShow } from '@tarojs/taro'
+import React, { useEffect } from 'react'
+import Taro from '@tarojs/taro'
 import { connect } from 'react-redux'
 import { View } from '@tarojs/components'
 
 import * as actions from '../../actions/schedule'
-import IconFont from '../../components/iconfont'
 import WhiteTable from '../../components/schedule-component/WhiteTable'
 import DayLine from '../../components/schedule-component/DayLine'
 import TimeLine from '../../components/schedule-component/TimeLine'
 import CourseTable from './components/CourseTable'
 import ScheduleTop from './components/ScheduleTop'
 import CourseDetailFloatLayout from './components/CourseDetailFloatLayout'
+import ScheduleFooter from './components/ScheduleFooter'
 import './index.less'
 
 function Schedule(props) {
-  const { bizData, uiData } = props
+  const { bizData, uiData, enter } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
   const { courseDetailFLData } = uiData
 
-  useDidShow(() => {
-    // 自动更新
-    props.enter()
-  })
+  useEffect(() => {
+    enter()
+  }, [enter])
 
-  const changeWeekIndex = async(weekIndex_) => {
+  const changeWeekIndex = async (weekIndex_) => {
     if (weekIndex_ < 0) {
       Taro.showToast({
         title: '当前已经是第一周',
@@ -45,8 +44,8 @@ function Schedule(props) {
   return (
     <View className='schedule'>
       <View className='schedule-header'>
-        
-        <ScheduleTop 
+
+        <ScheduleTop
           weekIndex={weekIndex}
           currentWeekIndex={currentWeekIndex}
           changeWeekIndex={changeWeekIndex}
@@ -63,19 +62,11 @@ function Schedule(props) {
               <CourseTable weekScheduleData={scheduleMatrix[weekIndex]} />
           }
         </View>
-
       </View>
 
-      <View className='schedule-footer'>
-        <View className='schedule-footer-pop' onClick={() => changeWeekIndex(weekIndex - 1)} >
-          <IconFont name='arrow-lift' size={52} color='#202124' />
-        </View>
-        <View className='schedule-footer-pop' onClick={() => changeWeekIndex(weekIndex + 1)}>
-          <IconFont name='arrow-right' size={52} color='#202124' />
-        </View>
-      </View>
+      <ScheduleFooter changeWeekIndex={changeWeekIndex} />
 
-      <CourseDetailFloatLayout 
+      <CourseDetailFloatLayout
         courseDetailFLData={courseDetailFLData}
         onClose={() => props.updateUiData({ courseDetailFLData: { isOpened: false } })}
       />
@@ -85,7 +76,7 @@ function Schedule(props) {
 
 function mapStateToProps(state) {
   return {
-    ...state.schedule
+    ...state.schedule,
   };
 }
 

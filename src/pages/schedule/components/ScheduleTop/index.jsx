@@ -5,7 +5,7 @@ import { View, Picker } from '@tarojs/components'
 import moment from 'moment'
 
 import StandardFloatLayout from '../../../../components/StandardFloatLayout'
-import { updateScheduleData, refreshColor, changeUserType } from '../../../../actions/schedule'
+import { updateScheduleData, refreshColor, changeUserType, updateUiData } from '../../../../actions/schedule'
 import * as loginActions from '../../../../actions/login'
 import IconFont from '../../../../components/iconfont'
 import LittleMenu from '../../../../components/LittleMenu'
@@ -74,6 +74,9 @@ export default (props) => {
   }
 
   const handleAiXinClick = () => {
+    // 关闭diff，防止diff状态下切换回自己的课表后再切换回情侣课表，diff按钮无法恢复
+    dispatch(updateUiData({ diff: false }))
+
     Taro.getStorage({ key: 'her' })
       .then(() => {
         dispatch(changeUserType())
@@ -145,11 +148,11 @@ export default (props) => {
         本项目已在GitHub开源，仓库名称为：hfut_schedule_hacker。欢迎对前端感兴趣的同学与我一起交流和开发！\n
         情侣课表功能专为我的挚爱：唐小姐开发。祝天下有情人终成眷属~
         `}
-        buttons={[{
-          value: '知道了',
-          color: 'blue',
-          onClick: () => setShowAbout(false)
-        }]}
+        // buttons={[{
+        //   value: '知道了',
+        //   color: 'blue',
+        //   onClick: () => setShowAbout(false)
+        // }]}
       />
 
       <StandardFloatLayout
