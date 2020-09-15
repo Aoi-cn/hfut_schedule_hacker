@@ -79,12 +79,19 @@ export const enter = ({ userType }) => async (dispatch) => {
     .then(async (userData) => {
       const { scheduleMatrix } = userData.data  // 读取本地的课表数据
       // 到这里还没有被catch，说明本地有可用的缓存。接下来判断版本更新：
-      const localVersion = Taro.getStorageSync('version')
+      const config = Taro.getStorageSync('config')
+      // 本地config都没有，说明是2.1.1或之前版本
+      if (!config) {
+        dispatch(handleAutoUpdate(config))
+        return null
+      }
+      // 2.1.1之后的版本
+      const { version: localVersion } = config
       if (localVersion !== version) {
         console.log('线上版本：' + version)
         console.log('本地版本：' + localVersion)
         console.log('执行自动更新数据操作')
-        dispatch(handleAutoUpdate())
+        dispatch(handleAutoUpdate(config))
         return null
       }
       const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
@@ -97,13 +104,28 @@ export const enter = ({ userType }) => async (dispatch) => {
     })
 }
 
-export const handleAutoUpdate = () => async (dispatch) => {
+// 检测到版本更新后的自动数据更新
+export const handleAutoUpdate = (config) => async (dispatch) => {
   await dispatch(updateScheduleData({ userType: 'her' }))
   dispatch(updateScheduleData({ userType: 'me' }))
-  Taro.setStorage({
-    key: 'version',
-    data: version,
-  })
+  if (!config) {
+    Taro.setStorage({
+      key: 'config',
+      data: {
+        version,
+        showDiffHelp: true,
+        showAllSHelp: true,
+      },
+    })
+  } else {
+    Taro.setStorage({
+      key: 'config',
+      data: {
+        ...config,
+        version,
+      },
+    })
+  }
 }
 
 // key失效，自动登录更新key
@@ -170,12 +192,17 @@ export const updateSingleCourseColor = (payload) => async (dispatch) => {
   const userData = await Taro.getStorage({ key: userType })
   const { userInfo, scheduleData, scheduleMatrix, lessonIds } = userData.data
 
+  // 确保diff按钮是关闭的
+  dispatch(updateUiData({ diff: false }))
+
   scheduleMatrix.map((weekData, weekIndex) => {
     weekData.map((dayData, dayIndex) => {
-      dayData.map((courseBoxData, courseIndex) => {
-        if (courseBoxData.lessonId === lessonId) {
-          scheduleMatrix[weekIndex][dayIndex][courseIndex].color = newColor
-        }
+      dayData.map((courseBoxList, courseIndex) => {
+        courseBoxList.map((courseBoxData, timeIndex) => {
+          if (courseBoxData.lessonId === lessonId) {
+            scheduleMatrix[weekIndex][dayIndex][courseIndex][timeIndex].color = newColor
+          }
+        })
       })
     })
   })
@@ -217,6 +244,23 @@ export const changeUserType = ({ userType }) => async (dispatch) => {
 }
 
 export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
+  // 先判断是不是第一次点击，是的话就显示help
+  const config = Taro.getStorageSync('config')
+  if (config.showDiffHelp) {
+    Taro.showModal({
+      title: '提示',
+      content: `这是将另一张课表与自己的进行对比：绿色代表两方都没课；红色代表两方都有课；黄色代表只有自己有课；蓝色代表只有对方有课。`,
+      showCancel: false,
+      confirmText: '我知道了',
+    })
+    Taro.setStorage({
+      key: 'config',
+      data: {
+        ...config,
+        showDiffHelp: false,
+      }
+    })
+  }
   Taro.showLoading({
     title: '正在对比...',
     mask: true,

@@ -11,7 +11,7 @@ import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 import scheduleDiffTool from '../utils/scheduleDiffTool'
 
 export const updateScheduleData = (payload) => async (dispatch) => {
-  const { clazz } = payload
+  const { clazz, level } = payload
 
   Taro.showLoading({
     title: '正在查询...',
@@ -23,6 +23,23 @@ export const updateScheduleData = (payload) => async (dispatch) => {
   const res = await GET('/schedule/schedule', { clazz })
   const { scheduleData, lessonIds } = res
   const scheduleMatrix = dataToMatrix(scheduleData, lessonIds)
+  scheduleMatrix.map((weekData) => {
+    weekData.map((dayData) => {
+      dayData.map((courseBoxList) => {
+        courseBoxList.map((courseBoxData, timeIndex) => {
+          // 过滤掉重修的课（非本年级的）、公选课
+          const { studentClazzes, lessonType } = courseBoxData
+          if (!studentClazzes || !lessonType) {
+            return null
+          }
+          if (studentClazzes[0].indexOf(level) === -1 || lessonType.indexOf('公选') !== -1) {
+            courseBoxList[timeIndex] = {}
+            console.log(courseBoxData)
+          }
+        })
+      })
+    })
+  })
   await dispatch(updateBizData({ scheduleMatrix, backupScheduleM: _.cloneDeep(scheduleMatrix) }))
   Taro.hideLoading()
 }
@@ -30,6 +47,23 @@ export const updateScheduleData = (payload) => async (dispatch) => {
 // 首次进入，检查本地存储有没有selectInfo和scheduleData。
 // 有的话就dispaatch，没有就请求selectInfo并存在本地
 export const enter = () => async (dispatch) => {
+  // 先判断是不是第一次进入，是的话就显示help
+  const config = Taro.getStorageSync('config')
+  if (config.showAllSHelp) {
+    Taro.showModal({
+      title: '提示',
+      content: `点击右上角的搜索按钮开始`,
+      showCancel: false,
+      confirmText: '我知道了',
+    })
+    Taro.setStorage({
+      key: 'config',
+      data: {
+        ...config,
+        showAllSHelp: false,
+      }
+    })
+  }
   const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()
   dispatch(updateBizData({ dayLineMatrix: dayLineMatrix, currentWeekIndex }))
   Taro.getStorage({ key: 'selectInfo' })
@@ -46,6 +80,7 @@ export const enter = () => async (dispatch) => {
     })
 }
 
+// 开始执行diff
 export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
   Taro.showLoading({ 
     title: '正在对比...',

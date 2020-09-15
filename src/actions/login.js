@@ -44,10 +44,16 @@ export const login = ({ username, password, userType }) => async (dispatch) => {
   })
 
   // 写入当前版本信息
-  Taro.setStorage({
-    key: 'version',
-    data: version,
-  })
+  if (userType === 'me') {
+    Taro.setStorage({
+      key: 'config',
+      data: {
+        version,
+        showDiffHelp: true,
+        showAllSHelp: true,
+      },
+    })
+  }
 
   await Taro.switchTab({ url: '/pages/schedule/index' })
 

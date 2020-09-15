@@ -7,13 +7,13 @@ export default (scheduleData, lessonIds) => {
   let scheduleMatrix = []
   for (let i = 0; i < 20; i++) {
     scheduleMatrix.push([
-      [{}, {}, {}, {}, {}],
-      [{}, {}, {}, {}, {}],
-      [{}, {}, {}, {}, {}],
-      [{}, {}, {}, {}, {}],
-      [{}, {}, {}, {}, {}],
-      [{}, {}, {}, {}, {}],
-      [{}, {}, {}, {}, {}],
+      [[], [], [], [], []],
+      [[], [], [], [], []],
+      [[], [], [], [], []],
+      [[], [], [], [], []],
+      [[], [], [], [], []],
+      [[], [], [], [], []],
+      [[], [], [], [], []],
     ])
   }
 
@@ -97,6 +97,9 @@ export default (scheduleData, lessonIds) => {
         timeIndexes.push(timeIndex)
       }
 
+      // 分配一个颜色
+      let color = lessonIdsColor[lessonId]
+
       // 填充scheduleMatrix
       const courseBoxData = {
         name,
@@ -114,11 +117,43 @@ export default (scheduleData, lessonIds) => {
         timeRange: timeIndexToTime(startTime) + '~' + timeIndexToTime(endTime),
         weekIndexesZh,
         campus,
-        color: lessonIdsColor[lessonId],
+        color,
       }
 
       weekIndexes.map((weekIndex_) => {
-        scheduleMatrix[weekIndex_ - 1][dayIndex - 1][parseInt(parseInt(startTime/2))] = _.cloneDeep(courseBoxData)
+        const courseBoxList = scheduleMatrix[weekIndex_ - 1][dayIndex - 1][parseInt(parseInt(startTime / 2))]
+        for (let cn = 0; cn < courseBoxList.length; cn++) {
+          if (courseBoxList.length > cn) {
+            const { lessonId: existCourseId } = courseBoxList[cn]
+            if (existCourseId === lessonId) {
+              // 同一堂课，两个老师
+              courseBoxData.teacher = `${teacher}、${courseBoxList[cn].teacher}`
+              courseBoxList[cn] = _.cloneDeep(courseBoxData)
+              return null
+            }
+          }
+        }
+        // 确保同一时间的两门课的颜色不同
+        if (courseBoxList.length > 0) {
+          const existColor = courseBoxList[0].color
+          while (color === existColor) {
+            const randomI = Math.floor(Math.random() * lessonIds.length + 1) - 1
+            color = lessonIdsColor[lessonIds[randomI]]
+          }
+          courseBoxData.color = color
+        }
+        courseBoxList.push(_.cloneDeep(courseBoxData))
+      })
+    })
+  })
+
+  // 给所有没课的添加{}
+  scheduleMatrix.map((weekData) => {
+    weekData.map((dayData) => {
+      dayData.map((courseBoxList) => {
+        if (courseBoxList.length === 0) {
+          courseBoxList.push({})
+        }
       })
     })
   })

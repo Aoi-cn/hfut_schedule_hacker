@@ -4,7 +4,6 @@ import { View, Picker } from '@tarojs/components'
 import { AtFloatLayout, AtButton, AtList, AtListItem } from 'taro-ui'
 
 import { updateScheduleData, updateBizData } from '../../../../actions/allSchedule'
-// import IconFont from '../../../../components/iconfont'
 import './index.less'
 
 export default (props) => {
@@ -65,7 +64,7 @@ export default (props) => {
   const handleQuery = async () => {
     if (!selectedClazz) { return }
     await dispatch(updateBizData({ level: selectedLevel }))
-    dispatch(updateScheduleData({ clazz: selectedClazz }))
+    dispatch(updateScheduleData({ clazz: selectedClazz, level: selectedLevel }))
     onClose()
   }
 
