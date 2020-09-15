@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { View } from '@tarojs/components'
 
 import { updateUiData } from '../../../../actions/allSchedule'
@@ -8,7 +8,6 @@ import './index.less'
 export default ({ courseBoxList, number }) => {
   const courseBoxData = courseBoxList[0] ? courseBoxList[0] : {}
   const { name = "", clazzRoom, teacher, timeRange, lessonCode, lessonType, weekIndexes, studentClazzes, studentNumber, lessonId, credits, campus, weekIndexesZh, color } = courseBoxData
-  // const { level } = useSelector(state => state.allSchedule.bizData)
   const dispatch = useDispatch()
 
   // 有数据
