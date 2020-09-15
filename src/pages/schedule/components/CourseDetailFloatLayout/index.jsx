@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { View, Text, Picker } from '@tarojs/components'
 import { AtFloatLayout, AtButton } from 'taro-ui'
 
@@ -10,6 +10,7 @@ import './index.less'
 export default (props) => {
   const { courseDetailFLData, onClose } = props
   const { isOpened, name, credits, clazzRoom, teacher, timeRange, lessonType, studentClazzes, studentNumber, weekIndexesZh, campus, color } = courseDetailFLData
+  const { userType } = useSelector(state => state.login.bizData)
   const dispatch = useDispatch()
 
   let clazzString = ''
@@ -83,7 +84,7 @@ export default (props) => {
   const handlePickerChange = (e) => {
     const colorIndex = parseInt(e.detail.value)
     const newColor = colorPickerRange[colorIndex].value
-    dispatch(updateSingleCourseColor({ newColor, courseDetailFLData: props }))
+    dispatch(updateSingleCourseColor({ userType, newColor, courseDetailFLData: props }))
   }
 
   return (

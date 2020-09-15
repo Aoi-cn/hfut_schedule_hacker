@@ -1,3 +1,4 @@
+import _ from 'lodash'
 
 export default (scheduleData, lessonIds) => {
   const lessonIdsColor = initLessonIdsColor(lessonIds)
@@ -69,13 +70,13 @@ export default (scheduleData, lessonIds) => {
           // 判断有没有分单双周
           if (endWeekString.indexOf('单') !== -1) {
             for (let weekIndex = parseInt(startWeek); weekIndex <= parseInt(endWeekString); weekIndex++) {
-              if (weekIndex % 2 === 0) {
+              if (weekIndex % 2 !== 0) {
                 weekIndexes.push(weekIndex)
               }
             }
           } else if (endWeekString.indexOf('双') !== -1) {
             for (let weekIndex = parseInt(startWeek); weekIndex <= parseInt(endWeekString); weekIndex++) {
-              if (weekIndex % 2 !== 0) {
+              if (weekIndex % 2 === 0) {
                 weekIndexes.push(weekIndex)
               }
             }
@@ -117,7 +118,7 @@ export default (scheduleData, lessonIds) => {
       }
 
       weekIndexes.map((weekIndex_) => {
-        scheduleMatrix[weekIndex_ - 1][dayIndex - 1][parseInt(parseInt(startTime/2))] = courseBoxData
+        scheduleMatrix[weekIndex_ - 1][dayIndex - 1][parseInt(parseInt(startTime/2))] = _.cloneDeep(courseBoxData)
       })
     })
   })

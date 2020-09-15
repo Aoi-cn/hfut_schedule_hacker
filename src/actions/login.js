@@ -5,7 +5,9 @@ import {
   LOGOUT,
 } from '../constants/login'
 import { GET } from '../utils/request'
-import { updateScheduleData, enter } from './schedule'
+import { updateScheduleData, enter, logout as scheduleLogout } from './schedule'
+import { logout as allScheduleLogout } from './allSchedule'
+import { version } from '../config/config.default'
 
 export const login = ({ username, password, userType }) => async (dispatch) => {
   Taro.showLoading({
@@ -40,15 +42,17 @@ export const login = ({ username, password, userType }) => async (dispatch) => {
       lessonIds: [],
     }
   })
-  await Taro.setStorage({
-    key: 'userType',
-    data: userType
+
+  // 写入当前版本信息
+  Taro.setStorage({
+    key: 'version',
+    data: version,
   })
 
   await Taro.switchTab({ url: '/pages/schedule/index' })
 
   // 更新课表数据
-  dispatch(updateScheduleData())
+  dispatch(updateScheduleData({ userType }))
   return null
 }
 
@@ -56,20 +60,13 @@ export const login = ({ username, password, userType }) => async (dispatch) => {
 // 在情侣课表绑定页面 点击了返回
 export const back = () => async (dispatch) => {
   dispatch(updateBizData({ userType: 'me' }))
-  await Taro.setStorage({ 
-    key: 'userType',
-    data: 'me'
-   })
    Taro.switchTab({ url: '/pages/schedule/index' })
 }
 
 export const unBindHer = () => async (dispatch) => {
-  await Taro.setStorage({
-    key: 'userType',
-    data: 'me'
-  })
+  dispatch(updateBizData({ userType: 'me' }))
   await Taro.removeStorage({ key: 'her' })
-  dispatch(enter())
+  dispatch(enter({ userType: 'me' }))
 }
 
 export const updateBizData = (payload) => {
@@ -86,8 +83,10 @@ export const updateUiData = (payload) => {
   }
 }
 
-export const logout = () => {
+export const logout = () => async (dispatch) => {
   // 执行登出逻辑
+  dispatch(scheduleLogout())
+  dispatch(allScheduleLogout())
   Taro.clearStorage()
   Taro.redirectTo({ url: '/pages/login/index' })
   return {

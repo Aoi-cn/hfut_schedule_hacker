@@ -14,13 +14,13 @@ import ScheduleFooter from './components/ScheduleFooter'
 import './index.less'
 
 function Schedule(props) {
-  const { bizData, uiData, enter } = props
+  const { bizData, uiData, enter, userType } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
   const { courseDetailFLData } = uiData
 
   useEffect(() => {
-    enter()
-  }, [enter])
+    enter({ userType })
+  }, [enter, userType])
 
   const changeWeekIndex = async (weekIndex_) => {
     if (weekIndex_ < 0) {
@@ -77,6 +77,7 @@ function Schedule(props) {
 function mapStateToProps(state) {
   return {
     ...state.schedule,
+    userType: state.login.bizData.userType,
   };
 }
 

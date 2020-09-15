@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Taro from '@tarojs/taro'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { View, Picker } from '@tarojs/components'
 import moment from 'moment'
 
@@ -17,9 +17,9 @@ export default (props) => {
   const [showAbout, setShowAbout] = useState(false)
   const [showLoverBox, setShowLoverBox] = useState(false)
   const [showConfirmBox, setShowConfirmBox] = useState(false)
+  const { userType } = useSelector(state => state.login.bizData)
   const dispatch = useDispatch()
 
-  const userType = Taro.getStorageSync('userType')
   const daysZh = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
 
   const weekIndexes = [
@@ -49,12 +49,12 @@ export default (props) => {
     {
       value: '刷新颜色',
       icon: 'swap',
-      onClick: () => dispatch(refreshColor()),
+      onClick: () => dispatch(refreshColor({ userType })),
     },
     {
       value: '更新数据',
       icon: 'sync',
-      onClick: () => dispatch(updateScheduleData()),
+      onClick: () => dispatch(updateScheduleData({ userType })),
     },
     {
       value: '用前必读',
@@ -79,7 +79,7 @@ export default (props) => {
 
     Taro.getStorage({ key: 'her' })
       .then(() => {
-        dispatch(changeUserType())
+        dispatch(changeUserType({ userType }))
       })
       .catch(() => {
         setShowLoverBox(true)
@@ -87,7 +87,7 @@ export default (props) => {
   }
 
   const handleLoverScheduleClick = async () => {
-    dispatch(changeUserType())
+    dispatch(changeUserType({ userType }))
     setShowLoverBox(false)
   }
 

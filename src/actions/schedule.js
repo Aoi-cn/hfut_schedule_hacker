@@ -9,9 +9,10 @@ import dataToMatrix from '../utils/scheduleDataTranslator'
 import * as loginActions from './login'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 import scheduleDiffTool from '../utils/scheduleDiffTool'
+import { version } from '../config/config.default'
 
 // 登录成功、手动更新数据
-export const updateScheduleData = () => async (dispatch) => {
+export const updateScheduleData = ({ userType }) => async (dispatch) => {
   Taro.showLoading({
     title: '正在加载...',
     mask: true,
@@ -20,17 +21,17 @@ export const updateScheduleData = () => async (dispatch) => {
   // 确保diff按钮是关闭的
   dispatch(updateUiData({ diff: false }))
 
-  // 先获取当前用户
-  let userType = await Taro.getStorage({ key: 'userType' })
-  userType = userType.data
-
   // 生成一个时间线数据矩阵，先渲染时间线
   const { dayLineMatrix } = makeDayLineMatrix()
   dispatch(updateBizData({ dayLineMatrix: dayLineMatrix }))
 
   // 进行课表更新逻辑
-  const userData = await Taro.getStorage({ key: userType })
-  const { userInfo } = userData.data
+  const userData = Taro.getStorageSync(userType)
+  if (!userData) {
+    console.log('用户数据不存在：' + userType)
+    return null
+  }
+  const { userInfo } = userData
   const { key } = userInfo
   const res = await GET('/schedule', { key, semesterId: 114 })
   // 课表请求出错。执行key过期之后的逻辑
@@ -69,34 +70,40 @@ export const updateScheduleData = () => async (dispatch) => {
 }
 
 // 刚进入小程序时，判断是否有本地缓存，有的话就不用登录
-export const enter = () => async (dispatch) => {
+export const enter = ({ userType }) => async (dispatch) => {
+
   // 确保diff按钮是关闭的
   dispatch(updateUiData({ diff: false }))
-
-  let userType = ''
-  try {
-    userType = await Taro.getStorage({ key: 'userType' })
-    userType = userType.data
-  } catch (e) {
-    console.error(e);
-    Taro.redirectTo({ url: '/pages/login/index' })
-    return null
-  }
-
 
   Taro.getStorage({ key: userType })
     .then(async (userData) => {
       const { scheduleMatrix } = userData.data  // 读取本地的课表数据
+      // 到这里还没有被catch，说明本地有可用的缓存。接下来判断版本更新：
+      const localVersion = Taro.getStorageSync('version')
+      if (localVersion !== version) {
+        console.log('线上版本：' + version)
+        console.log('本地版本：' + localVersion)
+        console.log('执行自动更新数据操作')
+        dispatch(handleAutoUpdate())
+        return null
+      }
       const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
       dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
-      // 自动更新
-      // dispatch(updateScheduleData({ scheduleMatrix: scheduleMatrix.data, dayLineMatrix: dayLineMatrix.data }))
     })
     .catch((e) => {
       // 本地缓存获取失败，重新登录
       console.error(e);
       Taro.redirectTo({ url: '/pages/login/index' })
     })
+}
+
+export const handleAutoUpdate = () => async (dispatch) => {
+  await dispatch(updateScheduleData({ userType: 'her' }))
+  dispatch(updateScheduleData({ userType: 'me' }))
+  Taro.setStorage({
+    key: 'version',
+    data: version,
+  })
 }
 
 // key失效，自动登录更新key
@@ -120,7 +127,7 @@ export const reLogin = ({ userType }) => async (dispatch) => {
         lessonIds: [],
       }
     })
-    dispatch(updateScheduleData())
+    dispatch(updateScheduleData({ userType }))
   } else {
     console.log(msg)
     Taro.showToast({
@@ -131,7 +138,7 @@ export const reLogin = ({ userType }) => async (dispatch) => {
   }
 }
 
-export const refreshColor = () => async (dispatch) => {
+export const refreshColor = ({ userType }) => async (dispatch) => {
   Taro.showLoading({
     title: '正在刷新...',
     mask: true,
@@ -139,8 +146,6 @@ export const refreshColor = () => async (dispatch) => {
   // 确保diff按钮是关闭的
   await dispatch(updateUiData({ diff: false }))
 
-  let userType = await Taro.getStorage({ key: 'userType' })
-  userType = userType.data
   const userData = await Taro.getStorage({ key: userType })
   const { userInfo, scheduleData, lessonIds } = userData.data
 
@@ -159,11 +164,9 @@ export const refreshColor = () => async (dispatch) => {
 }
 
 export const updateSingleCourseColor = (payload) => async (dispatch) => {
-  const { newColor, courseDetailFLData: { courseDetailFLData } } = payload
+  const { userType, newColor, courseDetailFLData: { courseDetailFLData } } = payload
   const { lessonId } = courseDetailFLData
 
-  let userType = await Taro.getStorage({ key: 'userType' })
-  userType = userType.data
   const userData = await Taro.getStorage({ key: userType })
   const { userInfo, scheduleData, scheduleMatrix, lessonIds } = userData.data
 
@@ -198,20 +201,14 @@ export const updateSingleCourseColor = (payload) => async (dispatch) => {
   })
 }
 
-export const changeUserType = () => async (dispatch) => {
-  let userType = await Taro.getStorage({ key: 'userType' })
-  userType = userType.data
+export const changeUserType = ({ userType }) => async (dispatch) => {
   const newUserType = userType === 'me' ? 'her' : 'me'
-  await Taro.setStorage({
-    key: 'userType',
-    data: newUserType
-  })
   dispatch(loginActions.updateBizData({
     username: '',
     password: '',
     userType: newUserType,
   }))
-  dispatch(enter({ userType }))
+  dispatch(enter({ userType: newUserType }))
   Taro.showToast({
     title: '切换成功',
     icon: 'none',
