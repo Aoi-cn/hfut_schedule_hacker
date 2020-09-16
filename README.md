@@ -12,7 +12,7 @@
 
 CSS预处理：Less
 
-其他库：Taro-UI、MomentJs等
+其他库：Taro-UI、MomentJs、lodash等
 
 
 #### 更新日志
@@ -55,7 +55,7 @@ CSS预处理：Less
 
 ##### v2.1.5
 
-- 支持同一时间端的两个课程展示
+- 支持同一时间段的两个课程展示
 - 两处首次进入的modal help提示（对比和全校课表）
 - bug修复
 

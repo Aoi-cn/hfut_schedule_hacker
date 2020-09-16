@@ -9,7 +9,7 @@ import dataToMatrix from '../utils/scheduleDataTranslator'
 import * as loginActions from './login'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 import scheduleDiffTool from '../utils/scheduleDiffTool'
-import { version } from '../config/config.default'
+import { version, updateState } from '../config/config.default'
 
 // 登录成功、手动更新数据
 export const updateScheduleData = ({ userType }) => async (dispatch) => {
@@ -82,15 +82,15 @@ export const enter = ({ userType }) => async (dispatch) => {
       const config = Taro.getStorageSync('config')
       // 本地config都没有，说明是2.1.1或之前版本
       if (!config) {
-        dispatch(handleAutoUpdate(config))
+        dispatch(handleAutoUpdate(config, true))
         return null
       }
       // 2.1.1之后的版本
       const { version: localVersion } = config
-      if (localVersion !== version) {
+      if (localVersion !== version && updateState !== 0) {
         console.log('线上版本：' + version)
         console.log('本地版本：' + localVersion)
-        console.log('执行自动更新数据操作')
+        console.log('执行操作状态：' + updateState)
         dispatch(handleAutoUpdate(config))
         return null
       }
@@ -105,25 +105,36 @@ export const enter = ({ userType }) => async (dispatch) => {
 }
 
 // 检测到版本更新后的自动数据更新
-export const handleAutoUpdate = (config) => async (dispatch) => {
-  await dispatch(updateScheduleData({ userType: 'her' }))
-  dispatch(updateScheduleData({ userType: 'me' }))
-  if (!config) {
-    Taro.setStorage({
-      key: 'config',
-      data: {
-        version,
-        showDiffHelp: true,
-        showAllSHelp: true,
-      },
-    })
+export const handleAutoUpdate = (config, force) => async (dispatch) => {
+  if (updateState === 1 || force) {
+    // state=1 需更新数据
+    await dispatch(updateScheduleData({ userType: 'her' }))
+    dispatch(updateScheduleData({ userType: 'me' }))
+    if (!config) {
+      Taro.setStorage({
+        key: 'config',
+        data: {
+          version,
+          showDiffHelp: true,
+          showAllSHelp: true,
+        },
+      })
+    } else {
+      Taro.setStorage({
+        key: 'config',
+        data: {
+          ...config,
+          version,
+        },
+      })
+    }
   } else {
-    Taro.setStorage({
-      key: 'config',
-      data: {
-        ...config,
-        version,
-      },
+    // state=2 退出登录
+    dispatch(loginActions.logout())
+    Taro.showToast({
+      title: '检测到重大版本更新，请重新登陆一下~',
+      icon: "none",
+      duration: 2500,
     })
   }
 }
