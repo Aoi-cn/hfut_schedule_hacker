@@ -7,7 +7,7 @@ import {
 import { GET } from '../utils/request'
 import { updateScheduleData, enter, logout as scheduleLogout } from './schedule'
 import { logout as allScheduleLogout } from './allSchedule'
-import { version } from '../config/config.default'
+import { version, defaultConfig } from '../config/config.default'
 
 export const login = ({ username, password, userType, campus }) => async (dispatch) => {
   Taro.showLoading({
@@ -50,8 +50,7 @@ export const login = ({ username, password, userType, campus }) => async (dispat
       key: 'config',
       data: {
         version,
-        showDiffHelp: true,
-        showAllSHelp: true,
+        ...defaultConfig,
       },
     })
   }

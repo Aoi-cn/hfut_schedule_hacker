@@ -9,7 +9,7 @@ import dataToMatrix from '../utils/scheduleDataTranslator'
 import * as loginActions from './login'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 import scheduleDiffTool from '../utils/scheduleDiffTool'
-import { version, updateState } from '../config/config.default'
+import { version, updateState, updateInfo } from '../config/config.default'
 
 // 登录成功、手动更新数据
 export const updateScheduleData = ({ userType }) => async (dispatch) => {
@@ -82,7 +82,13 @@ export const enter = ({ userType }) => async (dispatch) => {
       const config = Taro.getStorageSync('config')
       // 本地config都没有，说明是2.1.1或之前版本
       if (!config) {
-        dispatch(handleAutoUpdate(config, true))
+        await dispatch(handleAutoUpdate(config, true))
+        Taro.showModal({
+          title: `v${version} 更新内容`,
+          content: updateInfo,
+          showCancel: false,
+          confirmText: '我知道了',
+        })
         return null
       }
       // 2.1.1之后的版本
@@ -91,7 +97,15 @@ export const enter = ({ userType }) => async (dispatch) => {
         console.log('线上版本：' + version)
         console.log('本地版本：' + localVersion)
         console.log('执行操作状态：' + updateState)
-        dispatch(handleAutoUpdate(config))
+        // 先判断是不是第一次进入，是的话就显示help
+        const config = Taro.getStorageSync('config')
+        await dispatch(handleAutoUpdate(config))
+        Taro.showModal({
+          title: `v${version} 更新内容`,
+          content: updateInfo,
+          showCancel: false,
+          confirmText: '我知道了',
+        })
         return null
       }
       const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
@@ -272,7 +286,7 @@ export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
       }
     })
   }
-  
+
   Taro.showLoading({
     title: '正在对比...',
     mask: true,
