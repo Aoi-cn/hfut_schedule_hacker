@@ -5,6 +5,7 @@ import { AtFloatLayout, AtButton } from 'taro-ui'
 
 import { updateSingleCourseColor } from '../../../../actions/schedule'
 import IconFont from '../../../../components/iconfont'
+import CustomButton from '../../../../components/CustomButton'
 import './index.less'
 
 export default (props) => {
@@ -113,9 +114,7 @@ export default (props) => {
           value={selectedColorIndex}
           onChange={e => handlePickerChange(e)}
         >
-          <AtButton className='courseDetailFloatLayout-footer-btn' >
-            更改课程颜色
-        </AtButton>
+          <CustomButton value='更改课程颜色' />
         </Picker>
       </View>
     </AtFloatLayout>

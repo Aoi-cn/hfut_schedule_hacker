@@ -28,7 +28,7 @@ export default class CustomButton extends Component {
 CustomButton.defaultProps = {
   value: '提交',
   isFixed: false,
-  type: 'primary',
+  type: 'default',
   disabled: false,
   loading: false,
 }

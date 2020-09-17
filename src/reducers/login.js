@@ -5,11 +5,14 @@ const INITIAL_STATE = {
     username: '',
     password: '',
     userType: 'me',
+    campusZh: '合肥校区',
+    campus: 1,
   },
   uiData: {
     isLoginDisabled: false,
     isLoginLoading: false,
     showLoginHelp: false,
+    showPwdHelp: false,
     showPwd: false,
   }
 }

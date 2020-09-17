@@ -9,7 +9,7 @@ import { updateScheduleData, enter, logout as scheduleLogout } from './schedule'
 import { logout as allScheduleLogout } from './allSchedule'
 import { version } from '../config/config.default'
 
-export const login = ({ username, password, userType }) => async (dispatch) => {
+export const login = ({ username, password, userType, campus }) => async (dispatch) => {
   Taro.showLoading({
     title: '正在加载...',
     mask: true,
@@ -35,7 +35,8 @@ export const login = ({ username, password, userType }) => async (dispatch) => {
       userInfo: {
         username,
         password,
-        key
+        campus,
+        key,
       },
       scheduleMatrix: [],
       scheduleData: [],

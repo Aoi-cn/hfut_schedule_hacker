@@ -32,8 +32,8 @@ export const updateScheduleData = ({ userType }) => async (dispatch) => {
     return null
   }
   const { userInfo } = userData
-  const { key } = userInfo
-  const res = await GET('/schedule', { key, semesterId: 114 })
+  const { key, campus } = userInfo
+  const res = await GET('/schedule', { key, campus, semesterId: 114 })
   // 课表请求出错。执行key过期之后的逻辑
   if (!res.body.currentWeek) {
     return dispatch(reLogin({ userType }))
@@ -272,6 +272,7 @@ export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
       }
     })
   }
+  
   Taro.showLoading({
     title: '正在对比...',
     mask: true,

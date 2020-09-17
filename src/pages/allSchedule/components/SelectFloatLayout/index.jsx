@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { View, Picker } from '@tarojs/components'
-import { AtFloatLayout, AtButton, AtList, AtListItem } from 'taro-ui'
+import { AtFloatLayout, AtList, AtListItem } from 'taro-ui'
 
+import CustomButton from '../../../../components/CustomButton'
 import { updateScheduleData, updateBizData } from '../../../../actions/allSchedule'
 import './index.less'
 
@@ -110,16 +111,16 @@ export default (props) => {
             const { title, extraText, range, onChange } = selectData
             return (
               <View className='selectFloatLayout-content-item' key={title} >
-              <Picker mode='selector' range={range} onChange={onChange}>
-                <AtList className='selectFloatLayout-content-item' hasBorder={false}>
-                  <AtListItem
-                    title={title}
-                    extraText={extraText}
-                    hasBorder={false}
-                  />
-                </AtList>
-              </Picker>
-            </View>
+                <Picker mode='selector' range={range} onChange={onChange}>
+                  <AtList className='selectFloatLayout-content-item' hasBorder={false}>
+                    <AtListItem
+                      title={title}
+                      extraText={extraText}
+                      hasBorder={false}
+                    />
+                  </AtList>
+                </Picker>
+              </View>
             )
           })
         }
@@ -127,9 +128,10 @@ export default (props) => {
       </View>
 
       <View className='selectFloatLayout-footer'>
-        <AtButton className='selectFloatLayout-footer-btn' onClick={handleQuery} >
-          查询
-        </AtButton>
+        <CustomButton
+          value='查询'
+          onSubmit={handleQuery}
+        />
       </View>
     </AtFloatLayout>
   )

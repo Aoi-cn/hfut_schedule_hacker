@@ -12,7 +12,7 @@ page {
   &-header {
     display: flex;
     flex-direction: column;
-    padding-top: 240px;
+    padding-top: 14vh;
     margin-bottom: 120px;
 
     &-title {
@@ -36,6 +36,7 @@ page {
     flex-direction: column;
     transition: all 300ms ease-out;
     // margin-top: 180px;
+    width: 100%;
 
     &-item {
       display: flex;
@@ -44,8 +45,9 @@ page {
       // border-bottom: 1px solid @color-line;
       color: #eee;
       background: @color-background;
-      border-radius: 50px;
+      border-radius: 20px;
       height: 100px;
+      width: 100%;
       align-items: center;
       justify-content: space-between;
 
@@ -63,6 +65,28 @@ page {
       &-icon {
         margin-right: 36px;
       }
+
+      &-select {
+        width: 540px;
+        background-color: @color-background;
+        border-radius: 20px;
+        padding: 0 25px;
+        padding-right: 0;
+        // color: @color-grey;
+        color: red;
+  
+        &-value {
+          border-bottom: 0!important;
+        }
+      }
+    }
+
+    &-pwdHelp {
+      width: 100%;
+      // background-color: red;
+      text-align: right;
+      font-size: 28px;
+      color: @color-brand;
     }
   }
 

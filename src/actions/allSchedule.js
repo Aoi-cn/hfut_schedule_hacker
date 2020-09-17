@@ -82,10 +82,28 @@ export const enter = () => async (dispatch) => {
 
 // 开始执行diff
 export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
-  Taro.showLoading({ 
+  // 先判断是不是第一次点击，是的话就显示help
+  const config = Taro.getStorageSync('config')
+  if (config.showDiffHelp) {
+    Taro.showModal({
+      title: '提示',
+      content: `这是将另一张课表与自己的进行对比：绿色代表两方都没课；红色代表两方都有课；黄色代表只有自己有课；蓝色代表只有对方有课。`,
+      showCancel: false,
+      confirmText: '我知道了',
+    })
+    Taro.setStorage({
+      key: 'config',
+      data: {
+        ...config,
+        showDiffHelp: false,
+      }
+    })
+  }
+  
+  Taro.showLoading({
     title: '正在对比...',
     mask: true,
-   })
+  })
   await dispatch(updateUiData({ diff: true }))
   const { scheduleMatrix: mineScheduleM } = Taro.getStorageSync('me')
   const diffScheduleM = scheduleDiffTool(targetScheduleM, mineScheduleM)
@@ -94,10 +112,10 @@ export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
 }
 
 export const cancelDiff = ({ backupScheduleM }) => async (dispatch) => {
-  Taro.showLoading({ 
+  Taro.showLoading({
     title: '正在关闭...',
     mask: true,
-   })
+  })
   await dispatch(updateUiData({ diff: false }))
   await dispatch(updateBizData({ scheduleMatrix: _.cloneDeep(backupScheduleM) }))
   Taro.hideLoading()

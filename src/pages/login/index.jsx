@@ -1,19 +1,24 @@
 import React from 'react'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { connect } from 'react-redux'
-import { View, Text, Input } from '@tarojs/components'
-import { AtMessage } from 'taro-ui'
+import { View, Text, Input, Picker } from '@tarojs/components'
+import { AtMessage, AtList, AtListItem } from 'taro-ui'
 
 import IconFont from '../../components/iconfont'
 import * as actions from '../../actions/login'
-import CustomButton from '../../components/CustomButtom'
 import StandardFloatLayout from '../../components/StandardFloatLayout'
+import CustomButton from '../../components/CustomButton'
 import './index.less'
 
 function Login(props) {
   const { bizData, uiData } = props
-  const { username, password, userType } = bizData
-  const { isLoginDisabled, showPwd, showLoginHelp } = uiData
+  const { username, password, userType, campus, campusZh } = bizData
+  const { isLoginDisabled, showPwd, showLoginHelp, showPwdHelp } = uiData
+
+  const campusRange = [
+    { campusZh: '合肥校区', campus: 1 },
+    { campusZh: '宣城校区', campus: 2 },
+  ]
 
   useDidShow(() => {
     Taro.hideHomeButton()
@@ -28,11 +33,15 @@ function Login(props) {
       })
       return null
     }
-    props.login({ username, password, userType })
+    props.login({ username, password, userType, campus })
   }
 
   const handleBackClick = () => {
     props.back()
+  }
+
+  const handleCampusChange = (e) => {
+    props.updateBizData(campusRange[e.detail.value])
   }
 
   return (
@@ -55,6 +64,19 @@ function Login(props) {
       </View>
 
       <View className='login-content'>
+
+        <View className='login-content-item'>
+          <Picker mode='selector' range={campusRange} value={campus - 1} rangeKey='campusZh' onChange={handleCampusChange}>
+            <AtList className='login-content-item-select' hasBorder={false}>
+              <AtListItem
+                title='选择校区'
+                extraText={campusZh}
+                hasBorder={false}
+              />
+            </AtList>
+          </Picker>
+        </View>
+
         <View className='login-content-item'>
           <Input
             className='login-content-item-input'
@@ -91,6 +113,10 @@ function Login(props) {
 
         </View>
 
+        <View className='login-content-pwdHelp' onClick={() => props.updateUiData({ showPwdHelp: true })}>
+          忘记密码
+        </View>
+
         <CustomButton
           value='登录'
           type='call'
@@ -112,11 +138,12 @@ function Login(props) {
         onClose={() => props.updateUiData({ showLoginHelp: false })}
         title='合工大课程表无敌版'
         content={`在学校封网时也可以看课表，造福工大学子。\n 另有查看全校课表、自定义课程颜色、情侣课表等特色功能~`}
-        // buttons={[{
-        //   value: '知道了',
-        //   color: 'blue',
-        //   onClick: () => props.updateUiData({ showLoginHelp: false })
-        // }]}
+      />
+      <StandardFloatLayout
+        isOpened={showPwdHelp}
+        onClose={() => props.updateUiData({ showPwdHelp: false })}
+        title='忘记密码'
+        content='这是你的教务系统密码，默认为身份证后六位。如果你自己修改了密码且忘记了该密码，请前往PC端教务（信息门户-本科教务）修改新密码。'
       />
     </View>
   )
