@@ -7,7 +7,7 @@ const DEFAULT_STYLE = {
   display: 'block',
 };
 
-const IconInfoCircleFill = ({ size, color, style: _style, ...rest }) => {
+const IconinfoCircleFill = ({ size, color, style: _style, ...rest }) => {
   const style = _style ? { ...DEFAULT_STYLE, ..._style } : DEFAULT_STYLE;
 
   return (
@@ -20,8 +20,8 @@ const IconInfoCircleFill = ({ size, color, style: _style, ...rest }) => {
   );
 };
 
-IconInfoCircleFill.defaultProps = {
+IconinfoCircleFill.defaultProps = {
   size: 18,
 };
 
-export default IconInfoCircleFill;
+export default IconinfoCircleFill;

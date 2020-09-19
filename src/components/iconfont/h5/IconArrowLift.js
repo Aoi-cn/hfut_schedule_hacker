@@ -7,7 +7,7 @@ const DEFAULT_STYLE = {
   display: 'block',
 };
 
-const IconArrowLift = ({ size, color, style: _style, ...rest }) => {
+const IconarrowLift = ({ size, color, style: _style, ...rest }) => {
   const style = _style ? { ...DEFAULT_STYLE, ..._style } : DEFAULT_STYLE;
 
   return (
@@ -20,8 +20,8 @@ const IconArrowLift = ({ size, color, style: _style, ...rest }) => {
   );
 };
 
-IconArrowLift.defaultProps = {
+IconarrowLift.defaultProps = {
   size: 18,
 };
 
-export default IconArrowLift;
+export default IconarrowLift;

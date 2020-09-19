@@ -4,7 +4,7 @@ import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 import { getIconColor } from './helper';
 
-const IconEye = ({ size, color, ...rest }) => {
+const Iconeye = ({ size, color, ...rest }) => {
   return (
     <Svg viewBox="0 0 1024 1024" width={size} height={size} {...rest}>
       <Path
@@ -19,8 +19,8 @@ const IconEye = ({ size, color, ...rest }) => {
   );
 };
 
-IconEye.defaultProps = {
+Iconeye.defaultProps = {
   size: 18,
 };
 
-export default IconEye;
+export default Iconeye;

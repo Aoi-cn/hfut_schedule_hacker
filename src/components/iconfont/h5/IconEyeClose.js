@@ -7,7 +7,7 @@ const DEFAULT_STYLE = {
   display: 'block',
 };
 
-const IconEyeClose = ({ size, color, style: _style, ...rest }) => {
+const IconeyeClose = ({ size, color, style: _style, ...rest }) => {
   const style = _style ? { ...DEFAULT_STYLE, ..._style } : DEFAULT_STYLE;
 
   return (
@@ -24,8 +24,8 @@ const IconEyeClose = ({ size, color, style: _style, ...rest }) => {
   );
 };
 
-IconEyeClose.defaultProps = {
+IconeyeClose.defaultProps = {
   size: 18,
 };
 
-export default IconEyeClose;
+export default IconeyeClose;

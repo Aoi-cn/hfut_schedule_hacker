@@ -4,7 +4,7 @@ import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 import { getIconColor } from './helper';
 
-const IconSwap = ({ size, color, ...rest }) => {
+const Iconswap = ({ size, color, ...rest }) => {
   return (
     <Svg viewBox="0 0 1024 1024" width={size} height={size} {...rest}>
       <Path
@@ -15,8 +15,8 @@ const IconSwap = ({ size, color, ...rest }) => {
   );
 };
 
-IconSwap.defaultProps = {
+Iconswap.defaultProps = {
   size: 18,
 };
 
-export default IconSwap;
+export default Iconswap;

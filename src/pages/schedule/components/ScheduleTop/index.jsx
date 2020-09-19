@@ -125,7 +125,7 @@ export default (props) => {
         <View className='scheduleTop-title'>
           {`第${weekIndex + 1}周 ` + (currentWeekIndex === weekIndex ? `（当前${daysZh[moment().day()]}）` : `（当前第${currentWeekIndex + 1}周）`)}
           <View className='scheduleTop-title-icon'>
-            <IconFont name='icon-test' size={46} color='#ffffff' />
+            <IconFont name='arrow-down' size={46} color='#ffffff' />
           </View>
         </View>
       </Picker>

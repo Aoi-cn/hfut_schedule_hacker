@@ -2,10 +2,11 @@ import { useGlobalIconFont } from './components/iconfont/helper';
 
 export default {
   pages: [
-    
+    'pages/gift/index',
     'pages/schedule/index',
     'pages/login/index',
     'pages/allSchedule/index',
+    
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -29,6 +30,11 @@ export default {
       text: '全校课表',
       iconPath: 'assets/all.png',
       selectedIconPath: 'assets/all_active.png',
+    }, {
+      pagePath: 'pages/gift/index',
+      text: '活水计划',
+      iconPath: 'assets/gift.png',
+      selectedIconPath: 'assets/gift_active.png',
     }]
   },
   usingComponents: useGlobalIconFont(),

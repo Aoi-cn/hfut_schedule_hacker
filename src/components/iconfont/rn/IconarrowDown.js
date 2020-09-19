@@ -4,19 +4,19 @@ import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 import { getIconColor } from './helper';
 
-const IconarrowRight = ({ size, color, ...rest }) => {
+const IconarrowDown = ({ size, color, ...rest }) => {
   return (
     <Svg viewBox="0 0 1024 1024" width={size} height={size} {...rest}>
       <Path
-        d="M593.450667 512.128L360.064 278.613333l45.290667-45.226666 278.613333 278.762666L405.333333 790.613333l-45.226666-45.269333z"
+        d="M500.8 604.779L267.307 371.392l-45.227 45.27 278.741 278.613L779.307 416.66l-45.248-45.248z"
         fill={getIconColor(color, 0, '#333333')}
       />
     </Svg>
   );
 };
 
-IconarrowRight.defaultProps = {
+IconarrowDown.defaultProps = {
   size: 18,
 };
 
-export default IconarrowRight;
+export default IconarrowDown;

@@ -7,7 +7,7 @@ const DEFAULT_STYLE = {
   display: 'block',
 };
 
-const IconSearch = ({ size, color, style: _style, ...rest }) => {
+const Iconsearch = ({ size, color, style: _style, ...rest }) => {
   const style = _style ? { ...DEFAULT_STYLE, ..._style } : DEFAULT_STYLE;
 
   return (
@@ -20,8 +20,8 @@ const IconSearch = ({ size, color, style: _style, ...rest }) => {
   );
 };
 
-IconSearch.defaultProps = {
+Iconsearch.defaultProps = {
   size: 18,
 };
 
-export default IconSearch;
+export default Iconsearch;

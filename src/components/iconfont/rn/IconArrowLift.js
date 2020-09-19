@@ -4,7 +4,7 @@ import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 import { getIconColor } from './helper';
 
-const IconArrowLift = ({ size, color, ...rest }) => {
+const IconarrowLift = ({ size, color, ...rest }) => {
   return (
     <Svg viewBox="0 0 1024 1024" width={size} height={size} {...rest}>
       <Path
@@ -15,8 +15,8 @@ const IconArrowLift = ({ size, color, ...rest }) => {
   );
 };
 
-IconArrowLift.defaultProps = {
+IconarrowLift.defaultProps = {
   size: 18,
 };
 
-export default IconArrowLift;
+export default IconarrowLift;

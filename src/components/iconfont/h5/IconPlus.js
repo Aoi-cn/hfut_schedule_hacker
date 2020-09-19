@@ -7,7 +7,7 @@ const DEFAULT_STYLE = {
   display: 'block',
 };
 
-const IconPlus = ({ size, color, style: _style, ...rest }) => {
+const Iconplus = ({ size, color, style: _style, ...rest }) => {
   const style = _style ? { ...DEFAULT_STYLE, ..._style } : DEFAULT_STYLE;
 
   return (
@@ -24,8 +24,8 @@ const IconPlus = ({ size, color, style: _style, ...rest }) => {
   );
 };
 
-IconPlus.defaultProps = {
+Iconplus.defaultProps = {
   size: 18,
 };
 
-export default IconPlus;
+export default Iconplus;

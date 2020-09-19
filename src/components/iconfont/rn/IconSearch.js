@@ -4,7 +4,7 @@ import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 import { getIconColor } from './helper';
 
-const IconSearch = ({ size, color, ...rest }) => {
+const Iconsearch = ({ size, color, ...rest }) => {
   return (
     <Svg viewBox="0 0 1024 1024" width={size} height={size} {...rest}>
       <Path
@@ -15,8 +15,8 @@ const IconSearch = ({ size, color, ...rest }) => {
   );
 };
 
-IconSearch.defaultProps = {
+Iconsearch.defaultProps = {
   size: 18,
 };
 
-export default IconSearch;
+export default Iconsearch;

@@ -4,7 +4,7 @@ import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 import { getIconColor } from './helper';
 
-const IconFileText = ({ size, color, ...rest }) => {
+const IconfileText = ({ size, color, ...rest }) => {
   return (
     <Svg viewBox="0 0 1024 1024" width={size} height={size} {...rest}>
       <Path
@@ -19,8 +19,8 @@ const IconFileText = ({ size, color, ...rest }) => {
   );
 };
 
-IconFileText.defaultProps = {
+IconfileText.defaultProps = {
   size: 18,
 };
 
-export default IconFileText;
+export default IconfileText;

@@ -4,7 +4,7 @@ import React from 'react';
 import { Svg, Path } from 'react-native-svg';
 import { getIconColor } from './helper';
 
-const IconInfoCircleFill = ({ size, color, ...rest }) => {
+const IconinfoCircleFill = ({ size, color, ...rest }) => {
   return (
     <Svg viewBox="0 0 1024 1024" width={size} height={size} {...rest}>
       <Path
@@ -15,8 +15,8 @@ const IconInfoCircleFill = ({ size, color, ...rest }) => {
   );
 };
 
-IconInfoCircleFill.defaultProps = {
+IconinfoCircleFill.defaultProps = {
   size: 18,
 };
 
-export default IconInfoCircleFill;
+export default IconinfoCircleFill;

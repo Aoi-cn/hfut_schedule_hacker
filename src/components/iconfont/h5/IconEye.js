@@ -7,7 +7,7 @@ const DEFAULT_STYLE = {
   display: 'block',
 };
 
-const IconEye = ({ size, color, style: _style, ...rest }) => {
+const Iconeye = ({ size, color, style: _style, ...rest }) => {
   const style = _style ? { ...DEFAULT_STYLE, ..._style } : DEFAULT_STYLE;
 
   return (
@@ -24,8 +24,8 @@ const IconEye = ({ size, color, style: _style, ...rest }) => {
   );
 };
 
-IconEye.defaultProps = {
+Iconeye.defaultProps = {
   size: 18,
 };
 
-export default IconEye;
+export default Iconeye;

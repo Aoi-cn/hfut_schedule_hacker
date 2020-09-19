@@ -7,7 +7,7 @@ const DEFAULT_STYLE = {
   display: 'block',
 };
 
-const IconSwap = ({ size, color, style: _style, ...rest }) => {
+const Iconswap = ({ size, color, style: _style, ...rest }) => {
   const style = _style ? { ...DEFAULT_STYLE, ..._style } : DEFAULT_STYLE;
 
   return (
@@ -20,8 +20,8 @@ const IconSwap = ({ size, color, style: _style, ...rest }) => {
   );
 };
 
-IconSwap.defaultProps = {
+Iconswap.defaultProps = {
   size: 18,
 };
 
-export default IconSwap;
+export default Iconswap;

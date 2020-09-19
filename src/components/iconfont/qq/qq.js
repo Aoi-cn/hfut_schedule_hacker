@@ -1,6 +1,6 @@
 Component({
   properties: {
-    // search | aixin-filled | aixin | icon-test | icon_selected_fill | tongzhi-shixiang | tongzhi-kebiao | tongzhi-chengji | tongzhi-xitong | 2 | 3 | 1 | jishu | sheji | shipin | yunying | bangongshi | tuiguang | chankai | chanpin | wode_bangzhu | arrow-lift | seleted | wode_shezhi | wode_guanyu | wode_xiaoxi | cloud | cooperate | task | bug1 | addteam | solution | file-text | taolunqu | weixin | like | unlike | info-circle-fill | arrow-right | mine-fill | home | mine | score | schedule | score-fill | home-fill | schedule-fill | login | eye-close | share | sync | eye | calculator | download | swap | plus
+    // caidan | mingxinghuodong | wenjuan | login | aixin | aixin-filled | sync | eye | file-text | swap | info-circle-fill | plus | eye-close | search | arrow-right | arrow-lift | arrow-down | personal | calendar | gift
     name: {
       type: String,
     },
