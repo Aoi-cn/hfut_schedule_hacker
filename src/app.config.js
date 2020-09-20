@@ -2,10 +2,10 @@ import { useGlobalIconFont } from './components/iconfont/helper';
 
 export default {
   pages: [
-    'pages/gift/index',
     'pages/schedule/index',
     'pages/login/index',
     'pages/allSchedule/index',
+    'pages/gift/index',
     
   ],
   window: {

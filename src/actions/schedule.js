@@ -1,4 +1,5 @@
 import Taro from '@tarojs/taro'
+import _ from 'lodash'
 import {
   UPDATE_BIZDATA,
   UPDATE_UIDATA,
@@ -11,65 +12,9 @@ import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 import scheduleDiffTool from '../utils/scheduleDiffTool'
 import { version, updateState, updateInfo } from '../config/config.default'
 
-// 登录成功、手动更新数据
-export const updateScheduleData = ({ userType }) => async (dispatch) => {
-  Taro.showLoading({
-    title: '正在加载...',
-    mask: true,
-  })
-
-  // 确保diff按钮是关闭的
-  dispatch(updateUiData({ diff: false }))
-
-  // 生成一个时间线数据矩阵，先渲染时间线
-  const { dayLineMatrix } = makeDayLineMatrix()
-  dispatch(updateBizData({ dayLineMatrix: dayLineMatrix }))
-
-  // 进行课表更新逻辑
-  const userData = Taro.getStorageSync(userType)
-  if (!userData) {
-    console.log('用户数据不存在：' + userType)
-    return null
-  }
-  const { userInfo } = userData
-  const { key, campus } = userInfo
-  const res = await GET('/schedule', { key, campus, semesterId: 114 })
-  // 课表请求出错。执行key过期之后的逻辑
-  if (!res.body.currentWeek) {
-    return dispatch(reLogin({ userType }))
-  }
-  // 获取当前的weekIndex(currentWeekIndex)并本地存储
-  const currentWeekIndex = res.body.currentWeek - 1
-  Taro.setStorage({
-    key: 'currentWeekIndex',
-    data: currentWeekIndex
-  })
-  // 获取课表数据
-  const scheduleData = res.body.lessons
-  const lessonIds = res.body.lessonIds
-  // 转化为UI可识别的matrix
-  const scheduleMatrix = dataToMatrix(scheduleData, lessonIds)
-
-  // 将数据存在本地
-  await Taro.setStorage({
-    key: userType,
-    data: {
-      userInfo,
-      scheduleData,
-      scheduleMatrix,
-      lessonIds
-    }
-  })
-  dispatch(updateBizData({ scheduleMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
-  Taro.hideLoading()
-  Taro.showToast({
-    title: '课表更新成功',
-    icon: 'none',
-    duration: 2000
-  })
-}
-
 // 刚进入小程序时，判断是否有本地缓存，有的话就不用登录
+// enterState = 0或unfinded => 刚进入小程序
+// enterState = 1 => 切换情侣课表
 export const enter = ({ userType }) => async (dispatch) => {
 
   // 确保diff按钮是关闭的
@@ -98,7 +43,6 @@ export const enter = ({ userType }) => async (dispatch) => {
         console.log('本地版本：' + localVersion)
         console.log('执行操作状态：' + updateState)
         // 先判断是不是第一次进入，是的话就显示help
-        const config = Taro.getStorageSync('config')
         await dispatch(handleAutoUpdate(config))
         Taro.showModal({
           title: `v${version} 更新内容`,
@@ -108,8 +52,18 @@ export const enter = ({ userType }) => async (dispatch) => {
         })
         return null
       }
+
+      // 版本正常，且本地缓存正常
+      // if (enterState === 1) {
+      //   console.log('没问题')
+      //   dispatch(updateBizData({ scheduleMatrix }))
+      // } else {
+      //   const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
+      //   dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
+      // }
       const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
       dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
+
     })
     .catch((e) => {
       // 本地缓存获取失败，重新登录
@@ -117,6 +71,108 @@ export const enter = ({ userType }) => async (dispatch) => {
       Taro.redirectTo({ url: '/pages/login/index' })
     })
 }
+
+
+// 更新数据
+export const updateScheduleData = ({ userType }) => async (dispatch) => {
+  Taro.showLoading({
+    title: '正在加载...',
+    mask: true,
+  })
+
+  // 确保diff按钮是关闭的
+  dispatch(updateUiData({ diff: false }))
+
+  // 生成一个时间线数据矩阵，先渲染时间线
+  const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()
+  dispatch(updateBizData({ dayLineMatrix: dayLineMatrix }))
+
+  // 进行课表更新逻辑
+  const userData = Taro.getStorageSync(userType)
+  if (!userData) {
+    console.log('用户数据不存在：' + userType)
+    return null
+  }
+  const { userInfo } = userData
+  const { key, campus } = userInfo
+  const res = await GET('/schedule', { key, campus, semesterId: 114 })
+  // 课表请求出错。执行key过期之后的逻辑
+  if (!res.body.currentWeek) {
+    return dispatch(reLogin({ userType }))
+  }
+  // 获取课表数据
+  const scheduleData = res.body.lessons
+  const lessonIds = res.body.lessonIds
+  // 转化为UI可识别的matrix
+  let scheduleMatrix = dataToMatrix(scheduleData, lessonIds)
+  // 颜色持久化
+  scheduleMatrix = drawColor({ userType, scheduleMatrix })
+
+  // 判断本地缓存有没有数据
+  const { scheduleMatrix: localScheduleMatrix } = Taro.getStorageSync(userType)
+  if (localScheduleMatrix.length === 0) {
+    dispatch(updateBizData({ scheduleMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
+  } else {
+    dispatch(updateBizData({ scheduleMatrix }))
+  }
+
+  // 将数据存在本地
+  Taro.setStorage({
+    key: userType,
+    data: {
+      userInfo,
+      scheduleData,
+      scheduleMatrix,
+      lessonIds
+    }
+  })
+  Taro.hideLoading()
+  Taro.showToast({
+    title: '课表更新成功',
+    icon: 'none',
+    duration: 2000
+  })
+}
+
+const drawColor = ({ userType, scheduleMatrix }) => {
+  const newScheduleMatrix = _.cloneDeep(scheduleMatrix)
+  const { scheduleMatrix: localScheduleMatrix } = Taro.getStorageSync(userType)
+
+  if (localScheduleMatrix.length === 0) {
+    return scheduleMatrix
+  }
+
+  // 先生成一个本地颜色库
+  const localColorLibrary = {}
+  localScheduleMatrix.map((weekData) => {
+    weekData.map((dayData) => {
+      dayData.map((courseBoxList) => {
+        courseBoxList.map((courseBoxData) => {
+          const { lessonId, color } = courseBoxData
+          if (lessonId && color) {
+            localColorLibrary[lessonId] = color
+          }
+        })
+      })
+    })
+  })
+
+  newScheduleMatrix.map((weekData) => {
+    weekData.map((dayData) => {
+      dayData.map((courseBoxList) => {
+        courseBoxList.map((courseBoxData) => {
+          const { lessonId } = courseBoxData
+          if (lessonId) {
+            courseBoxData.color = localColorLibrary[lessonId]
+          }
+        })
+      })
+    })
+  })
+
+  return newScheduleMatrix
+}
+
 
 // 检测到版本更新后的自动数据更新
 export const handleAutoUpdate = (config, force) => async (dispatch) => {
@@ -260,7 +316,7 @@ export const changeUserType = ({ userType }) => async (dispatch) => {
     password: '',
     userType: newUserType,
   }))
-  dispatch(enter({ userType: newUserType }))
+  // dispatch(enter({ userType: newUserType, enterState: 1 }))
   Taro.showToast({
     title: '切换成功',
     icon: 'none',

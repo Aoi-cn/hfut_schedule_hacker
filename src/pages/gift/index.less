@@ -1,8 +1,31 @@
 @import "../../style/theme.less";
 
 .gift {
-  padding: 48px 0;
-  padding-bottom: 96px;
+  padding-top: 24px;
+  padding-bottom: 72px;
+
+  &-header {
+    width: 100%;
+    background-color: @color-background;
+    border-radius: 120px;
+    padding: 24px 0;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 4px #e8e8e8;
+
+    &_title {
+      font-size: 40px;
+      font-weight: 700;
+      text-align: center;
+      color: @color-brand;
+    }
+
+    &_comment {
+      margin-top: 20px;
+      padding: 0 48px;
+      color: @color-semi;
+      text-align: center;
+    }
+  }
 
   &-item {
     &-title {

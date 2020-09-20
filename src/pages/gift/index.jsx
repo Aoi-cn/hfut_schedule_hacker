@@ -74,6 +74,13 @@ function Gift() {
   return (
     <View className='gift'>
 
+      <View className='gift-header'>
+        <View className='gift-header_title'>活水计划</View>
+        <View className='gift-header_comment'>各位同学可以在这里发挥你们的想象力，参与到小程序炫酷功能的创作中来！</View>
+      </View>
+
+      {/* <View className='gift-line'></View> */}
+
       <View className='gift-item'>
         <View className='gift-item-title'>
           <IconFont name='caidan' size={48} color='#0089ff' />
@@ -85,7 +92,8 @@ function Gift() {
           <View className='gift-item-content-list'>3. 校园卡流水查询</View>
           <View className='gift-item-content-list'>4. 图书馆个人借阅信息查询</View>
           <View className='gift-item-content-list'>5. 支持宣区的“全校课表”</View>
-          <View className='gift-item-content-list'>还可能有其他惊喜功能~</View>
+          <View className='gift-item-content-list'>6. 也许会支持查看成绩</View>
+          <View className='gift-item-content-list'>未完待续~</View>
         </View>
       </View>
 
