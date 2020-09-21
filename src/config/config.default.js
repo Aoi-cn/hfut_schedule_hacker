@@ -1,10 +1,9 @@
 
-export const version = '2.2.0'
+export const version = '2.3.0'
 
-// 0：不需要更新数据
-// 1：需要更新数据
-// 2：需要重新登陆
-export const updateState = 1
+// 0：无需进行操作
+// 1：需要重新登陆
+export const updateState = 0
 
 export const defaultConfig = {
   showDiffHelp: true,

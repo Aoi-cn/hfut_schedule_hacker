@@ -5,11 +5,11 @@ import {
   LOGOUT,
 } from '../constants/login'
 import { GET } from '../utils/request'
-import { updateScheduleData, enter, logout as scheduleLogout } from './schedule'
+import { enter, logout as scheduleLogout } from './schedule'
 import { logout as allScheduleLogout } from './allSchedule'
 import { version, defaultConfig } from '../config/config.default'
 
-export const login = ({ username, password, userType, campus }) => async (dispatch) => {
+export const login = ({ username, password, userType, campus }) => async () => {
   Taro.showLoading({
     title: '正在加载...',
     mask: true,
@@ -57,8 +57,8 @@ export const login = ({ username, password, userType, campus }) => async (dispat
 
   await Taro.switchTab({ url: '/pages/schedule/index' })
 
-  // 更新课表数据
-  dispatch(updateScheduleData({ userType }))
+  // // 更新课表数据
+  // dispatch(updateScheduleData({ userType }))
   return null
 }
 

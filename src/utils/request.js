@@ -21,9 +21,10 @@ const baseOptions = ({ url, data, method }) => Taro.request({
   Taro.hideLoading()
   Taro.showToast({
     title: '网络连接出错！',
-    icon: 'fail',
-    duration: 3000
+    icon: 'none',
+    duration: 1000
   })
+  return null
 })
 
 export const GET = (url, data = '') => baseOptions({

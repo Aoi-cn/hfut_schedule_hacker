@@ -10,47 +10,20 @@ import dataToMatrix from '../utils/scheduleDataTranslator'
 import * as loginActions from './login'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 import scheduleDiffTool from '../utils/scheduleDiffTool'
-import { version, updateState, updateInfo } from '../config/config.default'
+import { version, updateState, updateInfo, defaultConfig } from '../config/config.default'
 
 // 刚进入小程序时，判断是否有本地缓存，有的话就不用登录
 // enterState = 0或unfinded => 刚进入小程序
 // enterState = 1 => 切换情侣课表
 export const enter = ({ userType }) => async (dispatch) => {
 
-  // 确保diff按钮是关闭的
-  dispatch(updateUiData({ diff: false }))
-
   Taro.getStorage({ key: userType })
     .then(async (userData) => {
       const { scheduleMatrix } = userData.data  // 读取本地的课表数据
-      // 到这里还没有被catch，说明本地有可用的缓存。接下来判断版本更新：
-      const config = Taro.getStorageSync('config')
-      // 本地config都没有，说明是2.1.1或之前版本
-      if (!config) {
-        await dispatch(handleAutoUpdate(config, true))
-        Taro.showModal({
-          title: `v${version} 更新内容`,
-          content: updateInfo,
-          showCancel: false,
-          confirmText: '我知道了',
-        })
-        return null
-      }
-      // 2.1.1之后的版本
-      const { version: localVersion } = config
-      if (localVersion !== version && updateState !== 0) {
-        console.log('线上版本：' + version)
-        console.log('本地版本：' + localVersion)
-        console.log('执行操作状态：' + updateState)
-        // 先判断是不是第一次进入，是的话就显示help
-        await dispatch(handleAutoUpdate(config))
-        Taro.showModal({
-          title: `v${version} 更新内容`,
-          content: updateInfo,
-          showCancel: false,
-          confirmText: '我知道了',
-        })
-        return null
+      // 判断版本更新：
+      const isUpdateOk = await dispatch(handleCheckUpdate())
+      if (!isUpdateOk && updateState === 1) {
+        return {}
       }
 
       // 版本正常，且本地缓存正常
@@ -63,7 +36,10 @@ export const enter = ({ userType }) => async (dispatch) => {
       // }
       const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
       dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
-
+      // 每次进入的自动更新
+      dispatch(updateScheduleData({ userType }))
+      // 确保diff按钮是关闭的
+      dispatch(updateUiData({ diff: false }))
     })
     .catch((e) => {
       // 本地缓存获取失败，重新登录
@@ -72,13 +48,59 @@ export const enter = ({ userType }) => async (dispatch) => {
     })
 }
 
+// 检测到版本更新后的自动数据更新
+const handleCheckUpdate = () => async (dispatch) => {
+  const config = Taro.getStorageSync('config')
+  const { version: localVersion } = config
+  if (localVersion !== version) {
+    console.log('线上版本：' + version)
+    console.log('本地版本：' + localVersion)
+    console.log('执行操作状态：' + updateState)
+  }
+  if (localVersion !== version && updateState === 0) {
+    // 先判断是不是第一次进入，是的话就显示help
+    Taro.showModal({
+      title: `v${version} 更新内容`,
+      content: updateInfo,
+      showCancel: false,
+      confirmText: '我知道了',
+    })
+    Taro.setStorage({
+      key: 'config',
+      data: {
+        ...defaultConfig,
+        ...config,
+        version,
+      }
+    })
+    return false
+  } else if (localVersion !== version && updateState === 1) {
+    Taro.showToast({
+      title: '检测到重大版本更新，请重新登陆一下~',
+      icon: "none",
+      duration: 2500,
+    })
+    Taro.setStorage({
+      key: 'config',
+      data: {
+        ...defaultConfig,
+        ...config,
+        version,
+      }
+    })
+    setTimeout(() => {
+      dispatch(loginActions.logout())
+    }, 1000);
+    return false
+  }
+  return true
+}
+
 
 // 更新数据
 export const updateScheduleData = ({ userType }) => async (dispatch) => {
-  Taro.showLoading({
-    title: '正在加载...',
-    mask: true,
-  })
+  Taro.showNavigationBarLoading()
+  Taro.setNavigationBarTitle({ title: '正在更新...' })
 
   // 确保diff按钮是关闭的
   dispatch(updateUiData({ diff: false }))
@@ -96,6 +118,10 @@ export const updateScheduleData = ({ userType }) => async (dispatch) => {
   const { userInfo } = userData
   const { key, campus } = userInfo
   const res = await GET('/schedule', { key, campus, semesterId: 114 })
+  if (!res) {  // 请求失败
+    Taro.hideNavigationBarLoading()
+    Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
+  }
   // 课表请求出错。执行key过期之后的逻辑
   if (!res.body.currentWeek) {
     return dispatch(reLogin({ userType }))
@@ -126,12 +152,8 @@ export const updateScheduleData = ({ userType }) => async (dispatch) => {
       lessonIds
     }
   })
-  Taro.hideLoading()
-  Taro.showToast({
-    title: '课表更新成功',
-    icon: 'none',
-    duration: 2000
-  })
+  Taro.hideNavigationBarLoading()
+  Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
 }
 
 const drawColor = ({ userType, scheduleMatrix }) => {
@@ -174,45 +196,10 @@ const drawColor = ({ userType, scheduleMatrix }) => {
 }
 
 
-// 检测到版本更新后的自动数据更新
-export const handleAutoUpdate = (config, force) => async (dispatch) => {
-  if (updateState === 1 || force) {
-    // state=1 需更新数据
-    await dispatch(updateScheduleData({ userType: 'her' }))
-    dispatch(updateScheduleData({ userType: 'me' }))
-    if (!config) {
-      Taro.setStorage({
-        key: 'config',
-        data: {
-          version,
-          showDiffHelp: true,
-          showAllSHelp: true,
-        },
-      })
-    } else {
-      Taro.setStorage({
-        key: 'config',
-        data: {
-          ...config,
-          version,
-        },
-      })
-    }
-  } else {
-    // state=2 退出登录
-    dispatch(loginActions.logout())
-    Taro.showToast({
-      title: '检测到重大版本更新，请重新登陆一下~',
-      icon: "none",
-      duration: 2500,
-    })
-  }
-}
-
 // key失效，自动登录更新key
 export const reLogin = ({ userType }) => async (dispatch) => {
-  const userData = await Taro.getStorage({ key: userType })
-  const { userInfo } = userData.data
+  const localUserData = Taro.getStorageSync(userType)
+  const { userInfo } = localUserData
   const { username, password } = userInfo
   const res = await GET('/login', { username, password })
   const { success, msg, key } = res
@@ -220,14 +207,12 @@ export const reLogin = ({ userType }) => async (dispatch) => {
     await Taro.setStorage({
       key: userType,
       data: {
+        ...localUserData,
         userInfo: {
           username,
           password,
           key
         },
-        scheduleMatrix: [],
-        scheduleData: [],
-        lessonIds: [],
       }
     })
     dispatch(updateScheduleData({ userType }))
@@ -316,7 +301,6 @@ export const changeUserType = ({ userType }) => async (dispatch) => {
     password: '',
     userType: newUserType,
   }))
-  // dispatch(enter({ userType: newUserType, enterState: 1 }))
   Taro.showToast({
     title: '切换成功',
     icon: 'none',

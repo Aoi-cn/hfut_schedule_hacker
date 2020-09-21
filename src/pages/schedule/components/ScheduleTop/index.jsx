@@ -5,7 +5,7 @@ import { View, Picker } from '@tarojs/components'
 import moment from 'moment'
 
 import StandardFloatLayout from '../../../../components/StandardFloatLayout'
-import { updateScheduleData, refreshColor, changeUserType, updateUiData } from '../../../../actions/schedule'
+import { refreshColor, changeUserType, updateUiData } from '../../../../actions/schedule'
 import * as loginActions from '../../../../actions/login'
 import IconFont from '../../../../components/iconfont'
 import LittleMenu from '../../../../components/LittleMenu'
@@ -52,9 +52,9 @@ export default (props) => {
       onClick: () => dispatch(refreshColor({ userType })),
     },
     {
-      value: '更新数据',
+      value: '活水计划',
       icon: 'sync',
-      onClick: () => dispatch(updateScheduleData({ userType })),
+      onClick: () => Taro.navigateTo({ url: '/pages/gift/index' }),
     },
     {
       value: '用前必读',

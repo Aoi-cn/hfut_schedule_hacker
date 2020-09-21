@@ -7,6 +7,8 @@ const INITIAL_STATE = {
     currentDayIndex: 0,
     scheduleMatrix: [],
     dayLineMatrix: [],
+    meUpdate: false,
+    herUpdate: false,
   },
   uiData: {
     diff: false,
