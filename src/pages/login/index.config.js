@@ -1,4 +1,4 @@
 
 export default {
-  navigationBarTitleText: ''
+  navigationBarTitleText: '放假！解封！'
 }

@@ -153,7 +153,8 @@ export const updateScheduleData = ({ userType }) => async (dispatch) => {
     }
   })
   Taro.hideNavigationBarLoading()
-  Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
+  // Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
+  Taro.setNavigationBarTitle({ title: '放假！解封！' })
 }
 
 const drawColor = ({ userType, scheduleMatrix }) => {

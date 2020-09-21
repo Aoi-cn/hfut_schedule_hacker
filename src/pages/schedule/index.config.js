@@ -1,5 +1,5 @@
 export default {
-  navigationBarTitleText: '我的课表',
+  navigationBarTitleText: '放假！解封！',
   navigationBarTextStyle: 'white',
   navigationBarBackgroundColor: '#0089ff',
 }

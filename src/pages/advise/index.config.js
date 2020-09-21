@@ -1,5 +1,6 @@
+
 export default {
-  navigationBarTitleText: '放假！解封！',
+  navigationBarTitleText: '我要上书',
   navigationBarTextStyle: 'white',
   navigationBarBackgroundColor: '#0089ff',
 }

@@ -6,7 +6,7 @@ export default {
     'pages/login/index',
     'pages/allSchedule/index',
     'pages/gift/index',
-    
+    'pages/advise/index',
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -31,12 +31,12 @@ export default {
       iconPath: 'assets/all.png',
       selectedIconPath: 'assets/all_active.png',
     }, 
-    // {
-    //   pagePath: 'pages/gift/index',
-    //   text: '活水计划',
-    //   iconPath: 'assets/gift.png',
-    //   selectedIconPath: 'assets/gift_active.png',
-    // }
+    {
+      pagePath: 'pages/gift/index',
+      text: '活水计划',
+      iconPath: 'assets/gift.png',
+      selectedIconPath: 'assets/gift_active.png',
+    }
   ]
   },
   usingComponents: useGlobalIconFont(),

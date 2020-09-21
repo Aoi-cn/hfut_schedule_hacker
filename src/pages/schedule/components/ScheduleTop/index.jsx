@@ -53,8 +53,8 @@ export default (props) => {
     },
     {
       value: '活水计划',
-      icon: 'sync',
-      onClick: () => Taro.navigateTo({ url: '/pages/gift/index' }),
+      icon: 'mingxinghuodong',
+      onClick: () => Taro.switchTab({ url: '/pages/gift/index' }),
     },
     {
       value: '用前必读',

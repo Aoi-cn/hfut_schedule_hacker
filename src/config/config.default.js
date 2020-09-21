@@ -10,4 +10,4 @@ export const defaultConfig = {
   showAllSHelp: true,
 }
 
-export const updateInfo = `1.支持宣区；2.加入课表可视化对比`
+export const updateInfo = `1.每个页面标题改为“放假！解封！”！2.开启活水计划`
