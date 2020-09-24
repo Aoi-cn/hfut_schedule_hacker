@@ -1,0 +1,62 @@
+@import "../../../../style/theme.scss";
+
+.settingFloatLayout {
+  color: $color-semi;
+
+  &-header {
+    margin-top: 24px;
+    margin-bottom: 36px;
+    font-size: 36px;
+    font-weight: bold;
+    color: $color-semi;
+    text-align: center;
+  }
+
+  &-content {
+    padding: 0 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      width: 100%;
+      font-size: 34px;
+      color: $color-semi;
+      margin-bottom: 12px;
+
+      &:active {
+        background-color: $color-background;
+      }
+    }
+
+  }
+
+
+  &-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+
+    &-btnBox {
+      width: 100%;
+    }
+
+    &_blank {
+      width: 52px;
+    }
+  }
+
+  &-line {
+    height: 2px;
+    width: 654px;
+    background-color: #e8e8e8;
+    margin-bottom: 48px;
+    margin-top: 18px;
+  }
+
+}

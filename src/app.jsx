@@ -4,7 +4,7 @@ import 'taro-ui/dist/style/index.scss'
 
 import configStore from './store'
 
-import './style/app.less'
+import './style/app.scss'
 
 const store = configStore()
 

@@ -1,0 +1,54 @@
+@import "../../../../style/theme.scss";
+
+.scheduleTop {
+  background-color: $color-brand;
+  height: 92px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-title {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: fit-content;
+    color: #ffffff;
+    font-size: 32px;
+    padding: 4px 16px;
+
+    &-icon {
+      position: relative;
+      bottom: 4px;
+    }
+  }
+
+  &-aixin {
+    padding-left: 20px;
+    width: 40px;
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+
+  &-operation {
+    position: relative;
+    transition: all .2s;
+    transform: rotate(0deg);
+    padding: 14px 20px;
+
+    &_open {
+      transform: rotate(135deg);
+    }
+  }
+
+  &-mask {
+    position: absolute;
+    width: 100%;
+    height: 200vh;
+    // background-color: red;
+    // opacity: 0;
+    z-index: 9;
+  }
+}

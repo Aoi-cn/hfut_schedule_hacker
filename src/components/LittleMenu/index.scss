@@ -1,0 +1,46 @@
+@import "../../style/theme.scss";
+
+@keyframes menu {
+  from {
+    transform: scaleY(.2);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.littleMenu {
+  &-menu {
+    position: absolute;
+    top: 85px;
+    right: 32px;
+    z-index: 10;
+    width: 280px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    // transform-origin: top;
+    // animation: menu .1s forwards;
+
+
+    &-item {
+      display: flex;
+      padding: 0 24px;
+      height: 100px;
+      line-height: 100px;
+      align-items: center;
+
+      &:active {
+        background-color: $color-background;
+        filter: alpha(.65);
+      }
+
+      &-text {
+        margin-left: 16px;
+        color: $color-semi;
+        font-size: 32px;
+      }
+    }
+  }
+}

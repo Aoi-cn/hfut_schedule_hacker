@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Taro from '@tarojs/taro'
+import Taro, { usePullDownRefresh } from '@tarojs/taro'
 import { connect } from 'react-redux'
 import { View } from '@tarojs/components'
 
@@ -11,16 +11,22 @@ import CourseTable from './components/CourseTable'
 import ScheduleTop from './components/ScheduleTop'
 import CourseDetailFloatLayout from './components/CourseDetailFloatLayout'
 import ScheduleFooter from './components/ScheduleFooter'
-import './index.less'
+import UpdateNotice from '../../components/UpdateNotice'
+import './index.scss'
 
 function Schedule(props) {
   const { bizData, uiData, enter, userType } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
-  const { courseDetailFLData } = uiData
+  const { showUpdateNotice, courseDetailFLData } = uiData
 
   useEffect(() => {
     enter({ userType })
   }, [enter, userType])
+
+  usePullDownRefresh(async () => {
+    await props.updateScheduleData({ userType })
+    Taro.stopPullDownRefresh();
+  })
 
   const changeWeekIndex = async (weekIndex_) => {
     if (weekIndex_ < 0) {
@@ -43,6 +49,9 @@ function Schedule(props) {
 
   return (
     <View className='schedule'>
+
+      { showUpdateNotice && <UpdateNotice /> }
+
       <View className='schedule-header'>
 
         <ScheduleTop

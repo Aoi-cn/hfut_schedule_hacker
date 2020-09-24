@@ -6,18 +6,19 @@ import moment from 'moment'
 
 import StandardFloatLayout from '../../../../components/StandardFloatLayout'
 import { refreshColor, changeUserType, updateUiData } from '../../../../actions/schedule'
-import * as loginActions from '../../../../actions/login'
 import IconFont from '../../../../components/iconfont'
 import LittleMenu from '../../../../components/LittleMenu'
-import './index.less'
+import SettingFloatLayout from '../SettingFloatLayout'
+import './index.scss'
 
 export default (props) => {
   const { weekIndex, currentWeekIndex, changeWeekIndex } = props
   const [showMenu, setShowMenu] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
   const [showLoverBox, setShowLoverBox] = useState(false)
-  const [showConfirmBox, setShowConfirmBox] = useState(false)
+  const [showSetting, setShowSetting] = useState(false)
   const { userType } = useSelector(state => state.login.bizData)
+  const { showAiXin } = useSelector(state => state.schedule.bizData.userConfig)
   const dispatch = useDispatch()
 
   const daysZh = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
@@ -52,9 +53,9 @@ export default (props) => {
       onClick: () => dispatch(refreshColor({ userType })),
     },
     {
-      value: '活水计划',
-      icon: 'mingxinghuodong',
-      onClick: () => Taro.switchTab({ url: '/pages/gift/index' }),
+      value: '全校课表',
+      icon: 'paihangbang',
+      onClick: () => Taro.navigateTo({ url: '/pages/schedule/pages/allSchedule/index' }),
     },
     {
       value: '用前必读',
@@ -62,9 +63,9 @@ export default (props) => {
       onClick: () => setShowAbout(true),
     },
     {
-      value: userType === 'me' ? '退出登录' : '情侣解绑',
-      icon: 'login',
-      onClick: () => setShowConfirmBox(true),
+      value: '课表设置',
+      icon: 'shezhi',
+      onClick: () => setShowSetting(true),
     },
   ]
 
@@ -91,17 +92,8 @@ export default (props) => {
     setShowLoverBox(false)
   }
 
-
-  const handleUnbindHerClick = async () => {
-    dispatch(loginActions.unBindHer())
-    setShowConfirmBox(false)
-    setShowMenu(false)
-  }
-
-  const handleLogoutClick = async () => {
-    console.log('登出')
-    dispatch(loginActions.logout())
-    setShowConfirmBox(false)
+  const handleClickOperate = () => {
+    setShowMenu(!showMenu)
   }
 
   return (
@@ -109,10 +101,11 @@ export default (props) => {
 
       <View className='scheduleTop-aixin' onClick={handleAiXinClick}>
         {
-          userType === 'me' ?
+          showAiXin &&
+            (userType === 'me' ?
             <IconFont name='aixin' size={42} color='#ffffff' />
             :
-            <IconFont name='aixin-filled' size={42} color='#fcacc7' />
+            <IconFont name='aixin-filled' size={42} color='#fcacc7' />)
         }
       </View>
 
@@ -130,8 +123,8 @@ export default (props) => {
         </View>
       </Picker>
 
-      <View className='scheduleTop-operation' onClick={() => setShowMenu(!showMenu)}>
-        <IconFont name='plus' size={42} color='#ffffff' />
+      <View className={`scheduleTop-operation scheduleTop-operation_${showMenu ? 'open' : ''}`} onClick={handleClickOperate}>
+        <IconFont name='plus' size={46} color='#ffffff' />
       </View>
       <LittleMenu menuList={menuList} showMenu={showMenu} />
       {
@@ -157,31 +150,21 @@ export default (props) => {
         content='再绑定一个学生的课表数据，一键切换查看！'
         buttons={[{
           value: '取消',
-          color: 'gray',
+          color: 'cancel',
           onClick: () => setShowLoverBox(false)
         }, {
           value: '开始',
-          color: 'blue',
+          color: 'call',
           onClick: handleLoverScheduleClick
         }]}
       />
 
-      <StandardFloatLayout
-        isOpened={showConfirmBox}
-        onClose={() => setShowConfirmBox(false)}
-        title={userType === 'me' ? '退出登录' : '情侣解绑'}
-        content='确定进行该操作吗？'
-        contentAlign='center'
-        buttons={[{
-          value: '取消',
-          color: 'gray',
-          onClick: () => setShowConfirmBox(false)
-        }, {
-          value: '确定',
-          color: 'red',
-          onClick: userType === 'me' ? handleLogoutClick : handleUnbindHerClick
-        }]}
+      <SettingFloatLayout
+        isOpened={showSetting}
+        onClose={() => setShowSetting(false)}
       />
+
+
 
     </View>
 

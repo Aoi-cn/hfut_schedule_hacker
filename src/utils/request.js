@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 
 export const config = {
   baseUrl: 'https://api.cavano.vip',
-  // baseUrl: 'http://127.0.0.1:3003',
+  // baseUrl: 'http://127.0.0.1:3002',
 }
 
 const baseOptions = ({ url, data, method }) => Taro.request({ 

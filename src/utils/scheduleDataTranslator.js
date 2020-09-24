@@ -1,6 +1,7 @@
 import _ from 'lodash'
+import Taro from '@tarojs/taro'
 
-export default (scheduleData, lessonIds) => {
+export default (scheduleData, lessonIds, timeTable) => {
   const lessonIdsColor = initLessonIdsColor(lessonIds)
 
   // 初始化scheduleMatrix
@@ -114,7 +115,8 @@ export default (scheduleData, lessonIds) => {
         lessonCode,
         lessonType,
         studentNumber,
-        timeRange: timeIndexToTime(startTime) + '~' + timeIndexToTime(endTime),
+        // timeRange: timeIndexToTime(startTime) + '~' + timeIndexToTime(endTime),
+        timeRange: timeTable ? (timeTable[startTime - 1].startTimeText + '~' + timeTable[endTime - 1].endTimeText) : '',
         weekIndexesZh,
         campus,
         color,
@@ -166,56 +168,20 @@ export default (scheduleData, lessonIds) => {
 
 const initLessonIdsColor = (lessonIds) => {
   // 十个颜色随机
-  const colors = ['blue', 'darkBlue', 'red', 'yellow', 'green', 'gray', 'darkGray', 'brown', 'orange', 'purple']
+  let theme = 0
+  try {
+    theme = Taro.getStorageSync('config').userConfig.theme
+  } catch (error) {  }
+  
+  const colors = [
+    ['blue', 'darkBlue', 'red', 'yellow', 'green', 'gray', 'darkGray', 'brown', 'orange', 'purple'],
+    ['blue', 'darkBlue', 'red', 'yellow', 'green', 'pink', 'orange', 'purple'],
+  ][theme]
   const lessonIdsColor = {}
   lessonIds.map((lessonId) => {
     lessonIdsColor[lessonId] = colors[Math.floor((Math.random() * colors.length))]
   })
   return lessonIdsColor
-}
-
-const timeIndexToTime = (timeIndex) => {
-  let time = ''
-  switch (timeIndex) {
-    case 1:
-      time = '8:00'
-      break;
-    case 2:
-      time = '9:50'
-      break;
-    case 3:
-      time = '10:10'
-      break;
-    case 4:
-      time = '12:00'
-      break;
-    case 5:
-      time = '14:00'
-      break;
-    case 6:
-      time = '15:50'
-      break;
-    case 7:
-      time = '16:00'
-      break;
-    case 8:
-      time = '17:50'
-      break;
-    case 9:
-      time = '19:00'
-      break;
-    case 10:
-      time = '20:50'
-      break;
-    case 11:
-      time = '21:50'
-      break;
-
-    default:
-      break;
-  }
-  return time
-
 }
 
 // 将中文的周目转化为index

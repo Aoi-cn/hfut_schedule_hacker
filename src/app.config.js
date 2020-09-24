@@ -4,9 +4,10 @@ export default {
   pages: [
     'pages/schedule/index',
     'pages/login/index',
-    'pages/allSchedule/index',
     'pages/gift/index',
-    'pages/advise/index',
+    'pages/schedule/pages/allSchedule/index',
+    // 'pages/advise/index',
+
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -23,14 +24,9 @@ export default {
     list: [{
       pagePath: 'pages/schedule/index',
       text: '我的课表',
-      iconPath: 'assets/me.png',
-      selectedIconPath: 'assets/me_active.png',
-    }, {
-      pagePath: 'pages/allSchedule/index',
-      text: '全校课表',
       iconPath: 'assets/all.png',
       selectedIconPath: 'assets/all_active.png',
-    }, 
+    },
     {
       pagePath: 'pages/gift/index',
       text: '活水计划',

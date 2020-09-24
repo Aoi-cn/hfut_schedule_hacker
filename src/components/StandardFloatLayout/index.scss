@@ -1,0 +1,89 @@
+@import "../../style/theme.scss";
+
+.standardFloatLayout {
+
+  &-header {
+    margin: 56px 0;
+    // margin-bottom: 48px;
+    font-size: 36px;
+    font-weight: bold;
+    color: $color-semi;
+    text-align: center;
+  }
+
+  &-content {
+    padding: 0 48px;
+    margin-bottom: 56px;
+
+    &-center {
+      text-align: center;
+    }
+
+    &-content {
+      font-size: 32px;
+      color: $color-grey;
+    }
+
+  }
+
+  &-footer {
+    // background-color: blue;
+    padding: 0 24px;
+    padding-bottom: 36px;
+
+    &-noBtn {
+      padding-bottom: 1px;
+    }
+
+    &-twoButtonBox {
+      display: flex;
+      justify-content: space-between;
+
+      &_blank {
+        width: 52px;
+      }
+    }
+
+    &-btn {
+      border: none;
+      border-radius: 48px;
+      font-size: 34px;
+      line-height: 100px;
+      height: 100px;
+      width: 100%;
+      background-color: $color-background;
+      color: $color-grey;
+
+      &_call {
+        background-color: $color-brand;
+        color: #ffffff;
+      }
+    
+      &_default {
+        background-color: $color-background;
+        color: $color-brand;
+      }
+    
+      &_primary {
+        background-color: $color-background;
+        color: $color-semi;
+      }
+    
+      &_danger {
+        background-color: $color-background;
+        color: $color-error;
+      }
+    
+      &_cancel {
+        background-color: $color-background;
+        color: $color-grey;
+      }
+
+      &-icon {
+        position: relative;
+        margin-right: 16px;
+        top: 2px
+      }
+    }
+  }
+}

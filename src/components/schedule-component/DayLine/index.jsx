@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from '@tarojs/components'
 
-import './index.less'
+import './index.scss'
 
 export default (props) => {
   const { dayLineData } = props

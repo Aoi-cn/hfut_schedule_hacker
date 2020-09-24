@@ -8,7 +8,7 @@ import IconFont from '../../components/iconfont'
 import * as actions from '../../actions/login'
 import StandardFloatLayout from '../../components/StandardFloatLayout'
 import CustomButton from '../../components/CustomButton'
-import './index.less'
+import './index.scss'
 
 function Login(props) {
   const { bizData, uiData } = props

@@ -6,7 +6,7 @@
   "templateInfo": {
     "name": "redux",
     "typescript": false,
-    "css": "less"
+    "css": "sass"
   },
   "scripts": {
     "dev": "npm run build:weapp -- --watch",

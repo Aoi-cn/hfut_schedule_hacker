@@ -7,7 +7,7 @@ import {
 import { GET } from '../utils/request'
 import { enter, logout as scheduleLogout } from './schedule'
 import { logout as allScheduleLogout } from './allSchedule'
-import { version, defaultConfig } from '../config/config.default'
+import { config } from '../config/config.default'
 
 export const login = ({ username, password, userType, campus }) => async () => {
   Taro.showLoading({
@@ -48,10 +48,7 @@ export const login = ({ username, password, userType, campus }) => async () => {
   if (userType === 'me') {
     Taro.setStorage({
       key: 'config',
-      data: {
-        version,
-        ...defaultConfig,
-      },
+      data: config,
     })
   }
 

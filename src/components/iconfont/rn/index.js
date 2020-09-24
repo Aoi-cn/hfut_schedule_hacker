@@ -2,16 +2,16 @@
 
 import React from 'react';
 
+import IconfileText from './IconfileText';
+import Iconpaihangbang from './Iconpaihangbang';
+import Iconshezhi from './Iconshezhi';
+import Iconswap from './Iconswap';
 import Iconcaidan from './Iconcaidan';
 import Iconmingxinghuodong from './Iconmingxinghuodong';
 import Iconwenjuan from './Iconwenjuan';
-import Iconlogin from './Iconlogin';
 import Iconaixin from './Iconaixin';
 import IconaixinFilled from './IconaixinFilled';
-import Iconsync from './Iconsync';
 import Iconeye from './Iconeye';
-import IconfileText from './IconfileText';
-import Iconswap from './Iconswap';
 import IconinfoCircleFill from './IconinfoCircleFill';
 import Iconplus from './Iconplus';
 import IconeyeClose from './IconeyeClose';
@@ -25,26 +25,26 @@ import Icongift from './Icongift';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
+    case 'file-text':
+      return <IconfileText {...rest} />;
+    case 'paihangbang':
+      return <Iconpaihangbang {...rest} />;
+    case 'shezhi':
+      return <Iconshezhi {...rest} />;
+    case 'swap':
+      return <Iconswap {...rest} />;
     case 'caidan':
       return <Iconcaidan {...rest} />;
     case 'mingxinghuodong':
       return <Iconmingxinghuodong {...rest} />;
     case 'wenjuan':
       return <Iconwenjuan {...rest} />;
-    case 'login':
-      return <Iconlogin {...rest} />;
     case 'aixin':
       return <Iconaixin {...rest} />;
     case 'aixin-filled':
       return <IconaixinFilled {...rest} />;
-    case 'sync':
-      return <Iconsync {...rest} />;
     case 'eye':
       return <Iconeye {...rest} />;
-    case 'file-text':
-      return <IconfileText {...rest} />;
-    case 'swap':
-      return <Iconswap {...rest} />;
     case 'info-circle-fill':
       return <IconinfoCircleFill {...rest} />;
     case 'plus':

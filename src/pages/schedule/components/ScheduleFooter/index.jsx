@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../../actions/schedule'
 import IconFont from '../../../../components/iconfont'
-import './index.less'
+import './index.scss'
 
 function ScheduleFooter (props) {
   const { bizData, uiData, userType, changeWeekIndex } = props

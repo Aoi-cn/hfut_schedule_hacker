@@ -1,0 +1,90 @@
+@import "../../style/theme.scss";
+
+/* 固定圆角按钮 */
+/* 使用时根据页面边距重写left、right */
+.fixed-circle-button {
+  position: fixed;
+  right: 40px;
+  bottom: 56px;
+  left: 40px;
+  z-index: 998;
+  height: 88px;
+  border: none;
+  border-radius: 44px;
+  font-size: 34px;
+  line-height: 88px;
+
+  &_call {
+    background-color: $color-brand;
+    color: #ffffff;
+  }
+
+  &_default {
+    background-color: $color-background;
+    color: $color-brand;
+  }
+
+  &_primary {
+    background-color: $color-background;
+    color: $color-semi;
+  }
+
+  &_danger {
+    background-color: $color-background;
+    color: $color-error;
+  }
+
+  &_callDanger {
+    background-color: $color-error;
+    color: #ffffff;
+  }
+
+  &_cancel {
+    background-color: $color-background;
+    color: $color-grey;
+  }
+}
+
+/* 标准流中的圆角通栏按钮 */
+/* 使用时应根据页面边距重写margin */
+.relative-circle-button {
+  position: relative;
+  z-index: 10;
+  height: 100px;
+  border: none;
+  border-radius: 50px;
+  font-size: 34px;
+  line-height: 100px;
+  text-align: center;
+
+  &_call {
+    background-color: $color-brand;
+    color: #ffffff;
+  }
+
+  &_default {
+    background-color: $color-background;
+    color: $color-brand;
+  }
+
+  &_primary {
+    background-color: $color-background;
+    color: $color-semi;
+  }
+
+  &_danger {
+    background-color: $color-background;
+    color: $color-error;
+  }
+
+  &_callDanger {
+    background-color: $color-error;
+    color: #ffffff;
+  }
+
+  &_cancel {
+    background-color: $color-background;
+    color: $color-grey;
+  }
+}
+

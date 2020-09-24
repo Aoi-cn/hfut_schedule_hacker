@@ -49,7 +49,7 @@ export const updateScheduleData = (payload) => async (dispatch) => {
 export const enter = () => async (dispatch) => {
   // 先判断是不是第一次进入，是的话就显示help
   const config = Taro.getStorageSync('config')
-  if (config.showAllSHelp) {
+  if (config.autoConfig.showAllSHelp) {
     Taro.showModal({
       title: '提示',
       content: `点击右上角的搜索按钮开始`,
@@ -60,7 +60,10 @@ export const enter = () => async (dispatch) => {
       key: 'config',
       data: {
         ...config,
-        showAllSHelp: false,
+        autoConfig: {
+          ...config.autoConfig,
+          showAllSHelp: false,
+        }
       }
     })
   }

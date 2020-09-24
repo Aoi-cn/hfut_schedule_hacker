@@ -10,16 +10,28 @@ import dataToMatrix from '../utils/scheduleDataTranslator'
 import * as loginActions from './login'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 import scheduleDiffTool from '../utils/scheduleDiffTool'
-import { version, updateState, updateInfo, defaultConfig } from '../config/config.default'
+import { config, updateState, updateInfo } from '../config/config.default'
+
+const { version } = config
 
 // 刚进入小程序时，判断是否有本地缓存，有的话就不用登录
 // enterState = 0或unfinded => 刚进入小程序
 // enterState = 1 => 切换情侣课表
 export const enter = ({ userType }) => async (dispatch) => {
 
+  // dispatch(updateUiData({ showUpdateNotice: true }))
+
   Taro.getStorage({ key: userType })
     .then(async (userData) => {
       const { scheduleMatrix } = userData.data  // 读取本地的课表数据
+      let { userConfig } = Taro.getStorageSync('config')
+      if (!userConfig) {
+        userConfig = config.userConfig
+        Taro.setStorage({
+          key: 'config',
+          data: config
+        })
+      }
       // 判断版本更新：
       const isUpdateOk = await dispatch(handleCheckUpdate())
       if (!isUpdateOk && updateState === 1) {
@@ -27,15 +39,8 @@ export const enter = ({ userType }) => async (dispatch) => {
       }
 
       // 版本正常，且本地缓存正常
-      // if (enterState === 1) {
-      //   console.log('没问题')
-      //   dispatch(updateBizData({ scheduleMatrix }))
-      // } else {
-      //   const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
-      //   dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
-      // }
       const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
-      dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
+      dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex, userConfig }))
       // 每次进入的自动更新
       dispatch(updateScheduleData({ userType }))
       // 确保diff按钮是关闭的
@@ -50,8 +55,8 @@ export const enter = ({ userType }) => async (dispatch) => {
 
 // 检测到版本更新后的自动数据更新
 const handleCheckUpdate = () => async (dispatch) => {
-  const config = Taro.getStorageSync('config')
-  const { version: localVersion } = config
+  const localConfig = Taro.getStorageSync('config')
+  const { version: localVersion } = localConfig
   if (localVersion !== version) {
     console.log('线上版本：' + version)
     console.log('本地版本：' + localVersion)
@@ -65,11 +70,24 @@ const handleCheckUpdate = () => async (dispatch) => {
       showCancel: false,
       confirmText: '我知道了',
     })
+    // 更新selectInfo
+    const res = await GET('/schedule/select_info', {})
+    Taro.setStorage({
+      key: 'selectInfo',
+      data: res
+    })
+    // dispatch(updateUiData({ showUpdateNotice: true }))
     Taro.setStorage({
       key: 'config',
       data: {
-        ...defaultConfig,
-        ...config,
+        autoConfig: {
+          ...config.autoConfig,
+          ...localConfig.autoConfig,
+        },
+        userConfig: {
+          ...config.userConfig,
+          ...localConfig.userConfig,
+        },
         version,
       }
     })
@@ -83,8 +101,14 @@ const handleCheckUpdate = () => async (dispatch) => {
     Taro.setStorage({
       key: 'config',
       data: {
-        ...defaultConfig,
-        ...config,
+        autoConfig: {
+          ...config.autoConfig,
+          ...localConfig.autoConfig,
+        },
+        userConfig: {
+          ...config.userConfig,
+          ...localConfig.userConfig,
+        },
         version,
       }
     })
@@ -129,8 +153,9 @@ export const updateScheduleData = ({ userType }) => async (dispatch) => {
   // 获取课表数据
   const scheduleData = res.body.lessons
   const lessonIds = res.body.lessonIds
+  const timeTable = res.body.timeTable.courseUnitList
   // 转化为UI可识别的matrix
-  let scheduleMatrix = dataToMatrix(scheduleData, lessonIds)
+  let scheduleMatrix = dataToMatrix(scheduleData, lessonIds, timeTable)
   // 颜色持久化
   scheduleMatrix = drawColor({ userType, scheduleMatrix })
 
@@ -149,12 +174,12 @@ export const updateScheduleData = ({ userType }) => async (dispatch) => {
       userInfo,
       scheduleData,
       scheduleMatrix,
-      lessonIds
+      lessonIds,
+      timeTable,
     }
   })
   Taro.hideNavigationBarLoading()
-  // Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
-  Taro.setNavigationBarTitle({ title: '放假！解封！' })
+  Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
 }
 
 const drawColor = ({ userType, scheduleMatrix }) => {
@@ -227,7 +252,7 @@ export const reLogin = ({ userType }) => async (dispatch) => {
   }
 }
 
-export const refreshColor = ({ userType }) => async (dispatch) => {
+export const refreshColor = ({ userType, render = true }) => async (dispatch) => {
   Taro.showLoading({
     title: '正在刷新...',
     mask: true,
@@ -236,10 +261,12 @@ export const refreshColor = ({ userType }) => async (dispatch) => {
   await dispatch(updateUiData({ diff: false }))
 
   const userData = await Taro.getStorage({ key: userType })
-  const { userInfo, scheduleData, lessonIds } = userData.data
+  const { userInfo, scheduleData, lessonIds, timeTable } = userData.data
 
-  const scheduleMatrix = dataToMatrix(scheduleData, lessonIds)
-  await dispatch(updateBizData({ scheduleMatrix }))
+  const scheduleMatrix = dataToMatrix(scheduleData, lessonIds, timeTable)
+  if (render) {
+    await dispatch(updateBizData({ scheduleMatrix }))
+  }
   await Taro.setStorage({
     key: userType,
     data: {
@@ -311,8 +338,8 @@ export const changeUserType = ({ userType }) => async (dispatch) => {
 
 export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
   // 先判断是不是第一次点击，是的话就显示help
-  const config = Taro.getStorageSync('config')
-  if (config.showDiffHelp) {
+  const localConfig = Taro.getStorageSync('config')
+  if (localConfig.autoConfig.showDiffHelp) {
     Taro.showModal({
       title: '提示',
       content: `这是将另一张课表与自己的进行对比：绿色代表两方都没课；红色代表两方都有课；黄色代表只有自己有课；蓝色代表只有对方有课。`,
@@ -322,8 +349,11 @@ export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
     Taro.setStorage({
       key: 'config',
       data: {
-        ...config,
-        showDiffHelp: false,
+        ...localConfig,
+        autoConfig: {
+          ...localConfig.autoConfig,
+          showDiffHelp: false,
+        }
       }
     })
   }

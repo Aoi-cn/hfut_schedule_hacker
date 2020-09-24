@@ -1,6 +1,6 @@
 Component({
   props: {
-    // caidan | mingxinghuodong | wenjuan | login | aixin | aixin-filled | sync | eye | file-text | swap | info-circle-fill | plus | eye-close | search | arrow-right | arrow-lift | arrow-down | personal | calendar | gift
+    // file-text | paihangbang | shezhi | swap | caidan | mingxinghuodong | wenjuan | aixin | aixin-filled | eye | info-circle-fill | plus | eye-close | search | arrow-right | arrow-lift | arrow-down | personal | calendar | gift
     name: null,
     // string | string[]
     color: '',

@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from '@tarojs/components'
 
 import WhiteBox from '../WhiteBox'
-import './index.less'
+import './index.scss'
 
 export default () => {
 

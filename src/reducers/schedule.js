@@ -9,9 +9,14 @@ const INITIAL_STATE = {
     dayLineMatrix: [],
     meUpdate: false,
     herUpdate: false,
+    userConfig: {
+      theme: 0,
+      showAiXin: true,
+    },
   },
   uiData: {
     diff: false,
+    showUpdateNotice: false,
     courseDetailFLData: {
       isOpened: false,
       name: '',

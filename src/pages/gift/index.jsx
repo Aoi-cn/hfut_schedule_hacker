@@ -5,7 +5,7 @@ import { AtButton, AtMessage } from 'taro-ui'
 
 import IconFont from '../../components/iconfont'
 import { GET } from '../../utils/request'
-import './index.less'
+import './index.scss'
 
 function Gift() {
   const [brandname, setBrandname] = useState('')
