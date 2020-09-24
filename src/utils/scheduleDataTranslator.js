@@ -1,6 +1,45 @@
 import _ from 'lodash'
 import Taro from '@tarojs/taro'
 
+export const themeColors = [
+  // 默认
+  [
+    { name: '蓝', value: 'blue' },
+    { name: '深蓝', value: 'darkBlue' },
+    { name: '红', value: 'red' },
+    { name: '黄', value: 'yellow' },
+    { name: '绿', value: 'green' },
+    { name: '灰', value: 'gray' },
+    { name: '深灰', value: 'darkGray' },
+    { name: '棕', value: 'brown' },
+    { name: '橙', value: 'orange' },
+    { name: '紫', value: 'purple' },
+  ],
+  // 活泼
+  [
+    { name: '亮蓝', value: 'blue' },
+    { name: '蓝', value: 'darkBlue' },
+    { name: '红', value: 'red' },
+    { name: '亮黄', value: 'gold' },
+    { name: '黄', value: 'yellow' },
+    { name: '绿', value: 'green' },
+    { name: '橙', value: 'orange' },
+    { name: '紫', value: 'purple' },
+  ],
+  // 莫兰迪
+  [
+    { name: '灰蓝', value: 'blue' },
+    { name: '雪青', value: 'purple' },
+    { name: '粉红', value: 'red' },
+    { name: '姜黄', value: 'yellow' },
+    { name: '灰豆绿', value: 'green' },
+    { name: '烟灰粉', value: 'pink' },
+    { name: '黄栌', value: 'orange' },
+    { name: '灰', value: 'grey' },
+    { name: '驼色', value: 'brown' },
+  ],
+]
+
 export default (scheduleData, lessonIds, timeTable) => {
   const lessonIdsColor = initLessonIdsColor(lessonIds)
 
@@ -171,12 +210,9 @@ const initLessonIdsColor = (lessonIds) => {
   let theme = 0
   try {
     theme = Taro.getStorageSync('config').userConfig.theme
-  } catch (error) {  }
-  
-  const colors = [
-    ['blue', 'darkBlue', 'red', 'yellow', 'green', 'gray', 'darkGray', 'brown', 'orange', 'purple'],
-    ['blue', 'darkBlue', 'red', 'yellow', 'green', 'pink', 'orange', 'purple'],
-  ][theme]
+  } catch (error) { }
+
+  const colors = themeColors[theme].map(themeColor => themeColor.value)
   const lessonIdsColor = {}
   lessonIds.map((lessonId) => {
     lessonIdsColor[lessonId] = colors[Math.floor((Math.random() * colors.length))]

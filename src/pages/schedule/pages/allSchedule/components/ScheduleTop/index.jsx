@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-// import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import Taro from '@tarojs/taro'
 import { View, Picker } from '@tarojs/components'
 import moment from 'moment'
 
@@ -12,6 +12,33 @@ export default (props) => {
   const { weekIndex, currentWeekIndex, changeWeekIndex } = props
   const [showAbout, setShowAbout] = useState(false)
   const [showSelect, setShowSelect] = useState(false)
+  const [supportNum, setSupportNum] = useState({ academyNum: 0, majorNum: 0, clazzNum: 0 })
+
+  useEffect(() => {
+    setTimeout(() => {
+      const selectInfo = Taro.getStorageSync('selectInfo')
+      let academyNum = 0
+      let majorNum = 0
+      let clazzNum = 0
+
+      for (const academy in selectInfo) {
+        academyNum++
+        for (const major in selectInfo[academy]) {
+          majorNum++
+          for (const level in selectInfo[academy][major]) {
+            selectInfo[academy][major][level].map(() => {
+              clazzNum++
+            })
+          }
+        }
+      }
+      setSupportNum({
+        academyNum,
+        majorNum,
+        clazzNum,
+      })
+    }, 1500);
+  }, [])
 
   const daysZh = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
 
@@ -72,14 +99,9 @@ export default (props) => {
         isOpened={showAbout}
         onClose={() => setShowAbout(false)}
         title='注意事项'
-        content={`这里可以查看全校几乎所有班级的课表（目前仅支持19、18、17及少数16级）\n
+        content={`目前已支持${supportNum.academyNum}个学院${supportNum.majorNum}个专业，合计${supportNum.clazzNum}个班级。其中对20级班级和宣城校区的支持正在完善中~\n
         数据可靠性不做保证，仅供参考！点击右上角的搜索按钮开始。
         `}
-        // buttons={[{
-        //   value: '知道了',
-        //   color: 'blue',
-        //   onClick: () => setShowAbout(false)
-        // }]}
       />
 
       <SelectFloatLayout

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { View } from '@tarojs/components'
 
 import { updateUiData } from '../../../../actions/schedule'
-import './index.scss'
+import '../../../../style/courseBox.scss'
 
 export default ({ courseBoxList, number }) => {
   const courseBoxData = courseBoxList[0] ? courseBoxList[0] : {}

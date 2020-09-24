@@ -17,6 +17,7 @@ const INITIAL_STATE = {
   uiData: {
     diff: false,
     showUpdateNotice: false,
+    showHelpNotice: false,
     courseDetailFLData: {
       isOpened: false,
       name: '',

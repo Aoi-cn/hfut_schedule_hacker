@@ -30,22 +30,6 @@
     padding: 0 48px;
     padding-bottom: 36px;
 
-    &-btn {
-      border: none;
-      border-radius: 48px;
-      font-size: 34px;
-      line-height: 100px;
-      height: 100px;
-      min-width: 296px;
-      background-color: $color-background;
-      color: $color-brand;
-
-      &-icon {
-        position: relative;
-        margin-right: 16px;
-        top: 2px
-      }
-    }
   }
 
   &-itemTitle {

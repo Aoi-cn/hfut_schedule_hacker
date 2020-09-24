@@ -18,6 +18,7 @@ function SettingFloatLayout(props) {
   const themeRange = [
     { name: '默认', value: 0 },
     { name: '活泼', value: 1 },
+    { name: '莫兰蒂', value: 2 },
   ]
 
   const handleUnbindHerClick = () => {

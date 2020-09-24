@@ -1,27 +1,43 @@
 import React from 'react'
 import { View, Text } from '@tarojs/components'
-import { AtFloatLayout, AtButton } from 'taro-ui'
+import { AtFloatLayout } from 'taro-ui'
+import CustomButton from '../CustomButton'
 
 import './index.scss'
 
 function StandardFloatLayout(props) {
 
-  const { isOpened, onClose, title, content, contentAlign, buttons=[] } = props
+  const { isOpened, onClose, title, content, contentAlign, buttons = [] } = props
   let BottomButtons
   if (buttons.length === 1) {
-    BottomButtons = (<AtButton className={'standardFloatLayout-footer-btn standardFloatLayout-footer-btn_' + buttons[0].color} onClick={() => buttons[0].onClick()}>
-      {buttons[0].value}
-    </AtButton>)
+    BottomButtons = (
+      <View className='standardFloatLayout-footer_btnBox'>
+        <CustomButton
+          value={buttons[0].value}
+          onSubmit={buttons[0].onClick}
+          type={buttons[0].type}
+        />
+      </View>)
   } else if (buttons.length === 2) {
-    BottomButtons = (<View className='standardFloatLayout-footer-twoButtonBox'>
-      <AtButton className={'standardFloatLayout-footer-btn standardFloatLayout-footer-btn_' + buttons[0].color} onClick={() => buttons[0].onClick()}>
-        {buttons[0].value}
-      </AtButton>
-      <View  className='standardFloatLayout-footer-twoButtonBox_blank'></View>
-      <AtButton className={'standardFloatLayout-footer-btn standardFloatLayout-footer-btn_' + buttons[1].color} onClick={() => buttons[1].onClick()}>
-        {buttons[1].value}
-      </AtButton>
-    </View>)
+    BottomButtons = (
+      <>
+        <View className='standardFloatLayout-footer_btnBox'>
+          <CustomButton
+            value={buttons[0].value}
+            onSubmit={buttons[0].onClick}
+            type={buttons[0].type}
+          />
+        </View>
+        <View className='standardFloatLayout-footer_blank'></View>
+        <View className='standardFloatLayout-footer_btnBox'>
+          <CustomButton
+            value={buttons[1].value}
+            onSubmit={buttons[1].onClick}
+            type={buttons[1].type}
+          />
+        </View>
+      </>
+    )
   } else {
     BottomButtons = null
   }

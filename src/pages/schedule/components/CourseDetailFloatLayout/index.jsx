@@ -6,6 +6,7 @@ import { AtFloatLayout } from 'taro-ui'
 import { updateSingleCourseColor } from '../../../../actions/schedule'
 import IconFont from '../../../../components/iconfont'
 import CustomButton from '../../../../components/CustomButton'
+import { themeColors } from '../../../../utils/scheduleDataTranslator'
 import './index.scss'
 
 export default (props) => {
@@ -63,30 +64,7 @@ export default (props) => {
     },
   ]
 
-  const colorPickerRange = [
-    [
-      { name: '靛青', value: 'blue' },
-      { name: '黛蓝', value: 'darkBlue' },
-      { name: '胭脂', value: 'red' },
-      { name: '秋香', value: 'yellow' },
-      { name: '竹青', value: 'green' },
-      { name: '牙白', value: 'gray' },
-      { name: '鸦青', value: 'darkGray' },
-      { name: '驼色', value: 'brown' },
-      { name: '炎', value: 'orange' },
-      { name: '黛', value: 'purple' },
-    ],
-    [
-      { name: '靛青', value: 'blue' },
-      { name: '黛蓝', value: 'darkBlue' },
-      { name: '胭脂', value: 'red' },
-      { name: '秋香', value: 'yellow' },
-      { name: '竹青', value: 'green' },
-      { name: '炎', value: 'orange' },
-      { name: '黛', value: 'purple' },
-      { name: '桃', value: 'pink' },
-    ],
-  ][theme]
+  const colorPickerRange = themeColors[theme]
 
   let selectedColorIndex = 0
   colorPickerRange.map((colorInfo, index) => {

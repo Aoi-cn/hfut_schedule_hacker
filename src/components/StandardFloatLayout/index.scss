@@ -3,8 +3,8 @@
 .standardFloatLayout {
 
   &-header {
-    margin: 56px 0;
-    // margin-bottom: 48px;
+    margin: 48px 0;
+    margin-bottom: 56px;
     font-size: 36px;
     font-weight: bold;
     color: $color-semi;
@@ -27,63 +27,24 @@
   }
 
   &-footer {
-    // background-color: blue;
     padding: 0 24px;
+    box-sizing: border-box;
     padding-bottom: 36px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &_btnBox {
+      width: 100%;
+    }
 
     &-noBtn {
       padding-bottom: 1px;
     }
 
-    &-twoButtonBox {
-      display: flex;
-      justify-content: space-between;
-
-      &_blank {
-        width: 52px;
-      }
-    }
-
-    &-btn {
-      border: none;
-      border-radius: 48px;
-      font-size: 34px;
-      line-height: 100px;
-      height: 100px;
-      width: 100%;
-      background-color: $color-background;
-      color: $color-grey;
-
-      &_call {
-        background-color: $color-brand;
-        color: #ffffff;
-      }
-    
-      &_default {
-        background-color: $color-background;
-        color: $color-brand;
-      }
-    
-      &_primary {
-        background-color: $color-background;
-        color: $color-semi;
-      }
-    
-      &_danger {
-        background-color: $color-background;
-        color: $color-error;
-      }
-    
-      &_cancel {
-        background-color: $color-background;
-        color: $color-grey;
-      }
-
-      &-icon {
-        position: relative;
-        margin-right: 16px;
-        top: 2px
-      }
+    &_blank {
+      width: 52px;
+      height: 20px;
     }
   }
 }

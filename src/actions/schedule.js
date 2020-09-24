@@ -19,8 +19,6 @@ const { version } = config
 // enterState = 1 => 切换情侣课表
 export const enter = ({ userType }) => async (dispatch) => {
 
-  // dispatch(updateUiData({ showUpdateNotice: true }))
-
   Taro.getStorage({ key: userType })
     .then(async (userData) => {
       const { scheduleMatrix } = userData.data  // 读取本地的课表数据
@@ -62,21 +60,17 @@ const handleCheckUpdate = () => async (dispatch) => {
     console.log('本地版本：' + localVersion)
     console.log('执行操作状态：' + updateState)
   }
+  // 判断更新的类型
   if (localVersion !== version && updateState === 0) {
-    // 先判断是不是第一次进入，是的话就显示help
-    Taro.showModal({
-      title: `v${version} 更新内容`,
-      content: updateInfo,
-      showCancel: false,
-      confirmText: '我知道了',
-    })
-    // 更新selectInfo
+    // 更新selectInfo（可能全校课表有添加班级）
     const res = await GET('/schedule/select_info', {})
     Taro.setStorage({
       key: 'selectInfo',
       data: res
     })
-    // dispatch(updateUiData({ showUpdateNotice: true }))
+    // 显示更新公告
+    dispatch(updateUiData({ showUpdateNotice: true }))
+    // 更新本地config缓存
     Taro.setStorage({
       key: 'config',
       data: {

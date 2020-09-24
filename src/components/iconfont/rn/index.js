@@ -2,6 +2,9 @@
 
 import React from 'react';
 
+import Iconshibai from './Iconshibai';
+import Iconceshi from './Iconceshi';
+import Icontanhao from './Icontanhao';
 import IconfileText from './IconfileText';
 import Iconpaihangbang from './Iconpaihangbang';
 import Iconshezhi from './Iconshezhi';
@@ -25,6 +28,12 @@ import Icongift from './Icongift';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
+    case 'shibai':
+      return <Iconshibai {...rest} />;
+    case 'ceshi':
+      return <Iconceshi {...rest} />;
+    case 'tanhao':
+      return <Icontanhao {...rest} />;
     case 'file-text':
       return <IconfileText {...rest} />;
     case 'paihangbang':

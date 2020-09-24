@@ -3,18 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { View } from '@tarojs/components'
 
 import { updateUiData } from '../../../../../../actions/allSchedule'
-import './index.scss'
+import '../../../../../../style/courseBox.scss'
+// import './index.scss'
 
 export default ({ courseBoxList, number }) => {
   const courseBoxData = courseBoxList[0] ? courseBoxList[0] : {}
   const { name = "", clazzRoom, teacher, timeRange, lessonCode, lessonType, weekIndexes, studentClazzes, studentNumber, lessonId, credits, campus, weekIndexesZh, color } = courseBoxData
   const { theme } = useSelector(state => state.schedule.bizData.userConfig)
   const dispatch = useDispatch()
-
-  // 有数据
-  if (name) {
-    
-  }
 
   const handleClick = () => {
     if (!name) { return }

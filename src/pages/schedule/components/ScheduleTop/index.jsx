@@ -141,6 +141,13 @@ export default (props) => {
         本项目已在GitHub开源，仓库名称为：hfut_schedule_hacker。欢迎对前端感兴趣的同学与我一起交流和开发！\n
         情侣课表功能专为我的挚爱：唐小姐开发。祝天下有情人终成眷属~
         `}
+        buttons={[{
+          value: '查看帮助',
+          onClick: () => dispatch(updateUiData({ showHelpNotice: true }))
+        }, {
+          value: '更新公告',
+          onClick: () => dispatch(updateUiData({ showUpdateNotice: true }))
+        }]}
       />
 
       <StandardFloatLayout
@@ -150,11 +157,11 @@ export default (props) => {
         content='再绑定一个学生的课表数据，一键切换查看！'
         buttons={[{
           value: '取消',
-          color: 'cancel',
+          type: 'cancel',
           onClick: () => setShowLoverBox(false)
         }, {
           value: '开始',
-          color: 'call',
+          type: 'call',
           onClick: handleLoverScheduleClick
         }]}
       />

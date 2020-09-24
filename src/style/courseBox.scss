@@ -1,4 +1,4 @@
-@import '../../../../style/theme.scss';
+@import './theme.scss';
 
 .courseBox {
   width: 100%;
@@ -55,7 +55,7 @@
     }
   }
 
-
+// 盒子 主题颜色
   &-boxColor {
 
     // 默认主题
@@ -132,10 +132,53 @@
     &-pink_1 {
       background-color: $pink_b1;
     }
+
+    &-gold_1 {
+      background-color: $gold_b1;
+    }
+
+    // 莫兰蒂主题
+    &-blue_2 {
+      background-color: $blue_b2;
+
+    }
+
+    &-purple_2 {
+      background-color: $purple_b2;
+    }
+
+    &-red_2 {
+      background-color: $red_b2;
+    }
+
+    &-yellow_2 {
+      background-color: $yellow_b2;
+    }
+
+    &-green_2 {
+      background-color: $green_b2;
+    }
+
+    &-pink_2 {
+      background-color: $pink_b2;
+    }
+
+    &-orange_2 {
+      background-color: $orange_b2;
+    }
+
+    &-grey_2 {
+      background-color: $grey_b2;
+    }
+
+    &-brown_2 {
+      background-color: $brown_b2;
+    }
   }
 
-
+// 文字 主题颜色
   &-fontColor {
+
     // 活泼主题
     &-blue_1 {
       color: $blue_f1;
@@ -167,6 +210,10 @@
 
     &-pink_1 {
       color: $pink_f1;
+    }
+
+    &-gold_1 {
+      color: $gold_f1;
     }
   }
 }

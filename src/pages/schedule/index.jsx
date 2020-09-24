@@ -12,12 +12,13 @@ import ScheduleTop from './components/ScheduleTop'
 import CourseDetailFloatLayout from './components/CourseDetailFloatLayout'
 import ScheduleFooter from './components/ScheduleFooter'
 import UpdateNotice from '../../components/UpdateNotice'
+import HelpNotice from '../../components/HelpNotice'
 import './index.scss'
 
 function Schedule(props) {
   const { bizData, uiData, enter, userType } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
-  const { showUpdateNotice, courseDetailFLData } = uiData
+  const { showUpdateNotice, showHelpNotice, courseDetailFLData } = uiData
 
   useEffect(() => {
     enter({ userType })
@@ -51,6 +52,7 @@ function Schedule(props) {
     <View className='schedule'>
 
       { showUpdateNotice && <UpdateNotice /> }
+      { showHelpNotice && <HelpNotice /> }
 
       <View className='schedule-header'>
 
