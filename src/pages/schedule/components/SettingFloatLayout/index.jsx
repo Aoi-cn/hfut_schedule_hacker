@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Switch, Text, Picker } from '@tarojs/components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { AtFloatLayout } from 'taro-ui'
+import { AtFloatLayout, AtActionSheet, AtActionSheetItem } from 'taro-ui'
 
 import * as scheduleActions_ from '../../../../actions/schedule'
 import * as loginActions_ from '../../../../actions/login'
@@ -14,11 +14,12 @@ import './index.scss'
 function SettingFloatLayout(props) {
   const { userConfig, userType, scheduleActions, loginActions, isOpened, onClose } = props
   const { theme, showAiXin } = userConfig
+  const [showSetBackground, setShowSetBackground] = useState(false)
 
   const themeRange = [
     { name: '默认', value: 0 },
     { name: '活泼', value: 1 },
-    { name: '莫兰蒂', value: 2 },
+    { name: '莫兰迪', value: 2 },
   ]
 
   const handleUnbindHerClick = () => {
@@ -83,11 +84,72 @@ function SettingFloatLayout(props) {
     })
   }
 
+  const handleSettingImg = () => {
+    Taro.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有，在H5浏览器端支持使用 `user` 和 `environment`分别指定为前后摄像头
+      success: async function (chooseImgRes) {
+        // 选择成功了一张图片，先清空本地的缓存图片
+        await Taro.getSavedFileList({
+          success: function (savedFileRes) {
+            if (savedFileRes.fileList.length > 0) {
+              Taro.removeSavedFile({
+                filePath: savedFileRes.fileList[0].filePath,
+                complete: function (removeRes) {
+                  console.log(removeRes)
+                }
+              })
+            }
+          }
+        })
+        const tempFilePath = chooseImgRes.tempFilePaths[0]
+        await Taro.saveFile({
+          tempFilePath: tempFilePath,
+          success: function (saveFileRes) {
+            const savedFilePath = saveFileRes.savedFilePath
+            scheduleActions.updateBizData({ backgroundPath: savedFilePath })
+          }
+        })
+        Taro.showToast({
+          title: '设置成功',
+          icon: 'success',
+          duration: 1000
+        })
+      }
+    })
+  }
+
+  const handleDeleteImg = () => {
+    Taro.getSavedFileList({
+      success: function (savedFileRes) {
+        if (savedFileRes.fileList.length > 0) {
+          Taro.removeSavedFile({
+            filePath: savedFileRes.fileList[0].filePath,
+            complete: function () {
+              scheduleActions.updateBizData({ backgroundPath: '' })
+              Taro.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 1000
+              })
+            }
+          })
+        }
+      }
+    })
+  }
+
+  const handleSettingClose = () => {
+    setShowSetBackground(false)
+    onClose()
+  }
+
   return (
     <AtFloatLayout
       isOpened={isOpened}
       className='settingFloatLayout'
-      onClose={onClose}
+      onClose={handleSettingClose}
     >
       <View className='settingFloatLayout-header'>课表设置</View>
 
@@ -101,10 +163,15 @@ function SettingFloatLayout(props) {
           onChange={e => handleThemePickerChange(e)}
         >
           <View className='settingFloatLayout-content-item'>
-            <Text>更换课表主题</Text>
+            <Text>更换配色主题</Text>
             <IconFont name='arrow-right' size={54} color='#60646b' />
           </View>
         </Picker>
+
+        <View className='settingFloatLayout-content-item' onClick={() => setShowSetBackground(true)}>
+          <Text>设置背景图片</Text>
+          <IconFont name='arrow-right' size={54} color='#60646b' />
+        </View>
 
         {
           userType === 'me' &&
@@ -127,6 +194,15 @@ function SettingFloatLayout(props) {
         </View>
 
       </View>
+
+      <AtActionSheet isOpened={showSetBackground} onClose={() => setShowSetBackground(false)} cancelText='取消' title={`注：选择好图片后点击左下角的“预览-编辑”\n可以对图片进行裁剪哦！`}>
+        <AtActionSheetItem onClick={handleSettingImg}>
+          从相册选取图片
+        </AtActionSheetItem>
+        <AtActionSheetItem onClick={handleDeleteImg} className='settingFloatLayout-actionSheet-danger'>
+          删除已选择的图片
+        </AtActionSheetItem>
+      </AtActionSheet>
 
     </AtFloatLayout >
   )

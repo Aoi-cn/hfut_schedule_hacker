@@ -2,8 +2,8 @@
 
 .courseBox {
   width: 100%;
-  height: 200px;
-  border: 1px solid #eaeaea;
+  opacity: 0.88;
+  background-color: rgba(255, 0, 0, 0);
   box-sizing: border-box;
   border-top: 0;
   border-right: 0;
@@ -12,30 +12,58 @@
   justify-content: center;
   position: relative;
 
+  &:active {
+    background-color: #f3f4f5;
+  }
+
   &-4 {
     border-bottom: 0;
   }
 
   &-course {
     position: absolute;
-    height: 195px;
-    width: 96px;
-    border-radius: 10px;
+    width: 97px;
     padding: 2px;
+    border-radius: 10px;
     box-sizing: border-box;
-    // text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    left: 5px;
+    bottom: 5px;
+
+    &:active {
+      opacity: 0.7;
+    }
+
+    &-boxType {
+
+      &_0 {
+        height: 98%;
+      }
+  
+      &_1 {
+        height: 194px;
+      }
+  
+      &_2 {
+        height: 98%;
+      }
+  
+      &_3 {
+        bottom: 6px;
+        height: 393px;
+      }
+    }
 
     &__doubleLeft {
-      left: 2px;
-      width: 47px;
+      left: 5px;
+      width: 48px;
     }
 
     &__doubleRight {
-      left: 51px;
-      width: 47px;
+      left: 54px;
+      width: 48px;
     }
 
     &-name {
@@ -55,10 +83,40 @@
     }
   }
 
+  &-boxType {
+
+    &_0 {
+      height: 100px;
+      // background-color: green;
+    }
+
+    &_1 {
+      height: 200px;
+      // background-color: yellow;
+    }
+
+    &_2 {
+      height: 299px;
+      // background-color: red;
+    }
+
+    &_3 {
+      height: 399px;
+      // background-color: blue;
+    }
+  }
+
+  // &-null {
+  // }
+
 // 盒子 主题颜色
   &-boxColor {
 
     // 默认主题
+    &-init_0 {
+      background-color: #000000;
+    }
+
     &-blue_0 {
       background-color: $blue_b0;
     }
@@ -100,6 +158,10 @@
     }
 
     // 活泼主题
+    &-init_1 {
+      background-color: #000000;
+    }
+
     &-blue_1 {
       background-color: $blue_b1;
 
@@ -138,6 +200,10 @@
     }
 
     // 莫兰蒂主题
+    &-init_2 {
+      background-color: #000000;
+    }
+
     &-blue_2 {
       background-color: $blue_b2;
 

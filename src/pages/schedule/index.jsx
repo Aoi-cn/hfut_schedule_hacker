@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Taro, { usePullDownRefresh } from '@tarojs/taro'
 import { connect } from 'react-redux'
-import { View } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 
 import * as actions from '../../actions/schedule'
 import WhiteTable from '../../components/schedule-component/WhiteTable'
@@ -16,13 +16,24 @@ import HelpNotice from '../../components/HelpNotice'
 import './index.scss'
 
 function Schedule(props) {
-  const { bizData, uiData, enter, userType } = props
-  const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
+  const { bizData, uiData, enter, userType, updateBizData } = props
+  const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix, backgroundPath } = bizData
   const { showUpdateNotice, showHelpNotice, courseDetailFLData } = uiData
 
   useEffect(() => {
     enter({ userType })
   }, [enter, userType])
+
+  useEffect(() => {
+    console.log('执行！！！！！')
+    Taro.getSavedFileList({
+      success: function (savedFileRes) {
+        if (savedFileRes.fileList.length > 0){
+          updateBizData({ backgroundPath: savedFileRes.fileList[0].filePath })
+        }
+      }
+    })
+  }, [updateBizData])
 
   usePullDownRefresh(async () => {
     await props.updateScheduleData({ userType })
@@ -51,8 +62,8 @@ function Schedule(props) {
   return (
     <View className='schedule'>
 
-      { showUpdateNotice && <UpdateNotice /> }
-      { showHelpNotice && <HelpNotice /> }
+      { showUpdateNotice && <UpdateNotice />}
+      { showHelpNotice && <HelpNotice />}
 
       <View className='schedule-header'>
 
@@ -81,6 +92,10 @@ function Schedule(props) {
         courseDetailFLData={courseDetailFLData}
         onClose={() => props.updateUiData({ courseDetailFLData: { isOpened: false } })}
       />
+
+      <View className='schedule-background'>
+        <Image style='width: 100%; height: 100%; opacity: 1' mode='scaleToFill' src={backgroundPath} />
+      </View>
     </View>
   )
 }

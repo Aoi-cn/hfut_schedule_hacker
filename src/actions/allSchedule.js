@@ -21,8 +21,8 @@ export const updateScheduleData = (payload) => async (dispatch) => {
   await dispatch(updateUiData({ diff: false }))
 
   const res = await GET('/schedule/schedule', { clazz })
-  const { scheduleData, lessonIds } = res
-  const scheduleMatrix = dataToMatrix(scheduleData, lessonIds)
+  const { scheduleData, lessonIds, timeTable: { courseUnitList: timeTable } } = res
+  const scheduleMatrix = dataToMatrix(scheduleData, lessonIds, timeTable)
   scheduleMatrix.map((weekData) => {
     weekData.map((dayData) => {
       dayData.map((courseBoxList) => {
@@ -68,7 +68,7 @@ export const enter = () => async (dispatch) => {
     })
   }
   const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()
-  dispatch(updateBizData({ dayLineMatrix: dayLineMatrix, currentWeekIndex }))
+  dispatch(updateBizData({ dayLineMatrix: dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
   Taro.getStorage({ key: 'selectInfo' })
     .then(async ({ data: selectInfo }) => {
       dispatch(updateBizData({ selectInfo }))

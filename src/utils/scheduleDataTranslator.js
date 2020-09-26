@@ -91,6 +91,9 @@ export default (scheduleData, lessonIds, timeTable) => {
         teacher = splitdSpace[5].split(';')[0]
       } else if (splitdSpace.length == 5) {
         teacher = splitdSpace[4].split(';')[0]
+        if (!teacher) {
+          teacher = splitdSpace[3].split(';')[0]
+        }
       } else if (splitdSpace.length == 4) {
         teacher = splitdSpace[3].split(';')[0]
       }

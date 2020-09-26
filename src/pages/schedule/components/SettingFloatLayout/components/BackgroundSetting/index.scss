@@ -1,4 +1,4 @@
-@import "../../../../style/theme.scss";
+@import "../../../../../../style/theme.scss";
 
 .settingFloatLayout {
   color: $color-semi;
@@ -57,13 +57,6 @@
     background-color: #e8e8e8;
     margin-bottom: 48px;
     margin-top: 18px;
-  }
-
-  &-actionSheet {
-
-    &-danger {
-      color: #f33f3f;
-    }
   }
 
 }

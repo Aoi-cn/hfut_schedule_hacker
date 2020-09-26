@@ -57,7 +57,7 @@ export default () => {
         }
       </View>
 
-      <View className='updateNotice-mask'></View>
+      <View className='updateNotice-mask' onClick={handleClose}></View>
     </View>
   )
 }

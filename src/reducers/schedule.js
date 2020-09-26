@@ -2,8 +2,8 @@ import { UPDATE_BIZDATA, UPDATE_UIDATA, LOGOUT } from '../constants/schedule'
 
 const INITIAL_STATE = {
   bizData: {
-    weekIndex: -1, // 课表上展示的周数
-    currentWeekIndex: 0, // 现实中的周数
+    weekIndex: 0, // 课表上展示的周数
+    currentWeekIndex: 1, // 现实中的周数
     currentDayIndex: 0,
     scheduleMatrix: [],
     dayLineMatrix: [],
@@ -13,6 +13,7 @@ const INITIAL_STATE = {
       theme: 0,
       showAiXin: true,
     },
+    backgroundPath: '',
   },
   uiData: {
     diff: false,

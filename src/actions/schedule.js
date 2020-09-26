@@ -10,7 +10,7 @@ import dataToMatrix from '../utils/scheduleDataTranslator'
 import * as loginActions from './login'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 import scheduleDiffTool from '../utils/scheduleDiffTool'
-import { config, updateState, updateInfo } from '../config/config.default'
+import { config, updateState } from '../config/config.default'
 
 const { version } = config
 
@@ -36,13 +36,14 @@ export const enter = ({ userType }) => async (dispatch) => {
         return {}
       }
 
+      // 确保diff按钮是关闭的
+      dispatch(updateUiData({ diff: false }))
+
       // 版本正常，且本地缓存正常
       const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
       dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex, userConfig }))
       // 每次进入的自动更新
       dispatch(updateScheduleData({ userType }))
-      // 确保diff按钮是关闭的
-      dispatch(updateUiData({ diff: false }))
     })
     .catch((e) => {
       // 本地缓存获取失败，重新登录
@@ -116,16 +117,9 @@ const handleCheckUpdate = () => async (dispatch) => {
 
 
 // 更新数据
-export const updateScheduleData = ({ userType }) => async (dispatch) => {
+export const updateScheduleData = ({ userType }) => async (dispatch, getState) => {
   Taro.showNavigationBarLoading()
   Taro.setNavigationBarTitle({ title: '正在更新...' })
-
-  // 确保diff按钮是关闭的
-  dispatch(updateUiData({ diff: false }))
-
-  // 生成一个时间线数据矩阵，先渲染时间线
-  const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()
-  dispatch(updateBizData({ dayLineMatrix: dayLineMatrix }))
 
   // 进行课表更新逻辑
   const userData = Taro.getStorageSync(userType)
@@ -144,6 +138,7 @@ export const updateScheduleData = ({ userType }) => async (dispatch) => {
   if (!res.body.currentWeek) {
     return dispatch(reLogin({ userType }))
   }
+  reLoginTime = 0
   // 获取课表数据
   const scheduleData = res.body.lessons
   const lessonIds = res.body.lessonIds
@@ -151,13 +146,13 @@ export const updateScheduleData = ({ userType }) => async (dispatch) => {
   // 转化为UI可识别的matrix
   let scheduleMatrix = dataToMatrix(scheduleData, lessonIds, timeTable)
   // 颜色持久化
-  scheduleMatrix = drawColor({ userType, scheduleMatrix })
+  try {
+    scheduleMatrix = drawColor({ userType, scheduleMatrix })
+  } catch (error) { console.log('颜色持久化出错') }
 
-  // 判断本地缓存有没有数据
-  const { scheduleMatrix: localScheduleMatrix } = Taro.getStorageSync(userType)
-  if (localScheduleMatrix.length === 0) {
-    dispatch(updateBizData({ scheduleMatrix, currentWeekIndex, weekIndex: currentWeekIndex }))
-  } else {
+  // 适应场景：刚打开课表就点情侣课表
+  const { login: { bizData: { userType: userType_ } } } = getState()
+  if (userType === userType_) {
     dispatch(updateBizData({ scheduleMatrix }))
   }
 
@@ -215,15 +210,18 @@ const drawColor = ({ userType, scheduleMatrix }) => {
   return newScheduleMatrix
 }
 
+// 判断尝试了多少次重新登陆。啊万恶的全局变量。
+let reLoginTime = 0
 
 // key失效，自动登录更新key
 export const reLogin = ({ userType }) => async (dispatch) => {
   const localUserData = Taro.getStorageSync(userType)
   const { userInfo } = localUserData
-  const { username, password } = userInfo
+  const { username, password, campus } = userInfo
   const res = await GET('/login', { username, password })
-  const { success, msg, key } = res
-  if (success) {
+  const { success, key } = res
+  if (success && reLoginTime < 4) {
+    reLoginTime++
     await Taro.setStorage({
       key: userType,
       data: {
@@ -231,13 +229,16 @@ export const reLogin = ({ userType }) => async (dispatch) => {
         userInfo: {
           username,
           password,
-          key
+          key,
+          campus,
         },
       }
     })
     dispatch(updateScheduleData({ userType }))
   } else {
-    console.log(msg)
+    reLoginTime = 0
+    Taro.hideNavigationBarLoading()
+    Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
     Taro.showToast({
       title: '课表更新出错。如需更新成绩，请尝试重新登陆~',
       icon: 'none',

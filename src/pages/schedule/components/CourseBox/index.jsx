@@ -5,13 +5,15 @@ import { View } from '@tarojs/components'
 import { updateUiData } from '../../../../actions/schedule'
 import '../../../../style/courseBox.scss'
 
-export default ({ courseBoxList, number }) => {
+export default ({ boxType, courseBoxList, number }) => {
   const courseBoxData = courseBoxList[0] ? courseBoxList[0] : {}
   const courseBoxData_ = courseBoxList[1] ? courseBoxList[1] : {}
   const { name = "", clazzRoom, color } = courseBoxData
   const { name: name_ = "", color: color_ } = courseBoxData_
   const { theme } = useSelector(state => state.schedule.bizData.userConfig)
   const dispatch = useDispatch()
+
+  if (!boxType && boxType !== 0) { return <View className='courseBox-null'></View> }
 
   const handleClick = (data) => {
     if (!name) { return }
@@ -44,15 +46,15 @@ export default ({ courseBoxList, number }) => {
   }
 
   return (
-    <View className={`courseBox courseBox-${number}`}>
-      <View className={`courseBox-course courseBox-boxColor-${color}_${theme} courseBox-course__${courseBoxList.length > 1 ? 'doubleLeft' : ''}`} onClick={() => handleClick(courseBoxData)}>
+    <View className={`courseBox courseBox-${number} courseBox-boxType_${boxType}`}>
+      <View className={`courseBox-course courseBox-course-boxType_${boxType} courseBox-boxColor-${color}_${theme} courseBox-course__${courseBoxList.length > 1 ? 'doubleLeft' : ''}`} onClick={() => handleClick(courseBoxData)}>
         <View className={`courseBox-course-name courseBox-fontColor-${color}_${theme}`}>{courseName}</View>
         <View className={`courseBox-course-clazzRoom courseBox-fontColor-${color}_${theme}`}>{courseBoxList.length > 1 ? '' : clazzRoom}</View>
       </View>
       {
         courseBoxList.length > 1 &&
-        <View className={`courseBox-course courseBox-course__doubleRight courseBox-course-${color_}`} onClick={() => handleClick(courseBoxData_)}>
-          <View className={`courseBox-course-name courseBox-fontColor-${color}_${theme}`}>{courseName_}</View>
+        <View className={`courseBox-course courseBox-course-boxType_${boxType} courseBox-course__doubleRight courseBox-boxColor-${color_}_${theme}`} onClick={() => handleClick(courseBoxData_)}>
+          <View className={`courseBox-course-name courseBox-fontColor-${color_}_${theme}`}>{courseName_}</View>
         </View>
       }
     </View>

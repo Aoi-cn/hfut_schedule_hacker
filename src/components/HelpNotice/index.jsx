@@ -35,7 +35,7 @@ export default () => {
         }
       </View>
 
-      <View className='helpNotice-mask'></View>
+      <View className='helpNotice-mask' onClick={handleClose}></View>
     </View>
   )
 }

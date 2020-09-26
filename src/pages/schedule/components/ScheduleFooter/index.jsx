@@ -6,9 +6,9 @@ import * as actions from '../../../../actions/schedule'
 import IconFont from '../../../../components/iconfont'
 import './index.scss'
 
-function ScheduleFooter (props) {
+function ScheduleFooter(props) {
   const { bizData, uiData, userType, changeWeekIndex } = props
-  const { weekIndex,  scheduleMatrix } = bizData
+  const { weekIndex, currentWeekIndex, scheduleMatrix } = bizData
   const { diff } = uiData
 
   const handleDiff = () => {
@@ -28,6 +28,12 @@ function ScheduleFooter (props) {
         userType === 'her' &&
         <View className={`schedule-footer-pop schedule-footer-pop-${diff ? 'active' : ''}`} onClick={handleDiff} >
           <Text className='schedule-footer-pop-text'>对比</Text>
+        </View>
+      }
+      {
+        weekIndex !== currentWeekIndex &&
+        <View className='schedule-footer-pop' onClick={() => changeWeekIndex(currentWeekIndex)}>
+          <Text className='schedule-footer-pop-text'>定位</Text>
         </View>
       }
       <View className='schedule-footer-pop' onClick={() => changeWeekIndex(weekIndex + 1)}>

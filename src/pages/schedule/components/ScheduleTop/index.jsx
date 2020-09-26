@@ -75,9 +75,6 @@ export default (props) => {
   }
 
   const handleAiXinClick = () => {
-    // 关闭diff，防止diff状态下切换回自己的课表后再切换回情侣课表，diff按钮无法恢复
-    dispatch(updateUiData({ diff: false }))
-
     Taro.getStorage({ key: 'her' })
       .then(() => {
         dispatch(changeUserType({ userType }))
