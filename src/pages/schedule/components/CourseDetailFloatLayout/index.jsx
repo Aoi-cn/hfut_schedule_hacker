@@ -85,7 +85,12 @@ export default (props) => {
       className='courseDetailFloatLayout'
       onClose={onClose}
     >
-      <View className='courseDetailFloatLayout-header'>{name}</View>
+      <View className='courseDetailFloatLayout-header'>
+        {name}
+        <View className='courseDetailFloatLayout-header-close' onClick={onClose}>
+          <IconFont name='shibai' size={48} color='#60646b' />
+        </View>
+      </View>
 
       <View className='courseDetailFloatLayout-content'>
         {

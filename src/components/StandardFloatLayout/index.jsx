@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text } from '@tarojs/components'
 import { AtFloatLayout } from 'taro-ui'
 import CustomButton from '../CustomButton'
+import IconFont from '../iconfont'
 
 import './index.scss'
 
@@ -48,7 +49,12 @@ function StandardFloatLayout(props) {
       className='standardFloatLayout'
       onClose={onClose}
     >
-      <View className='standardFloatLayout-header'>{title}</View>
+      <View className='standardFloatLayout-header'>
+        {title}
+        <View className='standardFloatLayout-header-close' onClick={onClose}>
+          <IconFont name='shibai' size={48} color='#60646b' />
+        </View>
+      </View>
 
       <View className={`standardFloatLayout-content standardFloatLayout-content-${contentAlign}`}>
         <Text className='standardFloatLayout-content-content'>{content}</Text>

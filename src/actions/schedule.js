@@ -22,13 +22,29 @@ export const enter = ({ userType }) => async (dispatch) => {
   Taro.getStorage({ key: userType })
     .then(async (userData) => {
       const { scheduleMatrix } = userData.data  // 读取本地的课表数据
-      let { userConfig } = Taro.getStorageSync('config')
+
+      //读取本地设置
+      const localConfig = Taro.getStorageSync('config')
+      let { userConfig } = localConfig
       if (!userConfig) {
         userConfig = config.userConfig
         Taro.setStorage({
           key: 'config',
           data: config
         })
+      } else {
+        for (const configKey in config.userConfig) {
+          if (!userConfig[configKey]) {
+            userConfig[configKey] = config.userConfig[configKey]
+            Taro.setStorage({
+              key: 'config',
+              data: {
+                ...localConfig,
+                userConfig,
+              }
+            })
+          }
+        }
       }
       // 判断版本更新：
       const isUpdateOk = await dispatch(handleCheckUpdate())

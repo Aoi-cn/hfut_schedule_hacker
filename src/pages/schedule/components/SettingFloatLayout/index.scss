@@ -4,12 +4,22 @@
   color: $color-semi;
 
   &-header {
-    margin-top: 24px;
-    margin-bottom: 36px;
+    margin: 42px 0;
+    margin-bottom: 56px;
     font-size: 36px;
     font-weight: bold;
     color: $color-semi;
     text-align: center;
+
+    &-close {
+      position: absolute;
+      right: 42px;
+      top: 42px;
+
+      &:active {
+        opacity: 0.6;
+      }
+    }
   }
 
   &-content {
@@ -61,7 +71,18 @@
 
   &-actionSheet {
 
+    &-item {
+      font-size: 34px;
+      color: $color-semi;
+
+      // &_sliderText {
+      //   font-size: 28px;
+      //   color: $color-grey;
+      // }
+    }
+
     &-danger {
+      font-size: 34px;
       color: #f33f3f;
     }
   }

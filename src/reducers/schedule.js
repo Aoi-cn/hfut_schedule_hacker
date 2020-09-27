@@ -12,6 +12,8 @@ const INITIAL_STATE = {
     userConfig: {
       theme: 0,
       showAiXin: true,
+      imgOpacity: 0.9,
+      courseOpacity: 0.88,
     },
     backgroundPath: '',
   },

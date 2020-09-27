@@ -11,6 +11,7 @@ export default ({ boxType, courseBoxList, number }) => {
   const { name = "", clazzRoom, color } = courseBoxData
   const { name: name_ = "", color: color_ } = courseBoxData_
   const { theme } = useSelector(state => state.schedule.bizData.userConfig)
+  const { courseOpacity } = useSelector(state => state.schedule.bizData.userConfig)
   const dispatch = useDispatch()
 
   if (!boxType && boxType !== 0) { return <View className='courseBox-null'></View> }
@@ -46,7 +47,7 @@ export default ({ boxType, courseBoxList, number }) => {
   }
 
   return (
-    <View className={`courseBox courseBox-${number} courseBox-boxType_${boxType}`}>
+    <View className={`courseBox courseBox-${number} courseBox-boxType_${boxType}`} style={`opacity: ${courseOpacity}`}>
       <View className={`courseBox-course courseBox-course-boxType_${boxType} courseBox-boxColor-${color}_${theme} courseBox-course__${courseBoxList.length > 1 ? 'doubleLeft' : ''}`} onClick={() => handleClick(courseBoxData)}>
         <View className={`courseBox-course-name courseBox-fontColor-${color}_${theme}`}>{courseName}</View>
         <View className={`courseBox-course-clazzRoom courseBox-fontColor-${color}_${theme}`}>{courseBoxList.length > 1 ? '' : clazzRoom}</View>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Taro from '@tarojs/taro'
-import { View, Switch, Text, Picker } from '@tarojs/components'
+import { View, Switch, Text, Picker, Slider } from '@tarojs/components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { AtFloatLayout, AtActionSheet, AtActionSheetItem } from 'taro-ui'
@@ -13,7 +13,7 @@ import './index.scss'
 
 function SettingFloatLayout(props) {
   const { userConfig, userType, scheduleActions, loginActions, isOpened, onClose } = props
-  const { theme, showAiXin } = userConfig
+  const { theme, showAiXin, imgOpacity, courseOpacity } = userConfig
   const [showSetBackground, setShowSetBackground] = useState(false)
 
   const themeRange = [
@@ -44,6 +44,16 @@ function SettingFloatLayout(props) {
         }
       }
     })
+  }
+
+  const handleImgOpacityChange = (e) => {
+    const opacity = e.detail.value
+    updateUserConfig({ imgOpacity: opacity / 100 })
+  }
+
+  const handleCourseOpacityChange = (e) => {
+    const opacity = e.detail.value
+    updateUserConfig({ courseOpacity: opacity / 100 })
   }
 
   const updateUserConfig = (setting) => {
@@ -109,6 +119,28 @@ function SettingFloatLayout(props) {
           success: function (saveFileRes) {
             const savedFilePath = saveFileRes.savedFilePath
             scheduleActions.updateBizData({ backgroundPath: savedFilePath })
+
+            const type = savedFilePath.split('.')[savedFilePath.split('.').length - 1]
+            const { userInfo: { username } } = Taro.getStorageSync('me')
+            Taro.uploadFile({
+              url: 'https://oss.cavano.vip',
+              filePath: savedFilePath,
+              name: 'file',
+              formData: {
+                name: savedFilePath,
+                key: `backgroundImg/${username}-${(new Date()).valueOf()}.${type}`,
+                policy: "eyJleHBpcmF0aW9uIjoiMjAyMC0xMi0wMVQxMjowMDowMC4wMDBaIiwiY29uZGl0aW9ucyI6W1siY29udGVudC1sZW5ndGgtcmFuZ2UiLDAsMTA0ODU3NjAwMF1dfQ==",
+                OSSAccessKeyId: "LTAI4GBfJcvNtskmbaNkyGoU",
+                success_action_status: "200",
+                signature: "Rc4ftUk/sn75q36BVOijwJSDG9g=",
+              },
+              success: function () {
+                console.log('chooseImage success, temp path is: ', savedFilePath)
+              },
+              fail: function ({ errMsg }) {
+                console.log('upladImage fail, errMsg is: ', errMsg)
+              },
+            })
           }
         })
         Taro.showToast({
@@ -121,18 +153,25 @@ function SettingFloatLayout(props) {
   }
 
   const handleDeleteImg = () => {
-    Taro.getSavedFileList({
-      success: function (savedFileRes) {
-        if (savedFileRes.fileList.length > 0) {
-          Taro.removeSavedFile({
-            filePath: savedFileRes.fileList[0].filePath,
-            complete: function () {
-              scheduleActions.updateBizData({ backgroundPath: '' })
-              Taro.showToast({
-                title: '删除成功',
-                icon: 'success',
-                duration: 1000
-              })
+    Taro.showModal({
+      title: '确定要清空背景吗？',
+      success: function (res) {
+        if (res.confirm) {
+          Taro.getSavedFileList({
+            success: function (savedFileRes) {
+              if (savedFileRes.fileList.length > 0) {
+                Taro.removeSavedFile({
+                  filePath: savedFileRes.fileList[0].filePath,
+                  complete: function () {
+                    scheduleActions.updateBizData({ backgroundPath: '' })
+                    Taro.showToast({
+                      title: '删除成功',
+                      icon: 'success',
+                      duration: 1000
+                    })
+                  }
+                })
+              }
             }
           })
         }
@@ -151,7 +190,12 @@ function SettingFloatLayout(props) {
       className='settingFloatLayout'
       onClose={handleSettingClose}
     >
-      <View className='settingFloatLayout-header'>课表设置</View>
+      <View className='settingFloatLayout-header'>
+        课表设置
+        <View className='settingFloatLayout-header-close' onClick={onClose}>
+          <IconFont name='shibai' size={48} color='#60646b' />
+        </View>
+      </View>
 
       <View className='settingFloatLayout-content'>
 
@@ -195,12 +239,44 @@ function SettingFloatLayout(props) {
 
       </View>
 
-      <AtActionSheet isOpened={showSetBackground} onClose={() => setShowSetBackground(false)} cancelText='取消' title={`注：选择好图片后点击左下角的“预览-编辑”\n可以对图片进行裁剪哦！`}>
+      <AtActionSheet isOpened={showSetBackground} onClose={() => setShowSetBackground(false)} cancelText='取消' title='小提示：选择好图片后，可以点击左下角的“预览-编辑”对图片进行裁剪！'>
         <AtActionSheetItem onClick={handleSettingImg}>
-          从相册选取图片
+          <View className='settingFloatLayout-actionSheet-item'>
+            从相册选取图片
+          </View>
+        </AtActionSheetItem>
+        <AtActionSheetItem>
+          <View className='settingFloatLayout-actionSheet-item'>
+            <Text className='settingFloatLayout-actionSheet-item_sliderText'>设置图片透明度</Text>
+            <Slider
+              step={1}
+              value={imgOpacity * 100}
+              min={0}
+              max={100}
+              showValue
+              activeColor='#29a2ff'
+              onchange={handleImgOpacityChange}
+            />
+          </View>
+        </AtActionSheetItem>
+        <AtActionSheetItem>
+          <View className='settingFloatLayout-actionSheet-item'>
+            <Text className='settingFloatLayout-actionSheet-item_sliderText'>设置课程透明度</Text>
+            <Slider
+              step={1}
+              value={courseOpacity * 100}
+              min={0}
+              max={100}
+              showValue
+              activeColor='#29a2ff'
+              onchange={handleCourseOpacityChange}
+            />
+          </View>
         </AtActionSheetItem>
         <AtActionSheetItem onClick={handleDeleteImg} className='settingFloatLayout-actionSheet-danger'>
-          删除已选择的图片
+          <View className='settingFloatLayout-actionSheet-danger'>
+            删除已选择的图片
+          </View>
         </AtActionSheetItem>
       </AtActionSheet>
 

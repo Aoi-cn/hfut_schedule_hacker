@@ -10,6 +10,16 @@
     font-weight: bold;
     color: $color-semi;
     text-align: center;
+
+    &-close {
+      position: absolute;
+      right: 42px;
+      top: 42px;
+
+      &:active {
+        opacity: 0.6;
+      }
+    }
   }
 
   &-content {

@@ -12,6 +12,8 @@ export const config = {
   userConfig: {
     showAiXin: true,
     theme: 0,
+    imgOpacity: 0.9,
+    courseOpacity: 0.88,
   }
 }
 
@@ -19,7 +21,7 @@ export const updateInfo = {
   features: [
     {
       info: '1.自定义课表背景',
-      comment: '不仅仅是纯白的！现在可以自己上传图片设置背景~ ',
+      comment: '不仅仅是纯白的！现在可以自己上传图片设置背景~ 快点击右上角的加号-课表设置试试吧！',
       type: 2,
     },
     {
@@ -44,7 +46,7 @@ export const helpInfo = [
   },
   {
     info: '2.为什么会出现“课表更新失败”?',
-    comment: '导致该情况的原因有很多，比如：更改了教务密码、登陆时校区选择错误、网络不稳定等。建议推出后台重进，或者退出登录重新绑定。',
+    comment: '导致该情况的原因有很多，比如：更改了教务密码、登陆时校区选择错误、网络不稳定等。建议退出后台重进，或者退出登录重新绑定。',
   },
   {
     info: '3.以后会推出查看绩点排名的功能吗？',

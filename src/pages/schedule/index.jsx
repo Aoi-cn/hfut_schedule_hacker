@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Taro, { usePullDownRefresh } from '@tarojs/taro'
 import { connect } from 'react-redux'
-import { View, Image } from '@tarojs/components'
+import { View } from '@tarojs/components'
 
 import * as actions from '../../actions/schedule'
 import WhiteTable from '../../components/schedule-component/WhiteTable'
@@ -13,11 +13,12 @@ import CourseDetailFloatLayout from './components/CourseDetailFloatLayout'
 import ScheduleFooter from './components/ScheduleFooter'
 import UpdateNotice from '../../components/UpdateNotice'
 import HelpNotice from '../../components/HelpNotice'
+import BackgroundImg from './components/BackgroundImg'
 import './index.scss'
 
 function Schedule(props) {
   const { bizData, uiData, enter, userType, updateBizData } = props
-  const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix, backgroundPath } = bizData
+  const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
   const { showUpdateNotice, showHelpNotice, courseDetailFLData } = uiData
 
   useEffect(() => {
@@ -25,7 +26,6 @@ function Schedule(props) {
   }, [enter, userType])
 
   useEffect(() => {
-    console.log('执行！！！！！')
     Taro.getSavedFileList({
       success: function (savedFileRes) {
         if (savedFileRes.fileList.length > 0){
@@ -93,9 +93,8 @@ function Schedule(props) {
         onClose={() => props.updateUiData({ courseDetailFLData: { isOpened: false } })}
       />
 
-      <View className='schedule-background'>
-        <Image style='width: 100%; height: 100%; opacity: 1' mode='scaleToFill' src={backgroundPath} />
-      </View>
+      <BackgroundImg />
+      
     </View>
   )
 }
