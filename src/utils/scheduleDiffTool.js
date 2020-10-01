@@ -9,7 +9,8 @@ export default (targetScheduleM, mineScheduleM) => {
       dayDataT.map((courseBoxListT, courseIndex) => {
         courseBoxListT.map((courseBoxDataT) => {
           const courseBoxDataM = mineScheduleM[weekIndex][dayIndex][courseIndex][0]
-          
+          const { timeIndexes = [] } = courseBoxDataM
+          const boxType = timeIndexes[timeIndexes.length - 1] - timeIndexes[0] + 1
           // if (courseBoxDataT.name === '工程力学B') {
           //     console.log('----------我有ta没有-----------')
           //     console.log('他的：' + courseBoxDataT.name + ' --- weekIndex=' + weekIndex + ' --- dayIndex=' + dayIndex + ' --- ' + 'courseIndex=' + courseIndex)
@@ -22,6 +23,7 @@ export default (targetScheduleM, mineScheduleM) => {
           } else if (courseBoxDataM.name && !courseBoxDataT.name) {
             // 我有ta没有
             courseBoxDataT.color = 'yellow'
+            courseBoxDataT.timeIndexes = [1, boxType]
           } else if (courseBoxDataT.name && !courseBoxDataM.name) {
             // ta有我没有
             courseBoxDataT.color = 'blue'

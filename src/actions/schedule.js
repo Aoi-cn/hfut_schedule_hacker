@@ -21,7 +21,7 @@ export const enter = ({ userType }) => async (dispatch) => {
 
   Taro.getStorage({ key: userType })
     .then(async (userData) => {
-      const { scheduleMatrix } = userData.data  // 读取本地的课表数据
+      const { scheduleMatrix, timeTable } = userData.data  // 读取本地的课表数据
 
       //读取本地设置
       const localConfig = Taro.getStorageSync('config')
@@ -55,9 +55,47 @@ export const enter = ({ userType }) => async (dispatch) => {
       // 确保diff按钮是关闭的
       dispatch(updateUiData({ diff: false }))
 
+      // 格式化timeTable
+      for (let i = 0; i < 4; i++) {
+        timeTable.push({ endTimeText: 'sleep' })
+      }
+
+      // 不是第一次登录
+      if (scheduleMatrix.length !== 0) {
+        // 写入自定义事件
+        let customSchedule = Taro.getStorageSync('custom')
+        customSchedule = customSchedule ? customSchedule : {}
+        const userCustomScheduleM = customSchedule[userType]
+        if (!userCustomScheduleM) {
+          // 本地还没有这个用户的自定义事件，那就新生成一个
+          customSchedule[userType] = dataToMatrix()
+          await Taro.setStorage({
+            key: 'custom',
+            data: customSchedule
+          })
+        } else {
+          // 本地有，那就写入
+          userCustomScheduleM.map((weekData, weekIndex) => {
+            weekData.map((dayData, dayIndex) => {
+              dayData.map((courseBoxList, timeIndex) => {
+                const courseBoxData = courseBoxList[0]
+                const { name } = courseBoxData
+                if (name) {
+                  const rawData = scheduleMatrix[weekIndex][dayIndex][timeIndex][0]
+                  // 规则：只有没课的地方才可以添加自定义事件
+                  if (!rawData.name) {
+                    scheduleMatrix[weekIndex][dayIndex][timeIndex][0] = courseBoxData
+                  }
+                }
+              })
+            })
+          })
+        }
+      }
+
       // 版本正常，且本地缓存正常
       const { dayLineMatrix, currentWeekIndex } = makeDayLineMatrix()  // 生成一个时间线矩阵
-      dispatch(updateBizData({ scheduleMatrix, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex, userConfig }))
+      dispatch(updateBizData({ scheduleMatrix, timeTable, dayLineMatrix, currentWeekIndex, weekIndex: currentWeekIndex, userConfig }))
       // 每次进入的自动更新
       dispatch(updateScheduleData({ userType }))
     })
@@ -163,13 +201,35 @@ export const updateScheduleData = ({ userType }) => async (dispatch, getState) =
   let scheduleMatrix = dataToMatrix(scheduleData, lessonIds, timeTable)
   // 颜色持久化
   try {
-    scheduleMatrix = drawColor({ userType, scheduleMatrix })
+    scheduleMatrix = dataPersistence({ userType, scheduleMatrix })
   } catch (error) { console.log('颜色持久化出错') }
+
+  for (let i = 0; i < 4; i++) {
+    timeTable.push({ endTimeText: 'sleep' })
+  }
+
+  // 写入自定义事件
+  const userCustomScheduleM = Taro.getStorageSync('custom')[userType]
+  userCustomScheduleM.map((weekData, weekIndex) => {
+    weekData.map((dayData, dayIndex) => {
+      dayData.map((courseBoxList, timeIndex) => {
+        const courseBoxData = courseBoxList[0]
+        const { name } = courseBoxData
+        if (name) {
+          const rawData = scheduleMatrix[weekIndex][dayIndex][timeIndex][0]
+          // 规则：只有没课的地方才可以添加自定义事件
+          if (!rawData.name) {
+            scheduleMatrix[weekIndex][dayIndex][timeIndex][0] = courseBoxData
+          }
+        }
+      })
+    })
+  })
 
   // 适应场景：刚打开课表就点情侣课表
   const { login: { bizData: { userType: userType_ } } } = getState()
   if (userType === userType_) {
-    dispatch(updateBizData({ scheduleMatrix }))
+    dispatch(updateBizData({ scheduleMatrix, timeTable }))
   }
 
   // 将数据存在本地
@@ -187,7 +247,8 @@ export const updateScheduleData = ({ userType }) => async (dispatch, getState) =
   Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
 }
 
-const drawColor = ({ userType, scheduleMatrix }) => {
+// 颜色持久化
+const dataPersistence = ({ userType, scheduleMatrix }) => {
   const newScheduleMatrix = _.cloneDeep(scheduleMatrix)
   const { scheduleMatrix: localScheduleMatrix } = Taro.getStorageSync(userType)
 
@@ -201,9 +262,9 @@ const drawColor = ({ userType, scheduleMatrix }) => {
     weekData.map((dayData) => {
       dayData.map((courseBoxList) => {
         courseBoxList.map((courseBoxData) => {
-          const { lessonId, color } = courseBoxData
+          const { lessonId, color, memo } = courseBoxData
           if (lessonId && color) {
-            localColorLibrary[lessonId] = color
+            localColorLibrary[lessonId] = { color, memo }
           }
         })
       })
@@ -216,7 +277,8 @@ const drawColor = ({ userType, scheduleMatrix }) => {
         courseBoxList.map((courseBoxData) => {
           const { lessonId } = courseBoxData
           if (lessonId) {
-            courseBoxData.color = localColorLibrary[lessonId]
+            courseBoxData.color = localColorLibrary[lessonId].color
+            courseBoxData.memo = localColorLibrary[lessonId].memo
           }
         })
       })
@@ -256,9 +318,9 @@ export const reLogin = ({ userType }) => async (dispatch) => {
     Taro.hideNavigationBarLoading()
     Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
     Taro.showToast({
-      title: '课表更新出错。如需更新成绩，请尝试重新登陆~',
+      title: '课表更新出错。请点击右上角加号-用前必读-查看帮助解决~',
       icon: 'none',
-      duration: 3000
+      duration: 8000
     })
   }
 }
@@ -294,8 +356,8 @@ export const updateSingleCourseColor = (payload) => async (dispatch) => {
   const { userType, newColor, courseDetailFLData: { courseDetailFLData } } = payload
   const { lessonId } = courseDetailFLData
 
-  const userData = await Taro.getStorage({ key: userType })
-  const { userInfo, scheduleData, scheduleMatrix, lessonIds } = userData.data
+  const userData = Taro.getStorageSync(userType)
+  const { scheduleMatrix } = userData
 
   // 确保diff按钮是关闭的
   dispatch(updateUiData({ diff: false }))
@@ -315,16 +377,14 @@ export const updateSingleCourseColor = (payload) => async (dispatch) => {
   Taro.setStorage({
     key: userType,
     data: {
-      userInfo,
-      scheduleData,
+      ...userData,
       scheduleMatrix,
-      lessonIds
     }
   })
   dispatch(updateBizData({ scheduleMatrix }))
   // 更新底部弹出框
   courseDetailFLData.color = newColor
-  courseDetailFLData.isOpened = false
+  // courseDetailFLData.isOpened = false
   dispatch(updateUiData({ courseDetailFLData }))
   Taro.showToast({
     title: '颜色更新成功',

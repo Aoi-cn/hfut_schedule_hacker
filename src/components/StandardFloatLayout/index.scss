@@ -3,8 +3,8 @@
 .standardFloatLayout {
 
   &-header {
-    margin: 48px 0;
-    margin-bottom: 56px;
+    margin: 36px 0;
+    margin-bottom: 48px;
     font-size: 36px;
     font-weight: bold;
     color: $color-semi;
@@ -12,8 +12,8 @@
 
     &-close {
       position: absolute;
-      right: 42px;
-      top: 42px;
+      right: 36px;
+      top: 36px;
 
       &:active {
         opacity: 0.6;

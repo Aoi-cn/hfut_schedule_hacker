@@ -41,21 +41,37 @@ export const themeColors = [
 ]
 
 export default (scheduleData, lessonIds, timeTable) => {
-  const lessonIdsColor = initLessonIdsColor(lessonIds)
 
   // 初始化scheduleMatrix
   let scheduleMatrix = []
   for (let i = 0; i < 20; i++) {
     scheduleMatrix.push([
-      [[], [], [], [], []],
-      [[], [], [], [], []],
-      [[], [], [], [], []],
-      [[], [], [], [], []],
-      [[], [], [], [], []],
-      [[], [], [], [], []],
-      [[], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], [], []],
     ])
   }
+
+  // 生成一个空scheduleMatrix
+  if (!scheduleData) {
+    scheduleMatrix.map((weekData) => {
+      weekData.map((dayData) => {
+        dayData.map((courseBoxList) => {
+          if (courseBoxList.length === 0) {
+            courseBoxList.push({})
+          }
+        })
+      })
+    })
+    return scheduleMatrix
+  }
+
+  // 给每个课程分配颜色
+  const lessonIdsColor = initLessonIdsColor(lessonIds)
 
   // 遍历scheduleData，填充scheduleMatrix
   scheduleData.map((lessonInfo) => {
@@ -96,6 +112,11 @@ export default (scheduleData, lessonIds, timeTable) => {
         }
       } else if (splitdSpace.length == 4) {
         teacher = splitdSpace[3].split(';')[0]
+      }
+
+      if (clazzRoom.indexOf('(') !== -1) {
+        const splitClazzRoom = clazzRoom.split('(')
+        clazzRoom = splitClazzRoom[splitClazzRoom.length - 2]
       }
 
       // 这门课在一周中的哪一天
@@ -145,6 +166,7 @@ export default (scheduleData, lessonIds, timeTable) => {
 
       // 填充scheduleMatrix
       const courseBoxData = {
+        type: 'course',
         name,
         credits,
         lessonId,
@@ -157,15 +179,16 @@ export default (scheduleData, lessonIds, timeTable) => {
         lessonCode,
         lessonType,
         studentNumber,
-        // timeRange: timeIndexToTime(startTime) + '~' + timeIndexToTime(endTime),
-        timeRange: timeTable ? (timeTable[startTime - 1].startTimeText + '~' + timeTable[endTime - 1].endTimeText) : '',
+        timeRange: timeTable ? (timeTable[startTime - 1].startTimeText + '-' + timeTable[endTime - 1].endTimeText) : '',
         weekIndexesZh,
         campus,
         color,
+        memo: '',
       }
 
       weekIndexes.map((weekIndex_) => {
-        const courseBoxList = scheduleMatrix[weekIndex_ - 1][dayIndex - 1][parseInt(parseInt(startTime / 2))]
+        // const courseBoxList = scheduleMatrix[weekIndex_ - 1][dayIndex - 1][parseInt(parseInt(startTime / 2))]
+        const courseBoxList = scheduleMatrix[weekIndex_ - 1][dayIndex - 1][startTime - 1]
         for (let cn = 0; cn < courseBoxList.length; cn++) {
           if (courseBoxList.length > cn) {
             const { lessonId: existCourseId } = courseBoxList[cn]
@@ -186,6 +209,7 @@ export default (scheduleData, lessonIds, timeTable) => {
           }
           courseBoxData.color = color
         }
+
         courseBoxList.push(_.cloneDeep(courseBoxData))
       })
     })

@@ -11,35 +11,22 @@ export default ({ weekScheduleData }) => {
       {
         weekScheduleData.map((dayScheduleData, i1) => {
           const boxTypeList = []
-          dayScheduleData.map((courseBoxList, boxi) => {
+          dayScheduleData.map((courseBoxList) => {
             const { timeIndexes = [] } = courseBoxList[0]
-            const boxType = timeIndexes[timeIndexes.length - 1] - timeIndexes[0]
-            if (boxType) {
-              boxTypeList.push(boxType)
-            } else {
-              // 控制空课程的长度
-              if (boxi === 0) {
-                boxTypeList.push(1)
-              } else if (boxi === 1 && boxTypeList[0] === 1) {
-                boxTypeList.push(1)
-              } else if (boxi === 1 && boxTypeList[0] === 2) {
-                boxTypeList.push(0)
-              } else if (boxi === 1 && boxTypeList[0] === 3) {
-                boxTypeList.push(null)
+            const boxType = timeIndexes[timeIndexes.length - 1] - timeIndexes[0] + 1
+            boxTypeList.push(boxType ? boxType : 1)
+          })
 
-              } else if (boxi === 2) {
-                boxTypeList.push(1)
-              }
-              
-              else if (boxi === 3 && boxTypeList[2] === 1) {
-                boxTypeList.push(1)
-              } else if (boxi === 3 && boxTypeList[2] === 2) {
-                boxTypeList.push(0)
-              } else if (boxi === 3 && boxTypeList[2] === 3) {
-                boxTypeList.push(null)
-              } else {
-                boxTypeList.push(null)
-              }
+          boxTypeList.map((boxType, boxi) => {
+            if (boxType === 2) {
+              boxTypeList[boxi + 1] = 0
+            } else if (boxType === 3) {
+              boxTypeList[boxi + 1] = 0
+              boxTypeList[boxi + 2] = 0
+            } else if (boxType === 4) {
+              boxTypeList[boxi + 1] = 0
+              boxTypeList[boxi + 2] = 0
+              boxTypeList[boxi + 3] = 0
             }
           })
 

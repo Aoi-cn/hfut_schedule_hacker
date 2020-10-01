@@ -1,0 +1,142 @@
+@import '../../style/theme.scss';
+
+.custom-color-button {
+  position: relative;
+  z-index: 10;
+  height: 100px;
+  border: none;
+  border-radius: 50px;
+  font-size: 34px;
+  line-height: 100px;
+  text-align: center;
+  color: #ffffff;
+
+  // 默认主题
+  &-init_0 {
+    background-color: #000000;
+  }
+
+  &-blue_0 {
+    background-color: $blue_b0;
+  }
+
+  &-darkBlue_0 {
+    background-color: $darkBlue_b0;
+  }
+
+  &-red_0 {
+    background-color: $red_b0;
+  }
+
+  &-yellow_0 {
+    background-color: $yellow_b0;
+  }
+
+  &-green_0 {
+    background-color: $green_b0;
+  }
+
+  &-gray_0 {
+    background-color: $gray_b0;
+  }
+
+  &-darkGray_0 {
+    background-color: $darkGray_b0;
+  }
+
+  &-brown_0 {
+    background-color: $brown_b0;
+  }
+
+  &-orange_0 {
+    background-color: $orange_b0;
+  }
+
+  &-purple_0 {
+    background-color: $purple_b0;
+  }
+
+  // 活泼主题
+  &-init_1 {
+    background-color: #000000;
+  }
+
+  &-blue_1 {
+    background-color: $blue_b1;
+
+  }
+
+  &-darkBlue_1 {
+    background-color: $darkBlue_b1;
+  }
+
+  &-red_1 {
+    background-color: $red_b1;
+  }
+
+  &-yellow_1 {
+    background-color: $yellow_b1;
+  }
+
+  &-green_1 {
+    background-color: $green_b1;
+  }
+
+  &-orange_1 {
+    background-color: $orange_b1;
+  }
+
+  &-purple_1 {
+    background-color: $purple_b1;
+  }
+
+  &-pink_1 {
+    background-color: $pink_b1;
+  }
+
+  &-gold_1 {
+    background-color: $gold_b1;
+  }
+
+  // 莫兰蒂主题
+  &-init_2 {
+    background-color: #000000;
+  }
+
+  &-blue_2 {
+    background-color: $blue_b2;
+
+  }
+
+  &-purple_2 {
+    background-color: $purple_b2;
+  }
+
+  &-red_2 {
+    background-color: $red_b2;
+  }
+
+  &-yellow_2 {
+    background-color: $yellow_b2;
+  }
+
+  &-green_2 {
+    background-color: $green_b2;
+  }
+
+  &-pink_2 {
+    background-color: $pink_b2;
+  }
+
+  &-orange_2 {
+    background-color: $orange_b2;
+  }
+
+  &-grey_2 {
+    background-color: $grey_b2;
+  }
+
+  &-brown_2 {
+    background-color: $brown_b2;
+  }
+}

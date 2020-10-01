@@ -9,52 +9,40 @@ export default ({ weekScheduleData }) => {
   return (
     <View className='courseTable'>
       {
-        weekScheduleData.map((dayScheduleData, i1) => {
+        weekScheduleData.map((dayScheduleData, dayIndex) => {
           const boxTypeList = []
-          dayScheduleData.map((courseBoxList, boxi) => {
+          dayScheduleData.map((courseBoxList) => {
             const { timeIndexes = [] } = courseBoxList[0]
-            const boxType = timeIndexes[timeIndexes.length - 1] - timeIndexes[0]
-            if (boxType) {
-              boxTypeList.push(boxType)
-            } else {
-              // 控制空课程的长度
-              if (boxi === 0) {
-                boxTypeList.push(1)
-              } else if (boxi === 1 && boxTypeList[0] === 1) {
-                boxTypeList.push(1)
-              } else if (boxi === 1 && boxTypeList[0] === 2) {
-                boxTypeList.push(0)
-              } else if (boxi === 1 && boxTypeList[0] === 3) {
-                boxTypeList.push(null)
-              } 
-              
-              else if (boxi === 2) {
-                boxTypeList.push(1)
-              }
-              
-              else if (boxi === 3 && boxTypeList[2] === 1) {
-                boxTypeList.push(1)
-              } else if (boxi === 3 && boxTypeList[2] === 2) {
-                boxTypeList.push(0)
-              } else if (boxi === 3 && boxTypeList[2] === 3) {
-                boxTypeList.push(null)
-              } 
-              
-              else if (boxi === 4) {
-                boxTypeList.push(2)
-              }
-              
-              else {
-                boxTypeList.push(null)
-              }
+            const boxType = timeIndexes[timeIndexes.length - 1] - timeIndexes[0] + 1
+            boxTypeList.push(boxType ? boxType : 1)
+          })
+
+          boxTypeList.map((boxType, boxi) => {
+            if (boxType === 2) {
+              boxTypeList[boxi + 1] = 0
+            } else if (boxType === 3) {
+              boxTypeList[boxi + 1] = 0
+              boxTypeList[boxi + 2] = 0
+            } else if (boxType === 4) {
+              boxTypeList[boxi + 1] = 0
+              boxTypeList[boxi + 2] = 0
+              boxTypeList[boxi + 3] = 0
             }
           })
+
           
+
           return (
-            <View className='courseTable-column' key={i1}>
+            <View className='courseTable-column' key={dayIndex}>
               {
-                dayScheduleData.map((courseBoxList, i2) => (
-                  <CourseBox boxType={boxTypeList[i2]} courseBoxList={courseBoxList} key={i2} number={i2} />
+                dayScheduleData.map((courseBoxList, timeIndex) => (
+                  <CourseBox
+                    boxType={boxTypeList[timeIndex]}
+                    courseBoxList={courseBoxList}
+                    key={timeIndex}
+                    dayIndex={dayIndex}
+                    timeIndex={timeIndex}
+                  />
                 ))
               }
             </View>

@@ -5,6 +5,7 @@ import { AtFloatLayout, AtList, AtListItem } from 'taro-ui'
 
 import CustomButton from '../../../../../../components/CustomButton'
 import { updateScheduleData, updateBizData } from '../../../../../../actions/allSchedule'
+import IconFont from '../../../../../../components/iconfont'
 import './index.scss'
 
 export default (props) => {
@@ -102,7 +103,12 @@ export default (props) => {
       className='selectFloatLayout'
       onClose={onClose}
     >
-      <View className='selectFloatLayout-header'>选择班级</View>
+      <View className='selectFloatLayout-header'>
+        选择班级
+        <View className='selectFloatLayout-header-close' onClick={onClose}>
+          <IconFont name='shibai' size={48} color='#60646b' />
+        </View>
+      </View>
 
       <View className='selectFloatLayout-content'>
 

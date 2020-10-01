@@ -1,0 +1,178 @@
+@import "../../../../style/theme.scss";
+
+@keyframes grey-blue {
+  0% {
+      background: $color-background;
+  }
+  100% {
+      background: $color-brand;
+  }
+}
+
+@keyframes blue-grey {
+  0% {
+      background: $color-brand;
+  }
+  100% {
+      background: $color-background;
+  }
+}
+
+
+.customScheduleFL {
+  color: $color-semi;
+
+  &-header {
+    margin: 36px 0;
+    margin-bottom: 48px;
+    font-size: 36px;
+    font-weight: bold;
+    color: $color-semi;
+    text-align: center;
+
+    &-close {
+      position: absolute;
+      right: 36px;
+      top: 36px;
+
+      &:active {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &-content {
+    padding: 0 8px;
+    padding-bottom: 12px;
+    
+    &-item {
+      width: 100%;
+      margin-bottom: 24px;
+
+      &-inputBox {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 88px;
+        background-color: $color-background;
+        border-radius: 20px;
+        padding: 0 32px;
+        font-size: 32px;
+        color: $color-semi;
+      }
+
+      &-input {
+        text-align: right;
+      }
+
+      &-timeIndexBox {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 24px;
+        margin-top: 36px;
+
+        &-jieshuBox {
+          font-size: 32px;
+          &_title {
+            color: $color-semi;
+            margin-right: 12px;
+          }
+          &_time {
+            color: $color-light;
+
+            &_danger {
+              color: $color-error;
+            }
+          }
+        }
+      }
+
+      &-weekIndexHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 24px;
+        font-size: 32px;
+        color: $color-semi;
+        margin-top: 36px;
+
+        &-popGroup {
+          display: flex;
+          justify-content: space-between;
+          font-size: 26px;
+          color: $color-brand;
+
+          &-item {
+            display: flex;
+            margin-left: 36px;
+            align-items: center;
+          }
+        }
+
+        &-pop {
+          height: 28px;
+          width: 28px;
+          border-radius: 50%;
+          background-color: #eee;
+          margin-right: 8px;
+
+          &_active {
+            background-color: #ffffff;
+            border: 8px solid $color-brand;
+            box-sizing: border-box;
+          }
+        }
+      }
+
+      &-weekIndexContent {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        height: 280px;
+        padding: 0 24px;
+        margin-top: 24px;
+
+        &-week {
+          width: 99px;
+          height: 58px;
+          background-color: $color-background;
+          color: $color-light;
+          border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          animation: blue-grey 0.2s linear;
+
+          &_chosen {
+            background-color: $color-brand;
+            color: #ffffff;
+            animation: grey-blue 0.2s linear;
+          }
+        }
+      }
+    }
+
+  }
+
+  &-footer {
+    // width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 32px;
+    padding-bottom: 24px;
+
+    &-btnBox {
+      width: 100%;
+    }
+
+    &_blank {
+      width: 52px;
+    }
+  }
+
+  &-itemTitle {
+    color: $color-light;
+  }
+}

@@ -39,6 +39,7 @@ export const login = ({ username, password, userType, campus }) => async () => {
         key,
       },
       scheduleMatrix: [],
+      timeTable: [],
       scheduleData: [],
       lessonIds: [],
     }
@@ -90,7 +91,17 @@ export const logout = () => async (dispatch) => {
   // 执行登出逻辑
   dispatch(scheduleLogout())
   dispatch(allScheduleLogout())
-  Taro.clearStorage()
+  const localConfig = Taro.getStorageSync('config')
+  const localCustom = Taro.getStorageSync('custom')
+  await Taro.clearStorage()
+  Taro.setStorage({
+    key: 'config',
+    data: localConfig
+  })
+  Taro.setStorage({
+    key: 'custom',
+    data: localCustom
+  })
   Taro.redirectTo({ url: '/pages/login/index' })
   return {
     type: LOGOUT

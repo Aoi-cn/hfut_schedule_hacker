@@ -38,6 +38,10 @@ export default ({ boxType, courseBoxList, number }) => {
     }))
   }
 
+  if (boxType === 0) {
+    return null
+  }
+
   return (
     <View className={`courseBox courseBox-${number} courseBox-boxType_${boxType}`} onClick={handleClick}>
       <View className={`courseBox-course courseBox-course-boxType_${boxType} courseBox-boxColor-${color}_${theme}`}>

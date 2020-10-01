@@ -2,22 +2,23 @@
 
 .courseBox {
   width: 100%;
-  // opacity: 0.88;
   background-color: rgba(255, 0, 0, 0);
-  box-sizing: border-box;
-  border-top: 0;
-  border-right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 
-  &:active {
-    background-color: #f3f4f5;
-  }
-
-  &-4 {
-    border-bottom: 0;
+  &-blank {
+    position: absolute;
+    width: 97px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 5px;
+    bottom: 5px;
+    height: 95px;
+    background-color: #f6f6f6;
   }
 
   &-course {
@@ -33,37 +34,36 @@
     bottom: 5px;
 
     &:active {
-      opacity: 0.7;
+      border: 3px solid $color-brand-light;
     }
 
     &-boxType {
 
-      &_0 {
-        height: 98%;
-      }
-  
       &_1 {
+        height: 96px;
+      }
+
+      &_2 {
         height: 194px;
       }
-  
-      &_2 {
+
+      &_3 {
         height: 98%;
       }
-  
-      &_3 {
-        bottom: 6px;
+
+      &_4 {
         height: 393px;
       }
     }
 
     &__doubleLeft {
       left: 5px;
-      width: 48px;
+      width: 47px;
     }
 
     &__doubleRight {
-      left: 54px;
-      width: 48px;
+      left: 55px;
+      width: 47px;
     }
 
     &-name {
@@ -85,31 +85,28 @@
 
   &-boxType {
 
-    &_0 {
+    &_1 {
       height: 100px;
       // background-color: green;
     }
 
-    &_1 {
+    &_2 {
       height: 200px;
       // background-color: yellow;
     }
 
-    &_2 {
+    &_3 {
       height: 299px;
       // background-color: red;
     }
 
-    &_3 {
-      height: 399px;
+    &_4 {
+      height: 398px;
       // background-color: blue;
     }
   }
 
-  // &-null {
-  // }
-
-// 盒子 主题颜色
+  // 盒子 主题颜色
   &-boxColor {
 
     // 默认主题
@@ -242,7 +239,7 @@
     }
   }
 
-// 文字 主题颜色
+  // 文字 主题颜色
   &-fontColor {
 
     // 活泼主题

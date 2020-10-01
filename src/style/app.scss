@@ -9,14 +9,14 @@ page {
 // 覆写taro-ui的float-layout样式
 .at-float-layout__container {
   border-radius: 32px 32px 0 0;
-  min-height: 384px!important;
+  min-height: 324px!important;
   max-height: 2800px!important;
 }
 .layout-body {
-  min-height: 384px!important;
+  min-height: 324px!important;
   max-height: 2800px!important;
   &__content {
-    min-height: 360px!important;
+    min-height: 300px!important;
     max-height: 2788px!important;
   }
 }

@@ -22,7 +22,7 @@ function ScheduleFooter(props) {
   return (
     <View className='schedule-footer'>
       <View className='schedule-footer-pop' onClick={() => changeWeekIndex(weekIndex - 1)} >
-        <IconFont name='arrow-lift' size={52} color='#202124' />
+        <IconFont name='arrow-lift' size={52} color='#60646b' />
       </View>
       {
         userType === 'her' &&
@@ -37,7 +37,7 @@ function ScheduleFooter(props) {
         </View>
       }
       <View className='schedule-footer-pop' onClick={() => changeWeekIndex(weekIndex + 1)}>
-        <IconFont name='arrow-right' size={52} color='#202124' />
+        <IconFont name='arrow-right' size={52} color='#60646b' />
       </View>
     </View>
   )

@@ -14,12 +14,13 @@ import ScheduleFooter from './components/ScheduleFooter'
 import UpdateNotice from '../../components/UpdateNotice'
 import HelpNotice from '../../components/HelpNotice'
 import BackgroundImg from './components/BackgroundImg'
+import CustomScheduleFL from './components/CustomScheduleFL'
 import './index.scss'
 
 function Schedule(props) {
   const { bizData, uiData, enter, userType, updateBizData } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
-  const { showUpdateNotice, showHelpNotice, courseDetailFLData } = uiData
+  const { showUpdateNotice, showHelpNotice, courseDetailFLData, showCustomScheduleFL } = uiData
 
   useEffect(() => {
     enter({ userType })
@@ -91,6 +92,11 @@ function Schedule(props) {
       <CourseDetailFloatLayout
         courseDetailFLData={courseDetailFLData}
         onClose={() => props.updateUiData({ courseDetailFLData: { isOpened: false } })}
+      />
+
+      <CustomScheduleFL 
+        isOpened={showCustomScheduleFL}
+        onClose={() => props.updateUiData({ showCustomScheduleFL: false })}
       />
 
       <BackgroundImg />

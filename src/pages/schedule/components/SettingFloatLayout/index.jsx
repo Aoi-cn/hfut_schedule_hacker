@@ -227,16 +227,16 @@ function SettingFloatLayout(props) {
 
         <View className='settingFloatLayout-line'></View>
 
-        <View className='settingFloatLayout-footer'>
-          <View className='settingFloatLayout-footer-btnBox'>
-            <CustomButton value='解绑情侣' type='primary' onSubmit={handleUnbindHerClick} />
-          </View>
-          <View className='settingFloatLayout-footer_blank'></View>
-          <View className='settingFloatLayout-footer-btnBox'>
-            <CustomButton value='退出登录' type='danger' onSubmit={handleLogoutClick} />
-          </View>
-        </View>
+      </View>
 
+      <View className='settingFloatLayout-footer'>
+        <View className='settingFloatLayout-footer-btnBox'>
+          <CustomButton value='解绑情侣' type='primary' onSubmit={handleUnbindHerClick} />
+        </View>
+        <View className='settingFloatLayout-footer_blank'></View>
+        <View className='settingFloatLayout-footer-btnBox'>
+          <CustomButton value='退出登录' type='danger' onSubmit={handleLogoutClick} />
+        </View>
       </View>
 
       <AtActionSheet isOpened={showSetBackground} onClose={() => setShowSetBackground(false)} cancelText='取消' title='小提示：选择好图片后，可以点击左下角的“预览-编辑”对图片进行裁剪！'>

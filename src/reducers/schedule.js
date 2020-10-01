@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     currentDayIndex: 0,
     scheduleMatrix: [],
     dayLineMatrix: [],
+    timeTable: [],
     meUpdate: false,
     herUpdate: false,
     userConfig: {
@@ -16,13 +17,17 @@ const INITIAL_STATE = {
       courseOpacity: 0.88,
     },
     backgroundPath: '',
+    chosenBlank: [],
   },
   uiData: {
     diff: false,
+    chosenBlank: [],
+    showCustomScheduleFL: false,
     showUpdateNotice: false,
     showHelpNotice: false,
     courseDetailFLData: {
       isOpened: false,
+      type: 'course',
       name: '',
       clazzRoom: '',
       teacher: '',
@@ -37,6 +42,7 @@ const INITIAL_STATE = {
       campus: '',
       weekIndexesZh: '',
       credits: '',
+      memo: '',
     }
   }
 }

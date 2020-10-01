@@ -4,8 +4,8 @@
   color: $color-semi;
 
   &-header {
-    margin: 42px 0;
-    margin-bottom: 56px;
+    margin: 36px 0;
+    margin-bottom: 36px;
     font-size: 36px;
     font-weight: bold;
     color: $color-semi;
@@ -13,8 +13,8 @@
 
     &-close {
       position: absolute;
-      right: 42px;
-      top: 42px;
+      right: 36px;
+      top: 36px;
 
       &:active {
         opacity: 0.6;
@@ -36,7 +36,7 @@
       width: 100%;
       font-size: 34px;
       color: $color-semi;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
 
       &:active {
         background-color: $color-background;
@@ -47,10 +47,10 @@
 
 
   &-footer {
-    width: 100%;
+    padding: 0 48px;
+    padding-bottom: 24px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 32px;
 
     &-btnBox {
       width: 100%;
@@ -65,8 +65,8 @@
     height: 2px;
     width: 654px;
     background-color: #e8e8e8;
-    margin-bottom: 48px;
-    margin-top: 18px;
+    margin-bottom: 40px;
+    margin-top: 10px;
   }
 
   &-actionSheet {
