@@ -6,7 +6,7 @@ import './index.scss'
 function CustomButton(props) {
 
   const { value, disabled, loading, onSubmit, openType, theme, backgroundColor } = props;
-  const className = `custom-color-button custom-color-button-${backgroundColor}_${theme}`
+  const className = `custom-color-button courseBox-boxColor-${backgroundColor}_${theme} courseBox-fontColor-${backgroundColor}_${theme}`
 
   return (
     <AtButton

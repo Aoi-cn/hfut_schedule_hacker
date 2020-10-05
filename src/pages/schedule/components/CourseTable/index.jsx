@@ -30,8 +30,6 @@ export default ({ weekScheduleData }) => {
             }
           })
 
-          
-
           return (
             <View className='courseTable-column' key={dayIndex}>
               {

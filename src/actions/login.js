@@ -70,6 +70,12 @@ export const back = () => async (dispatch) => {
 export const unBindHer = () => async (dispatch) => {
   dispatch(updateBizData({ userType: 'me' }))
   await Taro.removeStorage({ key: 'her' })
+  const customSchedule = Taro.getStorageSync('custom')
+  delete customSchedule.her
+  Taro.setStorage({
+    key: 'custom',
+    data: customSchedule
+  })
   dispatch(enter({ userType: 'me' }))
 }
 
@@ -92,18 +98,16 @@ export const logout = () => async (dispatch) => {
   dispatch(scheduleLogout())
   dispatch(allScheduleLogout())
   const localConfig = Taro.getStorageSync('config')
-  const localCustom = Taro.getStorageSync('custom')
+  // const localCustom = Taro.getStorageSync('custom')
   await Taro.clearStorage()
   Taro.setStorage({
     key: 'config',
     data: localConfig
   })
-  Taro.setStorage({
-    key: 'custom',
-    data: localCustom
-  })
+  // Taro.setStorage({
+  //   key: 'custom',
+  //   data: localCustom
+  // })
+  await dispatch({ type: LOGOUT })
   Taro.redirectTo({ url: '/pages/login/index' })
-  return {
-    type: LOGOUT
-  }
 }

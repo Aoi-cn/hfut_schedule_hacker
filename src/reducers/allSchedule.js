@@ -4,7 +4,6 @@ const INITIAL_STATE = {
   bizData: {
     weekIndex: 0, // 课表上展示的周数
     currentWeekIndex: 0, // 现实中的周数
-    currentDayIndex: 0,
     scheduleMatrix: [],
     backupScheduleM: [],
     dayLineMatrix: [],

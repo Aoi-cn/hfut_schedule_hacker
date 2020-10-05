@@ -20,6 +20,7 @@ function SettingFloatLayout(props) {
     { name: '默认', value: 0 },
     { name: '活泼', value: 1 },
     { name: '莫兰迪', value: 2 },
+    // { name: 'SKY色系', value: 3 },
   ]
 
   const handleUnbindHerClick = () => {
@@ -246,13 +247,14 @@ function SettingFloatLayout(props) {
           </View>
         </AtActionSheetItem>
         <AtActionSheetItem>
-          <View className='settingFloatLayout-actionSheet-item'>
+          <View className='settingFloatLayout-actionSheet-item settingFloatLayout-actionSheet-item_slider'>
             <Text className='settingFloatLayout-actionSheet-item_sliderText'>设置图片透明度</Text>
             <Slider
               step={1}
               value={imgOpacity * 100}
               min={0}
               max={100}
+              blockSize={24}
               showValue
               activeColor='#29a2ff'
               onchange={handleImgOpacityChange}
@@ -260,13 +262,14 @@ function SettingFloatLayout(props) {
           </View>
         </AtActionSheetItem>
         <AtActionSheetItem>
-          <View className='settingFloatLayout-actionSheet-item'>
+          <View className='settingFloatLayout-actionSheet-item settingFloatLayout-actionSheet-item_slider'>
             <Text className='settingFloatLayout-actionSheet-item_sliderText'>设置课程透明度</Text>
             <Slider
               step={1}
               value={courseOpacity * 100}
               min={0}
               max={100}
+              blockSize={24}
               showValue
               activeColor='#29a2ff'
               onchange={handleCourseOpacityChange}

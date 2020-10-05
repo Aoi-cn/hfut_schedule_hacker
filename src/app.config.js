@@ -2,6 +2,7 @@ import { useGlobalIconFont } from './components/iconfont/helper';
 
 export default {
   pages: [
+    'pages/event/index',
     'pages/schedule/index',
     'pages/login/index',
     'pages/gift/index',
@@ -22,18 +23,24 @@ export default {
     // borderStyle: 'white',
     custom: false,
     list: [{
+      pagePath: 'pages/event/index',
+      text: '日程',
+      iconPath: 'assets/event.png',
+      selectedIconPath: 'assets/event_active.png',
+    },
+    {
       pagePath: 'pages/schedule/index',
-      text: '我的课表',
-      iconPath: 'assets/all.png',
-      selectedIconPath: 'assets/all_active.png',
+      text: '课表',
+      iconPath: 'assets/schedule.png',
+      selectedIconPath: 'assets/schedule_active.png',
     },
     {
       pagePath: 'pages/gift/index',
-      text: '活水计划',
+      text: '反馈',
       iconPath: 'assets/gift.png',
       selectedIconPath: 'assets/gift_active.png',
     }
-  ]
+    ]
   },
   usingComponents: useGlobalIconFont(),
 }

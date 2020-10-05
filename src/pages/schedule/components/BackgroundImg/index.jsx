@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { View, Image } from '@tarojs/components'
 
 export default () => {
-  const { backgroundPath } = useSelector(state => state.schedule.bizData)
-  const { imgOpacity } = useSelector(state => state.schedule.bizData.userConfig)
+  const backgroundPath = useSelector(state => state.schedule.bizData.backgroundPath)
+  const imgOpacity = useSelector(state => state.schedule.bizData.userConfig.imgOpacity)
 
 
   return (

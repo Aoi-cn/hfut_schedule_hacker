@@ -4,7 +4,6 @@ const INITIAL_STATE = {
   bizData: {
     weekIndex: 0, // 课表上展示的周数
     currentWeekIndex: 1, // 现实中的周数
-    currentDayIndex: 0,
     scheduleMatrix: [],
     dayLineMatrix: [],
     timeTable: [],
@@ -21,7 +20,7 @@ const INITIAL_STATE = {
   },
   uiData: {
     diff: false,
-    chosenBlank: [],
+    chosenBlank: [], // 和bizData重复，是因为点击了之后会隐藏那个加号
     showCustomScheduleFL: false,
     showUpdateNotice: false,
     showHelpNotice: false,

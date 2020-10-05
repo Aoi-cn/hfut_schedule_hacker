@@ -34,7 +34,7 @@ function ScheduleFooter(props) {
       {
         weekIndex !== currentWeekIndex &&
         <View className='allSchedule-footer-pop' onClick={() => changeWeekIndex(currentWeekIndex)}>
-          <Text className='allSchedule-footer-pop-text'>定位</Text>
+          <Text className='allSchedule-footer-pop-text'>本周</Text>
         </View>
       }
       <View className='allSchedule-footer-pop' onClick={() => changeWeekIndex(weekIndex + 1)}>

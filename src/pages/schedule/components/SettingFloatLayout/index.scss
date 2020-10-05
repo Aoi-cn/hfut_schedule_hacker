@@ -74,11 +74,11 @@
     &-item {
       font-size: 34px;
       color: $color-semi;
+      // background-color: red;
 
-      // &_sliderText {
-      //   font-size: 28px;
-      //   color: $color-grey;
-      // }
+      &_slider {
+        margin-bottom: -16px;
+      }
     }
 
     &-danger {

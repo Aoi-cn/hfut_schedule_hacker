@@ -10,7 +10,7 @@ import './index.scss'
 
 export default (props) => {
   const { isOpened, onClose } = props
-  const { selectInfo } = useSelector(state => state.allSchedule.bizData)
+  const selectInfo = useSelector(state => state.allSchedule.bizData.selectInfo)
   const dispatch = useDispatch()
 
   const [selectedAcademy, setSelectedAcademy] = useState('')

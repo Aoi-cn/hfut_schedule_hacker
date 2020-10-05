@@ -4,19 +4,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { View, Text, Picker, Textarea } from '@tarojs/components'
 import { AtFloatLayout } from 'taro-ui'
 
-import { updateSingleCourseColor } from '../../../../actions/schedule'
-import { updateSingleCustomColor, deleteSingleCustom, updateSingleCustomMemo } from '../../../../actions/event'
-import IconFont from '../../../../components/iconfont'
-import ColorButton from '../../../../components/ColorButton'
-import CustomButton from '../../../../components/CustomButton'
-import { themeColors } from '../../../../utils/scheduleDataTranslator'
+import { updateSingleCourseColor } from '../../../actions/schedule'
+import { updateSingleCustomColor, deleteSingleCustom, updateSingleCustomMemo } from '../../../actions/customSchedule'
+import IconFont from '../../../components/iconfont'
+import ColorButton from '../../../components/ColorButton'
+import CustomButton from '../../../components/CustomButton'
+import { themeColors } from '../../../utils/scheduleDataTranslator'
 import './index.scss'
 
 export default (props) => {
-  const { courseDetailFLData, onClose } = props
+  const { courseDetailFLData, source, onClose } = props
   const { isOpened, type, name, credits, clazzRoom, teacher, timeRange, lessonType, studentClazzes, studentNumber, weekIndexes = [], weekIndexesZh, color, memo: memo_ } = courseDetailFLData
-  const { userType } = useSelector(state => state.login.bizData)
-  const { theme } = useSelector(state => state.schedule.bizData.userConfig)
+  const userType = useSelector(state => state.login.bizData.userType)
+  const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
   const [memo, setMemo] = useState('')
   const dispatch = useDispatch()
 
@@ -27,8 +27,8 @@ export default (props) => {
   }, [isOpened, memo_])
 
   const CDFLOnClose = () => {
-    if (memo !== memo_) {
-      dispatch(updateSingleCustomMemo({ userType, type, memo, courseDetailFLData: props }))
+    if (memo !== memo_ && memo_ !== undefined) {
+      dispatch(updateSingleCustomMemo({ userType, source, type, memo, courseDetailFLData: props }))
     } else {
       onClose()
     }
@@ -114,7 +114,7 @@ export default (props) => {
     if (type === 'course') {
       dispatch(updateSingleCourseColor({ userType, newColor, courseDetailFLData: props }))
     } else if (type === 'custom') {
-      dispatch(updateSingleCustomColor({ userType, newColor, courseDetailFLData: props }))
+      dispatch(updateSingleCustomColor({ userType, source, newColor, courseDetailFLData: props }))
     }
   }
 
@@ -124,7 +124,7 @@ export default (props) => {
       content: '此操作将无法恢复',
       success: function (res) {
         if (res.confirm) {
-          dispatch(deleteSingleCustom({ userType, courseDetailFLData: props }))
+          dispatch(deleteSingleCustom({ userType, source, courseDetailFLData: props }))
         }
       }
     })
@@ -137,8 +137,6 @@ export default (props) => {
       duration: 1000
     })
   }
-
-
 
   return (
     <AtFloatLayout
@@ -165,7 +163,7 @@ export default (props) => {
         <View className='courseDetailFloatLayout-content-memo'>
           <View className='courseDetailFloatLayout-content-memo-title'>
             <Text>备忘录</Text>
-            <Text className='courseDetailFloatLayout-content-memo-title_comment'>（关闭弹窗自动保存）</Text>
+            {/* <Text className='courseDetailFloatLayout-content-memo-title_comment'>（关闭弹窗自动保存）</Text> */}
           </View>
           <Textarea
             placeholder={type === 'course' ? '记录作业、课堂测试、考试要求等' : '记录该事件的其他信息'}
@@ -180,7 +178,7 @@ export default (props) => {
       </View>
 
       <View className='courseDetailFloatLayout-footer'>
-        <View className='settingFloatLayout-footer-btnBox'>
+        <View className='courseDetailFloatLayout-footer-btnBox'>
           <Picker mode='selector'
             range={colorPickerRange}
             rangeKey='name'

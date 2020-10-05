@@ -1,25 +1,30 @@
 import React from 'react'
+import Taro from '@tarojs/taro'
 import { useDispatch, useSelector } from 'react-redux'
 import { View } from '@tarojs/components'
 
 import { updateUiData, updateBizData } from '../../../../actions/schedule'
 import IconFont from '../../../../components/iconfont'
-import '../../../../style/courseBox.scss'
 
 export default ({ boxType, courseBoxList, dayIndex, timeIndex }) => {
   const courseBoxData = courseBoxList[0] ? courseBoxList[0] : {}
   const courseBoxData_ = courseBoxList[1] ? courseBoxList[1] : {}
   const { type, name = "", clazzRoom, color } = courseBoxData
   const { name: name_ = "", color: color_ } = courseBoxData_
-  const { theme } = useSelector(state => state.schedule.bizData.userConfig)
-  const { diff } = useSelector(state => state.schedule.uiData)
-  const { chosenBlank } = useSelector(state => state.schedule.uiData)
-  const { courseOpacity } = useSelector(state => state.schedule.bizData.userConfig)
+  const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
+  const diff = useSelector(state => state.schedule.uiData.diff)
+  const chosenBlank = useSelector(state => state.schedule.uiData.chosenBlank)
+  const courseOpacity = useSelector(state => state.schedule.bizData.userConfig.courseOpacity)
   const dispatch = useDispatch()
 
   const isChosen = (chosenBlank[0] === dayIndex && chosenBlank[1] === timeIndex)
-
-  if (!boxType && boxType !== 0) { return <View className='courseBox-null'></View> }
+  let courseName = name.length <= 8 ? name : (name.slice(0, 7) + "...")
+  let courseName_ = name_.length <= 4 ? name_ : (name_.slice(0, 4) + `\n...`)
+  if (courseBoxList.length > 1) {
+    courseName = name.length <= 4 ? name : (name.slice(0, 4) + `\n...`)
+  } else if (boxType === 1) {
+    courseName = name.length <= 5 ? name : (name.slice(0, 5) + `\n...`)
+  }
 
   const handleClickCourse = (data) => {
     if (!name) { return }
@@ -62,15 +67,25 @@ export default ({ boxType, courseBoxList, dayIndex, timeIndex }) => {
     });
   }
 
-  let courseName = name.length <= 8 ? name : (name.slice(0, 7) + "...")
-  let courseName_ = name_.length <= 4 ? name_ : (name_.slice(0, 4) + `\n...`)
-  if (courseBoxList.length > 1) {
-    courseName = name.length <= 4 ? name : (name.slice(0, 4) + `\n...`)
-  } else if (boxType === 1) {
-    courseName = name.length <= 5 ? name : (name.slice(0, 5) + `\n...`)
+  const handleMultCourseClick = ()=> {
+    Taro.showActionSheet({
+      itemList: courseBoxList.map(courseBD => courseBD.name),
+      success: function (res) {
+        dispatch(updateUiData({
+          courseDetailFLData: {
+            isOpened: true,
+            ...courseBoxList[res.tapIndex],
+          },
+          chosenBlank: [],
+        }))
+      },
+    })
   }
 
-  if (!name && !diff) {
+  if (!boxType) {
+    return ''
+  }
+  else if (!name && !diff) {
     return (
       <View className={`courseBox courseBox-boxType_${boxType}`} style={`opacity: ${courseOpacity}`} onClick={setChosenBlank}>
         {
@@ -82,9 +97,15 @@ export default ({ boxType, courseBoxList, dayIndex, timeIndex }) => {
       </View>
     )
   }
-
-  if (boxType === 0) {
-    return null
+  else if (courseBoxList.length > 2) {
+    return (
+      <View className={`courseBox courseBox-boxType_${boxType}`} style={`opacity: ${courseOpacity}`}>
+        <View className={`courseBox-course courseBox-course_mult courseBox-course-boxType_${boxType} courseBox-boxColor-${color}_${theme}`} onClick={handleMultCourseClick}>
+          <View className={`courseBox-course-name courseBox-fontColor-${color}_${theme}`}>{`这里有${courseBoxList.length}节课`}</View>
+          <View className={`courseBox-course-clazzRoom courseBox-fontColor-${color}_${theme}`}>点击查看详情</View>
+        </View>
+      </View>
+    )
   }
 
   return (

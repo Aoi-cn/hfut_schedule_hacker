@@ -1,0 +1,25 @@
+@import '../../../../style/theme.scss';
+
+.eventHeaderTitle {
+  margin-left: 36px;
+  
+  &-title {
+    color: #666;
+    font-size: 42px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+
+  &-comment {
+    margin-top: 8px;
+    margin-bottom: 42px;
+    color: #888;
+    font-size: 28px;
+
+    &-number {
+      color: $color-font-brand;
+    }
+  }
+}
+

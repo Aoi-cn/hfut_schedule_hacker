@@ -37,6 +37,10 @@
       border: 3px solid $color-brand-light;
     }
 
+    &_mult {
+      border: 2px dashed $color-semi;
+    }
+
     &-boxType {
 
       &_1 {
@@ -237,12 +241,95 @@
     &-brown_2 {
       background-color: $brown_b2;
     }
+
+    // 罗时锴主题
+    &-init_3 {
+      background-color: #000000;
+    }
+
+    &-blue_3 {
+      background-color: $blue_b3;
+
+    }
+
+    &-purple_3 {
+      background-color: $purple_b3;
+    }
+
+    &-red_3 {
+      background-color: $red_b3;
+    }
+
+    &-yellow_3 {
+      background-color: $yellow_b3;
+    }
+
+    &-green_3 {
+      background-color: $green_b3;
+    }
+
+    &-pink_3 {
+      background-color: $pink_b3;
+    }
+
+    &-orange_3 {
+      background-color: $orange_b3;
+    }
+
+    &-blue2_3 {
+      background-color: $blue2_b3;
+    }
+
+    &-green2_3 {
+      background-color: $green2_b3;
+    }
   }
 
   // 文字 主题颜色
   &-fontColor {
 
-    // 活泼主题
+    // 默认主题-文字
+    &-blue_0 {
+      color: #ffffff;
+    }
+
+    &-darkBlue_0 {
+      color: #ffffff;
+    }
+
+    &-red_0 {
+      color: #ffffff;
+    }
+
+    &-yellow_0 {
+      color: #ffffff;
+    }
+
+    &-green_0 {
+      color: #ffffff;
+    }
+
+    &-gray_0 {
+      color: #ffffff;
+    }
+
+    &-darkGray_0 {
+      color: #ffffff;
+    }
+
+    &-brown_0 {
+      color: #ffffff;
+    }
+
+    &-orange_0 {
+      color: #ffffff;
+    }
+
+    &-purple_0 {
+      color: #ffffff;
+    }
+
+    // 活泼主题-文字
     &-blue_1 {
       color: $blue_f1;
     }
@@ -277,6 +364,81 @@
 
     &-gold_1 {
       color: $gold_f1;
+    }
+
+    // 莫兰蒂主题-文字
+    &-blue_2 {
+      color: #ffffff;
+
+    }
+
+    &-purple_2 {
+      color: #ffffff;
+    }
+
+    &-red_2 {
+      color: #ffffff;
+    }
+
+    &-yellow_2 {
+      color: #ffffff;
+    }
+
+    &-green_2 {
+      color: #ffffff;
+    }
+
+    &-pink_2 {
+      color: #ffffff;
+    }
+
+    &-orange_2 {
+      color: #ffffff;
+    }
+
+    &-grey_2 {
+      color: #ffffff;
+    }
+
+    &-brown_2 {
+      color: #ffffff;
+    }
+
+    // 罗时锴主题-文字
+    &-blue_3 {
+      color: $blue_f3;
+    }
+
+    &-purple_3 {
+      color: $purple_f3;
+    }
+
+    &-red_3 {
+      color: $red_f3;
+    }
+
+    &-yellow_3 {
+      color: $yellow_f3;
+    }
+
+    &-green_3 {
+      color: $green_f3;
+    }
+
+    &-pink_3 {
+      color: $pink_f3;
+    }
+
+    &-orange_3 {
+      color: $orange_f3;
+    }
+
+    &-blue2_3 {
+      color: $blue2_f3;
+    }
+
+    &-green2_3 {
+      color: $green2_f3;
     }
   }
 }

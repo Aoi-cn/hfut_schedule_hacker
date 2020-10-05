@@ -1,6 +1,8 @@
 /* eslint-disable */
 
 import React from 'react';
+import IconarrowUpFilling from './IconarrowUpFilling';
+import IconarrowDownFilling from './IconarrowDownFilling';
 import Iconshibai from './Iconshibai';
 import Iconceshi from './Iconceshi';
 import Icontanhao from './Icontanhao';
@@ -27,6 +29,10 @@ import Icongift from './Icongift';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
+    case 'arrow-up-filling':
+      return <IconarrowUpFilling {...rest} />;
+    case 'arrow-down-filling':
+      return <IconarrowDownFilling {...rest} />;
     case 'shibai':
       return <Iconshibai {...rest} />;
     case 'ceshi':

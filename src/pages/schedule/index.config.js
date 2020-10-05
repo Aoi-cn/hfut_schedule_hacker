@@ -1,6 +1,7 @@
+
 export default {
   navigationBarTitleText: '我的课表',
   navigationBarTextStyle: 'white',
-  navigationBarBackgroundColor: '#0089ff',
+  navigationBarBackgroundColor: '#3374ff',
   enablePullDownRefresh: true,
 }

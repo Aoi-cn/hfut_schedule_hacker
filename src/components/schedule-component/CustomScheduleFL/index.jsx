@@ -4,19 +4,17 @@ import { useSelector, useDispatch } from 'react-redux'
 import { View, Picker, Input, Text } from '@tarojs/components'
 import { AtFloatLayout, AtInputNumber } from 'taro-ui'
 
-import * as eventActions from '../../../../actions/event'
-import IconFont from '../../../../components/iconfont'
-import CustomButton from '../../../../components/CustomButton'
-import ColorButton from '../../../../components/ColorButton'
-import { themeColors } from '../../../../utils/scheduleDataTranslator'
-import validWeekChecker from '../../../../utils/validWeekChecker'
+import * as customScheduleActions from '../../../actions/customSchedule'
+import IconFont from '../../../components/iconfont'
+import CustomButton from '../../../components/CustomButton'
+import ColorButton from '../../../components/ColorButton'
+import { themeColors } from '../../../utils/scheduleDataTranslator'
+import validWeekChecker from '../../../utils/validWeekChecker'
 import './index.scss'
 
 export default (props) => {
-  const { isOpened, onClose } = props
-  // const { userType } = useSelector(state => state.login.bizData)
-  const { theme } = useSelector(state => state.schedule.bizData.userConfig)
-  const { chosenBlank, scheduleMatrix, timeTable, weekIndex: weekIndex_ } = useSelector(state => state.schedule.bizData)
+  const { isOpened, source, onClose, chosenBlank, scheduleMatrix, timeTable, weekIndex: weekIndex_ } = props
+  const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
   const [selectedColorIndex, setSelectedColorIndex] = useState(0)
   const [timeIndex, setTimeIndex] = useState(1)
   const [validWeeks, setValidWeeks] = useState(scheduleMatrix.map(() => 1))
@@ -160,7 +158,8 @@ export default (props) => {
     const color = colorPickerRange[selectedColorIndex].value
     const timeRange = timeTable[startTime].startTimeText + '-' + timeTable[endTime].endTimeText
 
-    dispatch(eventActions.addCustomSchedule({
+    dispatch(customScheduleActions.addCustomSchedule({
+      source,
       name,
       clazzRoom,
       color,

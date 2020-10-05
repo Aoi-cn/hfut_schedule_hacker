@@ -38,6 +38,18 @@ export const themeColors = [
     { name: '灰', value: 'grey' },
     { name: '驼色', value: 'brown' },
   ],
+  // 罗时锴
+  [
+    { name: '蒂芙尼蓝', value: 'blue' },
+    { name: '紫', value: 'purple' },
+    { name: '树莓', value: 'red' },
+    { name: '黄', value: 'yellow' },
+    { name: '麓森绿', value: 'green' },
+    { name: '玫红', value: 'pink' },
+    { name: '橙', value: 'orange' },
+    { name: '烟蓝', value: 'blue2' },
+    { name: '草绿', value: 'green2' },
+  ],
 ]
 
 export default (scheduleData, lessonIds, timeTable) => {
@@ -218,9 +230,9 @@ export default (scheduleData, lessonIds, timeTable) => {
   // 给所有没课的添加{}
   scheduleMatrix.map((weekData) => {
     weekData.map((dayData) => {
-      dayData.map((courseBoxList) => {
+      dayData.map((courseBoxList, timeIndex) => {
         if (courseBoxList.length === 0) {
-          courseBoxList.push({})
+          courseBoxList.push({ timeIndexes: [timeIndex] })
         }
       })
     })

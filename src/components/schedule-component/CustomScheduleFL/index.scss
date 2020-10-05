@@ -1,17 +1,17 @@
-@import "../../../../style/theme.scss";
+@import "../../../style/theme.scss";
 
 @keyframes grey-blue {
   0% {
       background: $color-background;
   }
   100% {
-      background: $color-brand;
+      background: $color-font-brand;
   }
 }
 
 @keyframes blue-grey {
   0% {
-      background: $color-brand;
+      background: $color-font-brand;
   }
   100% {
       background: $color-background;
@@ -101,7 +101,7 @@
           display: flex;
           justify-content: space-between;
           font-size: 26px;
-          color: $color-brand;
+          color: $color-font-brand;
 
           &-item {
             display: flex;
@@ -119,7 +119,7 @@
 
           &_active {
             background-color: #ffffff;
-            border: 8px solid $color-brand;
+            border: 8px solid $color-font-brand;
             box-sizing: border-box;
           }
         }
@@ -146,7 +146,7 @@
           animation: blue-grey 0.2s linear;
 
           &_chosen {
-            background-color: $color-brand;
+            background-color: $color-font-brand;
             color: #ffffff;
             animation: grey-blue 0.2s linear;
           }

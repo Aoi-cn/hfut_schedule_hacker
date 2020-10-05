@@ -17,8 +17,8 @@ export default (props) => {
   const [showAbout, setShowAbout] = useState(false)
   const [showLoverBox, setShowLoverBox] = useState(false)
   const [showSetting, setShowSetting] = useState(false)
-  const { userType } = useSelector(state => state.login.bizData)
-  const { showAiXin } = useSelector(state => state.schedule.bizData.userConfig)
+  const userType = useSelector(state => state.login.bizData.userType)
+  const showAiXin = useSelector(state => state.schedule.bizData.userConfig.showAiXin)
   const dispatch = useDispatch()
 
   const daysZh = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']

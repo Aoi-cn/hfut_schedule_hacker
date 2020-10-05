@@ -6,6 +6,7 @@ import { AtButton, AtMessage } from 'taro-ui'
 import IconFont from '../../components/iconfont'
 import { GET } from '../../utils/request'
 import './index.scss'
+import themeC from '../../style/theme'
 
 function Gift() {
   const [brandname, setBrandname] = useState('')
@@ -83,16 +84,14 @@ function Gift() {
 
       <View className='gift-item'>
         <View className='gift-item-title'>
-          <IconFont name='caidan' size={48} color='#0089ff' />
+          <IconFont name='caidan' size={48} color={themeC['color-font-brand']} />
           <View className='gift-item-title__value'>v3.0.0更新预告</View>
         </View>
         <View className='gift-item-content'>
-          <View className='gift-item-content-list'>1. 入口更换为信息门户（且无惧封网）</View>
-          <View className='gift-item-content-list'>2. 校园卡余额查询</View>
-          <View className='gift-item-content-list'>3. 校园卡流水查询</View>
-          <View className='gift-item-content-list'>4. 图书馆个人借阅信息查询</View>
-          <View className='gift-item-content-list'>5. 支持宣区的“全校课表”</View>
-          <View className='gift-item-content-list'>6. 也许会支持查看成绩</View>
+          <View className='gift-item-content-list'>1. 成绩、绩点</View>
+          <View className='gift-item-content-list'>2. 班级同学信息查询</View>
+          <View className='gift-item-content-list'>3. 好用到爆炸的的日程管理</View>
+          <View className='gift-item-content-list'>4. 全校教师、课程信息检索（待定）</View>
           <View className='gift-item-content-list'>未完待续~</View>
         </View>
       </View>
@@ -101,7 +100,7 @@ function Gift() {
 
       <View className='gift-item'>
         <View className='gift-item-title'>
-          <IconFont name='mingxinghuodong' size={48} color='#0089ff' />
+          <IconFont name='mingxinghuodong' size={48} color={themeC['color-font-brand']} />
           <View className='gift-item-title__value'>v3.0.0更名征集</View>
         </View>
         <View className='gift-item-content'>
@@ -133,7 +132,7 @@ function Gift() {
 
       <View className='gift-item'>
         <View className='gift-item-title'>
-          <IconFont name='wenjuan' size={48} color='#0089ff' />
+          <IconFont name='wenjuan' size={48} color={themeC['color-font-brand']} />
           <View className='gift-item-title__value'>新功能征集与意见反馈</View>
         </View>
         <View className='gift-item-content'>

@@ -7,19 +7,20 @@ import * as actions from '../../actions/schedule'
 import WhiteTable from '../../components/schedule-component/WhiteTable'
 import DayLine from '../../components/schedule-component/DayLine'
 import TimeLine from '../../components/schedule-component/TimeLine'
+import CourseDetailFloatLayout from '../../components/schedule-component/CourseDetailFloatLayout'
+import CustomScheduleFL from '../../components/schedule-component/CustomScheduleFL'
 import CourseTable from './components/CourseTable'
 import ScheduleTop from './components/ScheduleTop'
-import CourseDetailFloatLayout from './components/CourseDetailFloatLayout'
 import ScheduleFooter from './components/ScheduleFooter'
 import UpdateNotice from '../../components/UpdateNotice'
 import HelpNotice from '../../components/HelpNotice'
 import BackgroundImg from './components/BackgroundImg'
-import CustomScheduleFL from './components/CustomScheduleFL'
+
 import './index.scss'
 
 function Schedule(props) {
   const { bizData, uiData, enter, userType, updateBizData } = props
-  const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
+  const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix, chosenBlank, timeTable } = bizData
   const { showUpdateNotice, showHelpNotice, courseDetailFLData, showCustomScheduleFL } = uiData
 
   useEffect(() => {
@@ -97,6 +98,10 @@ function Schedule(props) {
       <CustomScheduleFL 
         isOpened={showCustomScheduleFL}
         onClose={() => props.updateUiData({ showCustomScheduleFL: false })}
+        chosenBlank={chosenBlank}
+        scheduleMatrix={scheduleMatrix}
+        timeTable={timeTable}
+        weekIndex={weekIndex}
       />
 
       <BackgroundImg />

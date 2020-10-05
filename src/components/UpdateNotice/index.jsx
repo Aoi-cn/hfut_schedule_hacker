@@ -6,6 +6,7 @@ import { updateUiData } from '../../actions/schedule'
 import { config, updateInfo } from '../../config/config.default'
 import IconFont from '../../components/iconfont'
 import './index.scss'
+import themeC from '../../style/theme'
 
 export default () => {
   const { version } = config
@@ -20,12 +21,12 @@ export default () => {
     <View className='updateNotice'>
 
       <View className='updateNotice-content'>
-        <View className='updateNotice-content-title'>{`${version}更新公告`}</View>
+        <View className='updateNotice-content-title'>{`${version}重大更新公告！`}</View>
         <View className='updateNotice-content-close' onClick={handleClose}>
           <IconFont name='shibai' size={48} color='#60646b' />
         </View>
         <View className='updateNotice-content-subTitle'>
-          <IconFont name='ceshi' size={36} color='#0089ff' />
+          <IconFont name='ceshi' size={36} color={themeC['color-font-brand']} />
           <Text className='updateNotice-content-subTitle_text'>内容升级</Text>
         </View>
         {
@@ -41,7 +42,7 @@ export default () => {
         }
         <View className='updateNotice-content-line'></View>
         <View className='updateNotice-content-subTitle'>
-          <IconFont name='tanhao' size={36} color='#0089ff' />
+          <IconFont name='tanhao' size={36} color={themeC['color-font-brand']} />
           <Text className='updateNotice-content-subTitle_text'>问题修复</Text>
         </View>
         {
