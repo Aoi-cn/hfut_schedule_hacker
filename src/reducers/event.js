@@ -12,10 +12,18 @@ const INITIAL_STATE = {
     chosenBlank: [],
   },
   uiData: {
+    showCalendar: false,
+    timeDistance: 30,
     chosenBlank: [],
     showCustomScheduleFL: false,
     showUpdateNotice: false,
     showHelpNotice: false,
+    colorPickerData: {
+      isOpened: false,
+      handleColorChange: null,
+      theme: 0,
+      currentColor: 'blue',
+    },
     courseDetailFLData: {
       isOpened: false,
       type: 'course',

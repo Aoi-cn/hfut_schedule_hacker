@@ -1,25 +1,18 @@
 import React from 'react'
 import { View } from '@tarojs/components'
-import { useDispatch } from 'react-redux'
 
-import { updateUiData } from '../../actions/schedule'
 import { helpInfo } from '../../config/config.default'
 import IconFont from '../../components/iconfont'
 import './index.scss'
 
-export default () => {
-  const dispatch = useDispatch()
-
-  const handleClose = () => {
-    dispatch(updateUiData({ showHelpNotice: false }))
-  }
+export default ({ onClose }) => {
 
   return (
     <View className='helpNotice'>
 
       <View className='helpNotice-content'>
         <View className='helpNotice-content-title'>想帮上忙</View>
-        <View className='helpNotice-content-close' onClick={handleClose}>
+        <View className='helpNotice-content-close' onClick={onClose}>
           <IconFont name='shibai' size={48} color='#60646b' />
         </View>
         {
@@ -35,7 +28,7 @@ export default () => {
         }
       </View>
 
-      <View className='helpNotice-mask' onClick={handleClose}></View>
+      <View className='helpNotice-mask' onClick={onClose}></View>
     </View>
   )
 }

@@ -10,6 +10,7 @@ export default () => {
   const timeTable = useSelector(state => state.event.bizData.timeTable)
   const weekIndex = useSelector(state => state.event.bizData.weekIndex)
   const dayIndex = useSelector(state => state.event.bizData.dayIndex)
+  const eventBoxHeight = useSelector(state => state.schedule.bizData.userConfig.eventBoxHeight)
 
   if (scheduleMatrix.length === 0 || timeTable.length < 5) {
     return ''
@@ -38,10 +39,11 @@ export default () => {
   })
 
   const { startTime: startTime_ } = timeTable[0]
-  let paddingTop = 97 + 48 + (startTime_ - 800) * 1.5
+  // let paddingTop = 97 + 48 + (startTime_ - 800) * 1.5
+  let paddingTop = 62 * eventBoxHeight + 48 + (startTime_ - 800) * eventBoxHeight
 
   return (
-    <View className='eventTable' style={{ paddingTop: paddingTop + 'rpx' }}>
+    <View className='eventTable' style={{ top: paddingTop + 'rpx' }}>
       {
         dayScheduleData.map((courseBoxList, startTime) => (
           <EventBox

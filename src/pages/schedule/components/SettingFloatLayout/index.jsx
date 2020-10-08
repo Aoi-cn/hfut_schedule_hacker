@@ -17,10 +17,10 @@ function SettingFloatLayout(props) {
   const [showSetBackground, setShowSetBackground] = useState(false)
 
   const themeRange = [
-    { name: '默认', value: 0 },
-    { name: '活泼', value: 1 },
-    { name: '莫兰迪', value: 2 },
-    // { name: 'SKY色系', value: 3 },
+    { name: '教务原装', value: 0 },
+    { name: '小米课表', value: 1 },
+    { name: '莫兰迪色系', value: 2 },
+    { name: '美食拼盘', value: 3 },
   ]
 
   const handleUnbindHerClick = () => {

@@ -14,6 +14,9 @@ const INITIAL_STATE = {
       showAiXin: true,
       imgOpacity: 0.9,
       courseOpacity: 0.88,
+      eventBoxHeight: 1.5,
+      showBoxMask: true,
+      showEventMemo: true,
     },
     backgroundPath: '',
     chosenBlank: [],
@@ -24,6 +27,12 @@ const INITIAL_STATE = {
     showCustomScheduleFL: false,
     showUpdateNotice: false,
     showHelpNotice: false,
+    colorPickerData: {
+      isOpened: false,
+      handleColorChange: null,
+      theme: 0,
+      currentColor: 'blue',
+    },
     courseDetailFLData: {
       isOpened: false,
       type: 'course',

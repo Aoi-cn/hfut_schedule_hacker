@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { useDispatch, useSelector } from 'react-redux'
-import { View, Text, Picker, Textarea } from '@tarojs/components'
+import { View, Text, Textarea } from '@tarojs/components'
 import { AtFloatLayout } from 'taro-ui'
 
 import { updateSingleCourseColor } from '../../../actions/schedule'
@@ -9,11 +9,11 @@ import { updateSingleCustomColor, deleteSingleCustom, updateSingleCustomMemo } f
 import IconFont from '../../../components/iconfont'
 import ColorButton from '../../../components/ColorButton'
 import CustomButton from '../../../components/CustomButton'
-import { themeColors } from '../../../utils/scheduleDataTranslator'
+
 import './index.scss'
 
 export default (props) => {
-  const { courseDetailFLData, source, onClose } = props
+  const { courseDetailFLData, source, onClose, updateColorPicker } = props
   const { isOpened, type, name, credits, clazzRoom, teacher, timeRange, lessonType, studentClazzes, studentNumber, weekIndexes = [], weekIndexesZh, color, memo: memo_ } = courseDetailFLData
   const userType = useSelector(state => state.login.bizData.userType)
   const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
@@ -69,10 +69,10 @@ export default (props) => {
         value: <><Text className='courseDetailFloatLayout-itemTitle'>开设周目：</Text><Text>{weekIndexesZh}</Text></>,
         icon: '',
       },
-      {
-        value: <><Text className='courseDetailFloatLayout-itemTitle'>课程类别：</Text><Text>{lessonType}</Text></>,
-        icon: '',
-      },
+      // {
+      //   value: <><Text className='courseDetailFloatLayout-itemTitle'>课程类别：</Text><Text>{lessonType}</Text></>,
+      //   icon: '',
+      // },
       {
         value: <><Text className='courseDetailFloatLayout-itemTitle'>上课班级：</Text><Text>{clazzString}</Text></>,
         icon: '',
@@ -99,18 +99,7 @@ export default (props) => {
     ]
   }
 
-  const colorPickerRange = themeColors[theme]
-
-  let selectedColorIndex = 0
-  colorPickerRange.map((colorInfo, index) => {
-    if (colorInfo.value === color) {
-      selectedColorIndex = index
-    }
-  })
-
-  const handlePickerChange = (e) => {
-    const colorIndex = parseInt(e.detail.value)
-    const newColor = colorPickerRange[colorIndex].value
+  const handleColorChange = (newColor) => {
     if (type === 'course') {
       dispatch(updateSingleCourseColor({ userType, newColor, courseDetailFLData: props }))
     } else if (type === 'custom') {
@@ -163,7 +152,7 @@ export default (props) => {
         <View className='courseDetailFloatLayout-content-memo'>
           <View className='courseDetailFloatLayout-content-memo-title'>
             <Text>备忘录</Text>
-            {/* <Text className='courseDetailFloatLayout-content-memo-title_comment'>（关闭弹窗自动保存）</Text> */}
+            <Text className='courseDetailFloatLayout-content-memo-title_comment'>（提示：关闭弹窗自动保存）</Text>
           </View>
           <Textarea
             placeholder={type === 'course' ? '记录作业、课堂测试、考试要求等' : '记录该事件的其他信息'}
@@ -179,14 +168,7 @@ export default (props) => {
 
       <View className='courseDetailFloatLayout-footer'>
         <View className='courseDetailFloatLayout-footer-btnBox'>
-          <Picker mode='selector'
-            range={colorPickerRange}
-            rangeKey='name'
-            value={selectedColorIndex}
-            onChange={e => handlePickerChange(e)}
-          >
-            <ColorButton value='选择颜色' theme={theme} backgroundColor={color} />
-          </Picker>
+          <ColorButton value='选择颜色' theme={theme} backgroundColor={color} onSubmit={() => updateColorPicker(handleColorChange, theme, color)} />
         </View>
         <View className='courseDetailFloatLayout-footer_blank'></View>
         <View className='courseDetailFloatLayout-footer-btnBox'>
@@ -197,8 +179,6 @@ export default (props) => {
               <CustomButton value='班级同学' onSubmit={handleClickClazzMates} />
           }
         </View>
-
-
 
       </View>
     </AtFloatLayout>

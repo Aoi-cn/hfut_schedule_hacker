@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text } from '@tarojs/components'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import IconFont from '../../../../components/iconfont'
+import SettingFloatLayout from '../SettingFloatLayout'
+import { updateBizData, updateUiData } from '../../../../actions/event'
 import './index.scss';
 
 export default () => {
-  const currentWeekIndex = useSelector(state => state.event.bizData.currentWeekIndex)
-  // const dateZh = useSelector(state => state.event.bizData.dateZh)
-  // const dailyEventNumber = useSelector(state => state.event.bizData.dailyEventNumber)
   const scheduleMatrix = useSelector(state => state.event.bizData.scheduleMatrix)
   const dayLineMatrix = useSelector(state => state.event.bizData.dayLineMatrix)
   const weekIndex = useSelector(state => state.event.bizData.weekIndex)
   const dayIndex = useSelector(state => state.event.bizData.dayIndex)
+  const currentWeekIndex = useSelector(state => state.event.bizData.currentWeekIndex)
+  const currentDayIndex = useSelector(state => state.event.bizData.currentDayIndex)
+  const showCalendar = useSelector(state => state.event.uiData.showCalendar)
+  const dispatch = useDispatch()
 
   const [dailyEventNumber, setDailyEventNumber] = useState(0)
   const [dateZh, setDateZh] = useState(0)
+  const [showSetting, setShowSetting] = useState(false)
 
   const strM = JSON.stringify(scheduleMatrix)
 
@@ -42,17 +46,38 @@ export default () => {
     setDailyEventNumber(_dailyEventNumber)
   }, [dayLineMatrix, scheduleMatrix, strM, weekIndex, dayIndex])
 
+  const handleLocate = () => {
+    dispatch(updateBizData({ weekIndex: currentWeekIndex }))
+    dispatch(updateBizData({ dayIndex: currentDayIndex }))
+  }
+
   return (
     <View className='eventHeaderTitle'>
-      <View className='eventHeaderTitle-title'>
-        <Text style={{ marginRight: 8 }}>第{currentWeekIndex + 1}周 {dateZh}</Text>
-        <IconFont name='arrow-down-filling' size={24} color='#aaaaaa' />
+      <View className='eventHeaderTitle-left'>
+        <View className='eventHeaderTitle-title' onClick={() => dispatch(updateUiData({ showCalendar: !showCalendar }))}>
+          <Text style={{ marginRight: 8 }}>第{weekIndex + 1}周 {dateZh}</Text>
+          <IconFont name='arrow-down-filling' size={24} color='#aaaaaa' />
+        </View>
+        <View className='eventHeaderTitle-comment'>
+          <Text>今日有</Text>
+          <Text className='eventHeaderTitle-comment-number'>{dailyEventNumber}项</Text>
+          <Text>日程</Text>
+        </View>
       </View>
-      <View className='eventHeaderTitle-comment'>
-        <Text>今日有</Text>
-        <Text className='eventHeaderTitle-comment-number'>{dailyEventNumber}项</Text>
-        <Text>日程</Text>
+
+      <View className='eventHeaderTitle-right'>
+        <View className='eventHeaderTitle-right-operation' style={{ marginRight: '8rpx' }} onClick={handleLocate}>
+          <IconFont name='dingwei' size={48} color='#aaaaaa' />
+        </View>
+        <View className='eventHeaderTitle-right-operation' onClick={() => setShowSetting(true)}>
+          <IconFont name='moreandroid' size={48} color='#aaaaaa' />
+        </View>
       </View>
+
+      <SettingFloatLayout
+        isOpened={showSetting}
+        onClose={() => setShowSetting(false)}
+      />
     </View>
   )
 }

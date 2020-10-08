@@ -31,6 +31,20 @@ export const enter = () => async (dispatch, getState) => {
   }))
 }
 
+export const updateDayByCalendar = (payload) => async (dispatch, getState) => {
+  let { date } = payload
+  date = date.split('-')[1] + '/' + date.split('-')[2]
+  const { schedule: { bizData: { dayLineMatrix } } } = getState()
+  dayLineMatrix.map((weekInfo, weekIndex) => {
+    weekInfo.map((dayInfo, dayIndex) => {
+      if (dayInfo.dateZh === date) {
+        dispatch(updateBizData({ weekIndex }))
+        dispatch(updateBizData({ dayIndex }))
+      }
+    })
+  })
+}
+
 export const updateBizData = (payload) => {
   return {
     type: UPDATE_BIZDATA,

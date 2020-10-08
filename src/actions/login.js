@@ -20,11 +20,20 @@ export const login = ({ username, password, userType, campus }) => async () => {
 
   // 验证失败
   if (!success) {
-    Taro.atMessage({
-      'message': msg,
-      'type': 'error',
-      duration: 2000,
-    })
+    if (msg.indexOf('webvpn登录出错') !== -1) {
+      Taro.atMessage({
+        'message': '教务又双叒叕拥堵了，请稍后再试',
+        'type': 'error',
+        duration: 2000,
+      })
+    } else {
+      Taro.atMessage({
+        'message': msg,
+        'type': 'error',
+        duration: 2000,
+      })
+    }
+    
     return null
   }
 

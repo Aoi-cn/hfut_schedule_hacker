@@ -1,0 +1,21 @@
+@import "../../../style/theme.scss";
+
+
+.colorPicker {
+  color: $color-semi;
+
+  &-content {
+    padding: 0 32px;
+    padding-bottom: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    &-box {
+      height: 100px;
+      width: 204px;
+      margin-top: 24px;
+    }
+  }
+}

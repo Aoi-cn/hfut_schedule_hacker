@@ -19,26 +19,6 @@ const { version } = config
 // enterState = 0或unfinded => 刚进入小程序
 // enterState = 1 => 切换情侣课表
 export const enter = ({ userType, isEvent }) => async (dispatch) => {
-  // 检查更新
-  const updateManager = Taro.getUpdateManager()
-
-  updateManager.onCheckForUpdate(function (res) {
-    // 请求完新版本信息的回调
-    console.log(res.hasUpdate)
-  })
-
-  updateManager.onUpdateReady(function () {
-    Taro.showModal({
-      title: '更新提示',
-      content: '新版本已经准备好，是否重启应用？',
-      success: function (res) {
-        if (res.confirm) {
-          // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-          updateManager.applyUpdate()
-        }
-      }
-    })
-  })
 
   return Taro.getStorage({ key: userType })
     .then(async (userData) => {
@@ -55,7 +35,7 @@ export const enter = ({ userType, isEvent }) => async (dispatch) => {
         })
       } else {
         for (const configKey in config.userConfig) {
-          if (!userConfig[configKey]) {
+          if (userConfig[configKey] === undefined) {
             userConfig[configKey] = config.userConfig[configKey]
             Taro.setStorage({
               key: 'config',
@@ -122,11 +102,10 @@ export const enter = ({ userType, isEvent }) => async (dispatch) => {
       } catch (error) {
         console.error(error);
         Taro.hideNavigationBarLoading()
-        Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
         Taro.showToast({
-          title: '课表更新出错，请重试',
+          title: '更新出错，请查看帮助',
           icon: 'none',
-          duration: 2000
+          duration: 1500
         })
       }
     })
@@ -204,7 +183,6 @@ const handleCheckUpdate = () => async (dispatch) => {
 // 更新数据
 export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, getState) => {
   Taro.showNavigationBarLoading()
-  Taro.setNavigationBarTitle({ title: '正在更新...' })
 
   // 进行课表更新逻辑
   const userData = Taro.getStorageSync(userType)
@@ -217,11 +195,6 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
   const res = await GET('/schedule', { key, campus, semesterId: 114 })
   if (!res) {  // 请求失败
     Taro.hideNavigationBarLoading()
-    if (isEvent) {
-      Taro.setNavigationBarTitle({ title: '' })
-    } else {
-      Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
-    }
   }
   // 课表请求出错。执行key过期之后的逻辑
   if (!res.body.currentWeek) {
@@ -239,10 +212,10 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
   const timeTable = res.body.timeTable.courseUnitList
   // 转化为UI可识别的matrix
   let scheduleMatrix = dataToMatrix(scheduleData, lessonIds, timeTable)
-  // 颜色持久化
+  // 颜色、备忘录持久化
   try {
     scheduleMatrix = dataPersistence({ userType, scheduleMatrix })
-  } catch (error) { console.log('颜色持久化出错') }
+  } catch (error) { console.log('持久化出错') }
 
   for (let i = 0; i < 4; i++) {
     timeTable.push({ endTimeText: 'sleep' })
@@ -292,15 +265,10 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
     }
   })
   Taro.hideNavigationBarLoading()
-  if (isEvent) {
-    Taro.setNavigationBarTitle({ title: '' })
-  } else {
-    Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
-  }
 }
 
 // 颜色持久化
-const dataPersistence = ({ userType, scheduleMatrix }) => {
+const dataPersistence = ({ userType, scheduleMatrix, type = 'all' }) => {
   const newScheduleMatrix = _.cloneDeep(scheduleMatrix)
   const { scheduleMatrix: localScheduleMatrix } = Taro.getStorageSync(userType)
 
@@ -329,8 +297,13 @@ const dataPersistence = ({ userType, scheduleMatrix }) => {
         courseBoxList.map((courseBoxData) => {
           const { lessonId } = courseBoxData
           if (lessonId) {
-            courseBoxData.color = localColorLibrary[lessonId].color
-            courseBoxData.memo = localColorLibrary[lessonId].memo
+            if (type === 'all') {
+              courseBoxData.color = localColorLibrary[lessonId].color
+              courseBoxData.memo = localColorLibrary[lessonId].memo
+            }
+            else if (type === 'memo') {
+              courseBoxData.memo = localColorLibrary[lessonId].memo
+            }
           }
         })
       })
@@ -349,7 +322,7 @@ export const reLogin = ({ userType }) => async (dispatch) => {
   const { userInfo } = localUserData
   const { username, password, campus } = userInfo
   const res = await GET('/login', { username, password })
-  const { success, key } = res
+  const { success, key, msg } = res
   if (success && reLoginTime < 4) {
     reLoginTime++
     await Taro.setStorage({
@@ -366,15 +339,21 @@ export const reLogin = ({ userType }) => async (dispatch) => {
     })
     dispatch(updateScheduleData({ userType }))
   } else {
-    reLoginTime = 0
+    if (msg.indexOf('密码错误') !== -1) {
+      Taro.showToast({
+        title: '检测到教务密码变动，请重新登录',
+        icon: 'none',
+        duration: 1500
+      })
+    } else {
+      Taro.showToast({
+        title: '更新出错，下拉刷新试试',
+        icon: 'none',
+        duration: 1500
+      })
+    }
     console.error('重新登陆出错')
     Taro.hideNavigationBarLoading()
-    Taro.setNavigationBarTitle({ title: `${userType === 'me' ? '我的' : 'ta的'}课表` })
-    Taro.showToast({
-      title: '课表更新出错，请查看帮助',
-      icon: 'none',
-      duration: 2000
-    })
   }
 }
 
@@ -389,7 +368,11 @@ export const refreshColor = ({ userType, render = true }) => async (dispatch) =>
   const userData = await Taro.getStorage({ key: userType })
   const { userInfo, scheduleData, lessonIds, timeTable } = userData.data
 
-  const scheduleMatrix = dataToMatrix(scheduleData, lessonIds, timeTable)
+  let scheduleMatrix = dataToMatrix(scheduleData, lessonIds, timeTable)
+  // 颜色、备忘录持久化
+  try {
+    scheduleMatrix = dataPersistence({ userType, scheduleMatrix, type: 'memo' })
+  } catch (error) { console.log('持久化出错') }
 
   // 写入自定义事件
   const customSchedule = Taro.getStorageSync('custom')
@@ -486,7 +469,7 @@ export const updateSingleCourseColor = (payload) => async (dispatch, getState) =
 
 export const changeUserType = ({ userType }) => async (dispatch) => {
   const newUserType = userType === 'me' ? 'her' : 'me'
-  dispatch(loginActions.updateBizData({
+  await dispatch(loginActions.updateBizData({
     username: '',
     password: '',
     userType: newUserType,

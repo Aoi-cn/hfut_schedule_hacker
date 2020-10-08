@@ -20,6 +20,7 @@ export const themeColors = [
     { name: '亮蓝', value: 'blue' },
     { name: '蓝', value: 'darkBlue' },
     { name: '红', value: 'red' },
+    { name: '粉', value: 'pink' },
     { name: '亮黄', value: 'gold' },
     { name: '黄', value: 'yellow' },
     { name: '绿', value: 'green' },
@@ -40,15 +41,15 @@ export const themeColors = [
   ],
   // 罗时锴
   [
-    { name: '蒂芙尼蓝', value: 'blue' },
-    { name: '紫', value: 'purple' },
-    { name: '树莓', value: 'red' },
-    { name: '黄', value: 'yellow' },
-    { name: '麓森绿', value: 'green' },
-    { name: '玫红', value: 'pink' },
-    { name: '橙', value: 'orange' },
-    { name: '烟蓝', value: 'blue2' },
-    { name: '草绿', value: 'green2' },
+    { name: '马卡龙', value: 'blue' },
+    { name: '葡萄', value: 'purple' },
+    { name: '芋泥', value: 'red' },
+    { name: '半熟芝士', value: 'yellow' },
+    { name: '抹茶', value: 'green' },
+    { name: '覆盆子', value: 'pink' },
+    { name: '甜瓜', value: 'orange' },
+    { name: '蓝莓', value: 'blue2' },
+    { name: '牛油果', value: 'green2' },
   ],
 ]
 

@@ -1,30 +1,40 @@
 import React from 'react'
 import { View, Text } from '@tarojs/components'
-import { useDispatch } from 'react-redux'
 
-import { updateUiData } from '../../actions/schedule'
 import { config, updateInfo } from '../../config/config.default'
 import IconFont from '../../components/iconfont'
 import './index.scss'
 import themeC from '../../style/theme'
 
-export default () => {
+export default ({ onClose }) => {
   const { version } = config
-  const { features, bugs } = updateInfo
-  const dispatch = useDispatch()
-
-  const handleClose = () => {
-    dispatch(updateUiData({ showUpdateNotice: false }))
-  }
+  const { notices, features, bugs } = updateInfo
 
   return (
     <View className='updateNotice'>
 
       <View className='updateNotice-content'>
-        <View className='updateNotice-content-title'>{`${version}重大更新公告！`}</View>
-        <View className='updateNotice-content-close' onClick={handleClose}>
+        <View className='updateNotice-content-title'>{`${version}更新公告`}</View>
+        <View className='updateNotice-content-close' onClick={onClose}>
           <IconFont name='shibai' size={48} color='#60646b' />
         </View>
+
+        <View className='updateNotice-content-subTitle'>
+          <IconFont name='tanhao' size={36} color={themeC['color-font-brand']} />
+          <Text className='updateNotice-content-subTitle_text'>通告</Text>
+        </View>
+        {
+          notices.map((notice, index) => (
+            <View className='updateNotice-content-item' key={`thisis${index}`}>
+              <View className='updateNotice-content-item-info'>{notice.info}</View>
+              {
+                notice.comment &&
+                <View className='updateNotice-content-item-comment'>{notice.comment}</View>
+              }
+            </View>
+          ))
+        }
+        <View className='updateNotice-content-line'></View>
         <View className='updateNotice-content-subTitle'>
           <IconFont name='ceshi' size={36} color={themeC['color-font-brand']} />
           <Text className='updateNotice-content-subTitle_text'>内容升级</Text>
@@ -41,8 +51,9 @@ export default () => {
           ))
         }
         <View className='updateNotice-content-line'></View>
+
         <View className='updateNotice-content-subTitle'>
-          <IconFont name='tanhao' size={36} color={themeC['color-font-brand']} />
+          <IconFont name='anquan' size={36} color={themeC['color-font-brand']} />
           <Text className='updateNotice-content-subTitle_text'>问题修复</Text>
         </View>
         {
@@ -58,7 +69,7 @@ export default () => {
         }
       </View>
 
-      <View className='updateNotice-mask' onClick={handleClose}></View>
+      <View className='updateNotice-mask' onClick={onClose}></View>
     </View>
   )
 }

@@ -14,11 +14,11 @@
   margin-top: 48px;
 
   &-item {
-    height: 180px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1;
 
     &-timeBox {
       width: 142px;
@@ -45,7 +45,7 @@
     padding-left: 124px;
     display: flex;
     align-items: center;
-    z-index: 2;
+    z-index: 3;
     width: 100%;
     box-sizing: border-box;
     // background-color: red;

@@ -2,6 +2,10 @@
 
 import React from 'react';
 
+import Icondingwei from './Icondingwei';
+import Iconmoreandroid from './Iconmoreandroid';
+import Iconanquan from './Iconanquan';
+import Iconbulletin from './Iconbulletin';
 import IconarrowUpFilling from './IconarrowUpFilling';
 import IconarrowDownFilling from './IconarrowDownFilling';
 import Iconshibai from './Iconshibai';
@@ -30,6 +34,14 @@ import Icongift from './Icongift';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
+    case 'dingwei':
+      return <Icondingwei {...rest} />;
+    case 'moreandroid':
+      return <Iconmoreandroid {...rest} />;
+    case 'anquan':
+      return <Iconanquan {...rest} />;
+    case 'bulletin':
+      return <Iconbulletin {...rest} />;
     case 'arrow-up-filling':
       return <IconarrowUpFilling {...rest} />;
     case 'arrow-down-filling':

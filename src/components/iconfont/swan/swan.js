@@ -1,6 +1,6 @@
 Component({
   properties: {
-    // arrow-up-filling | arrow-down-filling | shibai | ceshi | tanhao | file-text | paihangbang | shezhi | swap | caidan | mingxinghuodong | wenjuan | aixin | aixin-filled | eye | info-circle-fill | plus | eye-close | search | arrow-right | arrow-lift | arrow-down | personal | calendar | gift
+    // dingwei | moreandroid | anquan | bulletin | arrow-up-filling | arrow-down-filling | shibai | ceshi | tanhao | file-text | paihangbang | shezhi | swap | caidan | mingxinghuodong | wenjuan | aixin | aixin-filled | eye | info-circle-fill | plus | eye-close | search | arrow-right | arrow-lift | arrow-down | personal | calendar | gift
     name: {
       type: String,
     },
