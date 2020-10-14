@@ -113,6 +113,15 @@
   // 盒子 主题颜色
   &-boxColor {
 
+    // 空教室查询的
+    &-red {
+      background-color: #ffdad1;
+    }
+
+    &-green {
+      background-color: #bceae0;
+    }
+
     // 默认主题
     &-init_0 {
       background-color: #000000;
@@ -287,6 +296,15 @@
 
   // 文字 主题颜色
   &-fontColor {
+
+    // 空教室查询的
+    &-red {
+      color: #b24b2a;
+    }
+
+    &-green {
+      color: #21574a;
+    }
 
     // 默认主题-文字
     &-blue_0 {

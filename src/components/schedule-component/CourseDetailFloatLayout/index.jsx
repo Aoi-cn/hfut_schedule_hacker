@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { useDispatch, useSelector } from 'react-redux'
 import { View, Text, Textarea } from '@tarojs/components'
-import { AtFloatLayout } from 'taro-ui'
+import { AtFloatLayout, AtAccordion } from 'taro-ui'
 
 import { updateSingleCourseColor } from '../../../actions/schedule'
 import { updateSingleCustomColor, deleteSingleCustom, updateSingleCustomMemo } from '../../../actions/customSchedule'
@@ -13,11 +13,12 @@ import CustomButton from '../../../components/CustomButton'
 import './index.scss'
 
 export default (props) => {
-  const { courseDetailFLData, source, onClose, updateColorPicker } = props
-  const { isOpened, type, name, credits, clazzRoom, teacher, timeRange, lessonType, studentClazzes, studentNumber, weekIndexes = [], weekIndexesZh, color, memo: memo_ } = courseDetailFLData
+  const { courseDetailFLData, source, onClose, updateColorPicker, openCustomScheduleFL } = props
+  const { isOpened, type, name, credits, clazzRoom, teacher, timeRange, lessonCode, lessonType, timeIndexes, dayIndex, studentClazzes, studentNumber, weekIndexes = [], weekIndexesZh, color, memo: memo_ } = courseDetailFLData
   const userType = useSelector(state => state.login.bizData.userType)
   const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
   const [memo, setMemo] = useState('')
+  const [showDetail, setShowDetail] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -36,6 +37,7 @@ export default (props) => {
 
   // icon先不要了啊
   let items = []
+  let detailItems = []
   if (type === 'course') {
     let clazzString = ''
     if (studentClazzes) {
@@ -54,11 +56,18 @@ export default (props) => {
         icon: '',
       },
       {
-        value: <><Text className='courseDetailFloatLayout-itemTitle'>学分：</Text><Text>{credits}</Text></>,
+        value: <><Text className='courseDetailFloatLayout-itemTitle'>时间：</Text><Text>{timeRange}</Text></>,
         icon: '',
       },
       {
-        value: <><Text className='courseDetailFloatLayout-itemTitle'>时间：</Text><Text>{timeRange}</Text></>,
+        value: <><Text className='courseDetailFloatLayout-itemTitle'>开设周目：</Text><Text>{weekIndexesZh}</Text></>,
+        icon: '',
+      },
+
+    ]
+    detailItems = [
+      {
+        value: <><Text className='courseDetailFloatLayout-itemTitle'>学分：</Text><Text>{credits}</Text></>,
         icon: '',
       },
       {
@@ -66,13 +75,13 @@ export default (props) => {
         icon: '',
       },
       {
-        value: <><Text className='courseDetailFloatLayout-itemTitle'>开设周目：</Text><Text>{weekIndexesZh}</Text></>,
+        value: <><Text className='courseDetailFloatLayout-itemTitle'>课程类型：</Text><Text>{lessonType}</Text></>,
         icon: '',
       },
-      // {
-      //   value: <><Text className='courseDetailFloatLayout-itemTitle'>课程类别：</Text><Text>{lessonType}</Text></>,
-      //   icon: '',
-      // },
+      {
+        value: <><Text className='courseDetailFloatLayout-itemTitle'>课程编号：</Text><Text>{lessonCode}</Text></>,
+        icon: '',
+      },
       {
         value: <><Text className='courseDetailFloatLayout-itemTitle'>上课班级：</Text><Text>{clazzString}</Text></>,
         icon: '',
@@ -149,6 +158,27 @@ export default (props) => {
             </View>
           ))
         }
+
+        <View className='courseDetailFloatLayout-detail'>
+          <AtAccordion
+            open={showDetail}
+            onClick={() => setShowDetail(!showDetail)}
+            title='详细信息'
+            hasBorder={false}
+          >
+            <View className='courseDetailFloatLayout-detail-content'>
+            {
+              detailItems.map((item, index) => (
+                <View className='courseDetailFloatLayout-content-item courseDetailFloatLayout-content-item_detail' key={`thisis${index}`}>
+                  <IconFont name={item.icon} />
+                  <Text>{item.value}</Text>
+                </View>
+              ))
+            }
+            </View>
+          </AtAccordion>
+        </View>
+
         <View className='courseDetailFloatLayout-content-memo'>
           <View className='courseDetailFloatLayout-content-memo-title'>
             <Text>备忘录</Text>
@@ -168,9 +198,16 @@ export default (props) => {
 
       <View className='courseDetailFloatLayout-footer'>
         <View className='courseDetailFloatLayout-footer-btnBox'>
-          <ColorButton value='选择颜色' theme={theme} backgroundColor={color} onSubmit={() => updateColorPicker(handleColorChange, theme, color)} />
+          {
+            type === 'custom' ?
+              <CustomButton value='修改事件' onSubmit={() => openCustomScheduleFL({ dayIndex, startTime: timeIndexes[0], courseType: timeIndexes.length, chosenWeeks: weekIndexes })} />
+              :
+              <ColorButton value='选择颜色' theme={theme} backgroundColor={color} onSubmit={() => updateColorPicker(handleColorChange, theme, color)} />
+          }
+
         </View>
         <View className='courseDetailFloatLayout-footer_blank'></View>
+
         <View className='courseDetailFloatLayout-footer-btnBox'>
           {
             type === 'custom' ?

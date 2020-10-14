@@ -13,17 +13,18 @@ import {
 } from '../constants/schedule'
 
 export const addCustomSchedule = (payload) => async (dispatch, getState) => {
-  const {
+  let {
     source,
     name,
     clazzRoom,
+    lessonId,
     color,
     dayIndex,
     startTime,
-    timeIndex,
     timeIndexes,
     timeRange,
     weekIndexes,
+    memo,
     scheduleMatrix
   } = payload
 
@@ -33,7 +34,25 @@ export const addCustomSchedule = (payload) => async (dispatch, getState) => {
   if (source === 'event') {
     userCustomSchedule = customSchedule['me']
   }
-  const lessonId = uuid()
+
+  // lessonId不为空，说明是修改，不是新增
+  if (lessonId) {
+    scheduleMatrix.map((weekData, weekIndex_) => {
+      weekData.map((dayData, dayIndex_) => {
+        dayData.map((courseBoxList, timeIndex_) => {
+          const { lessonId: lessonId_ } = courseBoxList[0]
+          // 删除修改后没有的
+          if (lessonId_ == lessonId && weekIndexes.indexOf(weekIndex_ + 1) === -1) {
+            // console.log('--------')
+            // console.log(courseBoxList[0])
+            scheduleMatrix[weekIndex_][dayIndex_][timeIndex_][0] = {}
+            userCustomSchedule[weekIndex_][dayIndex_][timeIndex_][0] = {}
+          }
+        })
+      })
+    })
+  }
+  lessonId = lessonId ? lessonId : uuid()
 
   weekIndexes.map(weekIndex => {
     scheduleMatrix[weekIndex - 1][dayIndex][startTime][0] = {
@@ -44,11 +63,10 @@ export const addCustomSchedule = (payload) => async (dispatch, getState) => {
       color,
       dayIndex,
       startTime,
-      timeIndex,
       timeIndexes,
       timeRange,
       weekIndexes,
-      memo: '',
+      memo: memo ? memo : '',
     }
     userCustomSchedule[weekIndex - 1][dayIndex][startTime][0] = {
       type: 'custom',
@@ -58,11 +76,10 @@ export const addCustomSchedule = (payload) => async (dispatch, getState) => {
       color,
       dayIndex,
       startTime,
-      timeIndex,
       timeIndexes,
       timeRange,
       weekIndexes,
-      memo: '',
+      memo: memo ? memo : '',
     }
   })
 
@@ -75,7 +92,7 @@ export const addCustomSchedule = (payload) => async (dispatch, getState) => {
   if (!(source === 'event' && userType === 'her')) {
     dispatch(updateBizData({ scheduleMatrix }))
   }
-  
+
   // 更新event
   if (userType === 'me' || source === 'event') {
     dispatch(eventActions.updateBizData({ scheduleMatrix }))

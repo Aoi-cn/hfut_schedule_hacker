@@ -2,13 +2,20 @@ import { useGlobalIconFont } from './components/iconfont/helper';
 
 export default {
   pages: [
+    
+    // 'pages/home/index',
+
     'pages/event/index',
     'pages/schedule/index',
+    'pages/home/index',
+    
     'pages/login/index',
-    'pages/gift/index',
-    'pages/schedule/pages/allSchedule/index',
-    // 'pages/advise/index',
+    'pages/home/pages/gift/index',
+    'pages/home/pages/empty-clazz-room/index',
+    'pages/home/pages/empty-clazz-room/pages/room-detail-schedule/index',
 
+    'pages/schedule/pages/all-schedule/index',
+    'pages/schedule/pages/mooc/index',
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -35,11 +42,23 @@ export default {
       selectedIconPath: 'assets/schedule_active.png',
     },
     {
-      pagePath: 'pages/gift/index',
-      text: '反馈',
-      iconPath: 'assets/gift.png',
-      selectedIconPath: 'assets/gift_active.png',
-    }
+      pagePath: 'pages/home/index',
+      text: '我',
+      iconPath: 'assets/home.png',
+      selectedIconPath: 'assets/home_active.png',
+    },
+    // {
+    //   pagePath: 'pages/schedule/pages/all-schedule/index',
+    //   text: '全校',
+    //   iconPath: 'assets/network.png',
+    //   selectedIconPath: 'assets/network_active.png',
+    // },
+    // {
+    //   pagePath: 'pages/gift/index',
+    //   text: '反馈',
+    //   iconPath: 'assets/gift.png',
+    //   selectedIconPath: 'assets/gift_active.png',
+    // }
     ]
   },
   usingComponents: useGlobalIconFont(),

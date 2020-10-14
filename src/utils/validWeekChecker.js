@@ -1,6 +1,5 @@
 
-export default (scheduleMatrix, chosenBlank, courseType) => {
-  const [dayIndex, startTime] = chosenBlank
+export default ({ scheduleMatrix, dayIndex, startTime, courseType, type, lessonId }) => {
 
   if (startTime < 4 && (startTime + courseType) > 4 ||
     startTime < 8 && startTime > 3 && (startTime + courseType) > 8 ||
@@ -15,7 +14,7 @@ export default (scheduleMatrix, chosenBlank, courseType) => {
     const dayData = weekData[dayIndex]
     for (let i = 0; i < courseType; i++) {
       const courseBoxData = dayData[startTime + i][0]
-      if (courseBoxData.name) {
+      if (courseBoxData.lessonId && courseBoxData.lessonId !== lessonId) {
         validType = 1
       }
     }

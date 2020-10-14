@@ -22,7 +22,7 @@ export const updateScheduleData = (payload) => async (dispatch) => {
 
   const res = await GET('/schedule/schedule', { clazz })
   const { scheduleData, lessonIds, timeTable: { courseUnitList: timeTable } } = res
-  const scheduleMatrix = dataToMatrix(scheduleData, lessonIds, timeTable)
+  const { scheduleMatrix } = dataToMatrix(scheduleData, lessonIds, timeTable)
   scheduleMatrix.map((weekData) => {
     weekData.map((dayData) => {
       dayData.map((courseBoxList) => {

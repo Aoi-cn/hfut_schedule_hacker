@@ -3,10 +3,10 @@ import Taro from '@tarojs/taro'
 import { useDispatch, useSelector } from 'react-redux'
 import { View } from '@tarojs/components'
 
-import { updateUiData, updateBizData } from '../../../../actions/schedule'
+import { updateUiData } from '../../../../actions/schedule'
 import IconFont from '../../../../components/iconfont'
 
-export default ({ boxType, courseBoxList, dayIndex, timeIndex }) => {
+export default ({ boxType, courseBoxList, dayIndex, startTime }) => {
   const courseBoxData = courseBoxList[0] ? courseBoxList[0] : {}
   const courseBoxData_ = courseBoxList[1] ? courseBoxList[1] : {}
   const { type, name = "", clazzRoom, color } = courseBoxData
@@ -15,9 +15,11 @@ export default ({ boxType, courseBoxList, dayIndex, timeIndex }) => {
   const diff = useSelector(state => state.schedule.uiData.diff)
   const chosenBlank = useSelector(state => state.schedule.uiData.chosenBlank)
   const courseOpacity = useSelector(state => state.schedule.bizData.userConfig.courseOpacity)
+  const weekIndex = useSelector(state => state.schedule.bizData.weekIndex)
+  const currentWeekIndex = useSelector(state => state.schedule.bizData.currentWeekIndex)
   const dispatch = useDispatch()
 
-  const isChosen = (chosenBlank[0] === dayIndex && chosenBlank[1] === timeIndex)
+  const isChosen = (chosenBlank[0] === dayIndex && chosenBlank[1] === startTime)
   let courseName = name.length <= 8 ? name : (name.slice(0, 7) + "...")
   let courseName_ = name_.length <= 4 ? name_ : (name_.slice(0, 4) + `\n...`)
   if (courseBoxList.length > 1) {
@@ -37,6 +39,8 @@ export default ({ boxType, courseBoxList, dayIndex, timeIndex }) => {
         clazzRoom: data.clazzRoom,
         teacher: data.teacher,
         timeRange: data.timeRange,
+        timeIndexes: data.timeIndexes,
+        dayIndex,
         lessonCode: data.lessonCode,
         lessonType: data.lessonType,
         weekIndexes: data.weekIndexes,
@@ -54,20 +58,26 @@ export default ({ boxType, courseBoxList, dayIndex, timeIndex }) => {
   }
 
   const setChosenBlank = () => {
-    dispatch(updateUiData({ chosenBlank: [dayIndex, timeIndex] }))
-    dispatch(updateBizData({ chosenBlank: [dayIndex, timeIndex] }))
+    dispatch(updateUiData({ chosenBlank: [dayIndex, startTime] }))
   }
 
   const openCustomScheduleFL = () => {
     setTimeout(() => {
       dispatch(updateUiData({
-        showCustomScheduleFL: true,
+        customScheduleFLData: {
+          isOpened: true,
+          ...courseBoxData,
+          dayIndex,
+          startTime,
+          chosenWeeks: [weekIndex + 1],
+          currentWeekIndex: currentWeekIndex + 1,
+        },
         chosenBlank: [],
       }))
     });
   }
 
-  const handleMultCourseClick = ()=> {
+  const handleMultCourseClick = () => {
     Taro.showActionSheet({
       itemList: courseBoxList.map(courseBD => courseBD.name),
       success: function (res) {

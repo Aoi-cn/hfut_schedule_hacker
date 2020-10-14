@@ -1,0 +1,77 @@
+@import "../../../../../../style/theme.scss";
+
+@keyframes grey-blue {
+  0% {
+    background: $color-background;
+  }
+
+  100% {
+    background: $color-font-brand;
+  }
+}
+
+@keyframes blue-grey {
+  0% {
+    background: $color-font-brand;
+  }
+
+  100% {
+    background: $color-background;
+  }
+}
+
+
+.datePickerFL {
+  color: $color-semi;
+
+  &-content {
+    padding: 24px;
+    // padding-bottom: 24px;
+
+    &-weekIndexContent {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      height: 310px;
+      padding: 0 24px;
+      margin-top: 12px;
+
+      &-week {
+        position: relative;
+        width: 99px;
+        height: 64px;
+        background-color: $color-background;
+        color: $color-light;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: blue-grey 0.2s linear;
+
+        &_chosen {
+          background-color: $color-font-brand;
+          color: #ffffff;
+          animation: grey-blue 0.2s linear;
+        }
+
+      }
+    }
+
+  }
+
+  &-footer {
+    padding: 0 48px;
+    padding-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+
+    &-btnBox {
+      width: 100%;
+    }
+
+    &_blank {
+      width: 52px;
+    }
+  }
+}

@@ -33,6 +33,11 @@
       justify-content: flex-start;
       font-size: 34px;
       margin-bottom: 16px;
+
+      &_detail {
+        font-size: 30px;
+        margin-bottom: 12px;
+      }
     }
 
     &-memo {
@@ -58,7 +63,21 @@
         background-color: $color-background;
       }
     }
+  }
 
+  &-detail {
+    width: 100%;
+    background-color: $color-background;
+    border-radius: 20px;
+
+    &-content {
+      width: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // padding: 0 24px;
+      padding-bottom: 16px;
+    }
   }
 
   &-footer {
@@ -80,4 +99,21 @@
   &-itemTitle {
     color: $color-light;
   }
+}
+
+.at-accordion__content::after {
+  border-top: none;
+}
+
+.at-accordion__header {
+  padding: 18px 0;
+}
+
+.at-accordion {
+  padding: 0 36px;
+}
+
+.at-accordion__info__title {
+  color: $color-light;
+  font-size: 30px;
 }

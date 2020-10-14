@@ -10,7 +10,7 @@
   &-course {
     position: absolute;
     width: inherit;
-    border-radius: 12px;
+    border-radius: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -65,7 +65,7 @@
     opacity: 0.2;
     width: inherit;
     height: inherit;
-    border-radius: 12px;
+    border-radius: 20px;
     background: linear-gradient(45deg, #999 25%, #bbb 0, #bbb 50%, #999 0, #999 75%, #bbb 0);
     background-size: 100px 100px;
     opacity: 0.3;

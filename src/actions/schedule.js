@@ -23,6 +23,8 @@ export const enter = ({ userType, isEvent }) => async (dispatch) => {
   return Taro.getStorage({ key: userType })
     .then(async (userData) => {
       const { scheduleMatrix, timeTable = [] } = userData.data  // 读取本地的课表数据
+      // 二话不说先渲染
+      dispatch(updateBizData({ scheduleMatrix, timeTable }))
 
       //读取本地设置
       const localConfig = Taro.getStorageSync('config')
@@ -67,7 +69,7 @@ export const enter = ({ userType, isEvent }) => async (dispatch) => {
       const userCustomScheduleM = customSchedule[userType]
       if (!userCustomScheduleM) {
         // 本地还没有这个用户的自定义事件，那就新生成一个
-        customSchedule[userType] = dataToMatrix()
+        customSchedule[userType] = dataToMatrix().scheduleMatrix
         await Taro.setStorage({
           key: 'custom',
           data: customSchedule
@@ -211,7 +213,7 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
   const lessonIds = res.body.lessonIds
   const timeTable = res.body.timeTable.courseUnitList
   // 转化为UI可识别的matrix
-  let scheduleMatrix = dataToMatrix(scheduleData, lessonIds, timeTable)
+  let { scheduleMatrix, moocData } = dataToMatrix(scheduleData, lessonIds, timeTable)
   // 颜色、备忘录持久化
   try {
     scheduleMatrix = dataPersistence({ userType, scheduleMatrix })
@@ -245,7 +247,7 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
   // 适应场景：刚打开课表就点情侣课表
   const { login: { bizData: { userType: userType_ } } } = getState()
   if (userType === userType_) {
-    dispatch(updateBizData({ scheduleMatrix, timeTable }))
+    dispatch(updateBizData({ scheduleMatrix, timeTable, moocData }))
   }
 
   // 更新event
@@ -368,7 +370,7 @@ export const refreshColor = ({ userType, render = true }) => async (dispatch) =>
   const userData = await Taro.getStorage({ key: userType })
   const { userInfo, scheduleData, lessonIds, timeTable } = userData.data
 
-  let scheduleMatrix = dataToMatrix(scheduleData, lessonIds, timeTable)
+  let { scheduleMatrix } = dataToMatrix(scheduleData, lessonIds, timeTable)
   // 颜色、备忘录持久化
   try {
     scheduleMatrix = dataPersistence({ userType, scheduleMatrix, type: 'memo' })

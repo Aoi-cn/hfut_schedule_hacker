@@ -42,7 +42,7 @@
   }
 
   &-content {
-    padding: 0 8px;
+    padding: 0 6px;
     padding-bottom: 12px;
     
     &-item {
@@ -69,7 +69,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 24px;
+        padding: 12px 32px;
         margin-top: 36px;
 
         &-jieshuBox {
@@ -92,7 +92,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 24px;
+        padding: 12px 32px;
         font-size: 32px;
         color: $color-semi;
         margin-top: 36px;
@@ -131,7 +131,7 @@
         justify-content: space-between;
         align-items: center;
         height: 280px;
-        padding: 0 24px;
+        padding: 0 32px;
         margin-top: 24px;
 
         &-week {
@@ -160,7 +160,7 @@
     // width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0 32px;
+    padding: 0 36px;
     padding-bottom: 24px;
 
     &-btnBox {

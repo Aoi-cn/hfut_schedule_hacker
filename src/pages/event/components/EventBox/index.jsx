@@ -3,7 +3,7 @@ import Taro from '@tarojs/taro'
 import { useDispatch, useSelector } from 'react-redux'
 import { View } from '@tarojs/components'
 
-import { updateUiData, updateBizData } from '../../../../actions/event'
+import { updateUiData } from '../../../../actions/event'
 import IconFont from '../../../../components/iconfont'
 import diffTime from '../../../../utils/diffTime'
 import './index.scss'
@@ -47,6 +47,8 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
         clazzRoom: data.clazzRoom,
         teacher: data.teacher,
         timeRange: data.timeRange,
+        timeIndexes: data.timeIndexes,
+        dayIndex,
         lessonCode: data.lessonCode,
         lessonType: data.lessonType,
         weekIndexes: data.weekIndexes,
@@ -65,13 +67,19 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
 
   const setChosenBlank = () => {
     dispatch(updateUiData({ chosenBlank: [dayIndex, startTime] }))
-    dispatch(updateBizData({ chosenBlank: [dayIndex, startTime] }))
   }
 
   const openCustomScheduleFL = () => {
     setTimeout(() => {
       dispatch(updateUiData({
-        showCustomScheduleFL: true,
+        customScheduleFLData: {
+          isOpened: true,
+          ...courseBoxData,
+          dayIndex,
+          startTime,
+          chosenWeeks: [weekIndex + 1],
+          currentWeekIndex: currentWeekIndex + 1,
+        },
         chosenBlank: [],
       }))
     });
@@ -125,7 +133,7 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
 
   // 这里计算mask的高度
   let maskHeight = 0
-  let maskBottomRadius = 12
+  let maskBottomRadius = 20
   if (currentDayIndex > dayIndex) {
     maskHeight = height
   } else if (currentDayIndex < dayIndex) {

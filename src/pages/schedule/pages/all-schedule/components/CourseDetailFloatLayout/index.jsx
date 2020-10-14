@@ -7,7 +7,7 @@ import './index.scss'
 
 export default (props) => {
   const { courseDetailFLData, onClose } = props
-  const { isOpened, name, credits, clazzRoom, teacher, timeRange, lessonType, studentClazzes, studentNumber, weekIndexesZh, campus } = courseDetailFLData
+  const { isOpened, name, credits, clazzRoom, teacher, timeRange, lessonCode, lessonType, studentClazzes, studentNumber, weekIndexesZh, campus } = courseDetailFLData
 
   let clazzString = ''
   if (studentClazzes) {
@@ -49,6 +49,10 @@ export default (props) => {
     },
     {
       value: <><Text className='courseDetailFloatLayout-itemTitle'>课程类别：</Text><Text>{lessonType}</Text></>,
+      icon: '',
+    },
+    {
+      value: <><Text className='courseDetailFloatLayout-itemTitle'>课程编号：</Text><Text>{lessonCode}</Text></>,
       icon: '',
     },
     {

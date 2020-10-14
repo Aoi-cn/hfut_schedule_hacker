@@ -53,7 +53,11 @@ export const themeColors = [
   ],
 ]
 
+// 主函数
 export default (scheduleData, lessonIds, timeTable) => {
+
+  // 初始化moocData
+  const moocData = []
 
   // 初始化scheduleMatrix
   let scheduleMatrix = []
@@ -80,7 +84,7 @@ export default (scheduleData, lessonIds, timeTable) => {
         })
       })
     })
-    return scheduleMatrix
+    return { scheduleMatrix }
   }
 
   // 给每个课程分配颜色
@@ -91,6 +95,7 @@ export default (scheduleData, lessonIds, timeTable) => {
     // course：(Object)课程数据
     // text：(String)该门课具体在星期几、教室信息、授课老师
     // lessonId:：课程id
+    // remark：判断是不是慕课
     const {
       course: {
         nameZh: name,
@@ -100,15 +105,31 @@ export default (scheduleData, lessonIds, timeTable) => {
       id: lessonId,
       nameZh: studentClazzes,
       code: lessonCode,
+      remark: remark,
       stdCount: studentNumber,
       courseType: { nameZh: lessonType },
       scheduleWeeksInfo: weekIndexesZh,
       campus: { nameZh: campus },
+      openDepartment: { abbrZh: openDepartment },
 
     } = lessonInfo
+
+    // 先生成moocData（慕课的）
+    if (remark && remark.indexOf('慕课') !== -1) {
+      moocData.push({
+        name,
+        lessonCode,
+        credits,
+        info: remark,
+        lessonType,
+        openDepartment,
+      })
+    }
+
     if (!text) { return } // 没有课程安排，跳过
 
-    // 解析
+
+    // 再生成scheduleMatrix
     text.split('\n').map((splitdText) => {
 
       // 教室、老师
@@ -226,6 +247,7 @@ export default (scheduleData, lessonIds, timeTable) => {
         courseBoxList.push(_.cloneDeep(courseBoxData))
       })
     })
+
   })
 
   // 给所有没课的添加{}
@@ -241,7 +263,10 @@ export default (scheduleData, lessonIds, timeTable) => {
 
   // console.log(scheduleMatrix)
 
-  return scheduleMatrix
+  return {
+    scheduleMatrix,
+    moocData,
+  }
 }
 
 
@@ -287,6 +312,35 @@ const dayZhToIndex = (dayZh) => {
       break;
   }
   return dayIndex
+}
+
+// 将中文的周目转化为index
+export const dayIndexToZh = (dayIndex) => {
+  let dayZh = 0
+  switch (dayIndex) {
+    case 0:
+      dayZh = '周一'
+      break;
+    case 1:
+      dayZh = '周二'
+      break;
+    case 2:
+      dayZh = '周三'
+      break;
+    case 3:
+      dayZh = '周四'
+      break;
+    case 4:
+      dayZh = '周五'
+      break;
+    case 5:
+      dayZh = '周六'
+      break;
+    default:
+      dayZh = '周日'
+      break;
+  }
+  return dayZh
 }
 
 // 将上课时间转化为index

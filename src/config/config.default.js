@@ -4,7 +4,7 @@
 export const updateState = 0
 
 export const config = {
-  version: '2.10.5',
+  version: '2.10.9',
   autoConfig: {
     showDiffHelp: true,
     showAllSHelp: true,
@@ -21,33 +21,24 @@ export const config = {
 }
 
 export const updateInfo = {
-  notices: [
-    {
-      info: '1. 在哪里退出登录？',
-      comment: '课表页-右上角加号-课表设置',
-    },
-    {
-      info: '2. 全校课表在哪里？',
-      comment: '课表页-右上角加号-全校课表',
-    },
-  ],
+  notices: [{
+    info: 'PC端教务正在进行系统升级！',
+    comment: '由于PC端教务正在进行系统升级，本小程序近期也会出现服务不稳定等情况，待教务升级完成之后即可恢复正常~',
+  },],
   features: [
     {
-      info: '1. 全新主题：美食拼盘',
-      comment: '创作者：管理学院大学生网络文化工作室的小哥哥：罗同学',
+      info: '1. 慕课查询',
+      comment: '点击课表页右上角加号-我的慕课，查看自己（或npy）的慕课信息',
     },
     {
-      info: '2. 全新的课程颜色选择器',
-      // comment: '快点击顶部的大标题试试吧！',
-    },
-    {
-      info: '3. 全新的周目选择器',
-      // comment: '快点击右上角的三个点试试吧！',
+      info: '2. 性能优化',
+      comment: '日程页面、课表页面打开速度翻倍！',
     },
   ],
   bugs: [
     {
-      info: '修复备忘录相关bug',
+      info: '1. 背景图片自动居中裁剪，不缩放',
+      // comment: '点击课表页右上角加号-我的慕课，查看自己（或npy）的慕课信息！',
     },
   ]
 }

@@ -6,6 +6,10 @@ import './index.scss'
 
 export default ({ weekScheduleData }) => {
 
+  if (!weekScheduleData) {
+    return ''
+  }
+
   return (
     <View className='courseTable'>
       {
@@ -33,13 +37,13 @@ export default ({ weekScheduleData }) => {
           return (
             <View className='courseTable-column' key={dayIndex}>
               {
-                dayScheduleData.map((courseBoxList, timeIndex) => (
+                dayScheduleData.map((courseBoxList, startTime) => (
                   <CourseBox
-                    boxType={boxTypeList[timeIndex]}
+                    boxType={boxTypeList[startTime]}
                     courseBoxList={courseBoxList}
-                    key={timeIndex}
+                    key={startTime}
                     dayIndex={dayIndex}
-                    timeIndex={timeIndex}
+                    startTime={startTime}
                   />
                 ))
               }

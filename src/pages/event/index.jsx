@@ -19,8 +19,8 @@ import './index.scss'
 function Event(props) {
   // console.log(props)
   const { bizData, uiData, enter } = props
-  const { weekIndex, scheduleMatrix, chosenBlank, timeTable } = bizData
-  const { courseDetailFLData, showCustomScheduleFL, colorPickerData } = uiData
+  const { weekIndex, currentWeekIndex, scheduleMatrix, timeTable } = bizData
+  const { courseDetailFLData, customScheduleFLData, colorPickerData } = uiData
 
   useEffect(() => {
     enter({ userType: 'me' })
@@ -57,16 +57,42 @@ function Event(props) {
         source='event'
         onClose={() => props.updateUiData({ courseDetailFLData: { isOpened: false } })}
         updateColorPicker={(handleColorChange, theme, color) => props.updateUiData({ colorPickerData: { isOpened: true, handleColorChange, theme, color } })}
+        openCustomScheduleFL={({ dayIndex, startTime, courseType, chosenWeeks }) => props.updateUiData({
+          customScheduleFLData: {
+            ...courseDetailFLData,
+            isOpened: true,
+            type: 'change',
+            dayIndex,
+            startTime,
+            courseType,
+            chosenWeeks,
+            currentWeekIndex: currentWeekIndex + 1,
+          },
+          chosenBlank: [],
+        })}
       />
 
       <CustomScheduleFL
-        isOpened={showCustomScheduleFL}
+        isOpened={customScheduleFLData.isOpened}
+        customScheduleFLData={customScheduleFLData}
+        updateData={(newData) => props.updateUiData({
+          customScheduleFLData: {
+            ...customScheduleFLData,
+            ...newData,
+          }
+        })}
         source='event'
-        onClose={() => props.updateUiData({ showCustomScheduleFL: false })}
-        chosenBlank={chosenBlank}
+        updateCourseDetailFL={(data) => props.updateUiData({
+          courseDetailFLData: {
+            ...courseDetailFLData,
+            ...data
+          }
+        })}
+        onClose={() => props.updateUiData({ customScheduleFLData: { isOpened: false } })}
         scheduleMatrix={scheduleMatrix}
         timeTable={timeTable}
         weekIndex={weekIndex}
+        updateColorPicker={(handleColorChange, theme, color) => props.updateUiData({ colorPickerData: { isOpened: true, handleColorChange, theme, color } })}
       />
 
       <ColorPicker

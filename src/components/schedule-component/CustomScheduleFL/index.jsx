@@ -1,66 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { useSelector, useDispatch } from 'react-redux'
-import { View, Picker, Input, Text } from '@tarojs/components'
+import { View, Input, Text } from '@tarojs/components'
 import { AtFloatLayout, AtInputNumber } from 'taro-ui'
 
 import * as customScheduleActions from '../../../actions/customSchedule'
 import IconFont from '../../../components/iconfont'
 import CustomButton from '../../../components/CustomButton'
 import ColorButton from '../../../components/ColorButton'
-import { themeColors } from '../../../utils/scheduleDataTranslator'
 import validWeekChecker from '../../../utils/validWeekChecker'
 import './index.scss'
 
 export default (props) => {
-  const { isOpened, source, onClose, chosenBlank, scheduleMatrix, timeTable, weekIndex: weekIndex_ } = props
+  const { isOpened, source, onClose, customScheduleFLData, updateData, scheduleMatrix, timeTable, updateColorPicker, updateCourseDetailFL } = props
+  const { type = 'add', name, clazzRoom, chosenWeeks = [], currentWeekIndex, courseType = 1, dayIndex = 0, startTime = 0, lessonId, memo, color = 'blue' } = customScheduleFLData
   const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
-  const [selectedColorIndex, setSelectedColorIndex] = useState(0)
-  const [timeIndex, setTimeIndex] = useState(1)
   const [validWeeks, setValidWeeks] = useState(scheduleMatrix.map(() => 1))
-  const [chosenWeeks, setChosenWeeks] = useState([])
   const [multChosen, setMultChosen] = useState('')
-  const [customInfo, setCustomInfo] = useState({
-    name: '',
-    clazzRoom: '',
-  })
   const dispatch = useDispatch()
 
-  const colorPickerRange = themeColors[theme]
-  const dayIndex = chosenBlank[0]
-  const startTime = chosenBlank[1]
   const weekIndexes = []
   for (let i = 1; i <= 24; i++) {
     weekIndexes.push(i)
   }
 
-  // 每次打开时执行
   useEffect(() => {
     if (isOpened) {
-      setChosenWeeks([weekIndex_ + 1])
-      setMultChosen('')
-      setCustomInfo({
-        name: '',
-        clazzRoom: '',
-      })
-      setTimeIndex(1)
+      setValidWeeks(validWeekChecker({ scheduleMatrix, dayIndex, startTime, courseType, type, lessonId }))
     }
-  }, [isOpened, weekIndex_])
+  }, [scheduleMatrix, courseType, isOpened, dayIndex, startTime, type, lessonId])
 
-  useEffect(() => {
-    if (chosenBlank.length === 0 || !isOpened) {
-      return
-    }
-    setValidWeeks(validWeekChecker(scheduleMatrix, chosenBlank, timeIndex))
-  }, [scheduleMatrix, chosenBlank, timeIndex, isOpened])
-
-  if (chosenBlank.length === 0) {
+  // timeTable没有拿到，不渲染
+  if (timeTable.length === 0) {
     return ''
-  }
-
-  const handlePickerChange = (e) => {
-    const colorIndex = parseInt(e.detail.value)
-    setSelectedColorIndex(colorIndex)
   }
 
   const handleClickWeekBox = (weekIndex) => {
@@ -71,15 +43,15 @@ export default (props) => {
     } else {
       newChosenWeeks.push(weekIndex)
     }
-    setChosenWeeks(newChosenWeeks)
+    updateData({ chosenWeeks: newChosenWeeks })
   }
 
-  const handleMultChosen = (type) => {
+  const handleMultChosen = (method) => {
     let newChosenWeeks = []
 
-    if (type === multChosen) {
+    if (method === multChosen) {
       setMultChosen('')
-      switch (type) {
+      switch (method) {
         case '单周':
           chosenWeeks.map(chosenWeek => {
             if (chosenWeek % 2 !== 1) {
@@ -100,8 +72,8 @@ export default (props) => {
           break;
       }
     } else {
-      setMultChosen(type)
-      switch (type) {
+      setMultChosen(method)
+      switch (method) {
         case '单周':
           for (let i = 1; i < 21; i++) {
             if (i % 2 === 1) {
@@ -126,12 +98,11 @@ export default (props) => {
       }
     }
 
-    setChosenWeeks(newChosenWeeks)
+    updateData({ chosenWeeks: newChosenWeeks })
   }
 
   const handleClickSubmit = () => {
     const finalWeeks = chosenWeeks.filter(chosenWeek => validWeeks[chosenWeek - 1] === 0)
-    const { name, clazzRoom } = customInfo
     if (!name) {
       Taro.showToast({
         title: '请填写事件名',
@@ -149,28 +120,33 @@ export default (props) => {
       return null
     }
 
-    const endTime = startTime + timeIndex - 1
+    const endTime = startTime + courseType - 1
     const timeIndexes = []
     for (let timeIndex_ = parseInt(startTime); timeIndex_ <= parseInt(endTime); timeIndex_++) {
       timeIndexes.push(timeIndex_)
     }
 
-    const color = colorPickerRange[selectedColorIndex].value
     const timeRange = timeTable[startTime].startTimeText + '-' + timeTable[endTime].endTimeText
-
-    dispatch(customScheduleActions.addCustomSchedule({
+    const newData = {
       source,
       name,
       clazzRoom,
+      lessonId,
       color,
       dayIndex,
       startTime,
-      timeIndex,
       timeIndexes,
       timeRange,
       weekIndexes: finalWeeks,
+      memo,
       scheduleMatrix
-    }))
+    }
+
+    dispatch(customScheduleActions.addCustomSchedule(newData))
+
+    if (type === 'change') {
+      updateCourseDetailFL(newData)
+    }
 
     Taro.showToast({
       title: '添加成功',
@@ -200,8 +176,8 @@ export default (props) => {
             <Input
               className='customScheduleFL-content-item-input'
               placeholder='必填'
-              value={customInfo.name}
-              onInput={e => setCustomInfo({ ...customInfo, name: e.detail.value })}
+              value={name}
+              onInput={e => updateData({ name: e.detail.value })}
             />
           </View>
         </View>
@@ -212,8 +188,8 @@ export default (props) => {
             <Input
               className='customScheduleFL-content-item-input'
               placeholder='非必填'
-              value={customInfo.clazzRoom}
-              onInput={e => setCustomInfo({ ...customInfo, clazzRoom: e.detail.value })}
+              value={clazzRoom}
+              onInput={e => updateData({ clazzRoom: e.detail.value })}
             />
           </View>
         </View>
@@ -224,14 +200,14 @@ export default (props) => {
               <Text className='customScheduleFL-content-item-timeIndexBox-jieshuBox_title'>节数</Text>
               <Text className='customScheduleFL-content-item-timeIndexBox-jieshuBox_time'>{`${timeTable[startTime].startTimeText}-`}</Text>
               <Text className={`customScheduleFL-content-item-timeIndexBox-jieshuBox_time customScheduleFL-content-item-timeIndexBox-jieshuBox_time_${validWeeks[0] === 2 && 'danger'}`}>
-                {timeTable[startTime + timeIndex - 1].endTimeText}</Text>
+                {timeTable[startTime + courseType - 1].endTimeText}</Text>
             </View>
             <AtInputNumber
               min={1}
               max={4}
               step={1}
-              value={timeIndex}
-              onChange={value => setTimeIndex(value)}
+              value={courseType}
+              onChange={value => updateData({ courseType: value })}
             />
           </View>
         </View>
@@ -274,7 +250,7 @@ export default (props) => {
                       style={`opacity: ${weekIndex > 20 ? 0 : 1}`}
                       onClick={() => handleClickWeekBox(weekIndex)}
                     >
-                      {weekIndex}
+                      {weekIndex === currentWeekIndex ? '本周' : weekIndex}
                     </View>
                   )
                 } else if (validWeeks[i] === 1) {
@@ -300,19 +276,12 @@ export default (props) => {
 
       <View className='customScheduleFL-footer'>
         <View className='customScheduleFL-footer-btnBox'>
-          <Picker mode='selector'
-            range={colorPickerRange}
-            rangeKey='name'
-            value={selectedColorIndex}
-            onChange={e => handlePickerChange(e)}
-          >
-            <ColorButton value='选择颜色' theme={theme} backgroundColor={colorPickerRange[selectedColorIndex].value} />
-          </Picker>
+          <ColorButton value='选择颜色' theme={theme} backgroundColor={color} onSubmit={() => updateColorPicker((c) => updateData({ color: c }), theme)} />
         </View>
         <View className='customScheduleFL-footer_blank'></View>
 
         <View className='customScheduleFL-footer-btnBox'>
-          <CustomButton value='确认新增' onSubmit={handleClickSubmit} />
+          <CustomButton value={`确认${type === 'add' ? '添加' : '修改'}`} onSubmit={handleClickSubmit} />
         </View>
 
       </View>

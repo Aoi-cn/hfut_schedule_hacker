@@ -3,10 +3,10 @@ import Taro, { showLoading } from '@tarojs/taro'
 import { View, Input, Textarea } from '@tarojs/components'
 import { AtButton, AtMessage } from 'taro-ui'
 
-import IconFont from '../../components/iconfont'
-import { GET } from '../../utils/request'
+import IconFont from '../../../../components/iconfont'
+import { GET } from '../../../../utils/request'
 import './index.scss'
-import themeC from '../../style/theme'
+import themeC from '../../../../style/theme'
 
 function Gift() {
   const [brandname, setBrandname] = useState('')

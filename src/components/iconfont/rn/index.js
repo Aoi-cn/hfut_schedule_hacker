@@ -2,6 +2,17 @@
 
 import React from 'react';
 
+import Iconhelp from './Iconhelp';
+import IcontaskFilling from './IcontaskFilling';
+import IconmapFilling from './IconmapFilling';
+import Iconrili from './Iconrili';
+import Iconsousuo from './Iconsousuo';
+import Icontaolunqu from './Icontaolunqu';
+import Icontishi from './Icontishi';
+import Icondaibanshixiang from './Icondaibanshixiang';
+import Icongongpai from './Icongongpai';
+import Iconjixiaopinggu from './Iconjixiaopinggu';
+import Iconnetwork from './Iconnetwork';
 import Icondingwei from './Icondingwei';
 import Iconmoreandroid from './Iconmoreandroid';
 import Iconanquan from './Iconanquan';
@@ -34,6 +45,28 @@ import Icongift from './Icongift';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
+    case 'help':
+      return <Iconhelp {...rest} />;
+    case 'task-filling':
+      return <IcontaskFilling {...rest} />;
+    case 'map-filling':
+      return <IconmapFilling {...rest} />;
+    case 'rili':
+      return <Iconrili {...rest} />;
+    case 'sousuo':
+      return <Iconsousuo {...rest} />;
+    case 'taolunqu':
+      return <Icontaolunqu {...rest} />;
+    case 'tishi':
+      return <Icontishi {...rest} />;
+    case 'daibanshixiang':
+      return <Icondaibanshixiang {...rest} />;
+    case 'gongpai':
+      return <Icongongpai {...rest} />;
+    case 'jixiaopinggu':
+      return <Iconjixiaopinggu {...rest} />;
+    case 'network':
+      return <Iconnetwork {...rest} />;
     case 'dingwei':
       return <Icondingwei {...rest} />;
     case 'moreandroid':
