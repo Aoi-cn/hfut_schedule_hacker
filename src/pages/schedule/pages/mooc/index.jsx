@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { connect } from 'react-redux'
-import { View, Image, Text } from '@tarojs/components'
+import { View, Image, Text, Ad } from '@tarojs/components'
 import { AtAccordion } from 'taro-ui'
 
 import IconFont from '../../../../components/iconfont'
@@ -10,8 +10,19 @@ import themeC from '../../../../style/theme'
 import './index.scss'
 
 function Mooc(props) {
-  const { moocData } = props
+  const { moocData, showAd } = props
   const [showLessonCode, setShowLessonCode] = useState('')
+
+  // useEffect(() => {
+  //   if (showAd) {
+  //     const interstitialAd = Taro.createInterstitialAd({
+  //       adUnitId: 'adunit-e8c3c88c149f8a07'
+  //     })
+  //     interstitialAd.show().catch((err) => {
+  //       console.error(err)
+  //     })
+  //   }
+  // }, [showAd])
 
   const copy = (data) => {
     Taro.setClipboardData({
@@ -36,8 +47,15 @@ function Mooc(props) {
             className='mooc-none-noneImg'
           />
           <Text className='mooc-none-noneText'>没有查询到慕课~</Text>
+          <View className='mooc-none-ad'>
+            {/* {
+              showAd &&
+              <Ad unit-id='adunit-209201f9afd060be' ad-type='video' ad-theme='white'></Ad>
+            } */}
+          </View>
         </View>
-      </View>)
+      </View>
+    )
   }
 
   return (
@@ -89,6 +107,7 @@ function Mooc(props) {
                 open={showLessonCode === lessonCode}
                 onClick={() => setShowLessonCode(showLessonCode === lessonCode ? '' : lessonCode)}
                 title={name}
+                style={{ color: '#000000' }}
                 note={'平台：' + info.split('开课平台')[1].split('）')[0]}
                 hasBorder={false}
               >
@@ -129,7 +148,8 @@ function Mooc(props) {
 
 function mapStateToProps(state) {
   return {
-    moocData: state.schedule.bizData.moocData
+    moocData: state.schedule.bizData.moocData,
+    showAd: state.schedule.bizData.userConfig.showAd,
   };
 }
 

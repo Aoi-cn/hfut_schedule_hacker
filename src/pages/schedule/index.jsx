@@ -13,19 +13,19 @@ import CustomScheduleFL from '../../components/schedule-component/CustomSchedule
 import CourseTable from './components/CourseTable'
 import ScheduleTop from './components/ScheduleTop'
 import ScheduleFooter from './components/ScheduleFooter'
-// import UpdateNotice from '../../components/UpdateNotice'
-// import HelpNotice from '../../components/HelpNotice'
 import BackgroundImg from './components/BackgroundImg'
 import checkUpdate from '../../utils/checkUpdate'
 
 import './index.scss'
+
+// let showInterstitialAd = true
 
 const MemoBackgroundImg = memo(BackgroundImg)
 
 function Schedule(props) {
   const { bizData, uiData, enter, userType } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix, timeTable, backgroundPath } = bizData
-  const { showUpdateNotice, showHelpNotice, courseDetailFLData, customScheduleFLData, colorPickerData } = uiData
+  const { courseDetailFLData, customScheduleFLData, colorPickerData } = uiData
   const [renderElse, setRenderElse] = useState(false)
 
   useEffect(() => {
@@ -40,11 +40,24 @@ function Schedule(props) {
   }, [])
 
   useEffect(() => {
+    // 性能优化部分，延时加载部分组件
     if (!renderElse && backgroundPath) {
       setTimeout(() => {
         setRenderElse(true)
       }, 200);
     }
+    // 广告部分
+    // return () => {
+    //   if (scheduleMatrix.length !== 0 && showAd && showInterstitialAd) {
+    //     showInterstitialAd = false
+    //     const interstitialAd = Taro.createInterstitialAd({
+    //       adUnitId: 'adunit-e8c3c88c149f8a07'
+    //     })
+    //     interstitialAd.show().catch((err) => {
+    //       console.error(err)
+    //     })
+    //   }
+    // }
   })
 
 
@@ -75,9 +88,6 @@ function Schedule(props) {
 
   return (
     <View className='schedule'>
-
-      {/* { showUpdateNotice && <UpdateNotice onClose={() => props.updateUiData({ showUpdateNotice: false })} />}
-      { showHelpNotice && <HelpNotice onClose={() => props.updateUiData({ showHelpNotice: false })} />} */}
 
       <View className='schedule-header'>
         <ScheduleTop

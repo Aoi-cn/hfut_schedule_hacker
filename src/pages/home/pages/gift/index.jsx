@@ -5,8 +5,9 @@ import { AtButton, AtMessage } from 'taro-ui'
 
 import IconFont from '../../../../components/iconfont'
 import { GET } from '../../../../utils/request'
-import './index.scss'
 import themeC from '../../../../style/theme'
+import './index.scss'
+
 
 function Gift() {
   const [brandname, setBrandname] = useState('')
@@ -85,13 +86,13 @@ function Gift() {
       <View className='gift-item'>
         <View className='gift-item-title'>
           <IconFont name='caidan' size={48} color={themeC['color-font-brand']} />
-          <View className='gift-item-title__value'>v3.0.0更新预告</View>
+          <View className='gift-item-title__value'>未来更新预告</View>
         </View>
         <View className='gift-item-content'>
-          <View className='gift-item-content-list'>1. 成绩、绩点</View>
-          <View className='gift-item-content-list'>2. 班级同学信息查询</View>
-          <View className='gift-item-content-list'>3. 好用到爆炸的的日程管理</View>
-          <View className='gift-item-content-list'>4. 全校教师、课程信息检索（待定）</View>
+          <View className='gift-item-content-list'>1. 成绩、绩点、考试安排</View>
+          <View className='gift-item-content-list'>2. 智慧评教（哦耶）</View>
+          <View className='gift-item-content-list'>3. 班级同学信息查询</View>
+          <View className='gift-item-content-list'>4. 全校教师、课程名、课程类别检索</View>
           <View className='gift-item-content-list'>未完待续~</View>
         </View>
       </View>
@@ -101,14 +102,14 @@ function Gift() {
       <View className='gift-item'>
         <View className='gift-item-title'>
           <IconFont name='mingxinghuodong' size={48} color={themeC['color-font-brand']} />
-          <View className='gift-item-title__value'>v3.0.0更名征集</View>
+          <View className='gift-item-title__value'>更名征集</View>
         </View>
         <View className='gift-item-content'>
           <View className='gift-item-content-text'>
             “合工大课程表无敌版”只是一个临时的名字，现向广大同学们征集新的名字！有任何奇思妙想都可以发给我们哦~
           </View>
           <View className='gift-item-content-comment'>
-            最终被采纳的新名字的作者将在v3.0.0更新后于主页提示里鸣谢感激（经过本人同意后）
+            最终被采纳的新名字的作者将在更新后于主页提示里鸣谢感激（经过本人同意后）
           </View>
           <View className='gift-item-content-bnOperate'>
             <View>

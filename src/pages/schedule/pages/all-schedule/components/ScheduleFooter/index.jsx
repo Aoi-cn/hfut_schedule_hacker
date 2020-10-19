@@ -7,9 +7,7 @@ import IconFont from '../../../../../../components/iconfont'
 import './index.scss'
 
 function ScheduleFooter(props) {
-  const { bizData, uiData, changeWeekIndex } = props
-  const { weekIndex, currentWeekIndex, scheduleMatrix, backupScheduleM } = bizData
-  const { diff } = uiData
+  const { weekIndex, currentWeekIndex, scheduleMatrix, backupScheduleM, diff, changeWeekIndex } = props
 
   const handleDiff = () => {
     if (scheduleMatrix.length === 0) {
@@ -46,7 +44,11 @@ function ScheduleFooter(props) {
 
 function mapStateToProps(state) {
   return {
-    ...state.allSchedule,
+    weekIndex: state.allSchedule.bizData.weekIndex,
+    currentWeekIndex: state.allSchedule.bizData.currentWeekIndex,
+    scheduleMatrix: state.allSchedule.bizData.scheduleMatrix,
+    backupScheduleM: state.allSchedule.bizData.backupScheduleM,
+    diff: state.allSchedule.uiData.diff,
   };
 }
 

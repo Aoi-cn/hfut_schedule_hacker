@@ -37,7 +37,6 @@ export default (props) => {
   }
 
   const [showMenu, setShowMenu] = useState(false)
-  // const [showAbout, setShowAbout] = useState(false)
   const [showLoverBox, setShowLoverBox] = useState(false)
   const [showSetting, setShowSetting] = useState(false)
   const [showWeekPicker, setShowWeekPicker] = useState(false)

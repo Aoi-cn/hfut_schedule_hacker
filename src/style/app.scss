@@ -27,3 +27,7 @@ page {
   z-index: 2000!important;
 }
 
+.at-accordion__content {
+  transition: height 300ms ease-in-out;
+}
+

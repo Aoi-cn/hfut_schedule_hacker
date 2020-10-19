@@ -17,6 +17,8 @@ const INITIAL_STATE = {
       eventBoxHeight: 1.5,
       showBoxMask: true,
       showEventMemo: true,
+      showRedPoint: true,
+      showAd: true,
     },
     backgroundPath: '',
     moocData: [],
@@ -24,8 +26,6 @@ const INITIAL_STATE = {
   uiData: {
     diff: false,
     chosenBlank: [],
-    showUpdateNotice: false,
-    showHelpNotice: false,
     customScheduleFLData: {
       isOpened: false,
       name: '',

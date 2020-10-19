@@ -1,7 +1,11 @@
+// 看的出来吧，这是一个写的很水的页面
+// 毫无优雅可言
+// 单纯从实现业务出发
+
 import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { useSelector, useDispatch } from 'react-redux'
-import { View, Text, Picker } from '@tarojs/components'
+import { View, Text, Picker, Ad } from '@tarojs/components'
 import _ from 'lodash'
 import * as moment from 'moment';
 
@@ -58,6 +62,7 @@ function EmptyClazzRoom() {
   const timeTable = useSelector(state => state.event.bizData.timeTable)
   const currentWeekIndex = useSelector(state => state.event.bizData.currentWeekIndex)
   const currentDayIndex = useSelector(state => state.event.bizData.currentDayIndex)
+  const showAd = useSelector(state => state.schedule.bizData.userConfig.showAd)
   const [allData, setAllData] = useState({})
   const [campus, setCampus] = useState(0)
   const [date, setDate] = useState('2020-10-10')
@@ -73,9 +78,23 @@ function EmptyClazzRoom() {
   const [uiData, setUiData] = useState([])
   const dispatch = useDispatch()
 
-  // 初始化effect
+  // useEffect(() => {
+  //   if (showAd) {
+  //     const interstitialAd = Taro.createInterstitialAd({
+  //       adUnitId: 'adunit-e8c3c88c149f8a07'
+  //     })
+  //     interstitialAd.show().catch((err) => {
+  //       console.error(err)
+  //     })
+  //   }
+  // }, [showAd])
+
+  // 刚进入页面时的初始化effect
   useEffect(() => {
     if (JSON.stringify(allData) === '{}') {
+      Taro.showLoading({
+        title: '获取数据...'
+      })
       Taro.request({
         url: 'https://oss.cavano.vip/data/empty-clazz-room.json',
         method: 'GET',
@@ -98,6 +117,7 @@ function EmptyClazzRoom() {
       setDayIndex(currentDayIndex)
       setDate(moment().format('YYYY-MM-DD'))
       let currentTime = parseInt(moment().format("Hmm"))
+      currentTime = currentTime > 800 ? currentTime : 801
       timeTable.map((timeData, tableIndex) => {
         const { startTime: startTime_, endTime: endTime_, indexNo } = timeData
         if (currentTime >= startTime_ && currentTime < endTime_) {
@@ -107,11 +127,16 @@ function EmptyClazzRoom() {
           setStartTime(indexNo + 1)
         }
       })
+      timeIndexRange.map(timeIndexData => {
+        if (timeIndexData.timeZh.indexOf('-') === -1) {
+          timeIndexData.timeZh += ' ' + timeTable[timeIndexData.index].startTimeText + '-' + timeTable[timeIndexData.index].endTimeText
+        }
+      })
     }
   }, [allData, currentDayIndex, currentWeekIndex, timeTable])
 
 
-  // 基础条件发生改变，改变uiData
+  // 基础条件发生改变时的effect，改变uiData
   useEffect(() => {
     if (startTime > endTime) {
       setEndTime(startTime)
@@ -137,6 +162,7 @@ function EmptyClazzRoom() {
       }
     })
 
+    // flag类别：
     // 0-空闲
     // 1-有课
     // 2-部分有课
@@ -159,10 +185,12 @@ function EmptyClazzRoom() {
             timeIndexesConcat = timeIndexesConcat.concat(range)
           })
           timeIndexes.map(range => {
-            if ((range[0] === startTime && range[1] >= endTime) ||
-              (range[1] === startTime && range[1] === endTime)) {
+            const range2 = [range[0], range[range.length - 1]]
+            if ((range.indexOf(startTime) !== -1 && range2[1] >= endTime) ||
+              (range2[1] === startTime && range2[1] === endTime)) {
               flag = 1
-            } else if ((range[0] >= startTime && range[1] < endTime) ||
+            }
+            else if ((range[0] >= startTime && range[1] < endTime) ||
               (range[1] >= startTime && range[1] < endTime)) {
               flag = 1
               for (let j = startTime; j <= endTime; j++) {
@@ -170,7 +198,8 @@ function EmptyClazzRoom() {
                   flag = 2
                 }
               }
-            } else if (timeIndexesConcat.indexOf(startTime) === -1) {
+            }
+            else if (timeIndexesConcat.indexOf(startTime) === -1) {
               timeIndexesConcat.map(allTimeIndex => {
                 if (allTimeIndex <= endTime && allTimeIndex > startTime) {
                   flag = 2
@@ -196,6 +225,9 @@ function EmptyClazzRoom() {
 
   // 校区改变的effect
   useEffect(() => {
+    if (JSON.stringify(allData) === '{}') {
+      return
+    }
     console.log('校区改变')
     setBuilding(0)
     if (campus === '1') {
@@ -221,6 +253,7 @@ function EmptyClazzRoom() {
       console.log('屯溪路')
       setBuildingRange(buildingRange_0)
     }
+    Taro.hideLoading()
   }, [allData, campus])
 
   // 日期发生改变，计算教学周、星期几并更新state
@@ -302,31 +335,34 @@ function EmptyClazzRoom() {
 
   // 定位到当天、当前时间
   const locateAll = () => {
-    const currentTime = parseInt(moment().format("Hmm"))
+    let currentTime = parseInt(moment().format("Hmm"))
+    currentTime = currentTime > 800 ? currentTime : 801
     timeTable.map((timeData, tableIndex) => {
       const { startTime: startTime_, endTime: endTime_, indexNo } = timeData
       if (currentTime >= startTime_ && currentTime < endTime_) {
         setStartTime(indexNo)
         setEndTime(indexNo)
-        weekAndDayToDate(currentWeekIndex, currentDayIndex)
       }
       else if (((tableIndex + 1) < timeTable.length) && currentTime >= endTime_ && currentTime < timeTable[tableIndex + 1].startTime) {
         setStartTime(indexNo + 1)
+        setEndTime(indexNo + 1)
       }
     })
+    weekAndDayToDate(currentWeekIndex, currentDayIndex)
   }
 
   // 定位按钮是否可见
   const isLocateBtnShow = () => {
     let isShow = false
-    const currentTime = parseInt(moment().format("Hmm"))
+    let currentTime = parseInt(moment().format("Hmm"))
+    currentTime = currentTime > 800 ? currentTime : 801
     timeTable.map((timeData, tableIndex) => {
       const { startTime: startTime_, endTime: endTime_, indexNo } = timeData
-      if (currentTime >= startTime_ && currentTime < endTime_ && startTime !== indexNo && endTime !== indexNo) {
+      if (currentTime >= startTime_ && currentTime < endTime_ && (startTime !== indexNo || endTime !== indexNo)) {
         isShow = true
       }
       else if (((tableIndex + 1) < timeTable.length) && currentTime >= endTime_ && currentTime < timeTable[tableIndex + 1].startTime
-        && startTime !== (indexNo + 1) && endTime !== (indexNo + 1)) {
+        && (startTime !== (indexNo + 1) || endTime !== (indexNo + 1))) {
         isShow = true
       }
     })
@@ -335,8 +371,6 @@ function EmptyClazzRoom() {
     }
     return isShow
   }
-
-
 
   return (
     <View className='emptyClazzRoom'>
@@ -412,7 +446,10 @@ function EmptyClazzRoom() {
         <View className='emptyClazzRoom-header-line'></View>
 
         <View className='emptyClazzRoom-header-bottom'>
-          <Text className='emptyClazzRoom-header-bottom-title'>{timeTable ? (timeTable[startTime - 1].startTimeText + ' - ' + timeTable[endTime - 1].endTimeText) : ''}</Text>
+          {
+            (timeTable && timeTable.length > 0) &&
+            <Text className='emptyClazzRoom-header-bottom-title'>{timeTable ? (timeTable[startTime - 1].startTimeText + ' - ' + timeTable[endTime - 1].endTimeText) : ''}</Text>
+          }
 
           <View className='emptyClazzRoom-header-bottom-colorBox'>
             {/* <Text style={{ marginRight: '24rpx' }}>颜色说明</Text> */}

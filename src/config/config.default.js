@@ -4,7 +4,7 @@
 export const updateState = 0
 
 export const config = {
-  version: '2.10.9',
+  version: '3.1.0',
   autoConfig: {
     showDiffHelp: true,
     showAllSHelp: true,
@@ -17,30 +17,27 @@ export const config = {
     eventBoxHeight: 1.5, // 1倍高度或1.5倍高度
     showBoxMask: true,
     showEventMemo: true,
+    showRedPoint: true, // 课表上有备忘录的课程右上角的红点
+    showAd: true,
   }
 }
 
 export const updateInfo = {
   notices: [{
-    info: 'PC端教务正在进行系统升级！',
-    comment: '由于PC端教务正在进行系统升级，本小程序近期也会出现服务不稳定等情况，待教务升级完成之后即可恢复正常~',
-  },],
+    info: '1. 关于打赏',
+    comment: '今日起向同学们开放“打赏”功能，一方面可以缓解我们开发的成本，另一方面可以让我们更有动力做下去！希望同学们多多理解和支持~',
+  }],
   features: [
     {
-      info: '1. 慕课查询',
-      comment: '点击课表页右上角加号-我的慕课，查看自己（或npy）的慕课信息',
+      info: '1. 打赏',
+      comment: '可以在“我的”页面中打赏开发者！',
     },
     {
-      info: '2. 性能优化',
-      comment: '日程页面、课表页面打开速度翻倍！',
+      info: '2. 有备忘录的课程右上角显示红点',
+      comment: '创意by 19级 集电 程同学',
     },
   ],
-  bugs: [
-    {
-      info: '1. 背景图片自动居中裁剪，不缩放',
-      // comment: '点击课表页右上角加号-我的慕课，查看自己（或npy）的慕课信息！',
-    },
-  ]
+  bugs: []
 }
 
 export const helpInfo = [

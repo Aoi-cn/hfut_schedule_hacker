@@ -15,7 +15,6 @@ const INITIAL_STATE = {
     timeDistance: 30,
     chosenBlank: [],
     showUpdateNotice: false,
-    showHelpNotice: false,
     customScheduleFLData: {
       isOpened: false,
       name: '',

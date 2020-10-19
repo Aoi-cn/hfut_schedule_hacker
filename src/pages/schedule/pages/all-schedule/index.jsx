@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { connect } from 'react-redux'
 import { View } from '@tarojs/components'
@@ -13,10 +13,22 @@ import CourseDetailFloatLayout from './components/CourseDetailFloatLayout'
 import ScheduleFooter from './components/ScheduleFooter'
 import './index.scss'
 
+
 function AllSchedule(props) {
-  const { bizData, uiData } = props
+  const { bizData, uiData, showAd } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
   const { courseDetailFLData } = uiData
+
+  // useEffect(() => {
+  //   if (showAd) {
+  //     const interstitialAd = Taro.createInterstitialAd({
+  //       adUnitId: 'adunit-e8c3c88c149f8a07'
+  //     })
+  //     interstitialAd.show().catch((err) => {
+  //       console.error(err)
+  //     })
+  //   }
+  // }, [showAd])
 
   useDidShow(() => {
     Taro.hideHomeButton()
@@ -78,7 +90,8 @@ function AllSchedule(props) {
 
 function mapStateToProps(state) {
   return {
-    ...state.allSchedule
+    ...state.allSchedule,
+    showAd: state.schedule.bizData.userConfig.showAd,
   };
 }
 

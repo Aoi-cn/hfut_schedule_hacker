@@ -13,7 +13,7 @@ import './index.scss'
 
 function SettingFloatLayout(props) {
   const { userConfig, userType, scheduleActions, loginActions, isOpened, onClose } = props
-  const { theme, showAiXin, imgOpacity, courseOpacity } = userConfig
+  const { theme, showAiXin, imgOpacity, courseOpacity, showRedPoint, showAd } = userConfig
   const [showSetBackground, setShowSetBackground] = useState(false)
 
   const themeRange = [
@@ -185,6 +185,17 @@ function SettingFloatLayout(props) {
     onClose()
   }
 
+  const handleAdChange = (status) => {
+    updateUserConfig({ showAd: status })
+    if (!status) {
+      Taro.showToast({
+        title: '关闭成功',
+        icon: 'none',
+        duration: 1000
+      })
+    }
+  }
+
   return (
     <AtFloatLayout
       isOpened={isOpened}
@@ -225,6 +236,16 @@ function SettingFloatLayout(props) {
             <Switch checked={!showAiXin} onChange={e => updateUserConfig({ showAiXin: !e.detail.value })} color='#29a2ff' />
           </View>
         }
+
+        <View className='settingFloatLayout-content-item'>
+          <Text>有备忘录的课程右上角显示红点</Text>
+          <Switch checked={showRedPoint} onChange={e => updateUserConfig({ showRedPoint: e.detail.value })} color='#29a2ff' />
+        </View>
+
+        {/* <View className='settingFloatLayout-content-item'>
+          <Text>关闭广告（广告可援助开发者😅）</Text>
+          <Switch checked={!showAd} onChange={e => handleAdChange(!e.detail.value)} color='#29a2ff' />
+        </View> */}
 
         <View className='settingFloatLayout-line'></View>
 

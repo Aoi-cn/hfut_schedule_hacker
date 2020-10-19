@@ -50,7 +50,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 4px 24px;
+      padding: 4px 0;
 
       &-line {
         height: 2px;
@@ -69,7 +69,7 @@
           margin-bottom: 24px;
 
           &_title {
-            color: $color-semi;
+            color: $color-grey;
             font-size: 30px;
             margin-bottom: 8px;
           }
@@ -89,17 +89,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
 
     &-noneImg {
-      margin-top: 80px;
       width: 400px;
       height: 400px;
     }
 
     &-noneText {
-      margin-top: 80px;
       color: $color-grey;
       font-size: 32px;
+    }
+
+    &-ad {
+      margin-top: 80px;
     }
   }
 }
@@ -107,4 +110,12 @@
 
 .at-accordion__content::after {
   border-top: none;
+}
+
+.at-accordion__info__title {
+  color: $color-semi;
+}
+
+.at-accordion__info__note {
+  color: $color-grey;
 }

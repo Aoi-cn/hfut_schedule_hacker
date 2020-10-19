@@ -22,9 +22,10 @@ export const enter = ({ userType, isEvent }) => async (dispatch) => {
 
   return Taro.getStorage({ key: userType })
     .then(async (userData) => {
-      const { scheduleMatrix, timeTable = [] } = userData.data  // 读取本地的课表数据
+      const { scheduleMatrix, scheduleData, lessonIds, timeTable = [] } = userData.data  // 读取本地的课表数据
+      const { moocData } = dataToMatrix(scheduleData, lessonIds, timeTable)
       // 二话不说先渲染
-      dispatch(updateBizData({ scheduleMatrix, timeTable }))
+      dispatch(updateBizData({ scheduleMatrix, timeTable, moocData }))
 
       //读取本地设置
       const localConfig = Taro.getStorageSync('config')
@@ -136,7 +137,7 @@ const handleCheckUpdate = () => async (dispatch) => {
       data: res
     })
     // 显示更新公告
-    dispatch(updateUiData({ showUpdateNotice: true }))
+    dispatch(eventActions.updateUiData({ showUpdateNotice: true }))
     // 更新本地config缓存
     Taro.setStorage({
       key: 'config',

@@ -14,13 +14,13 @@ import CourseDetailFloatLayout from '../../components/schedule-component/CourseD
 import ColorPicker from '../../components/schedule-component/ColorPicker'
 import CustomScheduleFL from '../../components/schedule-component/CustomScheduleFL'
 import checkUpdate from '../../utils/checkUpdate'
+import UpdateNotice from '../../components/UpdateNotice'
 import './index.scss'
 
 function Event(props) {
-  // console.log(props)
   const { bizData, uiData, enter } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, timeTable } = bizData
-  const { courseDetailFLData, customScheduleFLData, colorPickerData } = uiData
+  const { showUpdateNotice, courseDetailFLData, customScheduleFLData, colorPickerData } = uiData
 
   useEffect(() => {
     enter({ userType: 'me' })
@@ -40,6 +40,9 @@ function Event(props) {
 
   return (
     <View className='event'>
+
+    
+      { showUpdateNotice && <UpdateNotice onClose={() => props.updateUiData({ showUpdateNotice: false })} />}
 
       <View className='event-header'>
         <EventHeaderTitle />
@@ -108,7 +111,18 @@ function Event(props) {
 
 function mapStateToProps(state) {
   return {
-    ...state.event,
+    bizData: {
+      weekIndex: state.event.bizData.weekIndex,
+      currentWeekIndex: state.event.bizData.currentWeekIndex,
+      scheduleMatrix: state.event.bizData.scheduleMatrix,
+      timeTable: state.event.bizData.timeTable,
+    },
+    uiData: {
+      showUpdateNotice: state.event.uiData.showUpdateNotice,
+      courseDetailFLData: state.event.uiData.courseDetailFLData,
+      customScheduleFLData: state.event.uiData.customScheduleFLData,
+      colorPickerData: state.event.uiData.colorPickerData,
+    }
   };
 }
 

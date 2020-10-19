@@ -2,6 +2,7 @@
 
 import React from 'react';
 
+import Icondianzan from './Icondianzan';
 import Iconhelp from './Iconhelp';
 import IcontaskFilling from './IcontaskFilling';
 import IconmapFilling from './IconmapFilling';
@@ -45,6 +46,8 @@ import Icongift from './Icongift';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
+    case 'dianzan':
+      return <Icondianzan {...rest} />;
     case 'help':
       return <Iconhelp {...rest} />;
     case 'task-filling':

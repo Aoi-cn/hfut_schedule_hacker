@@ -87,6 +87,18 @@
     }
   }
 
+  &-redPoint {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background-color: $color-error;
+    box-shadow: 0 4px 8px 0 rgba($color: $color-error, $alpha: 0.2);;
+    z-index: 5;
+  }
+
   &-boxType {
 
     &_1 {

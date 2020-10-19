@@ -26,17 +26,17 @@ function Home() {
     {
       name: '考试安排',
       icon: 'daibanshixiang',
-      onClick: null,
+      onClick: () => Taro.navigateTo({ url: '/pages/home/pages/exam-arrange/index' }),
     },
     {
       name: '成绩查询',
       icon: 'jixiaopinggu',
-      onClick: null,
+      onClick: () => Taro.navigateTo({ url: '/pages/home/pages/grade/index' }),
     },
     {
-      name: '我的评教',
+      name: '智慧评教',
       icon: 'gongpai',
-      onClick: null,
+      onClick: () => Taro.navigateTo({ url: '/pages/home/pages/teacher-evaluate/index' }),
     },
   ]
 
@@ -49,7 +49,7 @@ function Home() {
     {
       name: '课程/教师检索',
       icon: 'sousuo',
-      onClick: null,
+      onClick: () => Taro.navigateTo({ url: '/pages/home/pages/course-search/index' }),
     },
     {
       name: '空教室查询',
@@ -58,14 +58,28 @@ function Home() {
     },
   ]
 
+  const handleClickCoin = () => {
+    Taro.navigateTo({ url: '/pages/home/pages/donate/index' })
+  }
+
   return (
     <View className='home'>
       <View className='home-header'>
+        {/* <View className='home-header-donate'></View> */}
+
         <View className='home-header-avatar'>
-          <OpenData type='userAvatarUrl'></OpenData>
+          <View className='home-header-avatar-img'>
+            <OpenData type='userAvatarUrl'></OpenData>
+          </View>
+          <View class='home-header-coin' onClick={handleClickCoin}>
+            <View class='home-header-coin-front'></View>
+            <View class='home-header-coin-front_b'></View>
+            <View class='home-header-coin-back'></View>
+            <View class='home-header-coin-back_b'></View>
+          </View>
         </View>
         <View className='home-header-nickName'>
-          <Text>{sno}</Text>
+          <Text>{sno ? sno : '0000000000'}</Text>
         </View>
       </View>
 
@@ -127,10 +141,10 @@ function Home() {
         `}
         buttons={[{
           value: '查看帮助',
-          onClick: () => {setShowAbout(false); setShowHelpNotice(true)}
+          onClick: () => { setShowAbout(false); setShowHelpNotice(true) }
         }, {
           value: '更新公告',
-          onClick: () => {setShowAbout(false); setShowUpdateNotice(true)}
+          onClick: () => { setShowAbout(false); setShowUpdateNotice(true) }
         }]}
       />
 

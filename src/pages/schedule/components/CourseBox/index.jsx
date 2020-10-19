@@ -9,9 +9,10 @@ import IconFont from '../../../../components/iconfont'
 export default ({ boxType, courseBoxList, dayIndex, startTime }) => {
   const courseBoxData = courseBoxList[0] ? courseBoxList[0] : {}
   const courseBoxData_ = courseBoxList[1] ? courseBoxList[1] : {}
-  const { type, name = "", clazzRoom, color } = courseBoxData
-  const { name: name_ = "", color: color_ } = courseBoxData_
+  const { type, name = "", clazzRoom, color, memo } = courseBoxData
+  const { name: name_ = "", color: color_, memo: memo_ } = courseBoxData_
   const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
+  const showRedPoint = useSelector(state => state.schedule.bizData.userConfig.showRedPoint)
   const diff = useSelector(state => state.schedule.uiData.diff)
   const chosenBlank = useSelector(state => state.schedule.uiData.chosenBlank)
   const courseOpacity = useSelector(state => state.schedule.bizData.userConfig.courseOpacity)
@@ -121,6 +122,9 @@ export default ({ boxType, courseBoxList, dayIndex, startTime }) => {
   return (
     <View className={`courseBox courseBox-boxType_${boxType}`} style={`opacity: ${courseOpacity}`}>
       <View className={`courseBox-course courseBox-course-boxType_${boxType} courseBox-boxColor-${color}_${theme} courseBox-course__${courseBoxList.length > 1 ? 'doubleLeft' : ''}`} onClick={() => handleClickCourse(courseBoxData)}>
+        {
+          (memo && showRedPoint) && <View className='courseBox-redPoint'></View>
+        }
         <View className={`courseBox-course-name courseBox-fontColor-${color}_${theme}`}>{courseName}</View>
         {
           courseBoxList.length > 1 || boxType > 1 &&
@@ -130,6 +134,9 @@ export default ({ boxType, courseBoxList, dayIndex, startTime }) => {
       {
         courseBoxList.length > 1 &&
         <View className={`courseBox-course courseBox-course-boxType_${boxType} courseBox-course__doubleRight courseBox-boxColor-${color_}_${theme}`} onClick={() => handleClickCourse(courseBoxData_)}>
+          {
+            (memo_ && showRedPoint) && <View className='courseBox-redPoint'></View>
+          }
           <View className={`courseBox-course-name courseBox-fontColor-${color_}_${theme}`}>{courseName_}</View>
         </View>
       }
