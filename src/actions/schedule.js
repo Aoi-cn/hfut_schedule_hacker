@@ -22,10 +22,11 @@ export const enter = ({ userType, isEvent }) => async (dispatch) => {
 
   return Taro.getStorage({ key: userType })
     .then(async (userData) => {
-      const { scheduleMatrix, scheduleData, lessonIds, timeTable = [] } = userData.data  // 读取本地的课表数据
+      const { scheduleMatrix, scheduleData, lessonIds, timeTable = [], examData = [] } = userData.data  // 读取本地的课表数据
       const { moocData } = dataToMatrix(scheduleData, lessonIds, timeTable)
       // 二话不说先渲染
       dispatch(updateBizData({ scheduleMatrix, timeTable, moocData }))
+      dispatch(eventActions.updateBizData({ scheduleMatrix, timeTable, examData }))
 
       //读取本地设置
       const localConfig = Taro.getStorageSync('config')
@@ -186,6 +187,9 @@ const handleCheckUpdate = () => async (dispatch) => {
 // 更新数据
 export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, getState) => {
   Taro.showNavigationBarLoading()
+  // updatePage用来保证取消loading的页面是发起请求的页面
+  const updatePage = Taro.getCurrentPages()[0].route
+  const dayLineMatrix = getState().schedule.bizData.dayLineMatrix
 
   // 进行课表更新逻辑
   const userData = Taro.getStorageSync(userType)
@@ -206,8 +210,9 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
     } else {
       return dispatch(reLogin({ userType }))
     }
-
   }
+  // 走到这里，说明key已经通过验证
+
   reLoginTime = 0
   // 获取课表数据
   const scheduleData = res.body.lessons
@@ -215,9 +220,50 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
   const timeTable = res.body.timeTable.courseUnitList
   // 转化为UI可识别的matrix
   let { scheduleMatrix, moocData } = dataToMatrix(scheduleData, lessonIds, timeTable)
+
+  // 请求考试数据
+  const examRes = await GET('/exam_arrange', { key })
+  const examData = examRes.content
+  dispatch(eventActions.updateBizData({ examData })) // 给event是因为event的数据是自己的，而schedule的数据可能是自己或者情侣的
+
+  // 写入考试数据
+  examData.map(examInfo => {
+    const { name, room, timeText } = examInfo
+    let date = timeText.split(' ')[0].slice(5, timeText.split(' ')[0].length)
+    date = date.split('-')[0] + '/' + date.split('-')[1]
+    const timeRangeText = timeText.split(' ')[1]
+    const startTime = examTimeText_to_timeIndex(timeRangeText.split('~')[0])
+    const endTime = examTimeText_to_timeIndex(timeRangeText.split('~')[1])
+    dayLineMatrix.map((weekInfo, weekIndex) => {
+      weekInfo.map((dayInfo, dayIndex) => {
+        if (dayInfo.dateZh === date) {
+          const examEvent = {
+            type: 'exam',
+            name,
+            lessonId: name + '考试',
+            clazzRoom: room,
+            timeIndexes: [startTime, endTime],
+            startTime: startTime,
+            dayIndex,
+            weekIndexes: [weekIndex + 1],
+            timeRange: timeRangeText,
+            color: 'red',
+            memo: '',
+          }
+          const existEvent = scheduleMatrix[weekIndex][dayIndex][startTime - 1][0]
+          if (existEvent.name) {
+            scheduleMatrix[weekIndex][dayIndex][startTime - 1].push(examEvent)
+          } else {
+            scheduleMatrix[weekIndex][dayIndex][startTime - 1][0] = examEvent
+          }
+        }
+      })
+    })
+  })
+
   // 颜色、备忘录持久化
   try {
-    scheduleMatrix = dataPersistence({ userType, scheduleMatrix })
+    scheduleMatrix = dataPersistence({ userType, scheduleMatrix, moocData })
   } catch (error) { console.log('持久化出错') }
 
   for (let i = 0; i < 4; i++) {
@@ -248,7 +294,7 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
   // 适应场景：刚打开课表就点情侣课表
   const { login: { bizData: { userType: userType_ } } } = getState()
   if (userType === userType_) {
-    dispatch(updateBizData({ scheduleMatrix, timeTable, moocData }))
+    dispatch(updateBizData({ scheduleMatrix, timeTable }))
   }
 
   // 更新event
@@ -265,9 +311,18 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
       scheduleMatrix,
       lessonIds,
       timeTable,
+      examData,
     }
   })
-  Taro.hideNavigationBarLoading()
+
+  // 这里用到updatePage
+  const intervalNumber = setInterval(() => {
+    if (updatePage === Taro.getCurrentPages()[0].route) {
+      Taro.hideNavigationBarLoading()
+      clearInterval(intervalNumber)
+    }
+  }, 500);
+  
 }
 
 // 颜色持久化
@@ -326,7 +381,7 @@ export const reLogin = ({ userType }) => async (dispatch) => {
   const { username, password, campus } = userInfo
   const res = await GET('/login', { username, password })
   const { success, key, msg } = res
-  if (success && reLoginTime < 4) {
+  if (success && reLoginTime < 5) {
     reLoginTime++
     await Taro.setStorage({
       key: userType,
@@ -360,18 +415,55 @@ export const reLogin = ({ userType }) => async (dispatch) => {
   }
 }
 
-export const refreshColor = ({ userType, render = true }) => async (dispatch) => {
+export const refreshColor = ({ userType, render = true }) => async (dispatch, getState) => {
   Taro.showLoading({
     title: '正在刷新...',
     mask: true,
   })
   // 确保diff按钮是关闭的
   await dispatch(updateUiData({ diff: false }))
+  const dayLineMatrix = getState().schedule.bizData.dayLineMatrix
 
   const userData = await Taro.getStorage({ key: userType })
-  const { userInfo, scheduleData, lessonIds, timeTable } = userData.data
+  const { scheduleData, lessonIds, timeTable, examData } = userData.data
 
   let { scheduleMatrix } = dataToMatrix(scheduleData, lessonIds, timeTable)
+
+  // 写入考试数据
+  examData.map(examInfo => {
+    const { name, room, timeText } = examInfo
+    let date = timeText.split(' ')[0].slice(5, timeText.split(' ')[0].length)
+    date = date.split('-')[0] + '/' + date.split('-')[1]
+    const timeRangeText = timeText.split(' ')[1]
+    const startTime = examTimeText_to_timeIndex(timeRangeText.split('~')[0])
+    const endTime = examTimeText_to_timeIndex(timeRangeText.split('~')[1])
+    dayLineMatrix.map((weekInfo, weekIndex) => {
+      weekInfo.map((dayInfo, dayIndex) => {
+        if (dayInfo.dateZh === date) {
+          const examEvent = {
+            type: 'exam',
+            name,
+            lessonId: name + '考试',
+            clazzRoom: room,
+            timeIndexes: [startTime, endTime],
+            startTime: startTime,
+            dayIndex,
+            weekIndexes: [weekIndex + 1],
+            timeRange: timeRangeText,
+            color: 'red',
+            memo: '',
+          }
+          const existEvent = scheduleMatrix[weekIndex][dayIndex][startTime - 1][0]
+          if (existEvent.name) {
+            scheduleMatrix[weekIndex][dayIndex][startTime - 1].push(examEvent)
+          } else {
+            scheduleMatrix[weekIndex][dayIndex][startTime - 1][0] = examEvent
+          }
+        }
+      })
+    })
+  })
+
   // 颜色、备忘录持久化
   try {
     scheduleMatrix = dataPersistence({ userType, scheduleMatrix, type: 'memo' })
@@ -405,10 +497,8 @@ export const refreshColor = ({ userType, render = true }) => async (dispatch) =>
   await Taro.setStorage({
     key: userType,
     data: {
-      userInfo,
-      scheduleData,
+      ...userData.data,
       scheduleMatrix,
-      lessonIds
     }
   })
   Taro.hideLoading()
@@ -493,6 +583,7 @@ export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
       content: `这是将另一张课表与自己的进行对比：绿色代表两方都没课；红色代表两方都有课；黄色代表只有自己有课；蓝色代表只有对方有课。`,
       showCancel: false,
       confirmText: '我知道了',
+      confirmColor: '#0089ff',
     })
     Taro.setStorage({
       key: 'config',
@@ -548,4 +639,45 @@ export const logout = () => {
   return {
     type: LOGOUT,
   }
+}
+
+const examTimeText_to_timeIndex = (timeText) => {
+  let timeIndex = 1
+  switch (timeText) {
+    case '8:00':
+      timeIndex = 1
+      break;
+    case '10:00':
+      timeIndex = 2
+      break;
+    case '10:20':
+      timeIndex = 3
+      break;
+    case '12:20':
+      timeIndex = 4
+      break;
+    case '14:00':
+      timeIndex = 5
+      break;
+    case '16:00':
+      timeIndex = 6
+      break;
+    case '16:20':
+      timeIndex = 7
+      break;
+    case '18:20':
+      timeIndex = 8
+      break;
+    case '19:00':
+      timeIndex = 9
+      break;
+    case '21:00':
+      timeIndex = 10
+      break;
+
+    default:
+      break;
+  }
+
+  return timeIndex
 }

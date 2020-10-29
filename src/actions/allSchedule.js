@@ -55,6 +55,7 @@ export const enter = () => async (dispatch) => {
       content: `点击右上角的搜索按钮开始`,
       showCancel: false,
       confirmText: '我知道了',
+      confirmColor: '#0089ff',
     })
     Taro.setStorage({
       key: 'config',
@@ -93,6 +94,7 @@ export const diffSchedule = ({ targetScheduleM }) => async (dispatch) => {
       content: `这是将另一张课表与自己的进行对比：绿色代表两方都没课；红色代表两方都有课；黄色代表只有自己有课；蓝色代表只有对方有课。`,
       showCancel: false,
       confirmText: '我知道了',
+      confirmColor: '#0089ff',
     })
     Taro.setStorage({
       key: 'config',

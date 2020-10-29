@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Taro, { usePullDownRefresh } from '@tarojs/taro'
 import { connect } from 'react-redux'
 import { View } from '@tarojs/components'
@@ -9,6 +9,7 @@ import EventHeaderTitle from './components/EventHeaderTitle'
 import EventTimePicker from './components/EventTimePicker'
 import EventTable from './components/EventTable'
 import EventTimeList from './components/EventTimeList'
+import Weather from './components/Weather'
 
 import CourseDetailFloatLayout from '../../components/schedule-component/CourseDetailFloatLayout'
 import ColorPicker from '../../components/schedule-component/ColorPicker'
@@ -21,9 +22,15 @@ function Event(props) {
   const { bizData, uiData, enter } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, timeTable } = bizData
   const { showUpdateNotice, courseDetailFLData, customScheduleFLData, colorPickerData } = uiData
+  const [statusBarHeight, setStatusBarHeight] = useState(28)
 
   useEffect(() => {
     enter({ userType: 'me' })
+    Taro.getSystemInfo({
+      success: function (res) {
+        setStatusBarHeight(res.statusBarHeight)
+      }
+    })
   }, [enter])
 
   useEffect(() => {
@@ -41,10 +48,11 @@ function Event(props) {
   return (
     <View className='event'>
 
-    
       { showUpdateNotice && <UpdateNotice onClose={() => props.updateUiData({ showUpdateNotice: false })} />}
 
-      <View className='event-header'>
+      <Weather statusBarHeight={statusBarHeight} />
+
+      <View className='event-header' style={{ paddingTop: statusBarHeight + 44 }}>
         <EventHeaderTitle />
         <EventTimePicker />
       </View>
@@ -58,8 +66,11 @@ function Event(props) {
       <CourseDetailFloatLayout
         courseDetailFLData={courseDetailFLData}
         source='event'
-        onClose={() => props.updateUiData({ courseDetailFLData: { isOpened: false } })}
-        updateColorPicker={(handleColorChange, theme, color) => props.updateUiData({ colorPickerData: { isOpened: true, handleColorChange, theme, color } })}
+        onClose={() => { props.updateUiData({ courseDetailFLData: { isOpened: false } }) }}
+        updateColorPicker={(handleColorChange, theme, color) => props.updateUiData({
+          colorPickerData: { isOpened: true, handleColorChange, theme, color },
+          courseDetailFLData: { ...courseDetailFLData, showMemo: false }
+        })}
         openCustomScheduleFL={({ dayIndex, startTime, courseType, chosenWeeks }) => props.updateUiData({
           customScheduleFLData: {
             ...courseDetailFLData,
@@ -72,6 +83,7 @@ function Event(props) {
             currentWeekIndex: currentWeekIndex + 1,
           },
           chosenBlank: [],
+          courseDetailFLData: { ...courseDetailFLData, showMemo: false }
         })}
       />
 
@@ -91,7 +103,10 @@ function Event(props) {
             ...data
           }
         })}
-        onClose={() => props.updateUiData({ customScheduleFLData: { isOpened: false } })}
+        onClose={() => props.updateUiData({
+          customScheduleFLData: { isOpened: false },
+          courseDetailFLData: { ...courseDetailFLData, showMemo: true }
+        })}
         scheduleMatrix={scheduleMatrix}
         timeTable={timeTable}
         weekIndex={weekIndex}
@@ -100,7 +115,10 @@ function Event(props) {
 
       <ColorPicker
         isOpened={colorPickerData.isOpened}
-        onClose={() => props.updateUiData({ colorPickerData: { isOpened: false } })}
+        onClose={() => props.updateUiData({
+          colorPickerData: { isOpened: false },
+          courseDetailFLData: { ...courseDetailFLData, showMemo: true }
+        })}
         handleColorChange={colorPickerData.handleColorChange}
         theme={colorPickerData.theme}
         currentColor={colorPickerData.currentColor}

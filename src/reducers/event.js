@@ -9,6 +9,9 @@ const INITIAL_STATE = {
     scheduleMatrix: [],
     dayLineMatrix: [],
     timeTable: [],
+    examData: [],
+    weatherRealTime: {},
+    weatherHourly: {},
   },
   uiData: {
     showCalendar: false,
@@ -36,6 +39,7 @@ const INITIAL_STATE = {
     },
     courseDetailFLData: {
       isOpened: false,
+      showMemo: true,
       type: 'course',
       name: '',
       clazzRoom: '',

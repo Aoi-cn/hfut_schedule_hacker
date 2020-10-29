@@ -4,8 +4,57 @@
   width: 100%;
   height: 100%;
   background-color: $color-background;
-  padding-top: 32px;
+  // padding-top: 32px;
   box-sizing: border-box;
+
+  &-content {
+    width: 100%;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    &-item {
+      background-color: #ffffff;
+      border-radius: 20px;
+      padding: 24px 32px;
+      box-sizing: border-box;
+      margin-bottom: 32px;
+      position: relative;
+
+      &_passed {
+        opacity: 0.4;
+        background-color: #eeeeee;
+      }
+
+      &-finished {
+        position: absolute;
+        top: 24px;
+        right: 32px;
+        font-size: 30px;
+        color: $color-grey;
+      }
+
+      &-title {
+        color: $color-semi;
+        font-size: 34px;
+        margin-bottom: 12px;
+      }
+
+      &-value {
+        display: flex;
+        align-items: center;
+        font-size: 30px;
+        color: $color-grey;
+        margin-top: 12px;
+
+        &_icon {
+          position: relative;
+          top: 2px;
+        }
+      }
+    }
+  }
 
   &-none {
     width: 100%;

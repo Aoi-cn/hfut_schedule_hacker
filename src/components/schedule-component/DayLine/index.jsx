@@ -27,7 +27,7 @@ export default (props) => {
             <View className='dayLine-box' key={dateZh}>
               <View className={today && 'dayLine-box-today'}>
                 <View className={'dayLine-box-day ' + (today && 'dayLine-box-day-today')}>{dayZh}</View>
-                <View className={'dayLine-box-date ' + (today && 'dayLine-box-date-today')}>{dateZh}</View>
+                <View className={'dayLine-box-date ' + (today && 'dayLine-box-date-today')}>{dateZh.slice(5,)}</View>
               </View>
             </View>
           )

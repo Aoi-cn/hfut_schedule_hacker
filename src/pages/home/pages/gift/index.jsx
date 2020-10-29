@@ -89,10 +89,11 @@ function Gift() {
           <View className='gift-item-title__value'>未来更新预告</View>
         </View>
         <View className='gift-item-content'>
-          <View className='gift-item-content-list'>1. 成绩、绩点、考试安排</View>
+          <View className='gift-item-content-list'>1. 成绩、绩点、选修类目</View>
           <View className='gift-item-content-list'>2. 智慧评教（哦耶）</View>
-          <View className='gift-item-content-list'>3. 班级同学信息查询</View>
-          <View className='gift-item-content-list'>4. 全校教师、课程名、课程类别检索</View>
+          <View className='gift-item-content-list'>3. 图书馆馆藏查询</View>
+          <View className='gift-item-content-list'>4. 班级同学信息查询</View>
+          <View className='gift-item-content-list'>5. 全校教师、课程名、课程类别检索</View>
           <View className='gift-item-content-list'>未完待续~</View>
         </View>
       </View>
@@ -138,7 +139,7 @@ function Gift() {
         </View>
         <View className='gift-item-content'>
           <View className='gift-item-content-text'>
-            这里向同学们征集未来版本的新功能！任何想到的新点子都有可能成为现实哦~ 有任何意见或bug反馈也可以一并告诉我们。
+            这里向同学们征集未来版本的新功能！任何想到的新点子都有可能成为现实哦~ 有任何意见或bug反馈也可以一并告诉我们。欢迎加开发者qq：254139147更方便的与我们交流！
           </View>
           <View className='gift-item-content-comment'>
             最终被采纳的新功能的作者将在功能上线后于主页提示里鸣谢感激（经过本人同意后）

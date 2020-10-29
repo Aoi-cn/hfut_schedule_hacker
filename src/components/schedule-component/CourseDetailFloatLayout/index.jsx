@@ -14,7 +14,7 @@ import './index.scss'
 
 export default (props) => {
   const { courseDetailFLData, source, onClose, updateColorPicker, openCustomScheduleFL } = props
-  const { isOpened, type, name, credits, clazzRoom, teacher, timeRange, lessonCode, lessonType, timeIndexes, dayIndex, studentClazzes, studentNumber, weekIndexes = [], weekIndexesZh, color, memo: memo_ } = courseDetailFLData
+  const { isOpened, showMemo, type, name, credits, clazzRoom, teacher, timeRange, lessonCode, lessonType, timeIndexes, dayIndex, studentClazzes, studentNumber, weekIndexes = [], weekIndexesZh, color, memo: memo_ } = courseDetailFLData
   const userType = useSelector(state => state.login.bizData.userType)
   const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
   const [memo, setMemo] = useState('')
@@ -87,7 +87,7 @@ export default (props) => {
         icon: '',
       },
     ]
-  } else if (type === 'custom') {
+  } else if (type === 'custom' || type === 'exam') {
     let customWeeksZh = weekIndexes.map(weekIndex => (weekIndex !== weekIndexes[weekIndexes.length - 1]) ? weekIndex + ', ' : weekIndex)
     if (customWeeksZh.length === 20) {
       customWeeksZh = '整个学期'
@@ -111,7 +111,7 @@ export default (props) => {
   const handleColorChange = (newColor) => {
     if (type === 'course') {
       dispatch(updateSingleCourseColor({ userType, newColor, courseDetailFLData: props }))
-    } else if (type === 'custom') {
+    } else if (type === 'custom' || type === 'exam') {
       dispatch(updateSingleCustomColor({ userType, source, newColor, courseDetailFLData: props }))
     }
   }
@@ -120,6 +120,8 @@ export default (props) => {
     Taro.showModal({
       title: '确定删除该事件吗',
       content: '此操作将无法恢复',
+      confirmColor: '#f33f3f',
+      cancelColor: '#60646b',
       success: function (res) {
         if (res.confirm) {
           dispatch(deleteSingleCustom({ userType, source, courseDetailFLData: props }))
@@ -136,6 +138,21 @@ export default (props) => {
     })
   }
 
+  let RightBtn = null
+  switch (type) {
+    case 'course':
+      RightBtn = <CustomButton value='班级同学' onSubmit={handleClickClazzMates} />
+      break;
+    case 'custom':
+      RightBtn = <CustomButton value='删除事件' type='danger' onSubmit={handleDeleteCustom} />
+      break;
+    case 'exam':
+      RightBtn = <CustomButton value='自习教室' type='call' onSubmit={() => Taro.navigateTo({ url: '/pages/home/pages/empty-clazz-room/index' })} />
+      break;
+    default:
+      break;
+  }
+
   return (
     <AtFloatLayout
       isOpened={isOpened}
@@ -143,7 +160,7 @@ export default (props) => {
       onClose={CDFLOnClose}
     >
       <View className='courseDetailFloatLayout-header'>
-        {name}
+        {(type === 'exam' ? '考试：' : '') + name}
         <View className='courseDetailFloatLayout-header-close' onClick={CDFLOnClose}>
           <IconFont name='shibai' size={48} color='#60646b' />
         </View>
@@ -159,39 +176,47 @@ export default (props) => {
           ))
         }
 
-        <View className='courseDetailFloatLayout-detail'>
-          <AtAccordion
-            open={showDetail}
-            onClick={() => setShowDetail(!showDetail)}
-            title='详细信息'
-            hasBorder={false}
-          >
-            <View className='courseDetailFloatLayout-detail-content'>
-            {
-              detailItems.map((item, index) => (
-                <View className='courseDetailFloatLayout-content-item courseDetailFloatLayout-content-item_detail' key={`thisis${index}`}>
-                  <IconFont name={item.icon} />
-                  <Text>{item.value}</Text>
-                </View>
-              ))
-            }
-            </View>
-          </AtAccordion>
-        </View>
+        {
+          (type === 'course') &&
+          <View className='courseDetailFloatLayout-detail'>
+            <AtAccordion
+              open={showDetail}
+              onClick={() => setShowDetail(!showDetail)}
+              title='详细信息'
+              hasBorder={false}
+            >
+              <View className='courseDetailFloatLayout-detail-content'>
+                {
+                  detailItems.map((item, index) => (
+                    <View className='courseDetailFloatLayout-content-item courseDetailFloatLayout-content-item_detail' key={`thisis${index}`}>
+                      <IconFont name={item.icon} />
+                      <Text>{item.value}</Text>
+                    </View>
+                  ))
+                }
+              </View>
+            </AtAccordion>
+          </View>
+        }
 
         <View className='courseDetailFloatLayout-content-memo'>
           <View className='courseDetailFloatLayout-content-memo-title'>
             <Text>备忘录</Text>
             <Text className='courseDetailFloatLayout-content-memo-title_comment'>（提示：关闭弹窗自动保存）</Text>
           </View>
-          <Textarea
-            placeholder={type === 'course' ? '记录作业、课堂测试、考试要求等' : '记录该事件的其他信息'}
-            className='courseDetailFloatLayout-content-memo-input'
-            value={memo}
-            maxlength={-1}
-            placeholder-style='color:#ccc;'
-            onInput={e => setMemo(e.detail.value)}
-          />
+          {
+            showMemo ?
+              <Textarea
+                placeholder={type === 'course' ? '记录作业、课堂测试、考试要求等' : '记录该事件的其他信息'}
+                className='courseDetailFloatLayout-content-memo-input'
+                value={memo}
+                maxlength={-1}
+                placeholder-style='color:#ccc;'
+                onInput={e => setMemo(e.detail.value)}
+              />
+              :
+              <View style={{ height: '160rpx' }}></View>
+          }
         </View>
 
       </View>
@@ -209,12 +234,7 @@ export default (props) => {
         <View className='courseDetailFloatLayout-footer_blank'></View>
 
         <View className='courseDetailFloatLayout-footer-btnBox'>
-          {
-            type === 'custom' ?
-              <CustomButton value='删除事件' type='danger' onSubmit={handleDeleteCustom} />
-              :
-              <CustomButton value='班级同学' onSubmit={handleClickClazzMates} />
-          }
+          {RightBtn}
         </View>
 
       </View>

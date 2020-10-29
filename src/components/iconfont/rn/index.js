@@ -2,6 +2,10 @@
 
 import React from 'react';
 
+import Icondayu from './Icondayu';
+import Iconsan from './Iconsan';
+import Icondizhi from './Icondizhi';
+import Iconlishi from './Iconlishi';
 import Icondianzan from './Icondianzan';
 import Iconhelp from './Iconhelp';
 import IcontaskFilling from './IcontaskFilling';
@@ -46,6 +50,14 @@ import Icongift from './Icongift';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
+    case 'dayu':
+      return <Icondayu {...rest} />;
+    case 'san':
+      return <Iconsan {...rest} />;
+    case 'dizhi':
+      return <Icondizhi {...rest} />;
+    case 'lishi':
+      return <Iconlishi {...rest} />;
     case 'dianzan':
       return <Icondianzan {...rest} />;
     case 'help':

@@ -13,6 +13,8 @@ export default () => {
     Taro.showModal({
       title: '更新提示',
       content: '新版本已经准备好，是否重启应用？',
+      confirmColor: '#0089ff',
+      cancelColor: '#60646b',
       success: function (res) {
         if (res.confirm) {
           // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启

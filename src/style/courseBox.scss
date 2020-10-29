@@ -41,6 +41,10 @@
       border: 2px dashed $color-semi;
     }
 
+    &_exam {
+      border: 2px solid $color-error;
+    }
+
     &-boxType {
 
       &_1 {

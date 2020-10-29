@@ -2,6 +2,7 @@ import React from 'react'
 import Taro from '@tarojs/taro'
 import { useDispatch, useSelector } from 'react-redux'
 import { View } from '@tarojs/components'
+import * as moment from 'moment'
 
 import { updateUiData } from '../../../../actions/event'
 import IconFont from '../../../../components/iconfont'
@@ -14,12 +15,17 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
   const courseBoxData_ = courseBoxList[1] ? courseBoxList[1] : {}
   const { type, name = "", clazzRoom, color, memo } = courseBoxData
   const { name: name_ = "", clazzRoom: clazzRoom_, color: color_ } = courseBoxData_
-  const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
+
   const chosenBlank = useSelector(state => state.event.uiData.chosenBlank)
   const timeDistance = useSelector(state => state.event.uiData.timeDistance)
   const currentDayIndex = useSelector(state => state.event.bizData.currentDayIndex)
   const weekIndex = useSelector(state => state.event.bizData.weekIndex)
   const currentWeekIndex = useSelector(state => state.event.bizData.currentWeekIndex)
+  const dayLineMatrix = useSelector(state => state.event.bizData.dayLineMatrix)
+  // 天气
+  const hourlyPrecipitation = useSelector(state => state.event.bizData.weatherHourly.precipitation)
+
+  const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
   const eventBoxHeight = useSelector(state => state.schedule.bizData.userConfig.eventBoxHeight)
   const showBoxMask = useSelector(state => state.schedule.bizData.userConfig.showBoxMask)
   const showEventMemo = useSelector(state => state.schedule.bizData.userConfig.showEventMemo)
@@ -42,6 +48,7 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
     dispatch(updateUiData({
       courseDetailFLData: {
         isOpened: true,
+        showMemo: true,
         type,
         name: data.name,
         clazzRoom: data.clazzRoom,
@@ -111,6 +118,9 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
   let { startTimeText } = timeTable[startTime]
   let { endTimeText } = timeTable[endTime]
   let height = diffTime(startTimeText, endTimeText) * eventBoxHeight
+  if (boxType === 1) {
+    height += 1
+  }
   const virtualHeight = diffTime('07:00', endTimeText)
   // 上午大课间
   // let breakTime = 16
@@ -120,14 +130,21 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
     breakTime = 20 * eventBoxHeight
   }
   // 午饭和晚饭
+  let noon = false
+  let noonHeight
   if (startTime === 4 - boxType || startTime === 12 - boxType) {
     startTimeText = timeTable[startTime + boxType - 1].endTimeText
     endTimeText = timeTable[startTime + boxType].startTimeText
     breakTime = diffTime(startTimeText, endTimeText) * eventBoxHeight + (eventBoxHeight === 1 ? 0 : 1)
+    // 计算午休的高度
+    noon = true
+    noonHeight = (diffTime(timeTable[3].endTimeText, timeTable[4].startTimeText) - 20) * eventBoxHeight
+
   } else if (startTime === 8 - boxType) {
     startTimeText = timeTable[startTime + boxType - 1].endTimeText
     endTimeText = timeTable[startTime + boxType].startTimeText
     breakTime = diffTime(startTimeText, endTimeText) * eventBoxHeight + 1
+    // noon = true
   }
 
 
@@ -154,10 +171,26 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
     maskHeight = 0
   }
 
+  // 确定是否带伞
+  let rainPre = 0
+  if (dayLineMatrix.length !== 0 && hourlyPrecipitation && name) {
+    // 这里加(减)了15分钟，为了更大范围的预测
+    const eventStartMoment = moment(dayLineMatrix[weekIndex][dayIndex].dateZh + ' ' + timeTable[startTime].startTimeText).subtract(15, 'minutes')
+    const eventEndMoment = moment(dayLineMatrix[weekIndex][dayIndex].dateZh + ' ' + timeTable[endTime].endTimeText).add(15, 'minutes')
+    hourlyPrecipitation.map(hourPre => {
+      const { datetime, value } = hourPre
+      const preMoment = moment(datetime)
+
+      if (preMoment.isAfter(eventStartMoment) && preMoment.isBefore(eventEndMoment)) {
+        rainPre += value
+      }
+    })
+  }
+
 
   if (!name) {
     return (
-      <View className='eventBox' style={{ height: height + 'rpx', marginBottom: breakTime + 'rpx' }} onClick={setChosenBlank}>
+      <View className='eventBox' style={{ height: height + 'rpx', paddingBottom: breakTime + 'rpx' }} onClick={setChosenBlank}>
         {
           isChosen ?
             <View
@@ -176,6 +209,18 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
             <View className='eventBox-course' style={{ height: height + 'rpx' }}>
             </View>
         }
+
+        {
+          noon &&
+          <View className='eventBox-noon' style={{
+            bottom: 10 * eventBoxHeight + 'rpx',
+            height: noonHeight + 'rpx',
+            lineHeight: noonHeight + 'rpx',
+          }}
+          >
+            午休
+        </View>
+        }
       </View>
     )
   }
@@ -188,6 +233,7 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
           paddingLeft: 18 * eventBoxHeight + 'rpx',
           paddingRight: 18 * eventBoxHeight + 'rpx',
           paddingTop: ((boxType === 1 && eventBoxHeight === 1) ? 5 : 9 * eventBoxHeight) + 'rpx',
+          marginBottom: breakTime + 'rpx',
         }}
       >
         <View className={`eventBox-course eventBox-course_mult courseBox-boxColor-${color}_${theme}`} style={{ height: height + 'rpx' }} onClick={handleMultCourseClick}>
@@ -201,7 +247,7 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
   return (
     <View
       className='eventBox'
-      style={{ height: height + 'rpx', marginBottom: breakTime + 'rpx' }}
+      style={{ height: height + 'rpx', paddingBottom: breakTime + 'rpx' }}
     >
       <View
         className={`eventBox-course courseBox-boxColor-${color}_${theme} eventBox-course__${courseBoxList.length > 1 ? 'doubleLeft' : ''}`}
@@ -246,6 +292,32 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
           className='eventBox-mask'
           onClick={() => handleClickCourse(courseBoxData)}
         ></View>
+      }
+
+      {
+        rainPre > 0.01 &&
+        <View className='eventBox-umbrella' onClick={() => {
+          Taro.showToast({
+            title: '记得带伞!',
+            icon: 'none',
+            duration: 500
+          })
+        }}
+        >
+          <IconFont name='dayu' size={eventBoxHeight === 1 ? 42 : 46} />
+        </View>
+      }
+
+      {
+        noon &&
+        <View className='eventBox-noon' style={{
+          bottom: 10 * eventBoxHeight + 'rpx',
+          height: noonHeight + 'rpx',
+          lineHeight: noonHeight + 'rpx',
+        }}
+        >
+          午休
+        </View>
       }
 
     </View>

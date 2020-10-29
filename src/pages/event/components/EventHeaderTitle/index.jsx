@@ -30,7 +30,7 @@ export default () => {
       if (weekIndex_ === weekIndex) {
         weekData.map((dayData, dayIndex_) => {
           if (dayIndex_ === dayIndex) {
-            _dateZh = `${dayData.dateZh.split('/')[0]}月${parseInt(dayData.dateZh.split('/')[1])}日`
+            _dateZh = `${dayData.dateZh.split('/')[1]}月${parseInt(dayData.dateZh.split('/')[2])}日`
             scheduleMatrix[weekIndex_][dayIndex_].map(courseBoxList => {
               courseBoxList.map(courseBoxData => {
                 if (courseBoxData.name) {

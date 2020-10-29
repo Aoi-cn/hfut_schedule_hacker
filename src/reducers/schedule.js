@@ -10,15 +10,18 @@ const INITIAL_STATE = {
     meUpdate: false,
     herUpdate: false,
     userConfig: {
-      theme: 0,
+      // schedule的
       showAiXin: true,
+      theme: 0,
       imgOpacity: 0.9,
       courseOpacity: 0.88,
-      eventBoxHeight: 1.5,
-      showBoxMask: true,
-      showEventMemo: true,
-      showRedPoint: true,
+      showRedPoint: true, // 课表上有备忘录的课程右上角的红点
       showAd: true,
+      // event的
+      eventBoxHeight: 1.5, // 1倍高度或1.5倍高度
+      showBoxMask: true,
+      showEventMemo: true, // event上显示memo
+      exactWeather: true,
     },
     backgroundPath: '',
     moocData: [],
@@ -47,6 +50,7 @@ const INITIAL_STATE = {
     },
     courseDetailFLData: {
       isOpened: false,
+      showMemo: true,
       type: 'course',
       name: '',
       clazzRoom: '',

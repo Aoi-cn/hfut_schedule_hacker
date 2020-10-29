@@ -27,6 +27,8 @@ function SettingFloatLayout(props) {
     Taro.showModal({
       title: '确定要解绑吗',
       content: '此操作将清空ta的所有数据',
+      confirmColor: '#f33f3f',
+      cancelColor: '#60646b',
       success: function (res) {
         if (res.confirm) {
           loginActions.unBindHer()
@@ -39,6 +41,8 @@ function SettingFloatLayout(props) {
     Taro.showModal({
       title: '确定要登出吗',
       content: '此操作将清空所有本地数据',
+      confirmColor: '#f33f3f',
+      cancelColor: '#60646b',
       success: function (res) {
         if (res.confirm) {
           loginActions.logout()
@@ -156,6 +160,8 @@ function SettingFloatLayout(props) {
   const handleDeleteImg = () => {
     Taro.showModal({
       title: '确定要清空背景吗？',
+      confirmColor: '#f33f3f',
+      cancelColor: '#60646b',
       success: function (res) {
         if (res.confirm) {
           Taro.getSavedFileList({

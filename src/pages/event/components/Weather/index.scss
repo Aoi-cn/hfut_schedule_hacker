@@ -1,0 +1,26 @@
+@import '../../../../style/theme.scss';
+
+.weather {
+  position: absolute;
+  left: 36px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+
+  &-loading {
+    color: $color-light;
+    font-size: 32px;
+  }
+
+  &-temp {
+    color: $color-light;
+    font-size: 32px;
+    margin-left: 12px;
+  }
+
+  &-img {
+    height: 64px;
+    width: 64px;
+  }
+}

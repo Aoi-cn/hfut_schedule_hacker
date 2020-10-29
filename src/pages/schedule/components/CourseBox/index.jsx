@@ -35,7 +35,8 @@ export default ({ boxType, courseBoxList, dayIndex, startTime }) => {
     dispatch(updateUiData({
       courseDetailFLData: {
         isOpened: true,
-        type,
+        showMemo: true,
+        type: data.type,
         name: data.name,
         clazzRoom: data.clazzRoom,
         teacher: data.teacher,
@@ -121,7 +122,7 @@ export default ({ boxType, courseBoxList, dayIndex, startTime }) => {
 
   return (
     <View className={`courseBox courseBox-boxType_${boxType}`} style={`opacity: ${courseOpacity}`}>
-      <View className={`courseBox-course courseBox-course-boxType_${boxType} courseBox-boxColor-${color}_${theme} courseBox-course__${courseBoxList.length > 1 ? 'doubleLeft' : ''}`} onClick={() => handleClickCourse(courseBoxData)}>
+      <View className={`courseBox-course  courseBox-course_${type} courseBox-course-boxType_${boxType} courseBox-boxColor-${color}_${theme} courseBox-course__${courseBoxList.length > 1 ? 'doubleLeft' : ''}`} onClick={() => handleClickCourse(courseBoxData)}>
         {
           (memo && showRedPoint) && <View className='courseBox-redPoint'></View>
         }

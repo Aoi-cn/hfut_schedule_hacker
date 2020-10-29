@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { connect } from 'react-redux'
 import { View, Text, OpenData } from '@tarojs/components'
+import { AtBadge } from 'taro-ui'
+import * as moment from 'moment';
 
 import IconFont from '../../components/iconfont'
 import StandardFloatLayout from '../../components/StandardFloatLayout'
@@ -9,34 +11,64 @@ import HelpNotice from '../../components/HelpNotice'
 import UpdateNotice from '../../components/UpdateNotice'
 import './index.scss'
 
-function Home() {
+function Home(props) {
+  const { examData } = props
   const [sno, setSno] = useState('')
   const [showAbout, setShowAbout] = useState(false)
   const [showUpdateNotice, setShowUpdateNotice] = useState(false)
   const [showHelpNotice, setShowHelpNotice] = useState(false)
+  const [showHomeRedPoint, setShowHomeRedPoint] = useState(false)
 
   useEffect(() => {
     const localUserData = Taro.getStorageSync('me')
-    const { userInfo } = localUserData
-    const { username } = userInfo
+    const { userInfo: { username } } = localUserData
+    const localConfig = Taro.getStorageSync('config')
+    const { autoConfig: { showHomeRedPoint: showHomeRedPoint_ } } = localConfig
+    setShowHomeRedPoint(showHomeRedPoint_)
+    if (showHomeRedPoint_) {
+      setTimeout(() => {
+        setShowHomeRedPoint(false)
+        Taro.setStorage({
+          key: 'config',
+          data: {
+            ...localConfig,
+            autoConfig: {
+              ...localConfig.autoConfig,
+              showHomeRedPoint: false,
+            }
+          }
+        })
+      }, 10000);
+    }
     setSno(username)
   }, [])
+
+  let examCount = 0
+  examData.map(exam => {
+    const { timeText } = exam
+    if (moment().isBefore(moment(timeText.split(' ')[0]))) {
+      examCount++
+    }
+  })
 
   const cardData = [
     {
       name: '考试安排',
       icon: 'daibanshixiang',
       onClick: () => Taro.navigateTo({ url: '/pages/home/pages/exam-arrange/index' }),
+      redPoint: (examCount !== 0) && (<AtBadge value={examCount}></AtBadge>),
     },
     {
       name: '成绩查询',
       icon: 'jixiaopinggu',
       onClick: () => Taro.navigateTo({ url: '/pages/home/pages/grade/index' }),
+      redPoint: null,
     },
     {
       name: '智慧评教',
       icon: 'gongpai',
       onClick: () => Taro.navigateTo({ url: '/pages/home/pages/teacher-evaluate/index' }),
+      redPoint: null,
     },
   ]
 
@@ -45,16 +77,22 @@ function Home() {
       name: '全校课表',
       icon: 'rili',
       onClick: () => Taro.navigateTo({ url: '/pages/schedule/pages/all-schedule/index' }),
+      redPoint: null,
     },
     {
-      name: '课程/教师检索',
+      name: '第二课堂',
       icon: 'sousuo',
-      onClick: () => Taro.navigateTo({ url: '/pages/home/pages/course-search/index' }),
+      onClick: () => Taro.navigateToMiniProgram({ 
+        appId: 'wx1e3feaf804330562',
+        path: 'pages/my/my',
+      }),
+      redPoint: (<AtBadge dot></AtBadge>),
     },
     {
       name: '空教室查询',
       icon: 'tishi',
       onClick: () => Taro.navigateTo({ url: '/pages/home/pages/empty-clazz-room/index' }),
+      redPoint: null,
     },
   ]
 
@@ -89,7 +127,10 @@ function Home() {
             cardData.map(data => (
               <View key={data.name} className='home-content-card-box' onClick={data.onClick}>
                 <IconFont name={data.icon} size={68} />
-                <Text className='home-content-card-box_name'>{data.name}</Text>
+                <View className='home-content-card-box-nameBox'>
+                  <View className='home-content-card-box-nameBox_redPoint'>{data.redPoint}</View>
+                  <Text className='home-content-card-box-nameBox_name'>{data.name}</Text>
+                </View>
               </View>
             ))
           }
@@ -99,9 +140,12 @@ function Home() {
           {
             toolsData.map(data => (
               <View key={data.name} className='home-content-group-item' onClick={data.onClick}>
-                <View className='home-content-group-item_left'>
+                <View className='home-content-group-item-left'>
                   <IconFont name={data.icon} size={48} color='#60646b' />
-                  <Text style={{ marginLeft: 10 }}>{data.name}</Text>
+                  <View className='home-content-group-item-left-nameBox'>
+                    <View className='home-content-group-item-left-nameBox_redPoint'>{showHomeRedPoint && data.redPoint}</View>
+                    <Text style={{ marginLeft: 10 }}>{data.name}</Text>
+                  </View>
                 </View>
                 <IconFont name='arrow-right' size={48} color='#60646b' />
               </View>
@@ -112,7 +156,7 @@ function Home() {
         <View className='home-content-group home-content-group_2'>
 
           <View className='home-content-group-item' onClick={() => setShowAbout(true)}>
-            <View className='home-content-group-item_left'>
+            <View className='home-content-group-item-left'>
               <IconFont name='tanhao' size={46} color='#60646b' />
               <Text style={{ marginLeft: 10 }}>用前必读</Text>
             </View>
@@ -120,7 +164,7 @@ function Home() {
           </View>
 
           <View className='home-content-group-item' onClick={() => Taro.navigateTo({ url: '/pages/home/pages/gift/index' })}>
-            <View className='home-content-group-item_left'>
+            <View className='home-content-group-item-left'>
               <IconFont name='taolunqu' size={46} color='#60646b' />
               <Text style={{ marginLeft: 10 }}>活水计划</Text>
             </View>
@@ -157,7 +201,7 @@ function Home() {
 
 function mapStateToProps(state) {
   return {
-    username: state.login.bizData.username
+    examData: state.event.bizData.examData
   };
 }
 

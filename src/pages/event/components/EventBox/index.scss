@@ -59,6 +59,22 @@
     }
   }
 
+  &-umbrella {
+    position: absolute;
+    padding: 24px;
+    right: 0;
+  }
+
+  &-noon {
+    position: absolute;
+    background-color: $color-background;
+    width: inherit;
+    border-radius: 20px;
+    text-align: center;
+    color: $color-light;
+    font-size: 32px;
+  }
+
   &-mask {
     position: absolute;
     top: 0;

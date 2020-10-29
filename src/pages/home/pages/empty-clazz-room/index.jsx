@@ -262,14 +262,9 @@ function EmptyClazzRoom() {
     dayLineMatrix.map((weekInfo, weekIndex_) => {
       weekInfo.map((dayInfo, dayIndex_) => {
         if (dayInfo.dateZh === date_) {
-          const month = date_.split('/')[0]
-          const day = date_.split('/')[1]
-          let year = ''
-          if (month > 8) {
-            year = '2020'
-          } else {
-            year = '2021'
-          }
+          const year = date_.split('/')[0]
+          const month = date_.split('/')[1]
+          const day = date_.split('/')[2]
           setDate(`${year}-${month}-${day}`)
           setWeekIndex(weekIndex_)
           setDayIndex(dayIndex_)
@@ -281,14 +276,9 @@ function EmptyClazzRoom() {
   // 教学周、星期几发生改变，计算出日期并更新state
   const weekAndDayToDate = (weekIndex_, dayIndex_) => {
     const d = dayLineMatrix[weekIndex_][dayIndex_].dateZh
-    const month = d.split('/')[0]
-    const day = d.split('/')[1]
-    let year = ''
-    if (month > 8) {
-      year = '2020'
-    } else {
-      year = '2021'
-    }
+    const year = d.split('/')[0]
+    const month = d.split('/')[1]
+    const day = d.split('/')[2]
     setDate(`${year}-${month}-${day}`)
     setWeekIndex(weekIndex_)
     setDayIndex(dayIndex_)
@@ -299,6 +289,7 @@ function EmptyClazzRoom() {
       title: '什么是“未知”？',
       content: '该教室一般为非正常上课教室，比如晚自习教室、毕设教室等等。',
       showCancel: false,
+      confirmColor: '#0089ff',
     })
   }
 

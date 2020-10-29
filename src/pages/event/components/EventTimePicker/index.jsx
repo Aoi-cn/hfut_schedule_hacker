@@ -59,7 +59,7 @@ export default () => {
                       {dayData.dayZh}
                     </View>
                     <View className='eventTimePicker-dayLine-box_date'>
-                      {parseInt(dayData.dateZh.split('/')[1])}
+                      {parseInt(dayData.dateZh.split('/')[2])}
                     </View>
                   </View>
                   {

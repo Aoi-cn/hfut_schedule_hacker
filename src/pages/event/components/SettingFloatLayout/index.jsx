@@ -12,7 +12,7 @@ import './index.scss'
 
 function SettingFloatLayout(props) {
   const { userConfig, scheduleActions, eventActions, isOpened, onClose } = props
-  const { eventBoxHeight, showBoxMask, showEventMemo } = userConfig
+  const { eventBoxHeight, showBoxMask, showEventMemo, exactWeather } = userConfig
 
   const eventHeightRange = [
     { name: '1倍', value: 1 },
@@ -41,6 +41,13 @@ function SettingFloatLayout(props) {
 
   const handleEventHeightPickerChange = async (e) => {
     await updateUserConfig({ eventBoxHeight: eventHeightRange[parseInt(e.detail.value)].value })
+  }
+
+  const handleChangeExactWeather = (e) => {
+    updateUserConfig({ exactWeather: e.detail.value })
+    if (e.detail.value) {
+      eventActions.updateExactWeather()
+    }
   }
 
   return (
@@ -79,6 +86,11 @@ function SettingFloatLayout(props) {
         <View className='settingFloatLayout-content-item'>
           <Text>当前时间前的日程阴影</Text>
           <Switch checked={showBoxMask} onChange={e => updateUserConfig({ showBoxMask: e.detail.value })} color='#29a2ff' />
+        </View>
+
+        <View className='settingFloatLayout-content-item'>
+          <Text>精确天气（需开启位置信息）</Text>
+          <Switch checked={exactWeather} onChange={handleChangeExactWeather} color='#29a2ff' />
         </View>
 
         {/* <View className='settingFloatLayout-line'></View> */}

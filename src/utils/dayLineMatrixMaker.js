@@ -23,7 +23,7 @@ export default () => {
       }
       return {
         dayZh,
-        dateZh: travelMoment.format('MM/DD'),
+        dateZh: travelMoment.format('YYYY/MM/DD'),
         today,
       }
     })

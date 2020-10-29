@@ -33,6 +33,7 @@ function Mooc(props) {
           title: '小提示',
           showCancel: false,
           content: '网址已复制',
+          confirmColor: '#0089ff',
         })
       }
     })

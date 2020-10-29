@@ -26,7 +26,7 @@ export default {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: '课表',
-    navigationBarTextStyle: 'black'
+    navigationBarTextStyle: 'black',
   },
   tabBar: {
     color: "#606468",
@@ -52,19 +52,12 @@ export default {
       iconPath: 'assets/home.png',
       selectedIconPath: 'assets/home_active.png',
     },
-    // {
-    //   pagePath: 'pages/schedule/pages/all-schedule/index',
-    //   text: '全校',
-    //   iconPath: 'assets/network.png',
-    //   selectedIconPath: 'assets/network_active.png',
-    // },
-    // {
-    //   pagePath: 'pages/gift/index',
-    //   text: '反馈',
-    //   iconPath: 'assets/gift.png',
-    //   selectedIconPath: 'assets/gift_active.png',
-    // }
     ]
+  },
+  permission: {
+    "scope.userLocation": {
+      desc: "你的位置信息将用于获取天气信息" 
+    }
   },
   usingComponents: useGlobalIconFont(),
 }
