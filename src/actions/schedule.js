@@ -226,13 +226,17 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
   const examData = examRes.content
   dispatch(eventActions.updateBizData({ examData })) // 给event是因为event的数据是自己的，而schedule的数据可能是自己或者情侣的
 
+  console.log('考试数据')
+  console.log(examData)
   // 写入考试数据
   examData.map(examInfo => {
     const { name, room, timeText } = examInfo
-    let date = timeText.split(' ')[0].slice(5, timeText.split(' ')[0].length)
-    date = date.split('-')[0] + '/' + date.split('-')[1]
+    const date = timeText.split(' ')[0].replace('-', '/').replace('-', '/')
     const timeRangeText = timeText.split(' ')[1]
     const startTime = examTimeText_to_timeIndex(timeRangeText.split('~')[0])
+    if (startTime === 0) {
+      return
+    }
     const endTime = examTimeText_to_timeIndex(timeRangeText.split('~')[1])
     dayLineMatrix.map((weekInfo, weekIndex) => {
       weekInfo.map((dayInfo, dayIndex) => {
@@ -642,7 +646,7 @@ export const logout = () => {
 }
 
 const examTimeText_to_timeIndex = (timeText) => {
-  let timeIndex = 1
+  let timeIndex = 0
   switch (timeText) {
     case '8:00':
       timeIndex = 1
@@ -668,8 +672,14 @@ const examTimeText_to_timeIndex = (timeText) => {
     case '18:20':
       timeIndex = 8
       break;
+    case '18:30':
+      timeIndex = 9
+      break;
     case '19:00':
       timeIndex = 9
+      break;
+    case '20:30':
+      timeIndex = 10
       break;
     case '21:00':
       timeIndex = 10

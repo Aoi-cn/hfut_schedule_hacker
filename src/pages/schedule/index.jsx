@@ -18,7 +18,6 @@ import checkUpdate from '../../utils/checkUpdate'
 
 import './index.scss'
 
-// let showInterstitialAd = true
 
 const MemoBackgroundImg = memo(BackgroundImg)
 
@@ -46,18 +45,6 @@ function Schedule(props) {
         setRenderElse(true)
       }, 200);
     }
-    // 广告部分
-    // return () => {
-    //   if (scheduleMatrix.length !== 0 && showAd && showInterstitialAd) {
-    //     showInterstitialAd = false
-    //     const interstitialAd = Taro.createInterstitialAd({
-    //       adUnitId: 'adunit-e8c3c88c149f8a07'
-    //     })
-    //     interstitialAd.show().catch((err) => {
-    //       console.error(err)
-    //     })
-    //   }
-    // }
   })
 
 
@@ -117,7 +104,10 @@ function Schedule(props) {
           <CourseDetailFloatLayout
             courseDetailFLData={courseDetailFLData}
             onClose={() => props.updateUiData({ courseDetailFLData: { isOpened: false } })}
-            updateColorPicker={(handleColorChange, theme, color) => props.updateUiData({ colorPickerData: { isOpened: true, handleColorChange, theme, color } })}
+            updateColorPicker={(handleColorChange, theme, color) => props.updateUiData({
+              colorPickerData: { isOpened: true, handleColorChange, theme, color },
+              courseDetailFLData: { ...courseDetailFLData, showMemo: false }
+            })}
             openCustomScheduleFL={({ dayIndex, startTime, courseType, chosenWeeks }) => props.updateUiData({
               customScheduleFLData: {
                 ...courseDetailFLData,
@@ -130,6 +120,7 @@ function Schedule(props) {
                 currentWeekIndex: currentWeekIndex + 1,
               },
               chosenBlank: [],
+              courseDetailFLData: { ...courseDetailFLData, showMemo: false }
             })}
           />
 
@@ -148,7 +139,10 @@ function Schedule(props) {
                 ...data
               }
             })}
-            onClose={() => props.updateUiData({ customScheduleFLData: { isOpened: false } })}
+            onClose={() => props.updateUiData({
+              customScheduleFLData: { isOpened: false },
+              courseDetailFLData: { ...courseDetailFLData, showMemo: true }
+            })}
             scheduleMatrix={scheduleMatrix}
             timeTable={timeTable}
             weekIndex={weekIndex}
@@ -157,7 +151,10 @@ function Schedule(props) {
 
           <ColorPicker
             isOpened={colorPickerData.isOpened}
-            onClose={() => props.updateUiData({ colorPickerData: { isOpened: false } })}
+            onClose={() => props.updateUiData({
+              colorPickerData: { isOpened: false },
+              courseDetailFLData: { ...courseDetailFLData, showMemo: true }
+            })}
             handleColorChange={colorPickerData.handleColorChange}
             theme={colorPickerData.theme}
             currentColor={colorPickerData.currentColor}

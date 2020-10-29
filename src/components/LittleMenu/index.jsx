@@ -7,25 +7,28 @@ import './index.scss'
 export default (props) => {
   const { showMenu, menuList } = props
 
+  if (!showMenu) {
+    return ''
+  }
+
+  // console.log('妥')
+
   return (
-    <>
+    <View className='littleMenu-menu'>
       {
-        showMenu &&
-        <View className='littleMenu-menu'>
-          {
-            menuList.map((item) =>
-              <View
-                key={item}
-                className='littleMenu-menu-item'
-                onClick={item.onClick}
-              >
-                <IconFont name={item.icon} size={34} />
-                <View className='littleMenu-menu-item-text'>{item.value}</View>
-              </View>
-            )
-          }
-        </View>
+        menuList.map((item) =>
+          <View
+            key={item}
+            className='littleMenu-menu-item'
+            onClick={item.onClick}
+          >
+            <IconFont name={item.icon} size={34} />
+            <View className='littleMenu-menu-item-text'>{item.value}</View>
+          </View>
+        )
       }
-    </>
+    </View>
   )
+
+
 }

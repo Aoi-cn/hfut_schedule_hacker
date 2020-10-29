@@ -23,7 +23,11 @@ export default () => {
 
   const strM = JSON.stringify(scheduleMatrix)
 
+
   useEffect(() => {
+    if (scheduleMatrix.length === 0) {
+      return
+    }
     let _dateZh = ''
     let _dailyEventNumber = 0
     dayLineMatrix.map((weekData, weekIndex_) => {

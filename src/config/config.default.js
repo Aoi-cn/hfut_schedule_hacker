@@ -4,7 +4,7 @@
 export const updateState = 0
 
 export const config = {
-  version: '3.3.0dev1',
+  version: '3.3.0dev3',
   autoConfig: {
     showDiffHelp: true,
     showAllSHelp: true,
@@ -31,26 +31,25 @@ export const updateInfo = {
   notices: [],
   features: [
     {
-      info: '1. 考试信息、考场查询',
-      comment: '全面支持考试信息，并且可以在课表上看到自己的考试~',
+      info: '1. 天气小助手',
+      comment: '左上角可以看到当前的天气状况，24小时内有雨的课程上也会有带伞提示哦~',
     },
     {
-      info: '2. 捐赠页面加入感谢名单',
-      comment: '感激涕零，谢谢同学们的支持！',
+      info: '2. 更新感谢名单',
     },
     {
-      info: '3. 添加第二课堂的入口',
-      // comment: '',
+      info: '2. 更新全校课表',
     },
   ],
   bugs: [
     {
-      info: '1. 修复备忘录出现在最上层的bug',
-      comment: '看到有多个同学反馈了这个bug，现在已经解决了！',
+      info: '1. 修复部分考试在课表上的显示问题',
     },
     {
-      info: '2. 修复部分莫名其妙重新登陆的问题',
-      // comment: '',
+      info: '2. 考试为0时去掉小红点',
+    },
+    {
+      info: '3. 修复备忘录相关问题',
     },
   ]
 }

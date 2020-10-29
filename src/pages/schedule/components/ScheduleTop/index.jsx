@@ -57,11 +57,6 @@ export default (props) => {
       icon: 'paihangbang',
       onClick: () => Taro.navigateTo({ url: '/pages/schedule/pages/mooc/index' }),
     },
-    // {
-    //   value: '用前必读',
-    //   icon: 'file-text',
-    //   onClick: () => setShowAbout(true),
-    // },
     {
       value: '课表设置',
       icon: 'shezhi',

@@ -152,7 +152,9 @@ const updateWeatherByLocation = ({ exact }) => async (dispatch) => {
 
 export const updateDayByCalendar = (payload) => async (dispatch, getState) => {
   let { date } = payload
-  date = date.split('-')[1] + '/' + date.split('-')[2]
+  console.log(date)
+  date = date.replace('-', '/').replace('-', '/')
+  console.log(date)
   const { schedule: { bizData: { dayLineMatrix } } } = getState()
   dayLineMatrix.map((weekInfo, weekIndex) => {
     weekInfo.map((dayInfo, dayIndex) => {
