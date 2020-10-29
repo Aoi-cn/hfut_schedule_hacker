@@ -26,7 +26,10 @@ export const enter = ({ userType, isEvent }) => async (dispatch) => {
       const { moocData } = dataToMatrix(scheduleData, lessonIds, timeTable)
       // 二话不说先渲染
       dispatch(updateBizData({ scheduleMatrix, timeTable, moocData }))
-      dispatch(eventActions.updateBizData({ scheduleMatrix, timeTable, examData }))
+      // 是自己，再渲染event，情侣与event页面无关
+      if (userType === 'me') {
+        dispatch(eventActions.updateBizData({ scheduleMatrix, timeTable, examData }))
+      }
 
       //读取本地设置
       const localConfig = Taro.getStorageSync('config')
@@ -224,10 +227,10 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
   // 请求考试数据
   const examRes = await GET('/exam_arrange', { key })
   const examData = examRes.content
-  dispatch(eventActions.updateBizData({ examData })) // 给event是因为event的数据是自己的，而schedule的数据可能是自己或者情侣的
+  if (userType === 'me') {
+    dispatch(eventActions.updateBizData({ examData })) // 给event是因为event的数据是自己的，而schedule的数据可能是自己或者情侣的
+  }
 
-  console.log('考试数据')
-  console.log(examData)
   // 写入考试数据
   examData.map(examInfo => {
     const { name, room, timeText } = examInfo

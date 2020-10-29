@@ -4,7 +4,7 @@
 export const updateState = 0
 
 export const config = {
-  version: '3.3.0dev3',
+  version: '3.3.0',
   autoConfig: {
     showDiffHelp: true,
     showAllSHelp: true,
