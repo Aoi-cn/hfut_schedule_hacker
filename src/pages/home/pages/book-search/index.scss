@@ -1,0 +1,33 @@
+@import '../../../../style/theme.scss';
+
+.bookSearch {
+  width: 100%;
+  height: 100%;
+  background-color: $color-background;
+  padding-top: 32px;
+  box-sizing: border-box;
+
+  &-none {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    &-noneImg {
+      width: 400px;
+      height: 400px;
+    }
+
+    &-noneText {
+      color: $color-grey;
+      font-size: 32px;
+    }
+
+    &-ad {
+      margin-top: 80px;
+    }
+  }
+}
+

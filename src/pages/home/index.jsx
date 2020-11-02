@@ -80,18 +80,24 @@ function Home(props) {
       redPoint: null,
     },
     {
+      name: '空教室查询',
+      icon: 'tishi',
+      onClick: () => Taro.navigateTo({ url: '/pages/home/pages/empty-clazz-room/index' }),
+      redPoint: null,
+    },
+    // {
+    //   name: '图书馆馆藏查询',
+    //   icon: 'sousuo',
+    //   onClick: () => Taro.navigateTo({ url: '/pages/home/pages/book-search/index' }),
+    //   redPoint: (<AtBadge dot></AtBadge>),
+    // },
+    {
       name: '第二课堂',
-      icon: 'sousuo',
+      icon: 'qinghuiyuan',
       onClick: () => Taro.navigateToMiniProgram({ 
         appId: 'wx1e3feaf804330562',
         path: 'pages/my/my',
       }),
-      redPoint: (<AtBadge dot></AtBadge>),
-    },
-    {
-      name: '空教室查询',
-      icon: 'tishi',
-      onClick: () => Taro.navigateTo({ url: '/pages/home/pages/empty-clazz-room/index' }),
       redPoint: null,
     },
   ]
@@ -180,8 +186,7 @@ function Home(props) {
         title='用前必读'
         content={`本小程序不代表任何组织或机构的利益，完全出于交流学习和方便工大学子的目的而开发。\n
         如在使用中遇到bug、或者有好的功能建议，请联系小程序的开发者（qq：254139147）\n
-        本项目已在GitHub开源，仓库名称为：hfut_schedule_hacker。欢迎对前端感兴趣的同学与我一起交流和开发！\n
-        情侣课表功能专为我的挚爱：唐小姐开发。祝天下有情人终成眷属~
+        本项目已在GitHub开源，仓库名称为：hfut_schedule_hacker。欢迎对前端感兴趣的同学与我一起交流和开发！
         `}
         buttons={[{
           value: '查看帮助',

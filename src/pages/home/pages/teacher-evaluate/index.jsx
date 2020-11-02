@@ -15,7 +15,7 @@ function TeacherEvaluate() {
           src={img}
           className='teacherEvaluate-none-noneImg'
         />
-        <Text className='teacherEvaluate-none-noneText'>聪明人才不会一个老师次点十几次按钮</Text>
+        <Text className='teacherEvaluate-none-noneText'>聪明人才不会一个老师点十几次按钮</Text>
         <View className='teacherEvaluate-none-ad'>
           {/* {
             showAd &&

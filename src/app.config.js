@@ -3,17 +3,18 @@ import { useGlobalIconFont } from './components/iconfont/helper';
 export default {
   pages: [
     
-    // 'pages/home/pages/donate/index',
+    'pages/home/index',
 
     'pages/event/index',
     'pages/schedule/index',
-    'pages/home/index',
+    // 'pages/home/index',
     
     'pages/login/index',
     'pages/home/pages/gift/index',
     'pages/home/pages/empty-clazz-room/index',
     'pages/home/pages/empty-clazz-room/pages/room-detail-schedule/index',
-    'pages/home/pages/course-search/index',
+    // 'pages/home/pages/course-search/index',
+    'pages/home/pages/book-search/index',
     'pages/home/pages/exam-arrange/index',
     'pages/home/pages/grade/index',
     'pages/home/pages/teacher-evaluate/index',
