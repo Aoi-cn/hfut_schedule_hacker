@@ -13,7 +13,7 @@ import './index.scss'
 
 function SettingFloatLayout(props) {
   const { userConfig, userType, scheduleActions, loginActions, isOpened, onClose } = props
-  const { theme, showAiXin, imgOpacity, courseOpacity, showRedPoint, showAd } = userConfig
+  const { theme, showAiXin, imgOpacity, courseOpacity, showRedPoint } = userConfig
   const [showSetBackground, setShowSetBackground] = useState(false)
 
   const themeRange = [
@@ -32,20 +32,6 @@ function SettingFloatLayout(props) {
       success: function (res) {
         if (res.confirm) {
           loginActions.unBindHer()
-        }
-      }
-    })
-  }
-
-  const handleLogoutClick = () => {
-    Taro.showModal({
-      title: '确定要登出吗',
-      content: '此操作将清空所有本地数据',
-      confirmColor: '#f33f3f',
-      cancelColor: '#60646b',
-      success: function (res) {
-        if (res.confirm) {
-          loginActions.logout()
         }
       }
     })
@@ -191,17 +177,6 @@ function SettingFloatLayout(props) {
     onClose()
   }
 
-  const handleAdChange = (status) => {
-    updateUserConfig({ showAd: status })
-    if (!status) {
-      Taro.showToast({
-        title: '关闭成功',
-        icon: 'none',
-        duration: 1000
-      })
-    }
-  }
-
   return (
     <AtFloatLayout
       isOpened={isOpened}
@@ -248,22 +223,13 @@ function SettingFloatLayout(props) {
           <Switch checked={showRedPoint} onChange={e => updateUserConfig({ showRedPoint: e.detail.value })} color='#29a2ff' />
         </View>
 
-        {/* <View className='settingFloatLayout-content-item'>
-          <Text>关闭广告（广告可援助开发者😅）</Text>
-          <Switch checked={!showAd} onChange={e => handleAdChange(!e.detail.value)} color='#29a2ff' />
-        </View> */}
-
         <View className='settingFloatLayout-line'></View>
 
       </View>
 
       <View className='settingFloatLayout-footer'>
         <View className='settingFloatLayout-footer-btnBox'>
-          <CustomButton value='解绑情侣' type='primary' onSubmit={handleUnbindHerClick} />
-        </View>
-        <View className='settingFloatLayout-footer_blank'></View>
-        <View className='settingFloatLayout-footer-btnBox'>
-          <CustomButton value='退出登录' type='danger' onSubmit={handleLogoutClick} />
+          <CustomButton value='解绑情侣' type='danger' onSubmit={handleUnbindHerClick} />
         </View>
       </View>
 

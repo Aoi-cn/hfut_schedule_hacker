@@ -7,6 +7,7 @@ import {
 import { GET } from '../utils/request'
 import { enter, logout as scheduleLogout } from './schedule'
 import { logout as allScheduleLogout } from './allSchedule'
+import { logout as eventLogout } from './event'
 import { config } from '../config/config.default'
 
 export const login = ({ username, password, userType, campus }) => async () => {
@@ -106,17 +107,18 @@ export const logout = () => async (dispatch) => {
   // 执行登出逻辑
   dispatch(scheduleLogout())
   dispatch(allScheduleLogout())
+  dispatch(eventLogout())
   const localConfig = Taro.getStorageSync('config')
-  // const localCustom = Taro.getStorageSync('custom')
+  const localCustom = Taro.getStorageSync('custom')
   await Taro.clearStorage()
   Taro.setStorage({
     key: 'config',
     data: localConfig
   })
-  // Taro.setStorage({
-  //   key: 'custom',
-  //   data: localCustom
-  // })
+  Taro.setStorage({
+    key: 'custom',
+    data: localCustom
+  })
   await dispatch({ type: LOGOUT })
   Taro.redirectTo({ url: '/pages/login/index' })
 }

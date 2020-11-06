@@ -148,7 +148,10 @@ const handleCheckUpdate = () => async (dispatch) => {
       data: {
         autoConfig: {
           ...config.autoConfig,
-          ...localConfig.autoConfig,
+          autoConfig: {
+            ...localConfig.autoConfig,
+            showRedPoint: true,
+          }
         },
         userConfig: {
           ...config.userConfig,
@@ -329,7 +332,7 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
       clearInterval(intervalNumber)
     }
   }, 500);
-  
+
 }
 
 // 颜色持久化

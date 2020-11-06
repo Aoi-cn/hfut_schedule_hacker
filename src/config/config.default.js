@@ -4,7 +4,7 @@
 export const updateState = 0
 
 export const config = {
-  version: '3.3.0',
+  version: '4.1.0dev2',
   autoConfig: {
     showDiffHelp: true,
     showAllSHelp: true,
@@ -28,30 +28,30 @@ export const config = {
 }
 
 export const updateInfo = {
-  notices: [],
+  notices: [
+    {
+      info: '最近事情比较多，还有四门考试，所以更新的比较慢。谢谢同学们的支持，该来的总会来的！😆'
+    }
+  ],
   features: [
     {
-      info: '1. 天气小助手',
-      comment: '左上角可以看到当前的天气状况，24小时内有雨的课程上也会有带伞提示哦~',
+      info: '1. 图书馆馆藏检索',
+      comment: '最棒的图书馆检索体验！',
     },
     {
-      info: '2. 更新感谢名单',
+      info: '2. 天气详情',
+      comment: '点击左上角的天气图标可以查看天气详情哦~',
     },
     {
-      info: '2. 更新全校课表',
+      info: '3. 更新捐赠感谢列表',
+      // comment: '用前必读中加入历史更新模块',
+    },
+    {
+      info: '4. 优化部分细节',
+      // comment: '用前必读中加入历史更新模块',
     },
   ],
-  bugs: [
-    {
-      info: '1. 修复部分考试在课表上的显示问题',
-    },
-    {
-      info: '2. 考试为0时去掉小红点',
-    },
-    {
-      info: '3. 修复备忘录相关问题',
-    },
-  ]
+  bugs: []
 }
 
 export const helpInfo = [

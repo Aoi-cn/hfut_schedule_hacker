@@ -23,7 +23,7 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
   const currentWeekIndex = useSelector(state => state.event.bizData.currentWeekIndex)
   const dayLineMatrix = useSelector(state => state.event.bizData.dayLineMatrix)
   // 天气
-  const hourlyPrecipitation = useSelector(state => state.event.bizData.weatherHourly.precipitation)
+  const weatherHourly = useSelector(state => state.event.bizData.weatherData.hourly)
 
   const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
   const eventBoxHeight = useSelector(state => state.schedule.bizData.userConfig.eventBoxHeight)
@@ -173,11 +173,11 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
 
   // 确定是否带伞
   let rainPre = 0
-  if (dayLineMatrix.length !== 0 && hourlyPrecipitation && name) {
+  if (weatherHourly && dayLineMatrix.length !== 0 && weatherHourly.hourlyPrecipitation && name) {
     // 这里加(减)了15分钟，为了更大范围的预测
     const eventStartMoment = moment(dayLineMatrix[weekIndex][dayIndex].dateZh + ' ' + timeTable[startTime].startTimeText).subtract(15, 'minutes')
     const eventEndMoment = moment(dayLineMatrix[weekIndex][dayIndex].dateZh + ' ' + timeTable[endTime].endTimeText).add(15, 'minutes')
-    hourlyPrecipitation.map(hourPre => {
+    weatherHourly.hourlyPrecipitation.map(hourPre => {
       const { datetime, value } = hourPre
       const preMoment = moment(datetime)
 

@@ -10,6 +10,9 @@ import * as scheduleActions from './schedule'
 // event的enter直接走schedule的enter
 export const enter = () => async (dispatch, getState) => {
 
+  // 0.先渲染一个天气
+  dispatch(updateWeatherByLocation({ exact: false }))
+
   // 1.渲染日程数据
   await dispatch(scheduleActions.enter({ userType: 'me', isEvent: true }))
   const { schedule: { bizData: { scheduleMatrix, dayLineMatrix, currentWeekIndex, timeTable } } } = getState()
@@ -33,13 +36,12 @@ export const enter = () => async (dispatch, getState) => {
     currentDayIndex: dayIndex,
   }))
 
-  // 2.先获取天气信息
+  // 2.获取具体天气信息
   const exactWeather = getState().schedule.bizData.userConfig.exactWeather
   if (exactWeather) {
     dispatch(updateExactWeather())
   } else {
-    // 循环，半小时更新一次
-    dispatch(updateWeatherByLocation({ exact: false }))
+    // 非精确天气，循环，半小时更新一次
     setInterval(() => {
       dispatch(updateWeatherByLocation({ exact: false }))
     }, 1800000);
@@ -119,31 +121,17 @@ const updateWeatherByLocation = ({ exact }) => async (dispatch) => {
   }
 
   // 当前时间天气api
-  Taro.request({ url: `https://api.caiyunapp.com/v2.5/Y2FpeXVuIGFuZHJpb2QgYXBp/${location.longitude},${location.latitude}/realtime.json` })
+  Taro.request({ url: `https://api.caiyunapp.com/v2.5/Y2FpeXVuIGFuZHJpb2QgYXBp/${location.longitude},${location.latitude}/weather.json` })
     .then(weatherRes => {
       const { status } = weatherRes.data
       if (status === 'ok') {
         // 天气信息获取成功，渲染event页面吧
-        console.log('当前天气获取成功')
-        const { result: { realtime: weatherRealTime } } = weatherRes.data
-        dispatch(updateBizData({ weatherRealTime }))
+        console.log('天气获取成功')
+        const { result: weatherData } = weatherRes.data
+        dispatch(updateBizData({ weatherData }))
       } else {
-        console.log('当前天气获取失败')
+        console.log('天气获取失败')
         dispatch(updateBizData({ weatherRealTime: { skycon: 'failed' } }))
-      }
-    })
-
-  // 小时天气的api
-  Taro.request({ url: `https://api.caiyunapp.com/v2.5/Y2FpeXVuIGFuZHJpb2QgYXBp/${location.longitude},${location.latitude}/hourly.json` })
-    .then(weatherRes => {
-      const { status } = weatherRes.data
-      if (status === 'ok') {
-        // 天气信息获取成功，渲染event页面吧
-        console.log('小时天气获取成功')
-        const { result: { hourly: weatherHourly } } = weatherRes.data
-        dispatch(updateBizData({ weatherHourly }))
-      } else {
-        console.log('小时天气获取失败')
       }
     })
 

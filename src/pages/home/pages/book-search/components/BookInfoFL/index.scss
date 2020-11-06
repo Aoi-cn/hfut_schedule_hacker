@@ -1,0 +1,58 @@
+@import "../../../../../../style/theme.scss";
+
+.bookInfoFL {
+  color: $color-semi;
+
+  &-header {
+    margin: 36px 0;
+    padding: 0 88px;
+    margin-bottom: 48px;
+    font-size: 36px;
+    font-weight: bold;
+    color: $color-semi;
+    text-align: center;
+  }
+
+  &-content {
+    padding: 0 36px;
+    padding-bottom: 56px;
+
+    &-loading {
+      height: 216px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-item {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 16px;
+      font-size: 32px;
+    }
+  }
+
+  &-itemTitle {
+    color: $color-light;
+  }
+
+  &-footer {
+    width: 100%;
+
+    &-close {
+      position: absolute;
+      right: 18px;
+      bottom: 10px;
+
+      &:active {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &-itemTitle {
+    color: $color-light;
+  }
+}

@@ -10,8 +10,7 @@ const INITIAL_STATE = {
     dayLineMatrix: [],
     timeTable: [],
     examData: [],
-    weatherRealTime: {},
-    weatherHourly: {},
+    weatherData: {},
   },
   uiData: {
     showCalendar: false,

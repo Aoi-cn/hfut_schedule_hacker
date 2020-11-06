@@ -3,13 +3,15 @@ import { useGlobalIconFont } from './components/iconfont/helper';
 export default {
   pages: [
     
-    'pages/home/index',
+    // 'pages/home/index',
 
     'pages/event/index',
     'pages/schedule/index',
-    // 'pages/home/index',
-    
+    'pages/home/index',
     'pages/login/index',
+
+    'pages/event/pages/weather-detail/index',
+
     'pages/home/pages/gift/index',
     'pages/home/pages/empty-clazz-room/index',
     'pages/home/pages/empty-clazz-room/pages/room-detail-schedule/index',

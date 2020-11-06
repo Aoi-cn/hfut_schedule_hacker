@@ -24,7 +24,7 @@ export default ({ onClose }) => {
           <>
             <View className='updateNotice-content-subTitle'>
               <IconFont name='tanhao' size={36} color={themeC['color-font-brand']} />
-              <Text className='updateNotice-content-subTitle_text'>通告</Text>
+              <Text className='updateNotice-content-subTitle_text'>消息</Text>
             </View>
             {
               notices.map((notice, index) => (

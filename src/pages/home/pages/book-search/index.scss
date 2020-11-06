@@ -4,30 +4,138 @@
   width: 100%;
   height: 100%;
   background-color: $color-background;
-  padding-top: 32px;
+  padding: 32px;
   box-sizing: border-box;
 
-  &-none {
+  &-header {
+    // margin-bottom: 12px;
+
+    &-searchBox {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-search {
+      margin-left: 0;
+      color: $color-semi;
+      font-size: 34px;
+      color: #202124;
+      width: 100%;
+      margin-right: 24px;
+      padding: 0 48px;
+      padding-right: 8px;
+      border-radius: 50px;
+      height: 100px;
+      background-color: #ffffff;
+    }
+
+    &-rankingBox {
+      color: $color-light;
+      font-size: 30px;
+      padding: 24px;
+      padding-left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &-text {
+        margin-left: 8px;
+      }
+
+      &:active {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-item {
+      background-color: #ffffff;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      width: 100%;
+      padding: 0 24px;
+      box-sizing: border-box;
+      box-shadow: 3px 3px 6px #eee, -3px -3px 6px #eee;
+      display: flex;
+      position: relative;
+
+      &-box {
+        width: 100%;
+        padding: 24px 0;
+      }
+
+      &-numberBox {
+        height: inherit;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 24px;
+
+        &-number {
+          color: $color-light;
+        }
+      }
+
+      &-title {
+        font-size: 32px;
+        color: $color-semi;
+        margin-bottom: 12px;
+        padding-right: 60px;
+      }
+
+      &-author {
+        font-size: 28px;
+        color: $color-light;
+      }
+
+      &-more {
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 24px;
+      }
+
+      &:active {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &-footer {
+    margin: 32px 0;
+  }
+
+  &-bookRanking {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    padding: 24px 12px;
+    box-sizing: border-box;
+    background-color: $color-background;
 
-    &-noneImg {
-      width: 400px;
-      height: 400px;
-    }
+    &-item {
+      background-color: $color-brand-light;
+      padding: 12px 24px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+      color: #ffffff;
 
-    &-noneText {
-      color: $color-grey;
-      font-size: 32px;
-    }
-
-    &-ad {
-      margin-top: 80px;
+      &:active {
+        opacity: 0.5;
+      }
     }
   }
-}
 
+}

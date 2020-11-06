@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { View, Text, OpenData } from '@tarojs/components'
 import { AtBadge } from 'taro-ui'
 import * as moment from 'moment';
@@ -9,15 +9,17 @@ import IconFont from '../../components/iconfont'
 import StandardFloatLayout from '../../components/StandardFloatLayout'
 import HelpNotice from '../../components/HelpNotice'
 import UpdateNotice from '../../components/UpdateNotice'
+import { logout } from '../../actions/login'
 import './index.scss'
 
-function Home(props) {
-  const { examData } = props
+function Home() {
+  const examData = useSelector(state => state.event.bizData.examData)
   const [sno, setSno] = useState('')
   const [showAbout, setShowAbout] = useState(false)
   const [showUpdateNotice, setShowUpdateNotice] = useState(false)
   const [showHelpNotice, setShowHelpNotice] = useState(false)
   const [showHomeRedPoint, setShowHomeRedPoint] = useState(false)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const localUserData = Taro.getStorageSync('me')
@@ -85,16 +87,16 @@ function Home(props) {
       onClick: () => Taro.navigateTo({ url: '/pages/home/pages/empty-clazz-room/index' }),
       redPoint: null,
     },
-    // {
-    //   name: '图书馆馆藏查询',
-    //   icon: 'sousuo',
-    //   onClick: () => Taro.navigateTo({ url: '/pages/home/pages/book-search/index' }),
-    //   redPoint: (<AtBadge dot></AtBadge>),
-    // },
+    {
+      name: '图书馆馆藏查询',
+      icon: 'sousuo',
+      onClick: () => Taro.navigateTo({ url: '/pages/home/pages/book-search/index' }),
+      redPoint: (<AtBadge dot></AtBadge>),
+    },
     {
       name: '第二课堂',
       icon: 'qinghuiyuan',
-      onClick: () => Taro.navigateToMiniProgram({ 
+      onClick: () => Taro.navigateToMiniProgram({
         appId: 'wx1e3feaf804330562',
         path: 'pages/my/my',
       }),
@@ -104,6 +106,20 @@ function Home(props) {
 
   const handleClickCoin = () => {
     Taro.navigateTo({ url: '/pages/home/pages/donate/index' })
+  }
+
+  const handleLogoutClick = () => {
+    Taro.showModal({
+      title: '确定要登出吗',
+      content: '此操作将清空所有本地数据',
+      confirmColor: '#f33f3f',
+      cancelColor: '#60646b',
+      success: function (res) {
+        if (res.confirm) {
+          dispatch(logout())
+        }
+      }
+    })
   }
 
   return (
@@ -178,6 +194,14 @@ function Home(props) {
           </View>
 
         </View>
+
+        <View className='home-content-group home-content-group_2'>
+
+          <View className='home-content-group-item home-content-group-item_logout' onClick={handleLogoutClick}>
+            <Text>退出登录</Text>
+          </View>
+
+        </View>
       </View>
 
       <StandardFloatLayout
@@ -204,10 +228,4 @@ function Home(props) {
   )
 }
 
-function mapStateToProps(state) {
-  return {
-    examData: state.event.bizData.examData
-  };
-}
-
-export default connect(mapStateToProps)(Home);
+export default Home;

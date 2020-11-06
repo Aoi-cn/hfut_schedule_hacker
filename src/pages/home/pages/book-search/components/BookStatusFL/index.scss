@@ -1,0 +1,99 @@
+@import "../../../../../../style/theme.scss";
+
+.bookStatusFL {
+  color: $color-semi;
+
+  &-header {
+    margin: 16px 0;
+    padding: 0 88px;
+    margin-bottom: 24px;
+    font-size: 36px;
+    font-weight: bold;
+    color: $color-semi;
+    text-align: center;
+  }
+
+  &-content {
+    padding-left: 24px;
+    padding-bottom: 56px;
+
+    &-loading {
+      height: 216px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-item {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      color: $color-semi;
+      margin-bottom: 12px;
+
+      &_header {
+        color: $color-light;
+        margin-bottom: 20px;
+      }
+
+      &_box1 {
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 24px;
+      }
+
+      &_box2 {
+        width: 28%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $color-font-brand;
+        margin-right: 24px;
+      }
+
+      &_box3 {
+        width: 32%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &_green {
+          color: $color-success;
+        }
+
+        &_red {
+          color: $color-error;
+        }
+
+        &_yellow {
+          color: $color-warning;
+        }
+      }
+
+      &_boxHeader {
+        color: $color-light;
+      }
+    }
+  }
+
+  &-footer {
+    width: 100%;
+
+    &-close {
+      position: fixed;
+      right: 18px;
+      bottom: 10px;
+
+      &:active {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &-itemTitle {
+    color: $color-light;
+  }
+}
