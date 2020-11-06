@@ -37,6 +37,10 @@ export const enter = () => async (dispatch, getState) => {
   }))
 
   // 2.获取具体天气信息
+  dispatch(refreshWeather())
+}
+
+export const refreshWeather = () => async (dispatch, getState) => {
   const exactWeather = getState().schedule.bizData.userConfig.exactWeather
   if (exactWeather) {
     dispatch(updateExactWeather())

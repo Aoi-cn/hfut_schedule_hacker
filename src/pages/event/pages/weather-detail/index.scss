@@ -2,7 +2,8 @@
 
 
 .weatherDetail {
-  height: 100%;
+  height: fit-content;
+  min-height: 100%;
   width: 100%;
   background-color: $blue_b2;
 
@@ -30,6 +31,7 @@
     height: fit-content;
     padding: 16px;
     box-sizing: border-box;
+    padding-bottom: 48px;
 
     &-item {
       background-color: #ffffff;

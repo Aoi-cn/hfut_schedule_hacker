@@ -4,11 +4,12 @@
 export const updateState = 0
 
 export const config = {
-  version: '4.1.0dev2',
+  version: '4.1.0',
   autoConfig: {
     showDiffHelp: true,
     showAllSHelp: true,
     showHomeRedPoint: true,
+    showWeatherRedPoint: true, // event页面天气右上角的红点
   },
   userConfig: {
     // schedule的
@@ -30,7 +31,7 @@ export const config = {
 export const updateInfo = {
   notices: [
     {
-      info: '最近事情比较多，还有四门考试，所以更新的比较慢。谢谢同学们的支持，该来的总会来的！😆'
+      info: '最近事情比较多，还有四门考试，所以更新的比较慢。谢谢同学们的支持，该来的总会来的！🤪'
     }
   ],
   features: [
@@ -43,11 +44,11 @@ export const updateInfo = {
       comment: '点击左上角的天气图标可以查看天气详情哦~',
     },
     {
-      info: '3. 更新捐赠感谢列表',
+      info: '3. 优化部分细节，更新捐赠感谢列表',
       // comment: '用前必读中加入历史更新模块',
     },
     {
-      info: '4. 优化部分细节',
+      info: '4. 添上了一句话',
       // comment: '用前必读中加入历史更新模块',
     },
   ],

@@ -1,9 +1,10 @@
 import React, { useEffect, useCallback } from 'react'
-import Taro from '@tarojs/taro'
-import { useSelector } from 'react-redux'
+import Taro, { usePullDownRefresh } from '@tarojs/taro'
+import { useSelector, useDispatch } from 'react-redux'
 import { View, Canvas, ScrollView } from '@tarojs/components'
 import * as moment from 'moment'
 
+import { refreshWeather } from '../../../../actions/event'
 import { dayIndexToZh } from '../../../../utils/scheduleDataTranslator'
 import themeC from '../../../../style/theme'
 import weatherConfig from '../../../../assets/img/weather/enter'
@@ -12,6 +13,26 @@ import './index.scss'
 function WeatherDetail() {
   const weatherData = useSelector(state => state.event.bizData.weatherData)
   const { hourly, realtime, daily } = weatherData
+  const dispatch = useDispatch()
+
+  const { windowWidth } = Taro.getSystemInfoSync()
+  const beginX_growth = windowWidth * 0.198
+  const board_width = windowWidth * 0.898
+
+  // 下拉刷新
+  usePullDownRefresh(async () => {
+    await dispatch(refreshWeather())
+    setTimeout(() => {
+      Taro.stopPullDownRefresh();
+      setTimeout(() => {
+        Taro.showToast({
+          title: '更新成功',
+          icon: 'success',
+          duration: 1000
+        })
+      }, 500);
+    }, 500);
+  })
 
   // 绘制近5日概览
   const drawDaily = useCallback(
@@ -23,7 +44,7 @@ function WeatherDetail() {
       cvsDaily.lineCap = "round";
       cvsDaily.fillStyle = themeC['color-semi']
       cvsDaily.font = '12px sans-serif'
-      let beginX = 18
+      let beginX = windowWidth * 0.036
       // 获取最高温度
       let maxMaxTmp = -40
       let maxMinTmp = -40
@@ -56,22 +77,23 @@ function WeatherDetail() {
         } else {
           cvsDaily.fillText(dayIndexToZh(dayMoment.day() - 1), beginX - 13, 24)
         }
-        
+
         cvsDaily.font = '12px sans-serif'
         cvsDaily.fillStyle = themeC['color-light']
         cvsDaily.fillText(dayMoment.month() + 1 + '-' + dayMoment.date(), beginX - 13, 50)
         cvsDaily.fillStyle = themeC['color-semi']
 
-        beginX += 78
+        beginX += beginX_growth
       }
       cvsDaily.stroke();
 
+      beginX = windowWidth * 0.036
       // 绘制下半部分
       cvsDaily.beginPath();
       cvsDaily.strokeStyle = "#79cae5";
       cvsDaily.lineWidth = 4;
       cvsDaily.lineCap = "round";
-      beginX = 18
+      beginX = 14
       for (let d = 0; d < 5; d++) {
         let { min } = daily.temperature[d]
         let { value: iconName } = daily['skycon_20h_32h'][d]
@@ -80,13 +102,13 @@ function WeatherDetail() {
         cvsDaily.lineTo(beginX, minHeight);
         cvsDaily.fillText(min + '°', beginX - 8, minHeight + 16)
         cvsDaily.drawImage(weatherConfig[iconName].img, beginX - 16, minHeight + 28, 32, 32)
-        beginX += 78
+        beginX += beginX_growth
       }
       cvsDaily.stroke();
 
       cvsDaily.draw()
     },
-    [daily]
+    [beginX_growth, daily, windowWidth]
   )
 
   // 绘制48小时概览
@@ -99,7 +121,7 @@ function WeatherDetail() {
       cvsHourly.lineCap = "round";
       cvsHourly.fillStyle = themeC['color-semi']
       cvsHourly.font = '12px sans-serif'
-      let beginX = 22
+      let beginX = windowWidth * 0.036
       // 获取最高温度
       let maxTmp = -40
       for (const tmpData of hourly.temperature) {
@@ -124,14 +146,14 @@ function WeatherDetail() {
         cvsHourly.fillStyle = themeC['color-light']
         cvsHourly.fillText(hourMoment.month() + 1 + '-' + hourMoment.date(), beginX - 13, 50)
         cvsHourly.fillStyle = themeC['color-semi']
-        beginX += 78
+        beginX += beginX_growth
       }
       cvsHourly.stroke();
 
       cvsHourly.draw()
 
     },
-    [hourly],
+    [windowWidth, hourly, beginX_growth],
   )
 
 
@@ -158,8 +180,8 @@ function WeatherDetail() {
             <View className='weatherDetail-content-item-titleBox_comment'>{hourly.description}</View>
           </View>
           <ScrollView scrollX enableFlex className='weatherDetail-content-item-board'>
-            <View style={{ width: 368, height: 210 }} >
-              <Canvas style={{ width: 3728, height: 210 }} canvasId='hourly' />
+            <View style={{ width: board_width, height: 210 }} >
+              <Canvas style={{ width: beginX_growth * 48, height: 210 }} canvasId='hourly' />
             </View>
           </ScrollView>
         </View>
@@ -169,7 +191,7 @@ function WeatherDetail() {
             <View className='weatherDetail-content-item-titleBox_title'>近5日概况</View>
           </View>
           <View className='weatherDetail-content-item-board'>
-            <Canvas style={{ width: 360, height: 254 }} canvasId='daily' />
+            <Canvas style={{ width: board_width, height: 254 }} canvasId='daily' />
           </View>
         </View>
 

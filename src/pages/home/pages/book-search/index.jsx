@@ -39,25 +39,9 @@ function CourseSearch() {
   })
 
   useEffect(() => {
-    Taro.showLoading({ title: '初始化...' })
     getNewTicket()
       .then(ticket_ => {
-        if (ticket_) {
-          console.log('ticket获取成功 - ' + ticket_)
-          setTicket(ticket_)
-        } else {
-          console.log('ticket获取失败')
-          Taro.showToast({
-            title: '初始化失败！请尝试退出重进',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-        Taro.hideLoading()
-      })
-      .catch(e => {
-        console.log(e);
-        Taro.hideLoading()
+        setTicket(ticket_)
       })
   }, [])
 
@@ -105,6 +89,12 @@ function CourseSearch() {
       bno: info.marcRecNo
     })
       .then(res => {
+        if (!res.bookStatus || res.bookStatus.length === 0) {
+          getNewTicket()
+            .then(ticket_ => {
+              setTicket(ticket_)
+            })
+        }
         setBookStatusFLData({ ...bookStatusFLData, isOpened: true, title: info.title, statusList: res.bookStatus })
       })
   }
@@ -116,6 +106,12 @@ function CourseSearch() {
       bno: info.marcRecNo
     })
       .then(res => {
+        if (!res.bookInfo || JSON.stringify(res.bookInfo) === '{}') {
+          getNewTicket()
+            .then(ticket_ => {
+              setTicket(ticket_)
+            })
+        }
         setBookInfoFLData({ ...bookInfoFLData, isOpened: true, title: info.title, author: info.author, info: res.bookInfo })
       })
   }
@@ -127,6 +123,12 @@ function CourseSearch() {
         key: ticket,
       })
         .then(res => {
+          if (!res.bookList || res.bookList.length === 0) {
+            getNewTicket()
+              .then(ticket_ => {
+                setTicket(ticket_)
+              })
+          }
           setBookRankingData({ show: true, bookList: res.bookList })
         })
     }
@@ -239,6 +241,7 @@ export default CourseSearch
 
 
 const getNewTicket = async () => {
+  Taro.showLoading({ title: '连接中...' })
   let ticket = ''
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
   for (let i = 0; i < 5; i++) {
@@ -250,5 +253,18 @@ const getNewTicket = async () => {
     }
     await delay(500)
   }
+
+  if (ticket) {
+    console.log('ticket获取成功 - ' + ticket)
+  } else {
+    console.log('ticket获取失败')
+    Taro.showToast({
+      title: '连接失败！请尝试退出重进',
+      icon: 'none',
+      duration: 2000
+    })
+  }
+  Taro.hideLoading()
+
   return ticket
 }
