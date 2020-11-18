@@ -50,7 +50,7 @@ function CourseSearch() {
     if (!searchData.keyword) {
       return
     }
-    Taro.showLoading({ title: '搜索中...' })
+    Taro.showLoading({ title: '搜索中...', mask: true, })
     GET('/book_search', {
       key: ticket,
       ...searchData

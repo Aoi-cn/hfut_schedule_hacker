@@ -22,10 +22,10 @@ export default ({ onClose }) => {
         {
           notices.length !== 0 &&
           <>
-            <View className='updateNotice-content-subTitle'>
+            {/* <View className='updateNotice-content-subTitle'>
               <IconFont name='tanhao' size={36} color={themeC['color-font-brand']} />
               <Text className='updateNotice-content-subTitle_text'>消息</Text>
-            </View>
+            </View> */}
             {
               notices.map((notice, index) => (
                 <View className='updateNotice-content-item' key={`thisis${index}`}>
@@ -41,20 +41,25 @@ export default ({ onClose }) => {
           </>
         }
 
-        <View className='updateNotice-content-subTitle'>
-          <IconFont name='ceshi' size={36} color={themeC['color-font-brand']} />
-          <Text className='updateNotice-content-subTitle_text'>内容升级</Text>
-        </View>
         {
-          features.map((feature, index) => (
-            <View className='updateNotice-content-item' key={`thisis${index}`}>
-              <View className='updateNotice-content-item-info'>{feature.info}</View>
-              {
-                feature.comment &&
-                <View className='updateNotice-content-item-comment'>{feature.comment}</View>
-              }
+          features.length !== 0 &&
+          <>
+            <View className='updateNotice-content-subTitle'>
+              <IconFont name='ceshi' size={36} color={themeC['color-font-brand']} />
+              <Text className='updateNotice-content-subTitle_text'>内容升级</Text>
             </View>
-          ))
+            {
+              features.map((feature, index) => (
+                <View className='updateNotice-content-item' key={`thisis${index}`}>
+                  <View className='updateNotice-content-item-info'>{feature.info}</View>
+                  {
+                    feature.comment &&
+                    <View className='updateNotice-content-item-comment'>{feature.comment}</View>
+                  }
+                </View>
+              ))
+            }
+          </>
         }
 
         {

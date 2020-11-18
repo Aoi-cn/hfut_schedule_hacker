@@ -3,7 +3,7 @@ import Taro from '@tarojs/taro'
 import { useSelector, useDispatch } from 'react-redux'
 import { View, Image } from '@tarojs/components'
 
-import { updateBizData } from '../../../../actions/schedule'
+import { updateBizData } from '../../../actions/schedule'
 
 export default () => {
   const backgroundPath = useSelector(state => state.schedule.bizData.backgroundPath)
@@ -24,7 +24,15 @@ export default () => {
   }, [dispatch])
 
   return (
-    <View className='schedule-background'>
+    <View
+      className='scheduleBackground'
+      style={`z-index: -10;
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;`}
+    >
       <Image style={`width: 100%; height: 100%; opacity: ${imgOpacity}`} mode='aspectFill' src={backgroundPath} />
     </View>
   )

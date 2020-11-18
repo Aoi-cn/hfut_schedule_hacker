@@ -1,0 +1,101 @@
+@import "../../../../style/theme.scss";
+
+.feedbackUpdate {
+  padding-bottom: 72px;
+
+  &-header {
+    width: 100%;
+    padding: 48px 0;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 4px #e8e8e8;
+
+    &_comment {
+      margin-top: 16px;
+      padding: 0 48px;
+      color: $color-grey;
+      text-align: center;
+    }
+  }
+
+  &-card {
+    padding: 32px;
+
+    &-item {
+
+      &-btn {
+        margin-top: 24px;
+        height: 94px;
+        width: 100%;
+        font-size: 34px;
+        color: $color-font-brand;
+        line-height: 94px;
+        background-color: $color-background;
+        // border: 2px outset $color-font-brand;
+
+        &:active {
+          opacity: 0.6;
+        }
+      }
+
+      &-btn::after {
+        border: none;
+      }
+    }
+  }
+
+  &-history {
+    padding: 32px;
+    padding-bottom: 0;
+    margin-top: 32px;
+    color: $color-semi;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  &-list {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+
+      &-title {
+        display: flex;
+        align-items: center;
+        color: $color-semi;
+        font-size: 34px;
+        margin-bottom: 12px;
+      }
+
+      &-comment {
+        color: $color-light;
+        font-size: 26px;
+        margin-bottom: 12px;
+      }
+
+      &-content {
+        color: $color-grey;
+        font-size: 30px;
+
+        &-item {
+          margin-bottom: 4px;
+        }
+      }
+    }
+
+    &-line {
+      height: 2px;
+      width: 92%;
+      background-color: #e8e8e8;
+      margin: 32px;
+    }
+  }
+
+}

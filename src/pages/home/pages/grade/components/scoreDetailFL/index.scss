@@ -1,0 +1,51 @@
+@import "../../../../../../style/theme.scss";
+
+.scoreDetailFL {
+
+  &-header {
+    margin: 36px 0;
+    padding: 0 88px;
+    margin-bottom: 48px;
+    font-size: 36px;
+    font-weight: bold;
+    color: $color-semi;
+    text-align: center;
+
+    &-close {
+      position: absolute;
+      right: 36px;
+      top: 36px;
+
+      &:active {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &-content {
+    padding: 0 48px;
+    padding-bottom: 56px;
+
+    &-loading {
+      height: 216px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-item {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 16px;
+      font-size: 34px;
+      color: $color-font-brand;
+    }
+  }
+
+  &-itemTitle {
+    color: $color-semi;
+  }
+
+}

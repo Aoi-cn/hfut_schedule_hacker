@@ -173,11 +173,11 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
 
   // 确定是否带伞
   let rainPre = 0
-  if (weatherHourly && dayLineMatrix.length !== 0 && weatherHourly.hourlyPrecipitation && name) {
+  if (weatherHourly && dayLineMatrix.length !== 0 && weatherHourly.precipitation && name) {
     // 这里加(减)了15分钟，为了更大范围的预测
     const eventStartMoment = moment(dayLineMatrix[weekIndex][dayIndex].dateZh + ' ' + timeTable[startTime].startTimeText).subtract(15, 'minutes')
     const eventEndMoment = moment(dayLineMatrix[weekIndex][dayIndex].dateZh + ' ' + timeTable[endTime].endTimeText).add(15, 'minutes')
-    weatherHourly.hourlyPrecipitation.map(hourPre => {
+    weatherHourly.precipitation.map(hourPre => {
       const { datetime, value } = hourPre
       const preMoment = moment(datetime)
 

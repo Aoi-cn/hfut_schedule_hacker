@@ -3,7 +3,6 @@ import { useGlobalIconFont } from './components/iconfont/helper';
 export default {
   pages: [
     
-    // 'pages/home/index',
 
     'pages/event/index',
     'pages/schedule/index',
@@ -12,18 +11,21 @@ export default {
 
     'pages/event/pages/weather-detail/index',
 
+    'pages/schedule/pages/all-schedule/index',
+    'pages/schedule/pages/mooc/index',
+
     'pages/home/pages/gift/index',
     'pages/home/pages/empty-clazz-room/index',
     'pages/home/pages/empty-clazz-room/pages/room-detail-schedule/index',
-    // 'pages/home/pages/course-search/index',
+    'pages/home/pages/course-search/index',
+    'pages/home/pages/course-search/pages/single-course-schedule/index',
     'pages/home/pages/book-search/index',
     'pages/home/pages/exam-arrange/index',
     'pages/home/pages/grade/index',
     'pages/home/pages/teacher-evaluate/index',
     'pages/home/pages/donate/index',
+    'pages/home/pages/feedback-update/index',
 
-    'pages/schedule/pages/all-schedule/index',
-    'pages/schedule/pages/mooc/index',
   ],
   window: {
     backgroundTextStyle: 'light',

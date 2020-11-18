@@ -79,7 +79,7 @@ export default (props) => {
         icon: '',
       },
       {
-        value: <><Text className='courseDetailFloatLayout-itemTitle'>课程编号：</Text><Text>{lessonCode}</Text></>,
+        value: <><Text className='courseDetailFloatLayout-itemTitle'>课程代码：</Text><Text>{lessonCode}</Text></>,
         icon: '',
       },
       {

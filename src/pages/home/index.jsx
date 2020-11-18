@@ -40,7 +40,7 @@ function Home() {
             }
           }
         })
-      }, 10000);
+      }, 20000);
     }
     setSno(username)
   }, [])
@@ -48,7 +48,7 @@ function Home() {
   let examCount = 0
   examData.map(exam => {
     const { timeText } = exam
-    if (moment().isBefore(moment(timeText.split(' ')[0]))) {
+    if (moment().isBefore(moment(timeText.split('~')[0]))) {
       examCount++
     }
   })
@@ -64,13 +64,16 @@ function Home() {
       name: '成绩查询',
       icon: 'jixiaopinggu',
       onClick: () => Taro.navigateTo({ url: '/pages/home/pages/grade/index' }),
-      redPoint: null,
+      redPoint: showHomeRedPoint && <AtBadge dot></AtBadge>,
     },
     {
-      name: '智慧评教',
+      name: '第二课堂',
       icon: 'gongpai',
-      onClick: () => Taro.navigateTo({ url: '/pages/home/pages/teacher-evaluate/index' }),
-      redPoint: null,
+      onClick: () => Taro.navigateToMiniProgram({
+        appId: 'wx1e3feaf804330562',
+        path: 'pages/my/my',
+      }),
+      redPoint: '',
     },
   ]
 
@@ -79,28 +82,25 @@ function Home() {
       name: '全校课表',
       icon: 'rili',
       onClick: () => Taro.navigateTo({ url: '/pages/schedule/pages/all-schedule/index' }),
-      redPoint: null,
+      redPoint: '',
     },
     {
       name: '空教室查询',
       icon: 'tishi',
       onClick: () => Taro.navigateTo({ url: '/pages/home/pages/empty-clazz-room/index' }),
-      redPoint: null,
+      redPoint: '',
     },
     {
       name: '图书馆馆藏查询',
       icon: 'sousuo',
       onClick: () => Taro.navigateTo({ url: '/pages/home/pages/book-search/index' }),
-      redPoint: (<AtBadge dot></AtBadge>),
+      redPoint: '',
     },
     {
-      name: '第二课堂',
-      icon: 'qinghuiyuan',
-      onClick: () => Taro.navigateToMiniProgram({
-        appId: 'wx1e3feaf804330562',
-        path: 'pages/my/my',
-      }),
-      redPoint: null,
+      name: '课程/教师检索',
+      icon: 'shuju',
+      onClick: () => Taro.navigateTo({ url: '/pages/home/pages/course-search/index' }),
+      redPoint: showHomeRedPoint && <AtBadge dot></AtBadge>,
     },
   ]
 
@@ -111,12 +111,27 @@ function Home() {
   const handleLogoutClick = () => {
     Taro.showModal({
       title: '确定要登出吗',
-      content: '此操作将清空所有本地数据',
+      confirmText: '登出',
       confirmColor: '#f33f3f',
       cancelColor: '#60646b',
       success: function (res) {
         if (res.confirm) {
-          dispatch(logout())
+          // 点击确定
+          Taro.showModal({
+            title: '是否要清空本地数据',
+            content: '包括自定义事件/备忘录、个人设置、情侣信息等',
+            confirmText: '不清空',
+            confirmColor: '#60646b',
+            cancelText: '清空',
+            cancelColor: '#f33f3f',
+            success: function (res2) {
+              if (res2.confirm) {
+                dispatch(logout({ localSave: true }))
+              } else {
+                dispatch(logout({ localSave: false }))
+              }
+            }
+          })
         }
       }
     })
@@ -165,7 +180,7 @@ function Home() {
                 <View className='home-content-group-item-left'>
                   <IconFont name={data.icon} size={48} color='#60646b' />
                   <View className='home-content-group-item-left-nameBox'>
-                    <View className='home-content-group-item-left-nameBox_redPoint'>{showHomeRedPoint && data.redPoint}</View>
+                    <View className='home-content-group-item-left-nameBox_redPoint'>{data.redPoint}</View>
                     <Text style={{ marginLeft: 10 }}>{data.name}</Text>
                   </View>
                 </View>
@@ -185,10 +200,13 @@ function Home() {
             <IconFont name='' size={46} color='#60646b' />
           </View>
 
-          <View className='home-content-group-item' onClick={() => Taro.navigateTo({ url: '/pages/home/pages/gift/index' })}>
+          <View className='home-content-group-item' onClick={() => Taro.navigateTo({ url: '/pages/home/pages/feedback-update/index' })}>
             <View className='home-content-group-item-left'>
               <IconFont name='taolunqu' size={46} color='#60646b' />
-              <Text style={{ marginLeft: 10 }}>活水计划</Text>
+              <View className='home-content-group-item-left-nameBox'>
+                <View className='home-content-group-item-left-nameBox_redPoint'>{showHomeRedPoint && <AtBadge dot></AtBadge>}</View>
+                <Text style={{ marginLeft: 10 }}>反馈与更新</Text>
+              </View>
             </View>
             <IconFont name='arrow-right' size={46} color='#60646b' />
           </View>

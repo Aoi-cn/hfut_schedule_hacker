@@ -10,6 +10,12 @@ import * as scheduleActions from './schedule'
 // event的enter直接走schedule的enter
 export const enter = () => async (dispatch, getState) => {
 
+  // 检测用户是否首次登录
+  const { userInfo } = Taro.getStorageSync('me')
+  if (!userInfo) {
+    return Taro.redirectTo({ url: '/pages/login/index' })
+  }
+
   // 0.先渲染一个天气
   dispatch(updateWeatherByLocation({ exact: false }))
 
@@ -107,7 +113,7 @@ export const updateExactWeather = () => async (dispatch) => {
 }
 
 const updateWeatherByLocation = ({ exact }) => async (dispatch) => {
-  console.log('开始获取天气')
+  // console.log('开始获取天气')
   let location = {}
   if (exact) {
     await Taro.getLocation({ type: 'wgs84' })
@@ -130,7 +136,7 @@ const updateWeatherByLocation = ({ exact }) => async (dispatch) => {
       const { status } = weatherRes.data
       if (status === 'ok') {
         // 天气信息获取成功，渲染event页面吧
-        console.log('天气获取成功')
+        // console.log('天气获取成功')
         const { result: weatherData } = weatherRes.data
         dispatch(updateBizData({ weatherData }))
       } else {

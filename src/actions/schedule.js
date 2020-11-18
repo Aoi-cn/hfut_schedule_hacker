@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import _ from 'lodash'
+
 import {
   UPDATE_BIZDATA,
   UPDATE_UIDATA,
@@ -12,8 +13,15 @@ import * as eventActions from './event'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 import scheduleDiffTool from '../utils/scheduleDiffTool'
 import { config, updateState } from '../config/config.default'
+import { relogin } from '../actions/login'
 
 const { version } = config
+
+// 判断尝试了多少次重新登陆。
+// 需要的场景：key超时失效时需要重新获取，但重新获取的key也有可能是无效的。
+// 实际测试中。relogin次数为5次可实现绝大多数的key成功验证
+let reloginTime = 0
+
 
 // 刚进入小程序时，判断是否有本地缓存，有的话就不用登录
 // enterState = 0或unfinded => 刚进入小程序
@@ -211,15 +219,24 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
   }
   // 课表请求出错。执行key过期之后的逻辑
   if (!res.body.currentWeek) {
+    reloginTime++
     if (isEvent) {
-      return dispatch(reLogin({ userType: 'me' }))
+      return dispatch(relogin({
+        userType: 'me',
+        reloginTime,
+        successCallback: () => dispatch(updateScheduleData({ userType }))
+      }))
     } else {
-      return dispatch(reLogin({ userType }))
+      return dispatch(relogin({
+        userType,
+        reloginTime,
+        successCallback: () => dispatch(updateScheduleData({ userType }))
+      }))
     }
   }
   // 走到这里，说明key已经通过验证
 
-  reLoginTime = 0
+  reloginTime = 0
   // 获取课表数据
   const scheduleData = res.body.lessons
   const lessonIds = res.body.lessonIds
@@ -381,49 +398,6 @@ const dataPersistence = ({ userType, scheduleMatrix, type = 'all' }) => {
   return newScheduleMatrix
 }
 
-// 判断尝试了多少次重新登陆。啊万恶的全局变量。
-let reLoginTime = 0
-
-// key失效，自动登录更新key
-export const reLogin = ({ userType }) => async (dispatch) => {
-  const localUserData = Taro.getStorageSync(userType)
-  const { userInfo } = localUserData
-  const { username, password, campus } = userInfo
-  const res = await GET('/login', { username, password })
-  const { success, key, msg } = res
-  if (success && reLoginTime < 5) {
-    reLoginTime++
-    await Taro.setStorage({
-      key: userType,
-      data: {
-        ...localUserData,
-        userInfo: {
-          username,
-          password,
-          key,
-          campus,
-        },
-      }
-    })
-    dispatch(updateScheduleData({ userType }))
-  } else {
-    if (msg.indexOf('密码错误') !== -1) {
-      Taro.showToast({
-        title: '检测到教务密码变动，请重新登录',
-        icon: 'none',
-        duration: 1500
-      })
-    } else {
-      Taro.showToast({
-        title: '更新出错，下拉刷新试试',
-        icon: 'none',
-        duration: 1500
-      })
-    }
-    console.error('重新登陆出错')
-    Taro.hideNavigationBarLoading()
-  }
-}
 
 export const refreshColor = ({ userType, render = true }) => async (dispatch, getState) => {
   Taro.showLoading({

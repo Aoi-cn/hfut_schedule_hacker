@@ -10,16 +10,16 @@ import TimeLine from '../../components/schedule-component/TimeLine'
 import CourseDetailFloatLayout from '../../components/schedule-component/CourseDetailFloatLayout'
 import ColorPicker from '../../components/schedule-component/ColorPicker'
 import CustomScheduleFL from '../../components/schedule-component/CustomScheduleFL'
+import BackgroundImg from '../../components/schedule-component/BackgroundImg'
 import CourseTable from './components/CourseTable'
 import ScheduleTop from './components/ScheduleTop'
 import ScheduleFooter from './components/ScheduleFooter'
-import BackgroundImg from './components/BackgroundImg'
 import checkUpdate from '../../utils/checkUpdate'
 
 import './index.scss'
 
-
 const MemoBackgroundImg = memo(BackgroundImg)
+
 
 function Schedule(props) {
   const { bizData, uiData, enter, userType } = props

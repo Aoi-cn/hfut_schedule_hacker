@@ -34,7 +34,7 @@ export const login = ({ username, password, userType, campus }) => async () => {
         duration: 2000,
       })
     }
-    
+
     return null
   }
 
@@ -74,7 +74,7 @@ export const login = ({ username, password, userType, campus }) => async () => {
 // 在情侣课表绑定页面 点击了返回
 export const back = () => async (dispatch) => {
   dispatch(updateBizData({ userType: 'me' }))
-   Taro.switchTab({ url: '/pages/schedule/index' })
+  Taro.switchTab({ url: '/pages/schedule/index' })
 }
 
 export const unBindHer = () => async (dispatch) => {
@@ -103,22 +103,100 @@ export const updateUiData = (payload) => {
   }
 }
 
-export const logout = () => async (dispatch) => {
+
+export const logout = ({ localSave = true }) => async (dispatch) => {
   // 执行登出逻辑
   dispatch(scheduleLogout())
   dispatch(allScheduleLogout())
   dispatch(eventLogout())
-  const localConfig = Taro.getStorageSync('config')
-  const localCustom = Taro.getStorageSync('custom')
-  await Taro.clearStorage()
-  Taro.setStorage({
-    key: 'config',
-    data: localConfig
-  })
-  Taro.setStorage({
-    key: 'custom',
-    data: localCustom
-  })
+
+  if (localSave) {
+    const localConfig = Taro.getStorageSync('config')
+    const localCustom = Taro.getStorageSync('custom')
+    const localHer = Taro.getStorageSync('her')
+    await Taro.clearStorage()
+    Taro.setStorage({
+      key: 'config',
+      data: localConfig
+    })
+    Taro.setStorage({
+      key: 'custom',
+      data: localCustom
+    })
+    if (localHer) {
+      Taro.setStorage({
+        key: 'her',
+        data: localHer
+      })
+    }
+  } else {
+    await Taro.clearStorage()
+  }
+
   await dispatch({ type: LOGOUT })
   Taro.redirectTo({ url: '/pages/login/index' })
+}
+
+
+// key失效，自动登录更新key
+// userType: me or her
+// reloginTime: 尝试次数，上限设定为5次，第6次就会提示“更新出错”
+// successCallback: 重新登陆成功之后的回调函数
+export const relogin = ({ userType, reloginTime, successCallback }) => async (dispatch) => {
+
+  const localUserData = Taro.getStorageSync(userType)
+  const { userInfo } = localUserData
+  const { username, password, campus } = userInfo
+  const res = await GET('/login', { username, password })
+  const { success, key, msg } = res
+  if (success && reloginTime < 6) {
+    await Taro.setStorage({
+      key: userType,
+      data: {
+        ...localUserData,
+        userInfo: {
+          username,
+          password,
+          key,
+          campus,
+        },
+      }
+    })
+    // 
+    successCallback()
+  } else {
+    if (msg.indexOf('密码错误') !== -1) {
+      Taro.showToast({
+        title: '检测到教务密码变动，请重新登录',
+        icon: 'none',
+        duration: 2000
+      })
+      if (userType === 'me') {
+        setTimeout(() => {
+          dispatch(logout({ localSave: true }))
+        }, 1750);
+      }
+    }
+    else if (msg.indexOf('注册') !== -1) {
+      Taro.showToast({
+        title: '请先前往信息门户修改教务密码~',
+        icon: 'none',
+        duration: 2000
+      })
+      if (userType === 'me') {
+        setTimeout(() => {
+          dispatch(logout({ localSave: true }))
+        }, 1750);
+      }
+    }
+    else {
+      Taro.showToast({
+        title: '更新出错，下拉刷新试试或退出重进试试~',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+    console.error('重新登陆出错')
+    Taro.hideNavigationBarLoading()
+  }
 }

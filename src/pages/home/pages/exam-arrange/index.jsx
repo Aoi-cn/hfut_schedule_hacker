@@ -31,7 +31,7 @@ function ExamArrange() {
         {
           examData.map(exam => {
             const { name, timeText, room } = exam
-            const isPassed = moment().isAfter(moment(timeText.split(' ')[0]))
+            const isPassed = moment().isAfter(moment(timeText.split('~')[0]))
             return (
               <View className={`examArrange-content-item examArrange-content-item_${isPassed && 'passed'}`} key={name}>
                 {isPassed && <View className='examArrange-content-item-finished'>已考完</View>}

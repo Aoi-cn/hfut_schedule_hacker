@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { memo } from 'react'
 import Taro, { useDidShow } from '@tarojs/taro'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { View } from '@tarojs/components'
 
 import WhiteTable from '../../../../../../components/schedule-component/WhiteTable'
@@ -9,13 +9,16 @@ import TimeLine from '../../../../../../components/schedule-component/TimeLine'
 import CourseTable from './components/CourseTable'
 import ScheduleTop from './components/ScheduleTop'
 import ScheduleFooter from './components/ScheduleFooter'
+import BackgroundImg from '../../../../../../components/schedule-component/BackgroundImg'
 import { UPDATE_BIZDATA } from '../../../../../../constants/roomDetailSchedule'
 import './index.scss'
 
+const MemoBackgroundImg = memo(BackgroundImg)
+
+
 function RoomDetailSchedule(props) {
-  const { dayLineMatrix, bizData } = props
+  const { dayLineMatrix, currentWeekIndex, bizData } = props
   const { weekIndex, scheduleMatrix, roomZh } = bizData
-  const currentWeekIndex = useSelector(state => state.event.bizData.currentWeekIndex)
   const dispatch = useDispatch()
 
   useDidShow(() => {
@@ -72,6 +75,8 @@ function RoomDetailSchedule(props) {
       </View>
 
       <ScheduleFooter changeWeekIndex={changeWeekIndex} />
+
+      <MemoBackgroundImg />
 
     </View>
   )

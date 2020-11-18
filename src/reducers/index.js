@@ -4,6 +4,7 @@ import schedule from './schedule'
 import allSchedule from './allSchedule'
 import event from './event'
 import roomDetailSchedule from './roomDetailSchedule'
+import singleCourseSchedule from './singleCourseSchedule'
 
 export default combineReducers({
   login,
@@ -11,4 +12,5 @@ export default combineReducers({
   allSchedule,
   event,
   roomDetailSchedule,
+  singleCourseSchedule,
 })

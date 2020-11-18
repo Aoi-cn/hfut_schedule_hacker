@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo } from 'react'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { connect } from 'react-redux'
 import { View } from '@tarojs/components'
@@ -9,26 +9,17 @@ import DayLine from '../../../../components/schedule-component/DayLine'
 import TimeLine from '../../../../components/schedule-component/TimeLine'
 import CourseTable from './components/CourseTable'
 import ScheduleTop from './components/ScheduleTop'
-import CourseDetailFloatLayout from './components/CourseDetailFloatLayout'
+import CourseDetailFloatLayout2 from '../../../../components/schedule-component/CourseDetailFloatLayout2'
+import BackgroundImg from '../../../../components/schedule-component/BackgroundImg'
 import ScheduleFooter from './components/ScheduleFooter'
 import './index.scss'
 
+const MemoBackgroundImg = memo(BackgroundImg)
 
 function AllSchedule(props) {
-  const { bizData, uiData, showAd } = props
+  const { bizData, uiData } = props
   const { weekIndex, currentWeekIndex, scheduleMatrix, dayLineMatrix } = bizData
   const { courseDetailFLData } = uiData
-
-  // useEffect(() => {
-  //   if (showAd) {
-  //     const interstitialAd = Taro.createInterstitialAd({
-  //       adUnitId: 'adunit-e8c3c88c149f8a07'
-  //     })
-  //     interstitialAd.show().catch((err) => {
-  //       console.error(err)
-  //     })
-  //   }
-  // }, [showAd])
 
   useDidShow(() => {
     Taro.hideHomeButton()
@@ -79,10 +70,12 @@ function AllSchedule(props) {
 
       <ScheduleFooter changeWeekIndex={changeWeekIndex} />
 
-      <CourseDetailFloatLayout
+      <CourseDetailFloatLayout2
         courseDetailFLData={courseDetailFLData}
         onClose={() => props.updateUiData({ courseDetailFLData: { isOpened: false } })}
       />
+
+      <MemoBackgroundImg />
 
     </View>
   )

@@ -1,7 +1,8 @@
 /* eslint-disable */
 
 import React from 'react';
-import Iconqinghuiyuan from './Iconqinghuiyuan';
+import Iconhuatifuhao from './Iconhuatifuhao';
+import Iconshuju from './Iconshuju';
 import Iconbiaoqian from './Iconbiaoqian';
 import IconbiaoqianCopyCopy2 from './IconbiaoqianCopyCopy2';
 import IconbiaoqianCopy from './IconbiaoqianCopy';
@@ -54,8 +55,10 @@ import Icongift from './Icongift';
 
 const IconFont = ({ name, ...rest }) => {
   switch (name) {
-    case 'qinghuiyuan':
-      return <Iconqinghuiyuan {...rest} />;
+    case 'huatifuhao':
+      return <Iconhuatifuhao {...rest} />;
+    case 'shuju':
+      return <Iconshuju {...rest} />;
     case 'biaoqian':
       return <Iconbiaoqian {...rest} />;
     case 'biaoqian-copy-copy2':

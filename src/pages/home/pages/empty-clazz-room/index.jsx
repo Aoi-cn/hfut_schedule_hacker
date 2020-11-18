@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { useSelector, useDispatch } from 'react-redux'
-import { View, Text, Picker, Ad } from '@tarojs/components'
+import { View, Text, Picker } from '@tarojs/components'
 import _ from 'lodash'
 import * as moment from 'moment';
 
@@ -62,7 +62,6 @@ function EmptyClazzRoom() {
   const timeTable = useSelector(state => state.event.bizData.timeTable)
   const currentWeekIndex = useSelector(state => state.event.bizData.currentWeekIndex)
   const currentDayIndex = useSelector(state => state.event.bizData.currentDayIndex)
-  const showAd = useSelector(state => state.schedule.bizData.userConfig.showAd)
   const [allData, setAllData] = useState({})
   const [campus, setCampus] = useState(0)
   const [date, setDate] = useState('2020-10-10')
@@ -77,17 +76,6 @@ function EmptyClazzRoom() {
   const [showWeekPicker, setShowWeekPicker] = useState(false)
   const [uiData, setUiData] = useState([])
   const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   if (showAd) {
-  //     const interstitialAd = Taro.createInterstitialAd({
-  //       adUnitId: 'adunit-e8c3c88c149f8a07'
-  //     })
-  //     interstitialAd.show().catch((err) => {
-  //       console.error(err)
-  //     })
-  //   }
-  // }, [showAd])
 
   // 刚进入页面时的初始化effect
   useEffect(() => {
@@ -258,7 +246,8 @@ function EmptyClazzRoom() {
 
   // 日期发生改变，计算教学周、星期几并更新state
   const handleDateChange = (date_) => {
-    date_ = date_.split('-')[1] + '/' + date_.split('-')[2]
+    console.log(date_)
+    date_ = date_.split('-')[0] + '/' + date_.split('-')[1] + '/' + date_.split('-')[2]
     dayLineMatrix.map((weekInfo, weekIndex_) => {
       weekInfo.map((dayInfo, dayIndex_) => {
         if (dayInfo.dateZh === date_) {

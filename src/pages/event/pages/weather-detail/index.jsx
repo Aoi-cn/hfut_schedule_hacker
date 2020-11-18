@@ -156,11 +156,12 @@ function WeatherDetail() {
     [windowWidth, hourly, beginX_growth],
   )
 
-
-
+  // 入口effect
   useEffect(() => {
-    drawDaily()
-    drawHourly()
+    setTimeout(() => {
+      drawDaily()
+      drawHourly()
+    }, 250);
   }, [drawDaily, drawHourly])
 
   return (

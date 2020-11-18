@@ -132,7 +132,7 @@ function Mooc(props) {
                     </View>
 
                     <View className='mooc-item-content-list-item'>
-                      <Text className='mooc-item-content-list-item_title'>课程编号</Text>
+                      <Text className='mooc-item-content-list-item_title'>课程代码</Text>
                       <Text className='mooc-item-content-list-item_info'>{lessonCode}</Text>
                     </View>
 

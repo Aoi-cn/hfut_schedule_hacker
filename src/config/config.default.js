@@ -4,7 +4,7 @@
 export const updateState = 0
 
 export const config = {
-  version: '4.1.0',
+  version: '4.5.0dev3',
   autoConfig: {
     showDiffHelp: true,
     showAllSHelp: true,
@@ -31,28 +31,37 @@ export const config = {
 export const updateInfo = {
   notices: [
     {
-      info: '最近事情比较多，还有四门考试，所以更新的比较慢。谢谢同学们的支持，该来的总会来的！🤪'
+      info: '一大波更新！大家准备好了吗 🤪'
     }
   ],
   features: [
     {
-      info: '1. 图书馆馆藏检索',
-      comment: '最棒的图书馆检索体验！',
+      info: '1. 成绩查询',
+      comment: '目前仅支持查看个人成绩',
     },
     {
-      info: '2. 天气详情',
-      comment: '点击左上角的天气图标可以查看天气详情哦~',
+      info: '2. 课程/教师检索',
+      comment: '有多好用，试试才知道！',
     },
     {
-      info: '3. 优化部分细节，更新捐赠感谢列表',
-      // comment: '用前必读中加入历史更新模块',
+      info: '3. 历史更新',
+      comment: '奇妙的旅程~',
     },
-    {
-      info: '4. 添上了一句话',
-      // comment: '用前必读中加入历史更新模块',
-    },
+    // {
+    //   info: '4. 更新全校课表；捐赠列表',
+    //   // comment: '奇妙的旅程~',
+    // },
   ],
-  bugs: []
+  bugs: [
+    {
+      info: '大幅优化登录相关体验',
+      // comment: '很多人都被提示',
+    },
+    {
+      info: '修复多处已知问题',
+      // comment: '很多人都被提示',
+    },
+  ]
 }
 
 export const helpInfo = [
@@ -65,7 +74,7 @@ export const helpInfo = [
     comment: '本小程序的数据与PC端教务实时同步（封网时也是），请先登录PC端教务查看自己课程是否一致，如有不一致请联系开发者（qq: 254139147）修复bug！',
   },
   {
-    info: '3. 退出登录、解绑情侣等选项在哪里？',
+    info: '3. 更换主题、解绑情侣等选项在哪里？',
     comment: '课表页-右上角加号-课表设置',
   },
 ]
