@@ -4,7 +4,7 @@
 export const updateState = 0
 
 export const config = {
-  version: '4.5.0dev3',
+  version: '4.5.0',
   autoConfig: {
     showDiffHelp: true,
     showAllSHelp: true,
@@ -44,13 +44,9 @@ export const updateInfo = {
       comment: '有多好用，试试才知道！',
     },
     {
-      info: '3. 历史更新',
+      info: '3. “反馈与更新”页面',
       comment: '奇妙的旅程~',
     },
-    // {
-    //   info: '4. 更新全校课表；捐赠列表',
-    //   // comment: '奇妙的旅程~',
-    // },
   ],
   bugs: [
     {

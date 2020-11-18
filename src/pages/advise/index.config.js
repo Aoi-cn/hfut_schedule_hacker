@@ -1,6 +1,6 @@
 
 export default {
-  navigationBarTitleText: '我要上书',
+  navigationBarTitleText: '',
   navigationBarTextStyle: 'white',
   navigationBarBackgroundColor: '#3374ff',
 }

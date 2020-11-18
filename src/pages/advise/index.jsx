@@ -1,4 +1,5 @@
-// 上书页面。放弃了。但这里的阿里云OSS上传实践是可以之后继续用的。
+// 放弃了的页面。
+// 但这里的阿里云OSS上传实践是可以之后继续用的，因此保留下拉。
 
 import React, { useState } from 'react'
 import Taro from '@tarojs/taro'
