@@ -4,7 +4,7 @@ import {
   UPDATE_BIZDATA,
   UPDATE_UIDATA,
   LOGOUT,
-} from '../constants/allSchedule'
+} from '../constants/schedule/allSchedule'
 import { GET } from '../utils/request'
 import dataToMatrix from '../utils/scheduleDataTranslator'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'

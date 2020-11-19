@@ -6,7 +6,7 @@ import { AtFloatLayout } from 'taro-ui'
 
 import IconFont from '../../../../../../components/iconfont'
 import CustomButton from '../../../../../../components/CustomButton'
-import { UPDATE_BIZDATA } from '../../../../../../constants/singleCourseSchedule'
+import { UPDATE_BIZDATA } from '../../../../../../constants/schedule/singleCourseSchedule'
 import dataToMatrix from '../../../../../../utils/scheduleDataTranslator'
 import './index.scss'
 

@@ -16,8 +16,6 @@ import ScheduleTop from './components/ScheduleTop'
 import ScheduleFooter from './components/ScheduleFooter'
 import checkUpdate from '../../utils/checkUpdate'
 
-import './index.scss'
-
 const MemoBackgroundImg = memo(BackgroundImg)
 
 
@@ -74,9 +72,9 @@ function Schedule(props) {
 
 
   return (
-    <View className='schedule'>
+    <View className='generalSchedule'>
 
-      <View className='schedule-header'>
+      <View className='generalSchedule-header'>
         <ScheduleTop
           weekIndex={weekIndex}
           currentWeekIndex={currentWeekIndex}
@@ -86,17 +84,17 @@ function Schedule(props) {
         <DayLine dayLineData={dayLineMatrix[weekIndex]} />
       </View>
 
-      <View className='schedule-content'>
+      <View className='generalSchedule-content'>
         <TimeLine />
-        <View className='schedule-content-table'>
+        <View className='generalSchedule-content-table'>
           <WhiteTable />
           <CourseTable weekScheduleData={scheduleMatrix[weekIndex]} />
         </View>
       </View>
 
-      <ScheduleFooter changeWeekIndex={changeWeekIndex} />
-
       <MemoBackgroundImg />
+
+      <ScheduleFooter changeWeekIndex={changeWeekIndex} />
 
       {
         renderElse &&

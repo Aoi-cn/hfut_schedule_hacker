@@ -1,4 +1,4 @@
-import { UPDATE_BIZDATA, UPDATE_UIDATA, LOGOUT } from '../constants/schedule'
+import { UPDATE_BIZDATA, UPDATE_UIDATA, LOGOUT } from '../../constants/schedule/schedule'
 
 const INITIAL_STATE = {
   bizData: {

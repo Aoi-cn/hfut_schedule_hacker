@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 
 import * as actions from '../../../../../../actions/allSchedule'
 import IconFont from '../../../../../../components/iconfont'
-import './index.scss'
 
 function ScheduleFooter(props) {
   const { weekIndex, currentWeekIndex, scheduleMatrix, backupScheduleM, diff, changeWeekIndex } = props
@@ -22,20 +21,20 @@ function ScheduleFooter(props) {
   }
 
   return (
-    <View className='allSchedule-footer'>
-      <View className='allSchedule-footer-pop' onClick={() => changeWeekIndex(weekIndex - 1)} >
+    <View className='generalSchedule-footer'>
+      <View className='generalSchedule-footer-pop' onClick={() => changeWeekIndex(weekIndex - 1)} >
         <IconFont name='arrow-lift' size={52} color='#202124' />
       </View>
-      <View className={`allSchedule-footer-pop allSchedule-footer-pop-${diff ? 'active' : ''}`} onClick={handleDiff} >
-        <Text className='allSchedule-footer-pop-text'>对比</Text>
+      <View className={`generalSchedule-footer-pop generalSchedule-footer-pop-${diff ? 'active' : ''}`} onClick={handleDiff} >
+        <Text className='generalSchedule-footer-pop-text'>对比</Text>
       </View>
       {
         weekIndex !== currentWeekIndex &&
-        <View className='allSchedule-footer-pop' onClick={() => changeWeekIndex(currentWeekIndex)}>
-          <Text className='allSchedule-footer-pop-text'>本周</Text>
+        <View className='generalSchedule-footer-pop' onClick={() => changeWeekIndex(currentWeekIndex)}>
+          <Text className='generalSchedule-footer-pop-text'>本周</Text>
         </View>
       }
-      <View className='allSchedule-footer-pop' onClick={() => changeWeekIndex(weekIndex + 1)}>
+      <View className='generalSchedule-footer-pop' onClick={() => changeWeekIndex(weekIndex + 1)}>
         <IconFont name='arrow-right' size={52} color='#202124' />
       </View>
     </View>

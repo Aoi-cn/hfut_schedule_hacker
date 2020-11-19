@@ -11,8 +11,8 @@ export default {
 
     'pages/event/pages/weather-detail/index',
 
-    'pages/schedule/pages/all-schedule/index',
     'pages/schedule/pages/mooc/index',
+    'pages/schedule/pages/history-schedule/index',
 
     'pages/home/pages/gift/index',
     'pages/home/pages/empty-clazz-room/index',
@@ -25,6 +25,7 @@ export default {
     'pages/home/pages/teacher-evaluate/index',
     'pages/home/pages/donate/index',
     'pages/home/pages/feedback-update/index',
+    'pages/home/pages/all-schedule/index',
 
   ],
   window: {

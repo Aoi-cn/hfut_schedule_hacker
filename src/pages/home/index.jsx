@@ -81,7 +81,7 @@ function Home() {
     {
       name: '全校课表',
       icon: 'rili',
-      onClick: () => Taro.navigateTo({ url: '/pages/schedule/pages/all-schedule/index' }),
+      onClick: () => Taro.navigateTo({ url: '/pages/home/pages/all-schedule/index' }),
       redPoint: '',
     },
     {

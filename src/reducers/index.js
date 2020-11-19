@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux'
 import login from './login'
-import schedule from './schedule'
-import allSchedule from './allSchedule'
 import event from './event'
-import roomDetailSchedule from './roomDetailSchedule'
-import singleCourseSchedule from './singleCourseSchedule'
+
+import schedule from './schedule/schedule'
+import allSchedule from './schedule/allSchedule'
+import roomDetailSchedule from './schedule/roomDetailSchedule'
+import singleCourseSchedule from './schedule/singleCourseSchedule'
 
 export default combineReducers({
   login,

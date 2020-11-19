@@ -11,8 +11,7 @@ import ScheduleTop from './components/ScheduleTop'
 import ScheduleFooter from './components/ScheduleFooter'
 import CourseDetailFloatLayout2 from '../../../../../../components/schedule-component/CourseDetailFloatLayout2'
 import BackgroundImg from '../../../../../../components/schedule-component/BackgroundImg'
-import { UPDATE_BIZDATA, UPDATE_UIDATA } from '../../../../../../constants/singleCourseSchedule'
-import './index.scss'
+import { UPDATE_BIZDATA, UPDATE_UIDATA } from '../../../../../../constants/schedule/singleCourseSchedule'
 
 const MemoBackgroundImg = memo(BackgroundImg)
 
@@ -54,17 +53,17 @@ function SingleCourseSchedule(props) {
   }
 
   return (
-    <View className='allSchedule'>
-      <View className='allSchedule-header'>
+    <View className='generalSchedule'>
+      <View className='generalSchedule-header'>
 
         <ScheduleTop changeWeekIndex={changeWeekIndex} />
         <DayLine dayLineData={dayLineMatrix[weekIndex]} />
 
       </View>
 
-      <View className='allSchedule-content'>
+      <View className='generalSchedule-content'>
         <TimeLine />
-        <View className='allSchedule-content-table'>
+        <View className='generalSchedule-content-table'>
           <WhiteTable />
           {
             scheduleMatrix.length === 0 ? null :

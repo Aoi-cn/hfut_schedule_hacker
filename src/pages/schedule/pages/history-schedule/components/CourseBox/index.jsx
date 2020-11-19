@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { View } from '@tarojs/components'
 
-import { UPDATE_UIDATA } from '../../../../../../../../constants/schedule/singleCourseSchedule'
+import { UPDATE_UIDATA } from '../../../../../../constants/schedule/historySchedule'
 
 export default ({ boxType, courseBoxList, number }) => {
   const courseBoxData = courseBoxList[0] ? courseBoxList[0] : {}

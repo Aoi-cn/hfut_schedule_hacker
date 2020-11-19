@@ -17,6 +17,7 @@ function StandardFloatLayout(props) {
           value={buttons[0].value}
           onSubmit={buttons[0].onClick}
           type={buttons[0].type}
+          openType={buttons[0].openType}
         />
       </View>)
   } else if (buttons.length === 2) {
@@ -27,6 +28,7 @@ function StandardFloatLayout(props) {
             value={buttons[0].value}
             onSubmit={buttons[0].onClick}
             type={buttons[0].type}
+            openType={buttons[0].openType}
           />
         </View>
         <View className='standardFloatLayout-footer_blank'></View>
@@ -35,6 +37,7 @@ function StandardFloatLayout(props) {
             value={buttons[1].value}
             onSubmit={buttons[1].onClick}
             type={buttons[1].type}
+            openType={buttons[1].openType}
           />
         </View>
       </>

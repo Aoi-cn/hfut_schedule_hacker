@@ -114,7 +114,7 @@ function Login(props) {
         </View>
 
         <View className='login-content-pwdHelp' onClick={() => props.updateUiData({ showPwdHelp: true })}>
-          忘记密码
+          遇到问题
         </View>
 
         <CustomButton
@@ -132,7 +132,9 @@ function Login(props) {
           关于这个
         </View>
       }
+      
       <AtMessage />
+
       <StandardFloatLayout
         isOpened={showLoginHelp}
         onClose={() => props.updateUiData({ showLoginHelp: false })}
@@ -140,16 +142,21 @@ function Login(props) {
         content={`在学校封网时也可以看课表，造福工大学子。\n 
         另有成绩查询、空教室查询、图书馆检索、课程/教师、查看全校课表、自定义课程颜色、情侣课表等特色功能~`}
       />
+
       <StandardFloatLayout
         isOpened={showPwdHelp}
         onClose={() => props.updateUiData({ showPwdHelp: false })}
         title='遇到问题'
         content={`
         忘记密码：\n
-        这是你的教务系统密码，默认为身份证后六位。如果你自己修改了密码且忘记了该密码，请前往PC端教务（信息门户-本科教务）修改新密码。\n\n
+        这是你的教务系统密码，默认为身份证后六位。如果你自己修改了密码且忘记了该密码，请前往PC端教务（信息门户-本科教务）修改新密码。\n
         提示“先完成注册”：\n
         前往PC端教务（信息门户-本科教务）修改新密码，使用新密码登录即可~
         `}
+        buttons={[{
+          value: '联系客服解决',
+          openType: 'contact',
+        }]}
       />
     </View>
   )

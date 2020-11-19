@@ -55,8 +55,10 @@ export const login = ({ username, password, userType, campus }) => async () => {
     }
   })
 
-  // 写入当前版本信息
-  if (userType === 'me') {
+  // 写入版本信息、自动设置、用户设置
+  // 假如本地有config，则跳过本环节
+  const localConfig = Taro.getStorageSync('config')
+  if (userType === 'me' && !localConfig) {
     Taro.setStorage({
       key: 'config',
       data: config,

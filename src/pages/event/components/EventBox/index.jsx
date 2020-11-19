@@ -298,9 +298,9 @@ export default ({ boxType, courseBoxList, dayIndex, startTime, timeTable }) => {
         rainPre > 0.01 &&
         <View className='eventBox-umbrella' onClick={() => {
           Taro.showToast({
-            title: '记得带伞!',
+            title: '该时段可能下雨，记得带伞!',
             icon: 'none',
-            duration: 500
+            duration: 1000
           })
         }}
         >

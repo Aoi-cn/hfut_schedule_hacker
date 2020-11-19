@@ -10,7 +10,7 @@ import {
   UPDATE_BIZDATA,
   UPDATE_UIDATA,
   LOGOUT,
-} from '../constants/schedule'
+} from '../constants/schedule/schedule'
 
 export const addCustomSchedule = (payload) => async (dispatch, getState) => {
   let {

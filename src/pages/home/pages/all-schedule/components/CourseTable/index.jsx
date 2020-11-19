@@ -2,7 +2,6 @@ import React from 'react'
 import { View } from '@tarojs/components'
 
 import CourseBox from '../CourseBox'
-import './index.scss'
 
 export default ({ weekScheduleData }) => {
 

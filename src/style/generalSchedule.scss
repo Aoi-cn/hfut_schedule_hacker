@@ -1,0 +1,82 @@
+@import "../style/theme.scss";
+
+.generalSchedule {
+  height: fit-content;
+  position: relative;
+
+  &-header {
+    height: 190px;
+    width: 100%;
+    z-index: 8;
+    position: fixed;
+  }
+
+  &-content {
+    margin-top: 190px;
+    width: 100%;
+    display: inline-flex;
+    padding-bottom: 160px;
+  }
+
+  &-content::after {
+    content: "";
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    &-pop {
+      border-radius: 50%;
+      width: 108px;
+      height: 108px;
+      background-color: #ddd;
+      margin: 36px;
+      border: 2px solid #ddd;
+      opacity: 0.7;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      &-text {
+        color: $color-semi;
+        font-size: 27px;
+      }
+
+      &-active {
+        background-color: $color-brand;
+      }
+
+      &:active {
+        background-color: #eee;
+      }
+    }
+  }
+
+}
+
+
+.courseTable {
+  display: flex;
+  width: 710px;
+  position: absolute;
+
+  &-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+}

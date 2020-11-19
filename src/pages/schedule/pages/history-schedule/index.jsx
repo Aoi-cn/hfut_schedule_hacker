@@ -3,28 +3,27 @@ import Taro, { useDidShow } from '@tarojs/taro'
 import { connect, useDispatch } from 'react-redux'
 import { View } from '@tarojs/components'
 
-import WhiteTable from '../../../../../../components/schedule-component/WhiteTable'
-import DayLine from '../../../../../../components/schedule-component/DayLine'
-import TimeLine from '../../../../../../components/schedule-component/TimeLine'
+import WhiteTable from '../../../../components/schedule-component/WhiteTable'
+import DayLine from '../../../../components/schedule-component/DayLine'
+import TimeLine from '../../../../components/schedule-component/TimeLine'
 import CourseTable from './components/CourseTable'
 import ScheduleTop from './components/ScheduleTop'
 import ScheduleFooter from './components/ScheduleFooter'
-import BackgroundImg from '../../../../../../components/schedule-component/BackgroundImg'
-import { UPDATE_BIZDATA } from '../../../../../../constants/schedule/roomDetailSchedule'
+import CourseDetailFloatLayout2 from '../../../../components/schedule-component/CourseDetailFloatLayout2'
+import BackgroundImg from '../../../../components/schedule-component/BackgroundImg'
+import { UPDATE_BIZDATA, UPDATE_UIDATA } from '../../../../constants/schedule/singleCourseSchedule'
 
 const MemoBackgroundImg = memo(BackgroundImg)
 
 
-function RoomDetailSchedule(props) {
-  const { dayLineMatrix, currentWeekIndex, bizData } = props
-  const { weekIndex, scheduleMatrix, roomZh } = bizData
+function SingleCourseSchedule(props) {
+  const { bizData, uiData, dayLineMatrix, currentWeekIndex } = props
+  const { weekIndex, scheduleMatrix } = bizData
+  const { courseDetailFLData } = uiData
   const dispatch = useDispatch()
 
   useDidShow(() => {
     Taro.hideHomeButton()
-    Taro.setNavigationBarTitle({
-      title: roomZh
-    })
     dispatch({
       type: UPDATE_BIZDATA,
       payload: { weekIndex: currentWeekIndex },
@@ -75,6 +74,14 @@ function RoomDetailSchedule(props) {
 
       <ScheduleFooter changeWeekIndex={changeWeekIndex} />
 
+      <CourseDetailFloatLayout2
+        courseDetailFLData={courseDetailFLData}
+        onClose={() => dispatch({
+          type: UPDATE_UIDATA,
+          payload: { courseDetailFLData: { isOpened: false } },
+        })}
+      />
+
       <MemoBackgroundImg />
 
     </View>
@@ -83,10 +90,10 @@ function RoomDetailSchedule(props) {
 
 function mapStateToProps(state) {
   return {
-    ...state.roomDetailSchedule,
+    ...state.singleCourseSchedule,
     dayLineMatrix: state.event.bizData.dayLineMatrix,
     currentWeekIndex: state.event.bizData.currentWeekIndex,
   };
 }
 
-export default connect(mapStateToProps)(RoomDetailSchedule);
+export default connect(mapStateToProps)(SingleCourseSchedule);

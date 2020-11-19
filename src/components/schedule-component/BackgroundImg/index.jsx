@@ -27,11 +27,11 @@ export default () => {
     <View
       className='scheduleBackground'
       style={`z-index: -10;
-        top: 0;
-        left: 0;
-        position: absolute;
         width: 100%;
-        height: 100%;`}
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;`}
     >
       <Image style={`width: 100%; height: 100%; opacity: ${imgOpacity}`} mode='aspectFill' src={backgroundPath} />
     </View>

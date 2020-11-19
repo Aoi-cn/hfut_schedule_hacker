@@ -13,7 +13,7 @@ import IconFont from '../../../../components/iconfont'
 import { dayIndexToZh } from '../../../../utils/scheduleDataTranslator'
 import DatePlckerFL from './components/DatePlckerFL'
 import WeekPicker from '../../../../components/schedule-component/WeekPicker'
-import { UPDATE_BIZDATA } from '../../../../constants/roomDetailSchedule'
+import { UPDATE_BIZDATA } from '../../../../constants/schedule/roomDetailSchedule'
 import './index.scss'
 
 const buildingRange_2 = [

@@ -5,7 +5,7 @@ import {
   UPDATE_BIZDATA,
   UPDATE_UIDATA,
   LOGOUT,
-} from '../constants/schedule'
+} from '../constants/schedule/schedule'
 import { GET } from '../utils/request'
 import dataToMatrix from '../utils/scheduleDataTranslator'
 import * as loginActions from './login'

@@ -1,9 +1,10 @@
-import { UPDATE_BIZDATA, UPDATE_UIDATA, LOGOUT } from '../constants/singleCourseSchedule'
+import { UPDATE_BIZDATA, UPDATE_UIDATA, LOGOUT } from '../../constants/schedule/historySchedule'
 
 const INITIAL_STATE = {
   bizData: {
     weekIndex: 0, // 课表上展示的周数
     scheduleMatrix: [],
+    dayLineMatrix: [],
   },
   uiData: {
     courseDetailFLData: {

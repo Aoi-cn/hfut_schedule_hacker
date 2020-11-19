@@ -31,7 +31,7 @@ function Gift() {
 
       <View className='feedbackUpdate-list'>
         {
-          updateHistory.reverse().map((updateData, ui) => (
+          updateHistory.map((updateData, ui) => (
             <View key={updateData.version} className='feedbackUpdate-list-item'>
               <View className='feedbackUpdate-list-item-title'>
                 {/* <View style={{ position: 'relative', top: 2 }}> */}

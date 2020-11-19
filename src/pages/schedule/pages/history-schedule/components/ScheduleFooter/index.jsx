@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text } from '@tarojs/components'
 import { useSelector } from 'react-redux'
 
-import IconFont from '../../../../../../../../components/iconfont'
+import IconFont from '../../../../../../components/iconfont'
 
 export default (props) => {
   const { changeWeekIndex } = props

@@ -1,34 +1,12 @@
-import { UPDATE_BIZDATA, UPDATE_UIDATA, LOGOUT } from '../constants/allSchedule'
+import { UPDATE_BIZDATA, UPDATE_UIDATA, LOGOUT } from '../../constants/schedule/roomDetailSchedule'
 
 const INITIAL_STATE = {
   bizData: {
     weekIndex: 0, // 课表上展示的周数
-    currentWeekIndex: 0, // 现实中的周数
     scheduleMatrix: [],
-    backupScheduleM: [],
-    dayLineMatrix: [],
-    selectInfo: {},
-    level: 18, // 当前选择班级的年级（为了过滤掉该班级的非正常课程，如重修的）
+    roomZh: '',
   },
   uiData: {
-    diff: false,
-    courseDetailFLData: {
-      isOpened: false,
-      name: '',
-      clazzRoom: '',
-      teacher: '',
-      timeRange: '',
-      lessonCode: '',
-      lessonType: '',
-      weekIndexes: [],
-      studentClazzes: [],
-      studentNumber: '',
-      color: '',
-      lessonId: '',
-      campus: '',
-      weekIndexesZh: '',
-      credits: '',
-    }
   }
 }
 
