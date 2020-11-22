@@ -9,12 +9,13 @@ import { updateSingleCustomColor, deleteSingleCustom, updateSingleCustomMemo } f
 import IconFont from '../../../components/iconfont'
 import ColorButton from '../../../components/ColorButton'
 import CustomButton from '../../../components/CustomButton'
+import { UPDATE_BIZDATA } from '../../../constants/schedule/classlist'
 
 import './index.scss'
 
 export default (props) => {
   const { courseDetailFLData, source, onClose, updateColorPicker, openCustomScheduleFL } = props
-  const { isOpened, showMemo, type, name, credits, clazzRoom, teacher, timeRange, lessonCode, lessonType, timeIndexes, dayIndex, studentClazzes, studentNumber, weekIndexes = [], weekIndexesZh, color, memo: memo_ } = courseDetailFLData
+  const { isOpened, showMemo, type, name, credits, clazzRoom, teacher, timeRange, lessonCode, lessonType, timeIndexes, dayIndex, studentClazzes, studentNumber, weekIndexes = [], weekIndexesZh, semestercode, color, memo: memo_ } = courseDetailFLData
   const userType = useSelector(state => state.login.bizData.userType)
   const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
   const [memo, setMemo] = useState('')
@@ -131,11 +132,15 @@ export default (props) => {
   }
 
   const handleClickClazzMates = () => {
-    Taro.showToast({
-      title: '即将推出',
-      icon: 'none',
-      duration: 1000
+    dispatch({
+      type: UPDATE_BIZDATA,
+      payload: {
+        clazzName: name,
+        lessonCode,
+        semestercode,
+      },
     })
+    Taro.navigateTo({ url: '/pages/schedule/pages/class-list/index' })
   }
 
   let RightBtn = null

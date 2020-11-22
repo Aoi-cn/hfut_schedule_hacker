@@ -5,6 +5,7 @@ const INITIAL_STATE = {
     weekIndex: 0, // 课表上展示的周数
     scheduleMatrix: [],
     dayLineMatrix: [],
+    semester: {},
   },
   uiData: {
     courseDetailFLData: {
@@ -22,6 +23,8 @@ const INITIAL_STATE = {
       lessonId: '',
       campus: '',
       weekIndexesZh: '',
+      semesterId: '',
+      semestercode: '',
       credits: '',
     }
   }

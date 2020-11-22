@@ -101,7 +101,7 @@ function Schedule(props) {
         <>
           <CourseDetailFloatLayout
             courseDetailFLData={courseDetailFLData}
-            onClose={() => props.updateUiData({ courseDetailFLData: { isOpened: false } })}
+            onClose={() => props.updateUiData({ courseDetailFLData: { ...courseDetailFLData, isOpened: false } })}
             updateColorPicker={(handleColorChange, theme, color) => props.updateUiData({
               colorPickerData: { isOpened: true, handleColorChange, theme, color },
               courseDetailFLData: { ...courseDetailFLData, showMemo: false }

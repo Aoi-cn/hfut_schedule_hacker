@@ -21,6 +21,8 @@ const INITIAL_STATE = {
       lessonId: '',
       campus: '',
       weekIndexesZh: '',
+      semesterId: '',
+      semestercode: '',
       credits: '',
     }
   }

@@ -143,8 +143,8 @@ export const logout = ({ localSave = true }) => async (dispatch) => {
 // key失效，自动登录更新key
 // userType: me or her
 // reloginTime: 尝试次数，上限设定为5次，第6次就会提示“更新出错”
-// successCallback: 重新登陆成功之后的回调函数
-export const relogin = ({ userType, reloginTime, successCallback }) => async (dispatch) => {
+// callback: 重新登陆成功之后的回调函数
+export const relogin = ({ userType, reloginTime, callback }) => async (dispatch) => {
 
   const localUserData = Taro.getStorageSync(userType)
   const { userInfo } = localUserData
@@ -165,7 +165,7 @@ export const relogin = ({ userType, reloginTime, successCallback }) => async (di
       }
     })
     // 
-    successCallback()
+    return callback()
   } else {
     if (msg.indexOf('密码错误') !== -1) {
       Taro.showToast({

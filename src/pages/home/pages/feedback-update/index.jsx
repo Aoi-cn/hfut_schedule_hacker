@@ -13,12 +13,12 @@ function Gift() {
     <View className='feedbackUpdate'>
 
       <View className='feedbackUpdate-header'>
-        <View className='feedbackUpdate-header_comment'>同学们现在可以通过新的方式进行意见反馈啦，支持上传图片。 另外也可以通过“联系客服”直接进行提问和反馈，我看到就会尽快回复的~</View>
+        <View className='feedbackUpdate-header_comment'>同学们现在可以通过新的方式进行反馈啦，支持上传图片。 另外也可以通过“联系客服”直接进行提问和反馈，我看到就会尽快回复的~</View>
       </View>
 
       <View className='feedbackUpdate-card'>
         <View className='feedbackUpdate-card-item'>
-          <Button className='feedbackUpdate-card-item-btn' openType='feedback'>意见反馈</Button>
+          <Button className='feedbackUpdate-card-item-btn' openType='feedback'>功能建议/问题反馈</Button>
         </View>
         <View className='feedbackUpdate-card-item'>
           <Button className='feedbackUpdate-card-item-btn' openType='contact'>联系客服</Button>

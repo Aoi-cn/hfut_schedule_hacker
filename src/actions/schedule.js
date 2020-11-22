@@ -12,7 +12,7 @@ import * as loginActions from './login'
 import * as eventActions from './event'
 import makeDayLineMatrix from '../utils/dayLineMatrixMaker'
 import scheduleDiffTool from '../utils/scheduleDiffTool'
-import { config, updateState } from '../config/config.default'
+import { config, updateState, currentSemester } from '../config/config.default'
 import { relogin } from '../actions/login'
 
 const { version } = config
@@ -213,24 +213,28 @@ export const updateScheduleData = ({ userType, isEvent }) => async (dispatch, ge
   }
   const { userInfo } = userData
   const { key, campus } = userInfo
-  const res = await GET('/schedule', { key, campus, semesterId: 114 })
-  if (!res) {  // 请求失败
-    Taro.hideNavigationBarLoading()
-  }
+  const res = await GET('/schedule', { key, campus, semesterId: currentSemester.id })
+
   // 课表请求出错。执行key过期之后的逻辑
-  if (!res.body.currentWeek) {
+  // 注：这里也不一定是key过期导致的，有可能是因为教务爆炸
+  if (!res || !res.body.currentWeek) {
     reloginTime++
+    if (reloginTime === 6) {
+      setTimeout(() => {
+        reloginTime = 0
+      }, 100);
+    }
     if (isEvent) {
       return dispatch(relogin({
         userType: 'me',
         reloginTime,
-        successCallback: () => dispatch(updateScheduleData({ userType }))
+        callback: () => dispatch(updateScheduleData({ userType }))
       }))
     } else {
       return dispatch(relogin({
         userType,
         reloginTime,
-        successCallback: () => dispatch(updateScheduleData({ userType }))
+        callback: () => dispatch(updateScheduleData({ userType }))
       }))
     }
   }

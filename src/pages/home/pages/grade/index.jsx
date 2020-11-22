@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import Taro from '@tarojs/taro'
-import { View, Swiper, SwiperItem } from '@tarojs/components'
+import { View, Swiper, SwiperItem, Image, Text } from '@tarojs/components'
 
 import ScoreDetailFL from './components/scoreDetailFL'
 import { GET } from '../../../../utils/request'
 import { relogin } from '../../../../actions/login'
+import EmptyImg from '../../../../assets/img/empty.svg'
 import './index.scss'
 
 // key过期后，尝试重新登陆的次数
@@ -30,16 +31,21 @@ function Grade() {
     const { key } = userInfo
     GET('/scorelist', { key })
       .then(res => {
-        reloginTime = 0
         if (res.success) {
+          reloginTime = 0
           setScorelist(res.scorelist)
         } else {
           // key过期了
           reloginTime++
+          if (reloginTime === 6) {
+            setTimeout(() => {
+              reloginTime = 0
+            }, 100);
+          }
           return dispatch(relogin({
             userType: 'me',
             reloginTime,
-            successCallback: getScorelist,
+            callback: getScorelist,
           }))
         }
         setTimeout(() => {
@@ -47,7 +53,8 @@ function Grade() {
         }, 500);
       })
       .catch(e => {
-        console.log(e)
+        reloginTime = 0
+        console.error(e)
         Taro.hideLoading()
         Taro.showToast({
           title: '查询失败',
@@ -60,6 +67,23 @@ function Grade() {
   useEffect(() => {
     getScorelist()
   }, [getScorelist])
+
+  if (scorelist.length === 0) {
+    return (
+      <View className='grade'>
+        <View className='grade-none'>
+          <Image
+            src={EmptyImg}
+            className='grade-none-noneImg'
+          />
+          <Text className='grade-none-noneText'>没有查询到成绩~</Text>
+          <View className='grade-none-ad'>
+
+          </View>
+        </View>
+      </View>
+    )
+  }
 
   return (
     <View className='grade'>

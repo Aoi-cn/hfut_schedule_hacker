@@ -61,7 +61,7 @@ export default (scheduleData, lessonIds, timeTable) => {
 
   // 初始化scheduleMatrix
   let scheduleMatrix = []
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 22; i++) {
     scheduleMatrix.push([
       [[], [], [], [], [], [], [], [], [], [], []],
       [[], [], [], [], [], [], [], [], [], [], []],
@@ -111,6 +111,7 @@ export default (scheduleData, lessonIds, timeTable) => {
       scheduleWeeksInfo: weekIndexesZh,
       campus: { nameZh: campus },
       openDepartment: { abbrZh: openDepartment },
+      semester: { id: semesterId, code: semestercode }
 
     } = lessonInfo
 
@@ -154,11 +155,12 @@ export default (scheduleData, lessonIds, timeTable) => {
       }
 
       // 这门课在一周中的哪一天
-      const dayIndex = dayZhToIndex(splitdText.split(' ')[1])
+      const dayIndex = dayZhToIndex(/\d/.test(splitdSpace[0]) ? splitdSpace[1] : splitdSpace[0])
 
       // 获取这门课在哪几周有
       const weekIndexes = []
-      splitdSpace[0].split(',').map((splitdComma) => {
+      const weekText = /\d/.test(splitdSpace[0]) ? splitdSpace[0] : splitdSpace[1]
+      weekText.split(',').map((splitdComma) => {
         if (splitdComma.split('~').length === 1) {
           // 对应情境：1~14周,15周
           weekIndexes.push(parseInt(splitdComma.split('~')[0].split('周')[0]))
@@ -216,6 +218,8 @@ export default (scheduleData, lessonIds, timeTable) => {
         timeRange: timeTable ? (timeTable[startTime - 1].startTimeText + '-' + timeTable[endTime - 1].endTimeText) : '',
         weekIndexesZh,
         campus,
+        semesterId,
+        semestercode,
         color,
         memo: '',
       }

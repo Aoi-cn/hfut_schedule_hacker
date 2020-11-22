@@ -3,13 +3,19 @@
 // 1：需要重新登陆
 export const updateState = 0
 
+// 当前学期
+export const currentSemester = {
+  code: '037',  // app教务使用这个
+  id: 114,  // pc教务使用这个
+}
+
 export const config = {
-  version: '4.5.0',
+  version: '4.6.0',
   autoConfig: {
     showDiffHelp: true,
     showAllSHelp: true,
     showHomeRedPoint: true,
-    showWeatherRedPoint: true, // event页面天气右上角的红点
+    // showWeatherRedPoint: true, // event页面天气右上角的红点
   },
   userConfig: {
     // schedule的
@@ -30,33 +36,29 @@ export const config = {
 
 export const updateInfo = {
   notices: [
-    {
-      info: '一大波更新！大家准备好了吗 🤪'
-    }
+    // {
+    //   info: '学校近期正在进行系统更新，可能会导致小程序部分功能无法正常使用，希望同学们理解！'
+    // }
   ],
   features: [
     {
-      info: '1. 成绩查询',
-      comment: '目前仅支持查看个人成绩',
+      info: '1. 教学班同学列表查询',
+      comment: '同学们期待的功能终于来了！不仅能看自己班级的，全校课表、课程检索中的班级也可以查看哦~',
     },
     {
-      info: '2. 课程/教师检索',
-      comment: '有多好用，试试才知道！',
-    },
-    {
-      info: '3. “反馈与更新”页面',
-      comment: '奇妙的旅程~',
+      info: '2. 查看历史学期课表',
+      comment: '位于课表页 - 右上角加号中~',
     },
   ],
   bugs: [
-    {
-      info: '大幅优化登录相关体验',
-      // comment: '很多人都被提示',
-    },
-    {
-      info: '修复多处已知问题',
-      // comment: '很多人都被提示',
-    },
+    // {
+    //   info: '修复部分已知问题，优化体验',
+    //   // comment: '很多人都被提示',
+    // },
+    // {
+    //   info: '修复多处已知问题',
+    //   // comment: '很多人都被提示',
+    // },
   ]
 }
 

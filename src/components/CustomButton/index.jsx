@@ -1,7 +1,7 @@
 import React from 'react'
 import { AtButton } from 'taro-ui'
 
-import './index.scss'
+// import './index.scss'
 
 function CustomButton(props) {
 

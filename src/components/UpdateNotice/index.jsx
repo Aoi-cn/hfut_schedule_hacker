@@ -22,10 +22,10 @@ export default ({ onClose }) => {
         {
           notices.length !== 0 &&
           <>
-            {/* <View className='updateNotice-content-subTitle'>
+            <View className='updateNotice-content-subTitle'>
               <IconFont name='tanhao' size={36} color={themeC['color-font-brand']} />
-              <Text className='updateNotice-content-subTitle_text'>消息</Text>
-            </View> */}
+              <Text className='updateNotice-content-subTitle_text'>坏消息</Text>
+            </View>
             {
               notices.map((notice, index) => (
                 <View className='updateNotice-content-item' key={`thisis${index}`}>
@@ -37,7 +37,7 @@ export default ({ onClose }) => {
                 </View>
               ))
             }
-            <View className='updateNotice-content-line'></View>
+            {/* <View className='updateNotice-content-line'></View> */}
           </>
         }
 

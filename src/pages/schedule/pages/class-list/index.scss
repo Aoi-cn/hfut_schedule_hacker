@@ -1,0 +1,73 @@
+@import '../../../../style/theme.scss';
+
+.classlist {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
+  padding-bottom: 48px;
+  box-sizing: border-box;
+
+  &-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: $color-grey;
+    padding: 22px 0;
+    border-top: 2px solid #eeeeee;
+
+    &-number {
+      padding-left: 24px;
+      flex: 2;
+    }
+
+    &-name {
+      flex: 3;
+    }
+
+    &-gender {
+      margin-left: 12px;
+      flex: 2;
+    }
+
+    &-clazz {
+      flex: 4;
+    }
+  }
+
+  &-none {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    &-noneImg {
+      width: 400px;
+      height: 400px;
+    }
+
+    &-noneText {
+      color: $color-grey;
+      font-size: 32px;
+    }
+
+    &-ad {
+      margin-top: 80px;
+    }
+  }
+}
+
+
+.at-accordion__content::after {
+  border-top: none;
+}
+
+.at-accordion__info__title {
+  color: $color-semi;
+}
+
+.at-accordion__info__note {
+  color: $color-grey;
+}

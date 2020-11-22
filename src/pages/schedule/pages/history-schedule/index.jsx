@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useCallback } from 'react'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { connect, useDispatch } from 'react-redux'
 import { View } from '@tarojs/components'
@@ -11,24 +11,80 @@ import ScheduleTop from './components/ScheduleTop'
 import ScheduleFooter from './components/ScheduleFooter'
 import CourseDetailFloatLayout2 from '../../../../components/schedule-component/CourseDetailFloatLayout2'
 import BackgroundImg from '../../../../components/schedule-component/BackgroundImg'
-import { UPDATE_BIZDATA, UPDATE_UIDATA } from '../../../../constants/schedule/singleCourseSchedule'
+import { UPDATE_BIZDATA, UPDATE_UIDATA } from '../../../../constants/schedule/historySchedule'
+import { GET } from '../../../../utils/request'
+import { relogin } from '../../../../actions/login'
+import dataToMatrix from '../../../../utils/scheduleDataTranslator'
+import makeDayLineMatrix from '../../../../utils/dayLineMatrixMaker'
 
 const MemoBackgroundImg = memo(BackgroundImg)
+// key过期后，尝试重新登陆的次数
+let reloginTime = 0
 
 
-function SingleCourseSchedule(props) {
-  const { bizData, uiData, dayLineMatrix, currentWeekIndex } = props
-  const { weekIndex, scheduleMatrix } = bizData
+function HistorySchedule(props) {
+  const { bizData, uiData } = props
+  const { weekIndex, scheduleMatrix, dayLineMatrix, semester } = bizData
   const { courseDetailFLData } = uiData
   const dispatch = useDispatch()
 
   useDidShow(() => {
     Taro.hideHomeButton()
-    dispatch({
-      type: UPDATE_BIZDATA,
-      payload: { weekIndex: currentWeekIndex },
-    })
   })
+
+  const getSchedule = useCallback(() => {
+    if (!semester.id) {
+      return
+    }
+    const userData = Taro.getStorageSync('me')
+    const { userInfo } = userData
+    const { key, campus } = userInfo
+    Taro.showLoading({
+      title: '加载中...',
+    })
+    GET('/schedule', { key, campus, semesterId: semester.id })
+      .then(res => {
+        reloginTime = 0
+        if (res.success) {
+          // 请求成功，生成scheduleMatrix和dayLineMatrix
+          const scheduleData = res.body.lessons
+          const lessonIds = res.body.lessonIds
+          const timeTable = res.body.timeTable.courseUnitList
+          // 转化为UI可识别的matrix
+          const { scheduleMatrix: scheduleMatrix_ } = dataToMatrix(scheduleData, lessonIds, timeTable)
+          const { dayLineMatrix: dayLineMatrix_ } = makeDayLineMatrix(semester.id)
+          dispatch({
+            type: UPDATE_BIZDATA,
+            payload: { scheduleMatrix: scheduleMatrix_, dayLineMatrix: dayLineMatrix_ },
+          })
+        } else {
+          // key过期了
+          reloginTime++
+          return dispatch(relogin({
+            userType: 'me',
+            reloginTime,
+            callback: getSchedule,
+          }))
+        }
+        setTimeout(() => {
+          Taro.hideLoading()
+        }, 200);
+      })
+      .catch(e => {
+        console.log(e)
+        Taro.hideLoading()
+        Taro.showToast({
+          title: '查询失败',
+          icon: 'none',
+          duration: 2000
+        })
+      })
+  }, [dispatch, semester])
+
+  useEffect(() => {
+    Taro.setNavigationBarTitle({ title: semester.nameZh || '' })
+    getSchedule()
+  }, [getSchedule, semester])
 
   const changeWeekIndex = (weekIndex_) => {
     if (weekIndex_ < 0) {
@@ -90,10 +146,8 @@ function SingleCourseSchedule(props) {
 
 function mapStateToProps(state) {
   return {
-    ...state.singleCourseSchedule,
-    dayLineMatrix: state.event.bizData.dayLineMatrix,
-    currentWeekIndex: state.event.bizData.currentWeekIndex,
+    ...state.historySchedule,
   };
 }
 
-export default connect(mapStateToProps)(SingleCourseSchedule);
+export default connect(mapStateToProps)(HistorySchedule);

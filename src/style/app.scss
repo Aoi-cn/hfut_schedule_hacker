@@ -2,6 +2,9 @@
 @import './courseBox.scss';
 @import './generalSchedule.scss';
 
+// 把一部分公用组件的scss放在这里，避免编译警告
+@import '../components/CustomButton/index.scss';
+
 page {
   height: 100%;
   width: 100%;

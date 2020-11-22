@@ -2,7 +2,6 @@ import { useGlobalIconFont } from './components/iconfont/helper';
 
 export default {
   pages: [
-    
 
     'pages/event/index',
     'pages/schedule/index',
@@ -13,6 +12,7 @@ export default {
 
     'pages/schedule/pages/mooc/index',
     'pages/schedule/pages/history-schedule/index',
+    'pages/schedule/pages/class-list/index',
 
     'pages/home/pages/gift/index',
     'pages/home/pages/empty-clazz-room/index',

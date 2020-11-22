@@ -9,6 +9,7 @@ import { GET } from '../../../../utils/request'
 import { relogin } from '../../../../actions/login'
 import IconFont from '../../../../components/iconfont'
 import CourseSearchDetailFL from './components/courseSearchDetailFL'
+import semesterData from '../../../../assets/data/semesterData'
 import './index.scss'
 
 // key过期后，尝试重新登陆的次数
@@ -25,6 +26,7 @@ function CourseSearch() {
     courseTypeAssoc: 0,
     nameZhLike: '',
     courseCodeLike: '',
+    selectedSemester: semesterData[0],
   })
   const [submitData, setSubmitData] = useState({
     pageCount: 0,
@@ -33,6 +35,7 @@ function CourseSearch() {
     courseTypeAssoc: 0,
     nameZhLike: '',
     courseCodeLike: '',
+    selectedSemester: semesterData[0],
   })
   const [showData, setShowData] = useState({
     courseList: [],
@@ -92,20 +95,27 @@ function CourseSearch() {
       courseTypeAssoc: submitData.courseTypeAssoc ? submitData.courseTypeAssoc : '',
       nameZhLike: submitData.nameZhLike,
       courseCodeLike: submitData.courseCodeLike,
+      semesterId: submitData.selectedSemester.id,
     })
       .then(res => {
-        reloginTime = 0
+
         if (res.success) {
           // 检索成功
+          reloginTime = 0
           const { data: { data: courseList, _page_: { totalRows: totalCourses } } } = res
           setShowData({ courseList, totalCourses })
         } else {
           // key过期了
           reloginTime++
+          if (reloginTime === 6) {
+            setTimeout(() => {
+              reloginTime = 0
+            }, 100);
+          }
           return dispatch(relogin({
             userType: 'me',
             reloginTime,
-            successCallback: handleSearch,
+            callback: handleSearch,
           }))
         }
         setTimeout(() => {
@@ -113,7 +123,8 @@ function CourseSearch() {
         }, 500);
       })
       .catch(e => {
-        console.log(e)
+        reloginTime = 0
+        console.error(e)
         Taro.hideLoading()
         Taro.showToast({
           title: '查询失败',
@@ -133,6 +144,14 @@ function CourseSearch() {
     setSearchData({
       ...searchData,
       courseTypeAssoc: e.detail.value
+    })
+  }
+
+  const handleSemesterChange = (e) => {
+    console.log(e)
+    setSearchData({
+      ...searchData,
+      selectedSemester: semesterData[e.detail.value]
     })
   }
 
@@ -198,7 +217,7 @@ function CourseSearch() {
         onClose={() => setShowDrawer(false)}
         mask
         right
-        width='238px'
+        width='246px'
       >
         <View className='courseSearch-drawer'>
           <View className='courseSearch-drawer-title'>课程名称</View>
@@ -249,6 +268,22 @@ function CourseSearch() {
             <View className='courseSearch-drawer-input courseSearch-drawer-input_type'>
               {
                 typeRange[searchData.courseTypeAssoc].typeZh.length < 12 ? typeRange[searchData.courseTypeAssoc].typeZh : typeRange[searchData.courseTypeAssoc].typeZh.slice(0, 10) + '...'
+              }
+            </View>
+          </Picker>
+
+          <View className='courseSearch-drawer-title'>开课学期</View>
+          <Picker
+            mode='selector'
+            range={semesterData}
+            value={semesterData.indexOf(searchData.selectedSemester)}
+            rangeKey='nameZh'
+            onChange={handleSemesterChange}
+            className='courseSearch-drawer-type'
+          >
+            <View className='courseSearch-drawer-input courseSearch-drawer-input_type'>
+              {
+                searchData.selectedSemester.nameZh
               }
             </View>
           </Picker>

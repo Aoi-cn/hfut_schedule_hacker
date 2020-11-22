@@ -1,6 +1,6 @@
 Component({
   properties: {
-    // huatifuhao | shuju | biaoqian | biaoqian-copy-copy2 | biaoqian-copy | biaoqian-copy-copy | dayu | san | dizhi | lishi | dianzan | help | task-filling | map-filling | rili | sousuo | taolunqu | tishi | daibanshixiang | gongpai | jixiaopinggu | network | dingwei | moreandroid | anquan | bulletin | arrow-up-filling | arrow-down-filling | shibai | ceshi | tanhao | file-text | paihangbang | shezhi | swap | caidan | mingxinghuodong | wenjuan | aixin | aixin-filled | eye | info-circle-fill | plus | eye-close | search | arrow-right | arrow-lift | arrow-down | personal | calendar | gift
+    // bofangjilu | huatifuhao | shuju | biaoqian | biaoqian-copy-copy2 | biaoqian-copy | biaoqian-copy-copy | dayu | san | dizhi | lishi | dianzan | help | task-filling | map-filling | rili | sousuo | taolunqu | tishi | daibanshixiang | gongpai | jixiaopinggu | network | dingwei | moreandroid | anquan | bulletin | arrow-up-filling | arrow-down-filling | shibai | ceshi | tanhao | file-text | paihangbang | shezhi | swap | caidan | mingxinghuodong | wenjuan | aixin | aixin-filled | eye | info-circle-fill | plus | eye-close | search | arrow-right | arrow-lift | arrow-down | personal | calendar | gift
     name: {
       type: String,
     },

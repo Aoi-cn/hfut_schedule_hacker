@@ -53,6 +53,8 @@ export default ({ boxType, courseBoxList, dayIndex, startTime }) => {
         credits: data.credits,
         campus: data.campus,
         weekIndexesZh: data.weekIndexesZh,
+        semesterId: data.semesterId,
+        semestercode: data.semestercode,
         memo: data.memo,
       },
       chosenBlank: [],

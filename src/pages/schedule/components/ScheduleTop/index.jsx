@@ -58,6 +58,11 @@ export default (props) => {
       onClick: () => Taro.navigateTo({ url: '/pages/schedule/pages/mooc/index' }),
     },
     {
+      value: '历史课表',
+      icon: 'bofangjilu',
+      onClick: () => Taro.navigateTo({ url: '/pages/schedule/pages/history-schedule/index' }),
+    },
+    {
       value: '课表设置',
       icon: 'shezhi',
       onClick: () => setShowSetting(true),

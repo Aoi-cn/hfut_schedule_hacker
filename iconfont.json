@@ -1,9 +1,10 @@
 {
-    "symbol_url": "//at.alicdn.com/t/font_2078451_hcy7juhfi2p.js",
+    "symbol_url": "//at.alicdn.com/t/font_2078451_3bjfj5damhp.js",
     "save_dir": "./src/components/iconfont",
     "use_typescript": false,
     "platforms": "*",
     "use_rpx": true,
     "trim_icon_prefix": "icon",
-    "default_icon_size": 18
+    "default_icon_size": 18,
+    "order": "npx iconfont-taro"
 }

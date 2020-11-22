@@ -6,7 +6,7 @@ import IconFont from '../../../../../../components/iconfont'
 
 export default (props) => {
   const { changeWeekIndex } = props
-  const weekIndex = useSelector(state => state.singleCourseSchedule.bizData.weekIndex)
+  const weekIndex = useSelector(state => state.historySchedule.bizData.weekIndex)
   const currentWeekIndex = useSelector(state => state.event.bizData.currentWeekIndex)
 
   return (

@@ -40,7 +40,7 @@ function Home() {
             }
           }
         })
-      }, 20000);
+      }, 10000);
     }
     setSno(username)
   }, [])
@@ -64,7 +64,7 @@ function Home() {
       name: '成绩查询',
       icon: 'jixiaopinggu',
       onClick: () => Taro.navigateTo({ url: '/pages/home/pages/grade/index' }),
-      redPoint: showHomeRedPoint && <AtBadge dot></AtBadge>,
+      redPoint: '',
     },
     {
       name: '第二课堂',
@@ -100,7 +100,7 @@ function Home() {
       name: '课程/教师检索',
       icon: 'shuju',
       onClick: () => Taro.navigateTo({ url: '/pages/home/pages/course-search/index' }),
-      redPoint: showHomeRedPoint && <AtBadge dot></AtBadge>,
+      redPoint: '',
     },
   ]
 
@@ -195,7 +195,10 @@ function Home() {
           <View className='home-content-group-item' onClick={() => setShowAbout(true)}>
             <View className='home-content-group-item-left'>
               <IconFont name='tanhao' size={46} color='#60646b' />
-              <Text style={{ marginLeft: 10 }}>用前必读</Text>
+              <View className='home-content-group-item-left-nameBox'>
+                {/* <View className='home-content-group-item-left-nameBox_redPoint'>{showHomeRedPoint && <AtBadge dot></AtBadge>}</View> */}
+                <Text style={{ marginLeft: 10 }}>用前必读</Text>
+              </View>
             </View>
             <IconFont name='' size={46} color='#60646b' />
           </View>
@@ -227,8 +230,9 @@ function Home() {
         onClose={() => setShowAbout(false)}
         title='用前必读'
         content={`本小程序不代表任何组织或机构的利益，完全出于交流学习和方便工大学子的目的而开发。\n
-        本项目已在GitHub开源，仓库名称为：hfut_schedule_hacker。欢迎对前端感兴趣的同学与我一起交流、参与开发！\n
-        情侣课表为我的挚爱 - 唐小姐开发。祝有情人终成眷属~
+        小程序大部分功能都依靠于学校的系统，如果学校的系统发生异常小程序也可能会受到影响，希望同学们理解！\n
+        本项目已在GitHub开源，仓库名称为：hfut_schedule_hacker。欢迎志同道合的同学与我一起交流、参与开发\n
+        情侣课表为我的挚爱 - 唐小姐开发。愿有情人终成眷属~
         `}
         buttons={[{
           value: '查看帮助',

@@ -1,13 +1,20 @@
+// 这个是全校课表/历史课表/搜索课程使用的
+
 import React from 'react'
+import Taro from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
+import { useDispatch } from 'react-redux'
 import { AtFloatLayout } from 'taro-ui'
 
 import IconFont from '../../iconfont'
+import CustomButton from '../../CustomButton'
+import { UPDATE_BIZDATA } from '../../../constants/schedule/classlist'
 import './index.scss'
 
 export default (props) => {
   const { courseDetailFLData, onClose } = props
-  const { isOpened, name, credits, clazzRoom, teacher, timeRange, lessonCode, lessonType, studentClazzes, studentNumber, weekIndexesZh, campus } = courseDetailFLData
+  const { isOpened, name, credits, clazzRoom, teacher, timeRange, lessonCode, lessonType, studentClazzes, studentNumber, weekIndexesZh, semestercode, campus } = courseDetailFLData
+  const dispatch = useDispatch()
 
   let clazzString = ''
   if (studentClazzes) {
@@ -61,6 +68,18 @@ export default (props) => {
     },
   ]
 
+  const handleClickClazzMates = () => {
+    dispatch({
+      type: UPDATE_BIZDATA,
+      payload: {
+        clazzName: name,
+        lessonCode,
+        semestercode,
+      },
+    })
+    Taro.navigateTo({ url: '/pages/schedule/pages/class-list/index' })
+  }
+
   return (
     <AtFloatLayout
       isOpened={isOpened}
@@ -86,7 +105,7 @@ export default (props) => {
       </View>
 
       <View className='courseDetailFloatLayout2-footer'>
-
+        <CustomButton value='班级同学' onSubmit={handleClickClazzMates} />
       </View>
     </AtFloatLayout>
   )

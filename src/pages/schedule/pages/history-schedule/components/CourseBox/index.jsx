@@ -6,7 +6,7 @@ import { UPDATE_UIDATA } from '../../../../../../constants/schedule/historySched
 
 export default ({ boxType, courseBoxList, number }) => {
   const courseBoxData = courseBoxList[0] ? courseBoxList[0] : {}
-  const { name = "", clazzRoom, teacher, timeRange, lessonCode, lessonType, weekIndexes, studentClazzes, studentNumber, lessonId, credits, campus, weekIndexesZh, color } = courseBoxData
+  const { name = "", clazzRoom, teacher, timeRange, lessonCode, lessonType, weekIndexes, studentClazzes, studentNumber, lessonId, credits, campus, weekIndexesZh, semesterId, semestercode, color } = courseBoxData
   const theme = useSelector(state => state.schedule.bizData.userConfig.theme)
   const dispatch = useDispatch()
 
@@ -34,6 +34,8 @@ export default ({ boxType, courseBoxList, number }) => {
           credits,
           campus,
           weekIndexesZh,
+          semesterId,
+          semestercode,
         }
       },
     })
